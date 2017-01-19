@@ -100,6 +100,6 @@
 `
 	no
 
-	[testcases] (https://github.com/varsleak/varsleak-vul.git)
+	[testcases] (https://github.com/varsleak/varsleak-vul/raw/master/testcases/emboss.jpg)
 	
 
