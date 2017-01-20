@@ -1,4 +1,5 @@
-# vul list
+vul list
+========
 
 ## LIBGD version 2.2.4 
 `
@@ -103,6 +104,6 @@
 `
 	no
 
-	[testcases] (https://github.com/varsleak/varsleak-vul/raw/master/testcases/emboss.jpg)
+	[testcases](https://github.com/varsleak/varsleak-vul/raw/master/testcases/emboss.jpg)
 	
 
