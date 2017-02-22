@@ -1,0 +1,14 @@
+<?xml version='1.0' ?>
+    <!DOCTYPE et SYSTEM 'w'>
+    <wddxPacket ven='1.0'>
+        <array>
+            <var Name="name">
+                <boolean ></boolean>
+            </var>
+            <var name="1111">
+                <var name="2222">
+                    <var name="3333"></var>
+                </var>
+            </var>
+        </array>
+    </wddxPacket>
