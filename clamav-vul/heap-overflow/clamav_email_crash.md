@@ -1,7 +1,7 @@
 ASAN crash log
 =============
 ```
-➜  fuzzer git:(master) ✗ ./clamav_fuzzer clamav-heap-overflow.eml 
+➜  fuzzer git:(master) ✗ ./clamav_fuzzer [clamav_email_crash.eml](https://github.com/varsleak/varsleak-vul/blob/master/clamav-vul/heap-overflow/clamav_email_crash.eml)   
 =================================================================
 ==2950==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x602000007ed9 at pc 0x000000466783 bp 0x7fffe72fcd20 sp 0x7fffe72fcd10
 READ of size 1 at 0x602000007ed9 thread T0

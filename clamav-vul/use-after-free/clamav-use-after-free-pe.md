@@ -1,7 +1,7 @@
 ASAN crash log
 ==============
 ```
-➜  fuzzer git:(master) ✗ ./clamav_fuzzer clamav-use-after-free.exe 
+➜  fuzzer git:(master) ✗ ./clamav_fuzzer [clamav-use-after-free.exe](https://github.com/varsleak/varsleak-vul/blob/master/clamav-vul/use-after-free/clamav-use-after-free.exe)
 =================================================================
 ==11882==ERROR: AddressSanitizer: heap-use-after-free on address 0x611000007e95 at pc 0x0000004cd9cc bp 0x7ffc5d8f5fc0 sp 0x7ffc5d8f5fb0
 READ of size 4 at 0x611000007e95 thread T0
