@@ -3,7 +3,7 @@ vul list
 
 PHP5.6.30 DoS vul
 
-LIBGD2.2.4 heap-overflow **CVE-2017-6363** && double-free vul **CVE-2017-6362**
+LIBGD2.2.4 heap-overflow && double-free vul 
 
 libtiff tiff2pdf heap-overflow vul
 
