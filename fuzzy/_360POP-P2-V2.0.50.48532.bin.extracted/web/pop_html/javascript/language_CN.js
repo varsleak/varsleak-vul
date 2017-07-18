@@ -1,0 +1,1 @@
+/web/javascript/language_CN.js

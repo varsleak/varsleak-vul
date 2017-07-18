@@ -1,0 +1,50 @@
+<div class="swiper-wrapper wispSwiperWrapper">
+    <section class="swiper-slide app-form wisp-set">
+        <article class="wisp-tip">
+            <p id="wispTip"></p>
+            <p id="wisp-success-tip"></p>
+        </article>
+        <form name="wisp_frm" id='wisp' method="post" action="" onsubmit="save_wisp();return false;">
+            <dl id="wisp_wrap">
+                <dd>
+                    <!--wisp_enable_set-->
+                    <label class="form-label"></label>
+                    <span class="switch-txt"></span>
+                    <input id="wisp_status" type="checkbox"   class="switch radio_form" />
+                    <label for="wisp_status" id="wisp_status_switch"></label>
+                    <input type="hidden" id="wisp_status_hidden" name="enable"/>
+                </dd>
+                <dd class="item" id="ssid_layer">
+                    <label class="form-label" id="lbl_ssid"></label>
+                    <input maxlength="32" class="txt7 margin-r" id="ssid_flag" type="text" autocomplete="off"  />
+                    <input type="hidden" id="old_ssid"/>
+					<input type="hidden" name="ssid_b64" id="ssid_b64"/>
+                </dd>
+                <dd class="off" id="bssid_layer">
+                    <label class="form-label"></label>
+                    <input type="text" class="input-text" readonly="readonly" name="bssid" id="bssid_flag"  />
+                </dd>
+                <dd class="item">
+                    <label class="form-label"></label>
+                    <input name="key"  maxlength="64" class="txt3" id="psd" type="password" autocomplete="off" data-aes="true" />
+                    <input type="hidden" name="action" value="set" />
+                    <input type="hidden" name="auth" id="auth_flag" />
+                    <input type="hidden" name="channel" id="channel_flag" />
+                    <input type="hidden" name="bandwidth" id="bandwidth_flag" />
+                    <input type="hidden" name="rssi" id="rssi_flag" />
+                    <input type="hidden" name="encrypt" id="encrypt_flag" />
+                    <input type="hidden" name="con_mode" id="type" value="1"  />
+					<input type="hidden" name="b64" value="1"  />
+                </dd>
+            </dl>
+        </form>
+        <div class="item wisp-control-zone">
+            <button id="ap-search"></button>
+        </div>
+    </section>
+    <section class="swiper-slide app-form wisp-ap-list">
+        <dl id="wisp-ap-list"></dl>
+    </section>
+</div>
+
+

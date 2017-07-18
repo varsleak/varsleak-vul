@@ -1,0 +1,163 @@
+<!doctype html>
+<!--[if lt IE 7 ]>
+<html class="ie6" lang="zh-cn"><![endif]-->
+<!--[if IE 7 ]>
+<html class="ie7" lang="zh-cn"><![endif]-->
+<!--[if IE 8 ]>
+<html class="ie8" lang="zh-cn"><![endif]-->
+<!--[if IE 9 ]>
+<html class="ie9" lang="zh-cn"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="w3c newYear"><!--<![endif]-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no"/>
+    <title>360安全路由</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link type="text/css" href="css/reset.css?version=1000" rel="stylesheet"/>
+    <link type="text/css" href="css/default.css?version=1000" rel="stylesheet"/>
+    <link type="text/css" href="css/nav.css?version=1000" rel="stylesheet"/>
+    <link type="text/css" href="css/new_style.css?version=1002" rel="stylesheet"/>
+    <link type="text/css" href="css/store_manage.css?version=1003" rel="stylesheet"/>
+    <link type="text/css" href="css/smart_home.css?version=1003" rel="stylesheet"/>
+    <script type="text/javascript" src="./javascript/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="./javascript/jq.plugin.js"></script>
+    <script type="text/javascript" src="./javascript/jquery.caret.js"></script>
+    <script type="text/javascript" src="javascript/jquery.ba_hashchange.js"></script>
+    <script type="text/javascript" src="./javascript/cookie.js"></script>
+    <script type="text/javascript" src="./javascript/module.js"></script>
+    <script type="text/javascript" src="./javascript/err.js"></script>
+	<script type="text/javascript" src="./javascript/table.js"></script>
+    <script type="text/javascript" src="./javascript/temp.js"></script>
+    <script type="text/javascript" src="./javascript/aes.js"></script>
+	<script type="text/javascript" src="./javascript/b64.js"></script>
+	<script type="text/javascript">
+		loadJs("/javascript/language_"+ igd.global_param.language_type +".js",function(){
+			loadJs("/javascript/new_lib.js",function(){
+				loadJs("/javascript/menu_admin.js",function(){
+					loadJs("/javascript/device_manage.js",function(){
+						insert_js("network_setup");
+						insert_js("app");
+						insert_js("app_list");
+						insert_js("wireless_base");
+						insert_js("log");
+						insert_js("new_index");
+						insert_js("smart_home");
+						if(igd.global_param.is_store_manage){
+							insert_js("store_manage");
+						}
+					});
+				});
+			});
+		});
+	</script>
+</head>
+<body class="newYear">
+<!-- 预加载图片 -->
+<div style="position: absolute;clip:rect(1px,1px,1px,1px);display: inline">
+    <img style="height: 1px;width: 0px" src="images/msg-error.png"/>
+    <img style="height: 0px;width: 0px" src="images/msg-info.png"/>
+    <img style="height: 0px;width: 0px" src="images/msg-success.png"/>
+    <!--<img style="height: 0px;width: 0px" src="http://luyouw.360.cn/images/small-bg.png"/>-->
+</div>
+<div class="happy-new-year-area">
+    <div class="blankNewYearArea">
+        <div class="happy-new-year-l"><img src="./images/happy-new-year-l.png" /></div>
+        <div class="happy-new-year-r"><img src="./images/happy-new-year-r.png" /></div>
+    </div>
+</div>
+<div class="down_app">
+	<div class="down_app_wrap">
+		<span id="down_app_tip"></span>
+		<button class="down_app_btn" onClick="download_now();"></button>
+		<span id="download_later_span" class="download_later" onClick="download_later();"></span>
+	</div>
+</div>
+<div class="topbar newYear">
+    <div class="container">
+        <div class="logo">
+            <img src="images/nav-logo.png" id="logo_img" alt=""/>
+        </div>
+        <div id="sidebar_wrap">
+            <ul class="newYear">
+                <li id="index_page" class="index_page " data-us-fov-count="3200"><b id="index_page_b"></b></li>
+                <li id="nav_addon" class="nav_addon" data-us-fov-count="3201"><b id="nav_addon_b"></b></li>
+                <li id="nav_setting" class="nav_setting" data-us-fov-count="3202"><b id="nav_setting_b"></b></li>
+				<li id="store_manage" class="store_manage"><b id="store_manage_b"></b></li>
+                <li id="nav_mobile_app" class="nav_mobile_app" data-us-fov-count="3203"><b id="nav_mobile_app_b"></b></li>
+            </ul>
+        </div>
+        <ul class="nav">
+            <li>
+                <a id="official_website" href="http://luyouw.360.cn/" onClick="office_website(this);" data-us-fov-count="3204" target="_blank"></a>
+            </li>
+            <li class="last">
+                <a id="i_login_out" href="/login.htm" onClick="loginOut(); return false;"></a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="article" class="clearfix nav-bg newYear">
+    <div id="container_wrap">
+    </div>
+</div>
+<div id="footer" class="newYear"></div>
+<div id="footer-os" class="newYear"><p id="os_txt"></p></div>
+<div id="lock_div"></div>
+<div id="quick_lock_div"></div>
+<div id="message_layer">
+    <div id="msg_type" class="wait"></div>
+    <div id="msg" class="word"></div>
+</div>
+<div id="dialog">
+    <form id="dialog_frm" action="javascript:void(0);">
+        <div id="dialog_head"></div>
+        <div id="dialog_wrap">
+            <div id="dialog_msg"></div>
+            <input type="text" class="dialog_focus"/>
+        </div>
+        <div id="dialog_btn_layer_wrap" class="form-area">
+            <div id="dialog_btn_layer" class="item opt">
+                <input type="submit" id="dialog_confirm_btn" class="btn margin-h submit_btn btn_confirm"/>
+                <input type="button" id="dialog_cancel_btn" class="btn gray btn_cancel margin-h"/>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="opacity_box small" id="update_log_layer" style="display:none">
+	<div class="head">
+		<span class="title"></span>
+		<a id="notice_close" class="shut" href="javascript:void(0);">×</a>
+	</div>
+	<div class="opacity_inner_box small">
+		<h2><span id="span_update"></span><span id="notice_version"></span><span id="span_version"></span></h2>
+		<div class="updateContentWrap">
+			<div class="line"></div>
+			<div id="NoticelogContent">
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+		<input type="button" id="log_notice_confirm_btn" class="btn margin-h submit_btn btn_confirm"/>
+	</div>
+</div>
+
+<div id="toolTipsBar">
+	<ul>
+<!--		<li>
+			<a href="javascript:void(0);"></a>
+		</li>
+		<li>
+			<a href="javascript:void(0);"></a>
+		</li>
+		<li>
+			<a href="javascript:void(0);"></a>
+		</li>-->
+	</ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<form id="ddnsform" class="app-form appContent_sectionModel" action="javascript:void(0);">
+	<dl>
+		<dd>
+			<label class="form-label"></label>
+			<span class="switch-txt"></span>
+			<input id="ddns_radio_status" type="checkbox" class="switch radio_form" />
+			<label for="ddns_radio_status" id="ddns_radio_status_switch"></label>
+			<input type="hidden" id="ddns_radio_status_hidden" name="enable"/>
+		</dd>
+		<dd>
+			<label class="form-label"></label>
+			<a class="oray_link" href="http://www.oray.com">www.oray.com</a>
+			<span id="orayName"></span>
+		</dd>
+		<dd>
+			<label class="form-label"></label>
+			<input type="text" autocomplete="off" name="user_id" maxlength="32" id="user_id" class="txt5" />
+		</dd>
+		<dd>
+			<label class="form-label"></label>
+			<input type="password" autocomplete="off" data-aes="true" name="password" maxlength="32" id="user_password" class="txt3"/>
+		</dd>
+		<dd>
+			<label class="form-label"></label>
+			<span id="ddns_status" class="txt4"></span>
+		</dd>
+	</dl>
+	<input type="hidden" name="action" value="set" />
+	<input type="hidden" name="ddns_sp" value="oray" />
+	<input type="hidden" name="wan_id" value="0" />
+</form>

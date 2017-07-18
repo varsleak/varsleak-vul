@@ -1,0 +1,67 @@
+<div class="app-box">
+	 <div class="box-bd">
+	 	<form name="qos_set_form" class="form-area" id="qos_set_form" method="post" action="" onsubmit="qos_set_submit();return false;">
+			<div class="item">
+				<label  class="form-label isneed"></label>
+				<div class="radio_form" id="flux_enable" onclick="radio_toggle(this,'set_flux_status');"></div>
+				<input type="hidden" name="flux_status" id="flux_enable_hidden">
+			</div>
+			<div id="qos_set_layer">
+				<div class="item off" id="speed_type_layer1">
+					<label  class="form-label isneed"></label>
+					<select onChange="qos_speed_set_change('1',this.value)" id="speed_type_sel1" name="speed_type1" style="width:160px;">
+						<option value="0"></option>
+						<option value="1M_adsl"></option>
+						<option value="2M_adsl"></option>
+						<option value="3M_adsl"></option>
+						<option value="4M_adsl"></option>
+						<option value="6M_adsl"></option>
+						<option value="8M_adsl"></option>
+						<option value="10M_adsl"></option>
+						<option value="12M_adsl"></option>
+						<option value="15M_adsl"></option>
+						<option value="20M_adsl"></option>
+						<option value="2M_g"></option>
+						<option value="3M_g"></option>
+						<option value="4M_g"></option>
+						<option value="5M_g"></option>
+						<option value="6M_g"></option>
+						<option value="7M_g"></option>
+						<option value="8M_g"></option>
+						<option value="9M_g"></option>
+						<option value="10M_g"></option>
+						<option value="20M_g"></option>
+						<option value="30M_g"></option>
+						<option value="40M_g"></option>
+						<option value="50M_g"></option>
+						<option value="60M_g"></option>
+						<option value="70M_g"></option>
+						<option value="80M_g"></option>
+						<option value="90M_g"></option>
+						<option value="100M_g"></option>
+						<option value="band_custom"></option>
+					</select>
+				</div>
+				<div id="qos_bandwidth_layer1" class="off">
+					<div id="qos_wan1">
+						<div class="item">
+							<!--线路带宽-->
+							<label for="wan_setup_up_bandwidth1" class="form-label mr_20"></label>
+							<input id="wan_setup_up_bandwidth1" name="up_bandwidth1" type="text" class="input-text txt_104" size="4" maxlength="5" />
+							<span class="pl">Mbps</span>
+						</div>
+						<div class="item">
+							<label for="wan_setup_down_bandwidth1" class="form-label mr_20"></label>
+							<input id="wan_setup_down_bandwidth1" name="down_bandwidth1" type="text" class="input-text txt_104" size="4" maxlength="5" />
+							<span class="pl">Mbps</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="item opt">
+				<input type="hidden" name="action" value="set"/>
+				<button type="submit" class="save_all" id="save_btn"></button>
+			</div>
+		</form>
+	 </div>
+</div>

@@ -1,0 +1,4 @@
+WANTYPE=dynamic
+ETHERMTU=1500
+ISP=
+TYPE=primary

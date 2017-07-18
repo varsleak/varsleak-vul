@@ -1,0 +1,21 @@
+{
+	"appsign":"anti_ddos",
+	"appname":"DDOS攻击防御",
+	"version":"1.0.6",
+	"dep_version":"1.3.0",
+	"description":"DDOS攻击防御",
+	"bin_start":"./anti_ddos",
+	"author":"蜂联科技",
+	"URL":"www.nowifi.cn",
+	"maintainer":"蜂联科技",
+	"email":"-",
+	"app_type":"local",
+	"icon":"./anti_ddos.png",
+	"rom_use":35,
+	"ram_use":876,
+	"start_reboot":"no",
+	"uninstall_reboot":"no",
+	"disable_reboot":"no",
+	"uninstall":"yes",
+	"disable":"yes"
+}

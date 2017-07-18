@@ -1,0 +1,94 @@
+﻿<style type="text/css">
+    .router_info .box-title{text-align: left;font-size: 20px;}
+    .router_info .item_wrap{width: 1000px;overflow: hidden;}
+    .router_info  .item_wrap .info{height: 55px;width: 100%;text-align: center;font-size: 16px;color: #020202;line-height: 55px;padding-left: 0;}
+    .left_info_ul{border-right:1px solid #edecea;text-align: right;float: right;padding-right: 75px;}
+    .left_info_ul li{width: 220px;}
+    .right_info_ul{width:425px;padding-left: 75px;float: left}
+    .left_info_ul,.right_info_ul{margin: 15px 0; font-size: 14px;padding-top: 17px;padding-bottom: 20px;overflow: hidden;text-align: left;}
+    .router_info_content li{margin-top: 10px;}
+    .left_info_content{width:500px;overflow: hidden;float: left}
+	#link_layer { padding-bottom:35px; text-align:center;}
+	#cutoff_link { background:#E7EAF1; color:#585858; display:inline-block; width:115px; height:34px; line-height:34px; }
+	#cutoff_link:hover { background:#eff1f6; text-decoration:none;}
+	.ani_dot { font-family: simsun; display: inline-block; font-size:13px; width: 1.5em;vertical-align: bottom;overflow: hidden; -moz-animation: dot 3s infinite step-start;  -webkit-animation: dot 3s infinite step-start; animation: dot 3s infinite step-start; }
+	@-moz-keyframes dot {
+    	0% { width: 0; margin-right: 1.5em; }
+    	33% { width: .5em; margin-right: 1em; }
+    	66% { width: 1em; margin-right: .5em; }
+    	100% { width: 1.5em; margin-right: 0;}
+	}
+	@-webkit-keyframes dot {
+    	0% { width: 0; margin-right: 1.5em; }
+    	33% { width: .5em; margin-right: 1em; }
+    	66% { width: 1em; margin-right: .5em; }
+    	100% { width: 1.5em; margin-right: 0;}
+	}
+	@keyframes dot {
+    	0% { width: 0; margin-right: 1.5em; }
+    	33% { width: .5em; margin-right: 1em; }
+    	66% { width: 1em; margin-right: .5em; }
+    	100% { width: 1.5em; margin-right: 0;}
+	}
+</style>
+<div class="router_info" style="position:relative;">
+    <div class="box-hd">
+        <h3 class="box-title" id="routerInfo_header"></h3>
+    </div>
+    <div class="item_wrap">
+        <div class="info" id="routerInfo"></div>
+        <div class="router_info_content">
+            <div class="left_info_content">
+                <ul class="left_info_ul">
+                    <li id="router_name_info"></li>
+                    <li id="router_model"></li>
+                    <li id="router_logo"></li>
+                    <li id="router_hz"></li>
+                </ul>
+            </div>
+            <ul class="right_info_ul">
+                <li id="router_bone"></li>
+                <li id="router_wifi_speed"></li>
+                <li id="router_save_in"></li>
+                <li id="router_save_onoff"></li>
+            </ul>
+        </div>
+    </div>
+    <div class="item_wrap">
+        <div class="info" id="online_info"></div>
+        <div class="router_info_content">
+            <input type="hidden" id="common_uiname" name="uiname"/>
+            <div class="left_info_content">
+                <ul class="left_info_ul">
+                    <li><span id="wanIp"></span><span id="routerInfo_wanIp"></span></li>
+                    <!--<li><span  id="wanMask"></span><span id="routerInfo_wanMask"></span></li>-->
+                    <!--<li><span  id="wanGm"></span><span id="routerInfo_wanGm"></span></li>-->
+                    <li><span  id="wanMac"></span><span id="routerInfo_wanMac"></span></li>
+                </ul>
+            </div>
+            <ul class="right_info_ul">
+                <li><span  id="wanDns_a"></span><span id="routerInfo_dns_a"></span></li>
+                <li><span  id="wanDns_b"></span><span id="routerInfo_dns_b"></span></li>
+
+            </ul>
+        </div>
+		<div id="link_layer" class="section_hide">
+			<a id="cutoff_link" href="javascript:void(0);"></a>
+		</div>
+    </div>
+    <div class="item_wrap">
+        <div class="info" id="home_net_info"></div>
+        <div class="router_info_content">
+            <div class="left_info_content">
+                <ul class="left_info_ul">
+                    <li><span  id="lanIp"></span><span id="routerInfo_lanIp"></span></li>
+                    <li><span  id="lanMask"></span><span id="routerInfo_mask"></span></li>
+                </ul>
+            </div>
+            <ul class="right_info_ul">
+                <li><span  id="dhcp_status"></span><span id="routerInfo_dhcp_status"></span></li>
+                <li><span  id="dhcp_range"></span><span id="routerInfo_dhcp_range"></span></li>
+            </ul>
+        </div>
+    </div>
+</div>

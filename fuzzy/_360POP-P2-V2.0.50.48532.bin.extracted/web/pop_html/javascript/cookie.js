@@ -1,0 +1,1 @@
+/web/javascript/cookie.js

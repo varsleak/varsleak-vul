@@ -1,0 +1,90 @@
+<div id="app_detail" class="smart_home">
+    <div id="app_intro">
+        <div id="app_img"><img src="./images/smart_home_top_icon.png"></div>
+        <div id="app_intro_list">
+            <div class="app_info">
+                <span class="app_name" id="nav_app_name"></span>
+                <span class="app_version" id="nav_app_version"></span>
+                <span class="app_author" id="nav_app_author"></span>
+            </div>
+            <div id="app_detail_area"></div>
+        </div>
+    </div>
+    <div id="app_set">
+        <div class="smart_devices_change off">
+            <div class="tab_area">
+                <div id="find_smart_devices" class="tab-item" style="width: 50%;"></div>
+                <div id="my_smart_devices" class="tab-item on" style="width: 50%;"></div>
+            </div>
+        </div>
+        <div id="find_smart_devices_layer" class="smart_devices_container form-area app-box">
+            <div class="tabs">
+                <div class="tab tab-1">
+                    <form action="javascript:void(0);" class="form-area app-box vendor-choose-frm">
+                        <div class="item">
+                            <label class="form-label" id="choose_vendor"></label>
+                            <select name="vendor" id="vendor_sel"></select>
+                        </div>
+                        <div class="item opt">
+                            <input type="submit" class="btn submit_btn btn_connect" />
+                        </div>
+                    </form>
+                </div>
+                <div class="tab tab-2">
+                    <div id="guide_img">
+                        <div class="normal" id="zoom"></div>
+                    </div>
+                    <div class="scanning-tip">
+                        <p id="scanning"></p>
+                        <p><span class="scanning-time blue">0</span>&nbsp;<span id="second"></span></p>
+                    </div>
+                    <div class="item opt">
+                        <button class="scanning btn_scan_device" type="button"></button>
+                    </div>
+                </div>
+                <div class="tab tab-3">
+                    <div class="no_device">
+                        <div class="icon"></div>
+                        <div class="txt" id="not_scan_device"></div>
+                        <div class="item opt">
+                            <button class="scan-again btn_scan_again" type="button"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab tab-4">
+                    <div class="device_num">
+                        <span id="device_txt1"></span>
+                        <span class="count">0</span>
+                        <span id="device_txt2"></span>
+                    </div>
+                    <table class="data-table" id="smart_device_list"></table>
+                    <div class="item opt">
+                        <button class="scan-again btn_scan_again" type="button"></button>
+                        <button class="a-key-connect btn_a_key_connect" type="button"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="my_smart_devices_layer" class="smart_devices_container form-area app-box">
+            <div class="tabs">
+                <div class="tab tab-1">
+                    <div class="no_device">
+                        <div class="icon"></div>
+                        <div class="txt" id="not_device_connect"></div>
+                    </div>
+                </div>
+                <div class="tab tab-2">
+                    <div class="device_num">
+                        <span id="my_device_txt1"></span>
+                        <span id="my_device_txt2" class="count"></span>
+                    </div>
+                    <table class="data-table" id="my_smart_device_list"></table>
+                </div>
+                <div class="item opt">
+                    <button class="refresh btn_refresh" type="button"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

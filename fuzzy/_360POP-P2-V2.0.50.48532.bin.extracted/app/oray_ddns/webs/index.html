@@ -1,0 +1,74 @@
+﻿<!doctype html>
+<!--[if lt IE 7 ]><html class="ie6" lang="zh-cn"><![endif]-->
+<!--[if IE 7 ]><html class="ie7" lang="zh-cn"><![endif]-->
+<!--[if IE 8 ]><html class="ie8" lang="zh-cn"><![endif]-->
+<!--[if IE 9 ]><html class="ie9" lang="zh-cn"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html class="w3c"><!--<![endif]-->
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="author" content="lfly" />
+    <!-- 以下两行必须载入 -->
+    <link rel="stylesheet" type="text/css" href="/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/css/default.css" />
+    <link rel="stylesheet" type="text/css" href="/app_common/style.css" />
+    <script type="text/javascript" src="/javascript/module.js"></script>
+    <script type="text/javascript" src="/app_common/app_ctrl/js/language_CN_app.js"></script>
+    <script type="text/javascript" src="/javascript/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/javascript/jq.plugin.js"></script>
+    <script type="text/javascript" src="/app_common/init.js"></script>
+    <style>
+        .app-box{
+            padding: 30px 34px 0;
+        }
+		#ddnsform .form-label{
+			width: 43%;
+		}
+    </style> 
+</head>
+<body>
+    <div class="app-box">
+        <div class="box-bd">
+            <form name="ddnsform" id="ddnsform" method="post" class="form-area" action="" onSubmit="submitSetData();return false;">
+                <div class="item">
+                    <label class="form-label isneed"></label>
+
+					<div class="radio_form" id="ddns_radio_status" onClick="radio_toggle(this,'change_ddns_enable');"></div>
+                    <input id="ddns_radio_status_hidden" type="hidden" value="" name="enable" />
+				</div>
+                <div class="item">
+                    <label class="form-label"></label>
+                    <label class="inline" id="orayName"></label>
+                    <input type="hidden" name="ddns_sp"  value="oray" />
+                    <a id="oray_link" target="_blank" >www.oray.com</a>
+                </div>
+                <div class="item">
+                    <label  class="form-label isneed"></label>
+					<input type="text" class="sr-only" />
+                    <input class="input-text" id="user_id" type="text"  value="" maxlength="32" name="user_id" autocomplete="off" />
+                </div>
+                <div class="item">
+                    <label  class="form-label isneed"></label>
+                    <input type="password" class="sr-only" />
+                    <input class="input-text" id="user_password" type="password" value="" maxlength="32" name="password" data-aes="true" autocomplete="off" />
+                </div>
+                <div class="item">
+                    <label class="form-label"></label>
+                    <span id="ddns_status" ></span>
+                </div>
+                <div class="item opt">
+                    <button type="submit" id="saveBtn"></button>
+                </div>
+                <div>
+                    <input type="hidden" value="0" name="wan_id" />
+                    <input type="hidden" value="set" name="action" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" src="/javascript/err.js"></script>
+    <script type="text/javascript" src="/app_common/app_ctrl/js/app_lib.js"></script>
+    <script type="text/javascript" src="js/ddns.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<div id="tip"></div>
+<div id="warning_count" class="grey-text">
+    <p class="warning_count_txt"></p>
+</div>
+<div class="app-box">
+    <div class="box-hd">
+        <h3 class="box-title"></h3>
+    </div>
+    <div class="box-bd">
+        <form id="filter_arp_bind" class="form-area" name="filter_arp_bind_frm" method="post" onsubmit="filter_arp_bind_submit();return false;">
+            <div class="item">
+                <label  class="form-label isneed"></label>
+                <input id="filter_arp_ip" type="text" maxlength="15" class="input-text" name="ip"></div>
+            <div class="item">
+                <label  class="form-label isneed"></label>
+                <input id="filter_arp_mac" type="text" maxlength="17" class="input-text" name="mac"></div>
+            <div class="item">
+                <label class="form-label" ></label>
+                <input id="filter_arp_name" type="text" name="host_name" class="input-text" maxlength="32" />
+            </div>
+            <div class="item">
+                <label  class="form-label isneed"></label>
+                <select id="bind_iface" name="dev"></select>
+            </div>
+            <div class="item opt">
+                <input id="filter_arp_deal" type="hidden" value="add" name="deal">
+                <input id="filter_arp_old_ip" type="hidden" value="0" name="old_ip">
+                <input id="filter_arp_old_dev" type="hidden" value="LAN" name="old_dev">
+                <button id="filter_arp_save" class="addBtn"  type="submit"></button>
+                <button id="filter_arp_modify_cancel" class="off modify_cancel" onclick="filter_arp_modify_cancle();return false;"></button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="app-box has-table">
+    <div class="box-hd">
+        <h3 class="box-title"></h3>
+    </div>
+    <div class="box-bd">
+        <table class="data-table" id="filter_arp_tab" ></table>
+        <div class="opt">
+            <button onclick="filter_arp_del_all();return false;" class="red delAll"></button>
+        </div>
+    </div>
+</div>

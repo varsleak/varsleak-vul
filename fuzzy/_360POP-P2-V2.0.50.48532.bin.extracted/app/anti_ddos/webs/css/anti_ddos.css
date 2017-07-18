@@ -1,0 +1,28 @@
+.formstyle dd label{
+	width: 300px;
+}
+#hand_mode_set .form-label {
+    float: left;
+    width: 55%;
+    height: 46px;
+/*    padding-right: 0;
+    margin-right: 0;
+    margin-left: -10px;*/
+    line-height: 46px;
+    text-align: right;
+}
+
+#set_state .form-label{
+    width: 52%;
+}
+#hand_mode_set .item {
+    height: 46px;
+    margin-bottom:0px;
+    line-height: 46px;
+}
+.even-bg{
+    background: #f6f6f9;
+}
+.odd-bg{
+    background: #ffffff;
+}

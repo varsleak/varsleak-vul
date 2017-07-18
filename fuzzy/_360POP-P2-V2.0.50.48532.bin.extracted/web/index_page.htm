@@ -1,0 +1,197 @@
+<div class="app_container">
+    <div id="app_section">
+        <div id="detail_area">
+            <div id="app_list">
+                <div class="left-container clearfix">
+                    <div class="work-time-box">
+                        <span id="has_work"></span>
+                        <span class="work-time">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                    <div class="wan-speed-box">
+                        <div class="wan-speed"><span class="wan-speed-value">&nbsp;&nbsp;</span>
+
+                            <p class="wan-speed-unit">KB/s</p>
+
+                            <p id="cur_speed" class="wan-speed-title"></p></div>
+                        <!--<div class="router-img">
+                            <img src="images/luyou_product.png" alt=""/>
+                        </div>-->
+                        <div class="router-stauts"></div>
+                    </div>
+                    <script type="text/template" id="index-left-template">
+                        <div class="work-time-box"><span id="has_work">{{L.has_work}}</span><span class="work-time">{{uptime}}</span>{{uptime_unit}}
+                        </div>
+                        <div class="wan-speed-box">
+                            <div class="wan-speed"><span class="wan-speed-value">{{down_speed}}</span>
+
+                                <p class="wan-speed-unit">{{down_speed_unit}}</p>
+
+                                <p id="cur_speed" class="wan-speed-title">{{L.cur_speed}}</p></div>
+                            <div class="router-stauts"></div>
+                        </div></script>
+                </div>
+                <div class="right-container clearfix">
+                    <div class="right-top-container">
+                        <script type="text/template" id="index-right-template">
+                            <div class="router-info-box {{errorclass}}">
+                                <p>
+                                    <span class="info">{{L.link_status}}：<label
+                                            class="networking-status">{{stauts}}</label></span>
+                                </p>
+                                <button class="button-akey-speed button-index-check check-ok">{{L.akey_speed}}</button>
+                                <button class="button-fail-help button-index-check internet-error">{{L.fail_help}}
+                                </button>
+                            </div>
+                        </script>
+                    </div>
+                    <div class="main-menu-box">
+                        <ul>
+                            <li>
+                                <div class="menu-item nav_device_list" data-html-name="nav_device_list"
+                                     data-us-fov-count="3016">
+                                    <div class="menu_text" id="nav_device_list_txt"></div>
+                                    <div class="tab-info">
+
+                                        <!--<p class="device-list-title" id="nav_device_list_count"></p>-->
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="menu-item nav_protection" data-html-name="nav_protection"
+                                     data-us-fov-count="3017">
+                                    <div class="menu_text" id="nav_protection_txt"></div>
+
+                                </div>
+                            </li>
+                            <li>
+                                <div class="menu-item wireless_base" data-html-name="wireless_base"
+                                     data-us-fov-count="3018">
+                                    <div class="menu_text" id="wireless_base_txt"></div>
+
+                                </div>
+                            </li>
+                            <li>
+                                <div class="menu-item wan_setup" data-html-name="wan_setup" data-us-fov-count="3019">
+                                    <div class="menu_text" id="wan_setup_txt"></div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="menu-item igd_ap app" data-html-name="igd_ap"
+                                     data-us-fov-count="3020">
+                                    <div class="menu_text" id="igd_ap_txt"></div>
+
+                                </div>
+                            </li>
+                            <li>
+                                <div class="menu-item smart_home" data-html-name="smart_home" data-us-fov-count="3021">
+                                    <div class="menu_text" id="smart_home_txt"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!--link help-->
+                <div id="link_help_pop" class="pop_layer">
+                    <div class="pop_layer_header pop_wired_icon">
+                        <h2 id="link_help_tip"></h2>
+                        <a class="modal_close" href="javascript:void(0);" id="link_help_shutDown">×</a>
+                    </div>
+                    <div class="hitch-diagnosis-check">
+                        <div class="hitch-diagnosis-tip-logo check-hd-diagnose"></div>
+                        <div class="hitch-diagnosis-tip-info">
+                            <p id="hitchDiagnosisTip"></p>
+                            <ul id="hd-normal-check">
+                                <li><p id="check_wan_status"></p><label class="hd-check-status"></label></li>
+                                <li><p id="check_connect_type"></p><label class="hd-check-status"></label></li>
+                                <li><p id="check_wan_ip"></p><label class="hd-check-status"></label></li>
+                                <li><p id="check_dns_info"></p><label class="hd-check-status"></label></li>
+                                <li><p id="check_web_status"></p><label class="hd-check-status"></label></li>
+                            </ul>
+                            <ul class="section_hide" id="link-abnormal">
+                                <li class="lineLink" id="line-abnormal-line"></li>
+                                <li class="lineLink" id="upper-equipment-isNoraml"></li>
+                                <li class="lineLink" id="link-line-picture"></li>
+                                <li class="wisp-link-down" id="wisp-auth-error"></li>
+                                <li class="wisp-link-down" id="wisp-reconnet"></li>
+                                <li class="connectTypeError" id="re_set_wan"></li>
+                                <li class="mac-clone" id="mac-lan"></li>
+                                <li class="connectTypeError pppoe-server mac-clone pppoe-userInfo wanIp-fault wanNolink"
+                                    id="change-route"></li>
+                                <li class="pppoe-server" id="refresh-pppoe"></li>
+                                <li class="lineLink pppoe-server pppoe-userInfo dns wanIp-fault web-fault wanNolink connectTypeError">
+                                    <a href="javascript:void(0);" id="internet-server-tip"
+                                       class="selectModelImgPadding selectModelDown"></a>
+
+                                    <div id="hd-server-info" class="section_hide"></div>
+                                </li>
+                                <li class="lineLink pppoe-server pppoe-userInfo dns wanIp-fault web-fault wanNolink connectTypeError wisp-link-down"
+                                    id="product-connect"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="link_help_show section_hide">
+                    </div>
+                    <div class="hdFooter">
+                        <div id="dnsUpdateSection" class="paddingTxt section_hide">
+                            <p id="dnsUpdateTip" class="lineHeight2"></p>
+                            <input type="checkbox" id="isEnableTempDns"/><label for="isEnableTempDns"
+                                                                                id="isEnableTempDnsTxt"></label>
+                        </div>
+                        <div class="btn-fld">
+                            <input type="button" class="btn btn_callback section_hide"/>
+                            <input type="button" class="btn btn_re_diagnosis section_hide"/>
+                            <input type="button" class="btn btn_shutDown section_hide"/>
+                        </div>
+                    </div>
+                </div>
+                <!-- akey_speed -->
+                <div id="akey_speed_pop" class="pop_layer">
+                    <div class="pop_layer_header">
+                        <h2 id="akey_speed_pop_tip"></h2>
+                        <a class="modal_close" href="javascript:void(0);" id="akey_speed_shut_a">×</a>
+                    </div>
+                    <div class="akey_speed_check">
+                        <div id="has_no_akey_speed">
+                            <div class="akey_speed_base"></div>
+                            <div class="akey_speed_progress"></div>
+                            <p id="akey_speed_count_tip"></p>
+                        </div>
+                        <p id="has_akey_speed" class="section_hide"></p>
+                    </div>
+                    <div class="akey_speed_result section_hide">
+                        <!--<p id="akey_speed_result_tip"></p>-->
+                        <p id="akey_speed_result_fail_tip" class="section_hide"></p>
+
+                        <div id="akey_success_result">
+                            <div class="speed-section">
+                                <div id="down-speed-logo" class="speed-airplane"></div>
+                                <p id="down-speed-result"></p>
+
+                                <p id="down-net-result"></p>
+                            </div>
+                            <div class="line"></div>
+                            <div class="speed-section">
+                                <div id="up-speed-logo" class="speed-airplane"></div>
+                                <p id="up-speed-result"></p>
+
+                                <p id="up-net-result"></p>
+                            </div>
+                        </div>
+                        <div class="btn-fld">
+                            <input type="button" class="btn btn_akey_refresh_check" id="refresh_akey_check"/>
+                            <input type="button" class="btn btn_confirm" id="akey_check_done"/>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="app_detail" class="section_hide">
+        <div id="app_set">
+        </div>
+    </div>
+</div>

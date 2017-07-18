@@ -1,0 +1,62 @@
+<!doctype html>
+<!--[if lt IE 7 ]><html class="ie6" lang="zh-cn"><![endif]-->
+<!--[if IE 7 ]><html class="ie7" lang="zh-cn"><![endif]-->
+<!--[if IE 8 ]><html class="ie8" lang="zh-cn"><![endif]-->
+<!--[if IE 9 ]><html class="ie9" lang="zh-cn"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html class="w3c"><!--<![endif]-->
+<head>
+	<title>pptp client</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="/css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="/css/default.css" />
+	<link rel="stylesheet" type="text/css" href="/app_common/style.css" />
+    <script type="text/javascript" src="/javascript/module.js"></script>
+	<script type="text/javascript" src="/app_common/init.js"></script>
+	<script type="text/javascript" src="/javascript/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/javascript/jq.plugin.js"></script>
+    <script type="text/javascript" src="/app_common/app_ctrl/js/language_CN_app.js"></script>
+	<script type="text/javascript" src="/app_common/app_ctrl/js/app_lib.js"></script>
+	<script type="text/javascript" src="/javascript/err.js"></script>
+    <script type="text/javascript" src="js/ap_timer.js"></script>
+    <style type="text/css">
+        #wifi_ctrl .form-label { width:34%;}
+        #ap-timer-list{padding: 0 34px;}
+        .data-table td a.edit,.data-table td a.del,.data-table td a.status{color: #438BF1;background: transparent;border: none;padding: 6px;}
+		#ap-timer-list { padding: 0 34px 20px;}
+    </style>
+</head>
+<body>
+	<div class="app-box">
+		<div class="box-hd">
+			<h3 class="box-title" id="wifi_ctrl_title"></h3>
+		</div>
+		<div class="box-bd">
+			<form  action="" method="post" class="form-area" id="wifi_ctrl" name="wifi_ctrl_frm">
+                <div class="item timeSlotSec">
+                    <label class="form-label mr_20"></label>
+                    <div class="timeSlot"></div>
+                </div>
+                <div class="item weekSlotSec">
+                    <label class="form-label mr_20"></label>
+                    <div class="weekSlot"></div>
+                </div>
+				<div class="item opt">
+					<input type="hidden" name="timer_enable" value="1" />
+					<input type="hidden" name="action" id="action" value="add" />
+					<input type="hidden" name="idx" id="opt_data_flag" value="" />
+					<button type="submit" class="save_all" id="add_btn"></button>
+                    <button class="cancel_edit gray  off" id="cancel_edit_btn"></button>
+				</div>
+			</form>
+		</div>
+	</div>
+    <div class="app-box" id="ap-timer-list">
+        <div class="box-hd no-border">
+            <h3 class="box-title"></h3>
+        </div>
+        <div class="box-bd">
+            <table  class="data-table"  id="ap_timer_tab"></table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<div class="swiper-wrapper babyModeSwiperWrapper">
+   <section class="swiper-slide app-form baby-mode-host">
+                <dl><dd class="noBabyModeList section_hide"><a class="addManageBtn"></a></dd></dl>
+            </section>
+   <section class="swiper-slide app-form baby-mode-list"><dl></dl></section>
+   <section class="swiper-slide app-form baby-mode-control">
+                <dl>
+                    <dd class="baby-sex-box">
+                        <a><label><span class="radioMode baby-sex-selected"></span><span class="baby-sex"></span></label><img src="/app/baby_mode/webs/images/boy_icon.png" /></a>
+                        <a><label><span class="radioMode"></span><span class="baby-sex"></span></label><img src="/app/baby_mode/webs/images/girl_icon.png" /></a>
+                        <input type="hidden" name="sex" id="baby-sex" value="0"/>
+                    </dd>
+                    <dt class="noMarginTop">
+                        <label id="limit_tip"></label>
+                    </dt>
+                    <dd class="item_time_group">
+                        <label class="time_group_txt"></label>
+                        <a href="javascript:void(0);" class="hour_min">
+                            <input class="start hour babyMode_timeToolTxt" type="text" readonly="true" size="5" maxlength="2" value="00"  />
+                            <span  class="time-label lbl_baby_hour"></span>
+                            <input class="start min babyMode_timeToolTxt"  type="text" readonly="true" size="5" maxlength="2" value="00"  />
+                            <span  class="time-label lbl_baby_minute"></span>
+                        </a>
+                    </dd>
+                    <dd class="item_time_group">
+                        <label class="time_group_txt"></label>
+                        <a href="javascript:void(0);" class="hour_min">
+                            <input class="end hour babyMode_timeToolTxt"  type="text" readonly="true" size="5" maxlength="2" value="00"  />
+                            <span class="time-label lbl_baby_hour"></span>
+                            <input  class="end min babyMode_timeToolTxt"  type="text" readonly="true" size="5" maxlength="2"  value="00"  />
+                            <span class="time-label lbl_baby_minute"></span>
+                        </a>
+                        <input type="hidden" class="submit-mac" value="" />
+                    </dd>
+                </dl>
+                <div class="baby_mode_edit_set">
+                    <button id="baby_mode_edit"></button>
+                </div>
+            </section>
+</div>

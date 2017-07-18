@@ -1,0 +1,115 @@
+/*智能家居 wbo*/
+.smart_home select{*width: 112px;}
+.smart_home #find_smart_devices_layer{
+    display: none;
+}
+.smart_home .smart_devices_container {
+    min-height: 400px;
+}
+.smart_home .tabs{margin: 60px 0}
+.smart_home .tabs .tab{display: none}
+.vendor-choose-frm .form-label{width:42% }
+.smart_home #guide_img {
+    background: url("../images/smart_link_guide.png") no-repeat scroll left top;
+    height: 147px;
+    margin: 0 auto;
+    position: relative;
+    width: 138px;
+}
+.smart_home #zoom {
+    bottom: 0;
+    height: 95px;
+    position: absolute;
+    right: 0;
+    width: 95px;
+}
+.smart_home .normal {
+    background: url("../images/zoom.png") no-repeat scroll 0 0;
+}
+.smart_home .searching {
+    background: url("../images/zoom.gif") no-repeat scroll 0 0;
+}
+.smart_home .scanning-tip{
+    width: 200px;
+    text-align: center;
+    margin: 0 auto;
+    display: none;
+}
+.smart_home .no_device {
+    padding-top: 28px;
+}
+.no_device .icon {
+    background: url("../images/warning_big.png") no-repeat scroll 0 0;
+    height: 42px;
+    margin: 0 auto;
+    width: 42px;
+}
+.no_device .txt {
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 23px 0 60px;
+    text-align: center;
+}
+.smart_home .device_num{
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+.smart_home .count,
+.blue
+{color: #428bef }
+
+#smart_home_pop{
+    border: 1px solid #f1f1f1;
+    background: #fff;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 0px 4px rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    position: absolute;
+    z-index: 4001;
+    display: none;
+    width: 280px;
+}
+#smart_home_type{
+    width: 90px;
+    height: 90px;
+    margin: 12px auto;
+}
+#smart_home_msg{
+    margin-bottom: 12px;
+}
+#smart_home_btn_wrap{
+    text-align: center;
+    margin-bottom:10px
+}
+#smart_home_pop .wait,
+#smart_home_pop .error,
+#smart_home_pop .success
+{
+    width: 50px;
+    height: 50px;
+}
+#smart_home_pop .camera{
+    background: url("../images/camera.png") no-repeat center center;
+}
+#smart_home_pop .camera_success{
+    background: url("../images/camera_success.png") no-repeat center center;
+}
+#smart_home_pop .camera_error{
+    background: url("../images/camera_error.png") no-repeat center center;
+}
+#smart_home_pop .wifi_extender{
+    background: url("../images/wifi_extender.png") no-repeat center center;
+}
+#smart_home_pop .wifi_extender_success{
+    background: url("../images/wifi_extender_success.png") no-repeat center center;
+}
+#smart_home_pop .wifi_extender_error{
+    background: url("../images/wifi_extender_error.png") no-repeat center center;
+}
+

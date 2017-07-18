@@ -1,0 +1,144 @@
+<style>
+    .fix_ie_shadow {
+        bottom: 3% \9;
+        *bottom: -0.5%;
+    }
+</style>
+<div class="fix_ie_shadow"></div>
+<div class="form-border-shadow has-tab">
+    <div class="box-bd form-area">
+        <div class="tab_area" id="update_mode_layer">
+            <div class="tab-item on" id="div_manual_update_title" data-type-index="0"></div>
+            <div class="tab-item" id="div_auto_update_title" data-type-index="1"></div>
+        </div>
+        <div class="app-box" id="manual_update_div">
+            <div class="box-bd">
+                <form id="update_form" method="post" class="form-area" target="iframe_hidden"
+                      action="/router/put_file.cgi"
+                      enctype="multipart/form-data">
+                    <div class="rally_center_tip center_tip">
+                        <span id="div_manual_update_tip"></span>
+                    </div>
+                    <div class="item">
+                        <center>
+                            <label id="span_cur_ver"></label>
+                            <span id="current_version"></span>
+                        </center>
+                    </div>
+                    <div class="item" style="position:relative;">
+                        <!--<label for="put_file" class="form-label" id="lbl_put_file"></label>-->
+                        <a href="javascript:void(0);" class="white_btn" style="text-decoration:none; overflow:hidden;">
+                            <span id="span_view"></span>
+                            <input type="file" name="put_file" id="put_file" class="filePrew" size="3"/>
+                        </a>
+                        <input type="text" id="focus_help" class="focus_help"/>
+                    </div>
+                    <div id="update_file_name" class="item file_name_layer"></div>
+                    <div class="item opt" style="padding-top:10px;">
+                        <input type="submit" class="btn submit_btn btn_confirm" onClick="answer();"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="auto_update_div" class="app-box section_hide">
+            <div class="box-bd">
+                <form id="auto_update_info_frm" class="form-area" method="post" action="javascript:void(0);">
+                    <div class="item">
+                        <label class="form-label" id="lbl_auto_update"></label>
+
+                        <label id="auto_update_checkbox_label" for="auto_update_checkbox"></label>
+                        <input type="checkbox" value="0" onclick="auto_update_checkbox_change(this);"
+                               id="auto_update_checkbox" name="auto_update_checkbox"/>
+                    </div>
+                    <div class="item">
+                        <label id="lbl_version_info" class="form-label"></label>
+                        <span id="span_cur_version"></span>
+                        <span id="cur_version" class="padding-left-10"></span>
+                    </div>
+                    <div id="new_version_layer" class="item section_hide">
+                        <label class="form-label"></label>
+                        <span id="span_new_version"></span>
+                        <span id="new_version" class="padding-left-10"></span>
+                    </div>
+                    <!--               <div class="item">
+                                        <label class="form-label"></label>
+                                        <a id="updateLog" href="javascript:void(0);" onclick="show_update_log();"></a>
+                                    </div>-->
+                    <div class="item">
+                        <label class="form-label"></label>
+                        <span id="span_status"></span>
+                        <span id="update_status" class="padding-left-10"></span>
+                    </div>
+                    <div class="item section_hide" id="pro_section">
+                        <span class="item_text item_word" id="span_pro"></span>
+				<span class="item_content">
+					<div id="pro_layer" class="section_hide">
+                        <div id="pro_bar_outer">
+                            <div id="pro_bar"></div>
+                        </div>
+                        <div id="pro_info">
+                            <div id="pro_msg">
+                                <span id="pro_percent"></span>
+                            </div>
+                        </div>
+                    </div>
+					<div id="pro_fin_layer" class="section_hide"></div>
+				</span>
+                    </div>
+                    <div class="item opt">
+                        <input type="button" id="check_btn" onClick="update_check();" class="btn btn_version_check"/>
+                        <input type="button" id="update_btn" onClick="start_update();"
+                               class="btn btn_update section_hide"/>
+                        <!--<input type="button" id="cancel_btn" onClick="cancel_update();" class="btn btn_cancel_download section_hide"/>-->
+                        <!-- <input type="hidden" id="update_uri"/>
+                         <input type="hidden" id="update_md5"/>-->
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="reset_div" class="section_hide">
+            <center>
+                <div class="reset_tip">
+                    <span id="span_reset_tip"></span>
+                    <span id="time"></span><a name="time_jump"></a><a id="time_jump" href="#time_jump"></a>
+                </div>
+            </center>
+        </div>
+    </div>
+    <iframe name="iframe_hidden" id="iframe_hidden" height="0" width="0" frameborder="0"></iframe>
+
+
+    <div class="opacity_box large" id="logContent" style="display:none;">
+        <div class="head">
+            <span class="title" id="logTxtTitle"></span>
+            <a class="shut" id="logTxtTitleShut" href="javascript:void(0);">×</a>
+        </div>
+        <div id="update_log_cnt" class="opacity_inner_box large">
+            <div class="updateContentWrap">
+                <div class="line"></div>
+                <div id="logTxtContent"></div>
+            </div>
+        </div>
+        <div class="footer">
+            <input type="button" id="log_confirm_btn" class="btn margin-h submit_btn btn_confirm"/>
+        </div>
+    </div>
+
+    <div id="repeater_op_layer" class="op_menu">
+        <ul>
+            <li><a href="javascript:void(0);">全选</a></li>
+            <li><a href="javascript:void(0);">版本升级</a></li>
+            <li><a class="drop" href="javascript:void(0);">手动更新固件<i></i></a></li>
+            <li class="active"><a class="drop" href="javascript:void(0);">配置管理<i></i></a>
+                <ul>
+                    <li><a href="javascript:void(0);">网络配置</a></li>
+                    <li><a href="javascript:void(0);">修改管理密码</a></li>
+                    <li><a href="javascript:void(0);">重启中继器</a></li>
+                    <li><a href="javascript:void(0);">恢复出场设置</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

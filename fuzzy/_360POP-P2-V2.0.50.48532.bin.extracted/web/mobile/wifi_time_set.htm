@@ -1,0 +1,41 @@
+<div style="height:1px;"></div><!--fix safari bug-->
+<form class="app-form appContent_sectionModel" id="wireless_base_2_4_frm">
+    <dl id="time_segment_ctr" >
+        <dd class="item">
+            <label class="form-label" >{{timeTxt}}</label>
+            <a id="g_time_A" name="g_time" class="selectArrow switch" href="javascript:void(0);"><span class="switch-txt"></span><input type="hidden" name="timer_enable" id="g_time_hidden" value="0" /><img  src="./images/selectArrow.png" /></a>
+            <ul class="option-box"><li class="subMenu"><label>{{weekTitle}}</label></li>
+                <li><input type="checkbox" value="1" id="g_day0"/>
+                    <label for="g_day0" style="margin:0 3px;">{{day0}}</label></li>
+                <li><input type="checkbox" value="2" id="g_day1"/>
+                    <label for="g_day1" style="margin:0 3px;">{{day1}}</label></li>
+                <li><input type="checkbox" value="3" id="g_day2"/>
+                    <label for="g_day2" style="margin:0 3px;">{{day2}}</label></li>
+                <li><input type="checkbox" value="4" id="g_day3"/>
+                    <label for="g_day3" style="margin:0 3px;">{{day3}}</label></li>
+                <li><input type="checkbox" value="5" id="g_day4"/>
+                    <label for="g_day4" style="margin:0 3px;">{{day4}}</label></li>
+                <li><input type="checkbox" value="6" id="g_day5"/>
+                    <label for="g_day5" style="margin:0 3px;">{{day5}}</label></li>
+                <li><input type="checkbox" value="7" id="g_day6"/>
+                    <label for="g_day6" style="margin:0 3px;">{{day6}}</label></li>
+                <input type="hidden" name="timer_day" id="g_day" value=""/>
+                <li class="subMenu"><label>{{timeTitle}}</label></li>
+                <li class="item_time_group">
+                    <label class="form-label">{{startTxt}}</label>
+                    <a class="hour_min"  href="javascript:void(0);"><input readonly="true" type="text"  maxlength="2" placeholder="0"  value="0" name="start_hour" id="g_start_hour" class="input-text input-small" />
+                    <span class="time-label">{{s_hour}}</span>
+                    <input readonly="true" type="text"  maxlength="2" name="start_minute" id="g_start_min" placeholder="0" value="0" class="input-text input-small"/>
+                    <span class="time-label">{{s_min}}</span></a>
+                </li>
+                <li class="item_time_group">
+                    <label class="form-label">{{endTxt}}</label>
+                    <a class="hour_min" href="javascript:void(0);"><input readonly="true" type="text"  maxlength="2" placeholder="23" value="23" name="end_hour" id="g_end_hour" class="input-text input-small"/>
+                    <span class="time-label">{{end_hour}}</span>
+                    <input readonly="true" type="text"  maxlength="2" placeholder="59"  value="59" name="end_minute" id="g_end_min" class="input-text input-small"/>
+                    <span class="time-label">{{end_min}}</span></a>
+                </li>
+            </ul>
+        </dd>
+    </dl>
+</form>

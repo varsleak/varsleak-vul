@@ -1,0 +1,104 @@
+﻿<div class="fix_ie_shadow"></div>
+<div class="form-border-shadow has-tab store-manage">
+    <div id="store_type_layer" class="tab_area">
+        <div id="store_info" class="tab-item on"></div>
+        <div id="store_share" class="tab-item"></div>
+    </div>
+    <div class="tab_item_container" id="store_manage_wrap">
+        <div class="no-new-disk section_hide">
+            <div class="no-disk">
+                <p class="title" id="no_disk_tip"></p>
+                <p class="sub-title" id="ensure_tip"></p>
+                <div class="no-disk-img"></div>
+            </div>
+            <div class="new-disk">
+                <p class="sub-title" id="new_disk_tip"></p>
+                <p class="title" id="init_tip"></p>
+                <div class="new-disk-img"></div>
+            </div>
+        </div>
+        <div class="disk-wrap">
+            <div class="disk"></div>
+            <div class="rally_center_tip center_tip disk-tip section_hide"><span id="disk_mount_tip"></span></div>
+            <div class="btn-wrap section_hide">
+                <input type="button" class="btn btn_unstall uninstall-all-btn"/>
+            </div>
+        </div>
+    </div>
+    <div id="disk_sleep" class="tab_item_container section_hide">
+    	<div class="store-app">
+        	<div class="app-logo logo-disk-sleep"></div>
+            <div class="app-box">
+                <div class="box-hd">
+                    <h3 id="disk_sleep_share" class="box-title"></h3>
+                </div>
+                <div class="box-bd">
+                    <form name="disk_sleep_frm" id="disk_sleep_frm" class="form-area">
+                        <div class="app-tips" id="disk_sleep_tips"></div>
+                        <div class="item">
+                            <label id="lbl_run_status" class="form-label"></label>
+                            <span id="run_status"></span>
+                        </div>
+                        <div class="item">
+                            <label id="lbl_disk_sleep_time" class="form-label"></label>
+                            <select id="disk_sleep_time_sel" name="sleep_time">
+                            </select>
+                        </div>
+                        <div class="item opt">
+                            <input type="hidden" value="set_sleep_time" name="action">
+                            <input type="button" class="btn btn_save" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<div class="tab_item_container section_hide" id="app_page">
+        <div class="store-app app-samba">
+            <div class="app-logo logo-default"></div>
+            <div class="app-box">
+                <div class="box-hd">
+                    <h3 class="box-title" id="file_share"></h3>
+                </div>
+                <div class="box-bd">
+                    <form class="form-area" id="samba" name="samba_frm">
+                        <div id="samba_tips" class="app-tips"></div>
+                        <div class="item">
+                            <label class="form-label" id="status_samba"></label>
+                            <div id="samba_status" class="radio_form"></div>
+                            <input type="hidden" name="is_enable" id="samba_status_hidden">
+                        </div>
+                        <div class="item opt off">
+                            <input type="hidden" name="action" value="set" />
+                            <input type="button" class="btn btn_save"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="store-app app-dlna">
+            <div class="app-logo logo-default"></div>
+            <div class="app-box">
+                <div class="box-hd">
+                    <h3 class="box-title" id="multimedia_share"></h3>
+                </div>
+                <div class="box-bd">
+                    <form class="form-area" id="dlna" name="dlna_frm">
+                        <div id="dlna_tips" class="app-tips"></div>
+                        <div class="item">
+                            <label class="form-label" id="status_dlna"></label>
+                            <div id="dlna_status" class="radio_form"></div>
+                            <input type="hidden" name="is_enable" id="dlna_status_hidden">
+                        </div>
+                        <div class="item opt off">
+                            <input type="hidden" name="action" value="set" />
+                            <input type="button" class="btn btn_save"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>-->
+</div>
+
+

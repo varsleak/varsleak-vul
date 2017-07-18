@@ -1,0 +1,22 @@
+#guide_img { margin:30px auto 0; width:609px; height:218px; position:relative; background:url(../images/guide_img.png) no-repeat;}
+#set,#wait,#error,#correct,#linkdown { padding-bottom:45px;}
+p.tip { color:#333; text-align:center; padding:15px 0 42px 0;}
+p.detecting_tip { padding-bottom:10px; }
+.btn_layer { text-align:center;}
+.bigger_btn { width:150px;}
+#link_down_icon { width:50px; height:44px; background:url(../images/link_down_icon.png) no-repeat; position:absolute; left:287px; top:195px;}
+#coutdown_icon { width:70px; height:70px; background:url(../../../../images/init/loading.gif) no-repeat;  margin:0 auto; position:relative;}
+#error_icon { width:70px; height:70px; margin:0 auto;}
+#correct_icon { width:70px; height:70px; margin:0 auto;}
+#coutdown_time { font-size:18px; text-align:center; font-family:Arial, Helvetica, sans-serif; color:#333; position:absolute; left:25px; top:20px; display:inline-block; width:20px; }
+#wait_msg,#setup_msg,#correct_msg,#error_msg { text-align:center; font-size:30px; padding:25px 0;}
+#type { margin:0 auto; padding-bottom:47px; visibility:hidden;}
+#correct_tip,#error_pppoe { margin:0 auto; }
+#error_pppoe li,#type li,#correct_tip li { color:#333; font-size:16px; line-height:30px;}
+#error_tip { text-align:center; padding:4px 0 20px; margin:0;}
+.static { width:115px; display:inline-block; text-align:right;}
+.pppoe { width:115px; display:inline-block; text-align:right;}
+p.end_tip { padding:10px 0; }
+.recommend_tip { padding:20px 0 0; color:#7d8185; font-size:14px; text-align:center; margin:0;}
+#sp_layer table.data-table { width:80%; margin:0 auto;}
+.link_sp { line-height:40px;}

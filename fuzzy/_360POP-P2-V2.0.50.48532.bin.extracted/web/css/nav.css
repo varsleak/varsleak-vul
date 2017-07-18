@@ -1,0 +1,64 @@
+.topbar{
+	height: 55px;
+	line-height: 42px;
+	background: #262626;
+	width: 100%;
+	min-width:1004px;
+	position:fixed;
+	left:0;
+	top:0;
+	z-index:1000;
+}
+.topbar .container{
+	width: 1004px;
+	position: relative;
+	margin: 0 auto;
+	padding: 0 10px;
+}
+.topbar .logo{
+	float: left;
+	height: 20px;
+	margin-top: 20px;
+	line-height: 20px;
+}
+.topbar .nav {
+	position: absolute;
+	right: 9px;
+	top: 25px;
+	height: 14px;
+	line-height: 14px;
+	font-size: 14px;
+}
+.ie6 .topbar .nav{
+	height: 14px;
+	line-height: 14px;
+}
+.topbar .nav li {
+	float: left;
+	height: 14px;
+	padding: 0 8px;
+	border-right: 1px solid #A3A3A3;
+}
+.topbar .nav li.last{
+	border-right: none;
+}
+.topbar .nav li:last-child{
+	border: none;
+}
+.topbar .nav a{
+	color: #A3A3A3;
+	text-decoration: none;
+	font-family: "微软雅黑";
+    cursor: pointer;
+}
+.topbar .nav a:hover{
+	color: #ffba00;
+	text-decoration: underline;
+}
+.topbar .nav a.current{
+    color: #ffba00;
+}
+/****** new year ******/
+.newYear .topbar .logo {margin-top: 20px;}
+html.newYear{width: 100%;min-width: 1004px;min-height: 100%;background: url("./../images/newYear-footer.png") no-repeat left bottom #fdf2d9;}
+body.newYear{width: 100%;margin-bottom: 87px;}

@@ -1,0 +1,112 @@
+<div class="fix_ie_shadow"></div>
+<div class="form-border-shadow has-tab">
+	<div id="reboot_mode_layer" class="tab_area">
+		<div data-type-index="0" id="div_reboot_now_title" class="tab-item on"></div>
+		<div data-type-index="1" id="div_reboot_timed_title" class="tab-item"></div>
+	</div>
+    <div class="app-box" id="reboot_now_div" style="padding-top:20px;">
+        <div class="box-bd">
+            <form id="soft_reboot_form" class="form-area" method="post" action="javascript:void(0);">
+                <div class="item opt">
+                    <div id="div_reboot_now_tip" class="center_tip"></div>
+                </div>
+                <div class="item opt">
+                    <input type="submit" class="btn submit_btn btn_reboot" onClick="soft_reboot();"/> <!-- 重新启动 -->
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="app-box section_hide" id="reboot_timed_div" style="padding-top:20px;">
+        <div class="box-bd"></div>
+        <form id="timed_reboot_form" class="form-area" method="post" action="javascript:void(0);">
+            <div class="item opt">
+                <div id="div_reboot_timed_tip" class="center_tip"></div>
+            </div>
+            <div class="item">
+                <label class="form-label" id="lbl_reboot_status" for="reboot_on"></label>
+                <!--<input type="radio" class="input-radio" id="reboot_on" onClick="reboot_state_change(this.value);"
+                       value="1" name="reboot_state">
+                <label id="lbl_reboot_on" for="reboot_on"></label>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" class="input-radio" id="reboot_off" onClick="reboot_state_change(this.value);"
+                       value="0" name="reboot_state">
+                <label id="lbl_reboot_off" for="reboot_off"></label>-->
+				<div class="radio_form radio_on" id="reboot_enable" onclick="radio_toggle(this,'reboot_state_change');"></div>
+                <input type="hidden" id="reboot_enable_hidden" name="enable"/>
+            </div>
+            <div id="reboot_timed_layer">
+                <div class="item off">
+                    <label class="form-label" id="lbl_reboot_mode" for="reboot_mode"></label>
+                    <select id="reboot_mode" name="type" onChange="reboot_mode_set(this.value);"
+                            style="width:155px;"></select>
+                </div>
+                <div id="reboot_week" class="item_line section_hide">
+                    <label class="form-label"></label>
+				<span>
+					<input type="checkbox" class="input-chx" value="1" id="week_day0"/>
+					<label id="lbl_week_day0" for="week_day0"></label>
+					<input type="checkbox" class="input-chx" value="2" id="week_day1"/>
+					<label id="lbl_week_day1" for="week_day1"></label>
+					<input type="checkbox" class="input-chx" value="3" id="week_day2"/>
+					<label id="lbl_week_day2" for="week_day2"></label>
+					<input type="checkbox" class="input-chx" value="4" id="week_day3"/>
+					<label id="lbl_week_day3" for="week_day3"></label>
+					<input type="checkbox" class="input-chx" value="5" id="week_day4"/>
+					<label id="lbl_week_day4" for="week_day4"></label>
+					<input type="checkbox" class="input-chx" value="6" id="week_day5"/>
+					<label id="lbl_week_day5" for="week_day5"></label>
+					<input type="checkbox" class="input-chx" value="7" id="week_day6"/>
+					<label id="lbl_week_day6" for="week_day6"></label>
+				</span>
+                </div>
+                <div id="reboot_time" class="item_line section_hide">
+                    <label class="form-label"></label>
+				<span>
+					<input type="radio" name="r_time" value="1" id="time_day0"/>
+					<label id="lbl_time_day0" for="time_day0"></label>
+					<input type="radio" name="r_time" value="2" id="time_day1"/>
+					<label id="lbl_time_day1" for="time_day1"></label>
+					<input type="radio" name="r_time" value="3" id="time_day2"/>
+					<label id="lbl_time_day2" for="time_day2"></label>
+					<input type="radio" name="r_time" value="4" id="time_day3"/>
+					<label id="lbl_time_day3" for="time_day3"></label>
+					<input type="radio" name="r_time" value="5" id="time_day4"/>
+					<label id="lbl_time_day4" for="time_daye4"></label>
+					<input type="radio" name="r_time" value="6" id="time_day5"/>
+					<label id="lbl_time_day5" for="time_day5"></label>
+					<input type="radio" name="r_time" value="7" id="time_day6"/>
+					<label id="lbl_time_day6" for="time_day6"></label>
+				</span>
+                </div>
+                <input type="hidden" id="timer_day" name="timer_day" value="">
+
+                <div id="reboot_min_sec" class="item_line">
+                    <label id="lbl_reboot_time" class="form-label"></label>
+				<span>
+					<input type="text" maxlength="2" size="5" id="hour" name="hour" value="0"
+                           class="input-text input-small"/>
+					<span id="span_hour" class="word_sep"></span>
+					<input type="text" maxlength="2" size="5" id="minute" name="minute" value="0"
+                           class="input-text input-small"/>
+					<span id="span_minute" class="word_sep"></span>
+				</span>
+                </div>
+            </div>
+            <div class="item opt">
+                <input type="submit" class="btn submit_btn btn_confirm" onClick="set_miscreboot()"/>
+            </div>
+        </form>
+    </div>
+
+    <div id="reset_div" class="section_hide">
+        <center>
+            <div class="reset_tip">
+                <span id="span_reset_tip"></span>
+                <span id="time"></span>
+            </div>
+        </center>
+    </div>
+</div>
+
+<iframe name="iframe_hidden" id="iframe_hidden" height="0" width="0" frameborder="0"></iframe>

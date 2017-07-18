@@ -1,0 +1,89 @@
+<!doctype html>
+<!--[if lt IE 7 ]>
+<html class="ie6" lang="zh-cn"><![endif]-->
+<!--[if IE 7 ]>
+<html class="ie7" lang="zh-cn"><![endif]-->
+<!--[if IE 8 ]>
+<html class="ie8" lang="zh-cn"><![endif]-->
+<!--[if IE 9 ]>
+<html class="ie9" lang="zh-cn"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="w3c"><!--<![endif]-->
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="author" content="wbo"/>
+    <!-- 以下两行必须载入 -->
+    <link rel="stylesheet" type="text/css" href="/css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/default.css"/>
+    <link rel="stylesheet" type="text/css" href="/app_common/style.css"/>
+    <script type="text/javascript" src="/javascript/module.js"></script>
+    <script type="text/javascript" src="/app_common/app_ctrl/js/language_CN_app.js"></script>
+    <script type="text/javascript" src="/app_common/init.js"></script>
+    <link rel="stylesheet" href="css/power-progress.css" type="text/css"/>
+</head>
+<body>
+<div class="app-box opt-mode mode-info-show">
+    <div class="scrollbar_plus"></div>
+    <div class="scrollbar_add"></div>
+    <div class="sign-area" id="power-change-area">
+        <a href="###" class="text-low lowModeTxt" data-power="2" data-sign="low"></a>
+        <i></i>
+        <a href="###" class="text-middle" data-power="50" data-sign="middle"></a>
+        <i class="second_i"></i>
+        <a href="###" class="text-high" data-power="100" data-sign="high"></a>
+    </div>
+    <div class="info-title wifi-status middle">
+        <span class="high" id="highTxt"></span>
+        <span class="middle" id="middleTxt"></span>
+        <span class="low" id="lowTxt"></span>
+    </div>
+</div>
+<div class="app-box mode-info-show" id="power-progress-list">
+    <div class="box-hd no-border" style=" margin: 0;">
+        <h3 class="box-title" id="lbl_table_title"></h3>
+    </div>
+    <div class="box-bd">
+        <table class="data-table" id="power_progress_tab"></table>
+    </div>
+    <div class="item opt">
+        <button id="lbl_add_btn"></button>
+    </div>
+</div>
+<div class="app-box mode-set-show off">
+    <div class="box-hd">
+        <h3 class="box-title" id="lbl_add_frm_title"></h3>
+    </div>
+    <div class="box-bd">
+        <form action="" method="post" class="form-area" id="power_progress_frm" name="power_progress_frm">
+            <div class="item timeSlotSec">
+                <label class="form-label mr_20" id="lbl_time_slot"></label>
+                <div class="timeSlot"></div>
+            </div>
+            <div class="item weekSlotSec">
+                <label class="form-label mr_20" id="lbl_week_slot"></label>
+                <div class="weekSlot"></div>
+            </div>
+            <div class="item">
+                <label class="form-label" id="lbl_power_progress_mode"></label>
+                <input type="radio" value="2" name="power" id="power_low"/><label class="lowModeTxt" for="power_low" style="margin:0 20px 0 3px;"></label>
+                <input type="radio" value="50" name="power" id="power_middle"/><label class="text-middle" for="power_middle" style="margin:0 20px 0 3px;"></label>
+                <input type="radio" value="100" name="power" id="power_high" checked/><label class="text-high" for="power_high" style="margin-left: 3px;"></label>
+            </div>
+            <div class="item opt">
+                <input type="hidden" name="timer_enable" value="1"/>
+                <input type="hidden" name="action" id="action" value="add"/>
+                <input type="hidden" name="idx" id="opt_data_flag" value=""/>
+                <button type="submit" class="save_all" id="add_btn"></button>
+                <button class="cancel_edit gray" id="cancel_edit_btn"></button>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript" src="/javascript/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/javascript/jq.plugin.js"></script>
+<script type="text/javascript" src="/javascript/err.js"></script>
+<script type="text/javascript" src="/app_common/app_ctrl/js/app_lib.js"></script>
+<script type="text/javascript" src="js/power-progress.js?version=1001"></script>
+</body>
+</html>

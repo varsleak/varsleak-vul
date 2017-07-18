@@ -1,0 +1,77 @@
+<!doctype html>
+<!--[if lt IE 7 ]><html class="ie6" lang="zh-cn"><![endif]-->
+<!--[if IE 7 ]><html class="ie7" lang="zh-cn"><![endif]-->
+<!--[if IE 8 ]><html class="ie8" lang="zh-cn"><![endif]-->
+<!--[if IE 9 ]><html class="ie9" lang="zh-cn"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html class="w3c"><!--<![endif]-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>360安全路由提醒</title>
+</head>
+<body>
+<script type="text/javascript" src="../javascript/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var mac="";
+        var op ="";
+        var md5="";
+		var noneed="";
+        var str = decodeURI(location.toString());
+        var start_no=str.indexOf("?");
+        var location_argc = str.substr(start_no).substr(1);
+        var location_arr = location_argc.split("|");
+        for(var i =0; i < location_arr.length; i++){
+            if(location_arr[i].indexOf("mac") != -1)
+                mac = location_arr[i].split("=")[1];
+            if(location_arr[i].indexOf("op") != -1)
+                op = location_arr[i].split("=")[1];
+            if(location_arr[i].indexOf("md5") != -1)
+                md5 = location_arr[i].split("=")[1];
+        }
+        if(mac != ""){
+            $.post("/router/qh_360_adv_ignore_mac.cgi",{mac:mac},function(data){
+                data=eval("("+data+")");
+                if(data != "SUCCESS")
+                    alert("设置失败");
+            });
+        }
+        if(op != ""){
+			$.post("/router/update_skip.cgi",{"noneed":"noneed"},function(data){});
+        }
+        if(md5 !=""){
+            var postValue=window.location.search.substr(1).split("&");
+            var obj=new Object();
+            var url;
+            for(var s=0;s<postValue.length;s++){
+                if(postValue[s].split("=")[0]=="user"){
+                    obj.user=postValue[s].split("=")[1];
+                }
+                if(postValue[s].split("=")[0]=="passwd"){
+                    obj.passwd=postValue[s].split("=")[1];
+                }
+                if(postValue[s].split("=")[0]=="pcip"){
+                    obj.ip=postValue[s].split("=")[1];
+                }
+                if(postValue[s].split("=")[0]=="magic"){
+                    obj.magic=postValue[s].split("=")[1];
+                }
+                if(postValue[s].split("=")[0]=="md5"){
+                    obj.md5=postValue[s].split("=")[1];
+                }
+                if(postValue[s].substr(0,3)=="url"){
+                    url=postValue[s].substr(4);
+                }
+            }
+            $.post("/app/webauth_example/webs/auth_info_check.cgi",obj,function(data){
+                data=eval("("+data+")");
+                if(data[0]== "SUCCESS"){
+                    alert("设置成功！");
+                    self.parent.location.href=url;
+                }
+                else 	alert("设置失败！");
+            });
+        }	
+    });
+</script>
+</body>
+</html>

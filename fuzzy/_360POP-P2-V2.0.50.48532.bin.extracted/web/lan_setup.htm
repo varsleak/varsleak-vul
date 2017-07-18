@@ -1,0 +1,96 @@
+﻿<div class="fix_ie_shadow"></div>
+<div class="form-border-shadow has-tab">
+	<div id="lan_set_layer" class="tab_area">
+		<div data-type-index="0" id="lan_type1" class="tab-item on"></div>
+		<div data-type-index="1" id="lan_type2" class="tab-item"></div>
+	</div>
+	<!--<div id="warning_count_center" class="grey-text">
+		<p id="lan_setup_tip"></p>
+	</div>-->
+	<div id="lan_setup">
+		<div class="app-box">
+			<div class="box-bd">
+				<form id="lan_setup_frm" class="form-area" action="javascript:void(0);">
+					<div class="item">
+						<label class="form-label" id="lbl_lan_ip_address" ></label>
+		
+						<input type="text" class="input-text input-biger"  maxlength="15" size="27" name="lan_ip" id="lan_ip_address" autocomplete="off" />
+						<input type="hidden" id="old_lan_ip" />
+					</div>
+					<div class="item">
+						<label class="form-label" id="lbl_lan_sub_mask" ></label>
+		
+						<input type="text" class="input-text input-biger"  maxlength="15" size="27" name="lan_mask" id="lan_sub_mask" autocomplete="off" />
+						<input type="hidden" id="old_lan_mask" />
+					</div>
+					<div class="item">
+						<label class="form-label" id="lbl_dhcp_status" ></label>
+						<!--<input type="radio" id="dhcp_enable" onClick="dhcp_state_change(this.value);" value="1" name="dhcp_enable_radio" />
+						<label id="lbl_dhcp_enable" for="dhcp_enable"></label>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" id="dhcp_disable" onClick="dhcp_state_change(this.value);" value="0" name="dhcp_enable_radio" />
+						<label id="lbl_dhcp_disable" for="dhcp_disable"></label>-->
+						<input type="hidden" id="dhcp_enable_hidden" name="dhcp_enable"/>
+						<div onclick="radio_toggle(this,'dhcp_state_change');" id="dhcp_enable" class="radio_form"></div>
+					</div>
+					<div id="dhcp_layer">
+						<div class="item">
+							<label class="form-label" id="lbl_dhcp_pool_start" ></label>
+		
+							<input type="text" class="input-text input-biger" maxlength="15" size="27" id="dhcp_pool_start" name="dhcp_start" autocomplete="off" />
+						</div>
+						<div class="item">
+							<label class="form-label" id="lbl_dhcp_pool_end" ></label>
+		
+							<input type="text" class="input-text input-biger" maxlength="15" size="27" id="dhcp_pool_end"  name="dhcp_end" autocomplete="off" />
+						</div>
+					</div>
+					<div class="item">
+						<label class="form-label"></label>
+						<a onclick="lan_advance_toggle();" id="lan_advance_link" href="javascript:void(0);" class="default_link"></a>
+					</div>
+					<div id="advance_body" class="item section_hide">
+						<label class="form-label" id="lbl_dns_proxy"></label>
+						<input type="hidden" id="dns_proxy_hidden" name="is_router_as_dns"/>
+						<div onclick="radio_toggle(this);" id="dns_proxy" class="radio_form"></div>
+					</div>	
+					<div class="item opt">
+						<input type="submit"  class="btn submit_btn btn_confirm" onClick="lan_setup_submit()" />
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div id="dhcp_addr" class="section_hide">
+		<div class="app-box">
+			<div class="box-bd">
+				<form id="dhcp_addr_frm" class="form-area" action="javascript:void(0);">
+					<div class="item">
+						<label class="form-label" id="lbl_mac"></label>
+						<input type="text" class="input-text input-biger" maxlength="17" size="17" id="dhcp_addr_mac" name="mac" autocomplete="off" />
+						<input type="hidden" id="dhcp_addr_old_ip" name="old_ip" />
+					</div>
+					<div class="item">
+						<label class="form-label" id="lbl_ip"></label>
+						<input type="text" class="input-text input-biger" maxlength="15" size="17" id="dhcp_addr_ip"  name="ip" autocomplete="off" />
+						<input type="hidden" id="dhcp_addr_old_mac" name="old_mac" />
+					</div>
+					<div class="item opt">
+						<input type="hidden" id="deal" name="deal" value="add" />
+						<input type="hidden" name="name" />
+						<input type="submit"  class="btn submit_btn btn_confirm margin-h" onClick="dhcp_addr_submit();" />
+						<input type="button"  class="btn btn_cancel margin-h off" id="dhcp_addr_clear_btn" onClick="clear_dhcp_addr_input();" />
+					</div>
+				</form>
+			</div>	
+		</div>
+		<div class="app-box tab-box">
+            <div class="box-hd">
+            	<h3 class="box-title" id="dhcp_addr_title"></h3>
+            </div>
+			<div class="box-bd">
+				<table id="dhcpAddrTab" class="data-table" style="width:90%; margin:0 auto;"></table>
+			</div>	
+		</div>
+	</div>
+</div>

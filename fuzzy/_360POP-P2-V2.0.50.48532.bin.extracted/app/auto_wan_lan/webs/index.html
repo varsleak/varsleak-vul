@@ -1,0 +1,70 @@
+<!doctype html>
+<!--[if lt IE 7 ]><html class="ie6" lang="zh-cn"><![endif]-->
+<!--[if IE 7 ]><html class="ie7" lang="zh-cn"><![endif]-->
+<!--[if IE 8 ]><html class="ie8" lang="zh-cn"><![endif]-->
+<!--[if IE 9 ]><html class="ie9" lang="zh-cn"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html class="w3c"><!--<![endif]-->
+<head>
+	<title>pptp client</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="format-detection" content="telephone=no"/>
+	<link rel="stylesheet" type="text/css" href="/css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="/css/default.css" />
+	<link rel="stylesheet" type="text/css" href="/app_common/style.css" />
+	<link rel="stylesheet" type="text/css" href="./css/auto_wan_lan.css" />
+    <script type="text/javascript" src="/javascript/module.js"></script>
+	<script type="text/javascript" src="/app_common/init.js"></script>
+	<script type="text/javascript" src="/javascript/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/javascript/jq.plugin.js"></script>
+    <script type="text/javascript" src="/app_common/app_ctrl/js/language_CN_app.js"></script>
+	<script type="text/javascript" src="/app_common/app_ctrl/js/app_lib.js"></script>
+	<script type="text/javascript" src="/javascript/err.js"></script>
+	<script type="text/javascript" src="./js/auto_wan_lan.js"></script>
+</head>
+<body>
+	<div class="app-box">
+		<div class="box-bd">
+			<div id="guide_layer">
+				<div id="guide_panel">
+					<div id="power_layer">
+						<div></div>
+						<span>电源</span>
+					</div>
+					<div id="wan_wrapper">
+						<div class="icon">
+							<div></div>
+							<span></span>
+						</div>
+						<div class="icon">
+							<div></div>
+							<span></span>
+						</div>
+						<div class="icon">
+							<div></div>
+							<span></span>
+						</div>
+						<div class="icon">
+							<div></div>
+							<span></span>
+						</div>
+						<div class="icon">
+							<div></div>
+							<span></span>
+						</div>
+					</div>
+				</div>
+				<div id="tips"></div>
+			</div>
+			<form onSubmit="save_auto_wan_lan();return false;" action="" method="post" class="form-area" id="auto_wan_lan" name="auto_wan_lan_frm">
+				<div class="item">
+					<label class="form-label isneed"></label>
+					<div onClick="radio_toggle(this,'save_auto_wan_lan');" id="auto_wan_lan_status" class="radio_form"></div>
+					<input type="hidden" value="1" name="enable" id="auto_wan_lan_status_hidden" />
+					<input type="hidden" name="action" value="set" />
+				</div>
+			</form>
+			<div id="detect_tip" class="off"></div>
+		</div>
+	</div>
+</body>
+</html>

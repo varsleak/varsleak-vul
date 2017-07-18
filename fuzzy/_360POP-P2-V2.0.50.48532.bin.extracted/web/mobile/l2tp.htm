@@ -1,0 +1,61 @@
+<div class="swiper-wrapper l2tpSwiperWrapper">
+    <section class="swiper-slide app-form l2tp-host">
+        <dl>
+            <dd class="select_dd l2tp-child-title" data-srouce-html-name="l2tp-set"></dd>
+            <dd class="select_dd l2tp-child-title" data-srouce-html-name="l2tp-list"></dd>
+            <dd class="select_dd l2tp-child-title"  data-srouce-html-name="l2tp-status"></dd>
+        </dl>
+    </section>
+    <section class="swiper-slide app-form l2tp-list">
+        <dl id="l2tp-list">
+        </dl>
+    </section>
+    <section class="swiper-slide app-form l2tp-set">
+        <form id="client_set_frm"  name="client_set_frm" method="post">
+            <dl>
+                <dd>
+                    <label class="l2tp-form-label"></label>
+                    <span class="switch-txt"></span>
+                    <input id="status" type="checkbox"   class="switch radio_form" />
+                    <label for="status"></label>
+                    <input type="hidden" id="status_hidden" name="enable"/>
+                </dd>
+                <dd>
+                    <label class="l2tp-form-label"></label>
+                    <input type="text" id="server" name="server" class="txt6" maxlength="63" autocomplete="off" />
+                </dd>
+                <dd>
+                    <label class="l2tp-form-label"></label>
+                    <input type="text" id="user" name="user" class="txt4" maxlength="32" autocomplete="off"/>
+                </dd>
+                <dd>
+                    <label class="l2tp-form-label"></label>
+                    <input type="text" id="pass" name="pass" class="txt3" maxlength="32"  data-aes="true" autocomplete="off"  />
+                    <input type="hidden" name="deal" id="deal" value="add" />
+                    <input type="hidden" name="enable_nat" value="1"  />
+                    <input type="hidden" name="mode" value="isp" />
+                    <input type="hidden" name="uiname" value="WAN1" />
+                    <input type="hidden" name="is_ipaddr" value="1" />
+                    <input type="hidden" name="id" id="id" value="" />
+                </dd>
+            </dl>
+        </form>
+    </section>
+    <section class="swiper-slide app-form l2tp-status">
+        <dl id="l2tp-status-list"></dl>
+        <dl id="l2tp-status-list-info" class="section_hide">
+            <dd><label class="status-list-info-label"></label><span id="l2tp-status-user"></span></dd>
+            <dd>
+                <label class="status-list-info-label"></label>
+                <span class="switch-txt"></span>
+                <input id="link_status" type="checkbox" class="switch radio_form" />
+                <label for="link_status"></label>
+                <input type="hidden" id="link_status_hidden" name="link_status"/>
+            </dd>
+            <dd><label class="status-list-info-label"></label><span id="l2tp-status-localIp"></span></dd>
+            <dd><label class="status-list-info-label"></label><span id="l2tp-status-remoteIp"></span>
+                <input id="l2tpStatusLinkId" type="hidden" />
+            </dd>
+        </dl>
+    </section>
+</div>

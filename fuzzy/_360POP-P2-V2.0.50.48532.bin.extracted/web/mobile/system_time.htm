@@ -1,0 +1,50 @@
+<form id="system_time_frm" class="app-form appContent_sectionModel">
+    <dl>
+        <dd>
+            <label  id="span_cur_time"></label><span id="current_time"></span>
+        </dd>
+        <dd>
+            <label  id="lbl_get_time" ></label>
+            <span class="switch-txt"></span>
+            <input id="get_time_mode" type="checkbox"   class="switch radio_form" />
+            <label for="get_time_mode" id="get_time_mode_radio"></label>
+            <input type="hidden" name="work_mode" id="get_time_mode_hidden"/>
+        </dd>
+        <dd class="item_time_group">
+            <label  id="lbl_system_date" ></label>
+            <a href="javascript:void(0);" class="year_month_day">
+                <input type="text" readonly="true" size="5" maxlength="4" id="system_year" name="year" class="input-text input-small"/>
+                <span id="lbl_system_year" class="time-label" ></span>
+                <input type="text" readonly="true" size="5" maxlength="2" id="system_month" name="month" class="input-text input-small"/>
+                <span id="lbl_system_month" class="time-label"></span>
+                <input type="text" readonly="true" size="5" maxlength="2" id="system_day" name="day" class="input-text input-small"/>
+            </a>
+        </dd>
+        <dd class="item_time_group">
+            <label  id="lbl_system_time" ></label>
+            <a href="javascript:void(0);" class="hour_min_sec">
+                <input type="text" readonly="true" size="5" maxlength="2" id="system_hour" name="hour" class="input-text input-small"/>
+                <span id="lbl_system_hour" class="time-label"></span>
+                <input type="text" readonly="true" size="5" maxlength="2" id="system_minute" name="minute" class="input-text input-small"/>
+                <span id="lbl_system_minute" class="time-label"></span>
+                <input type="text" readonly="true" size="5" maxlength="2" id="system_second" name="second" class="input-text input-small"/>
+            </a>
+        </dd>
+        <!--<dd>-->
+            <!--<label  id="lbl_get_timezone" ></label>-->
+            <!--<span class="switch-txt"></span>-->
+            <!--<input id="get_timezone_mode" type="checkbox"   class="switch radio_form" />-->
+            <!--<label for="get_timezone_mode" id="lbl_get_timezone_radio"></label>-->
+            <!--<input type="hidden" id="get_timezone_mode_hidden" value="0"  />-->
+        <!--</dd>-->
+        <dd>
+            <label  id="lbl_timezone_sel" ></label>
+            <a class="selectArrow" href="javascript:void(0);">
+                <span id="timezone_sel_txt" class="select-txt"></span>
+                <input id="timezone_sel" name="NTP" type="hidden" />
+                <img  src="./images/selectArrow.png" />
+            </a>
+            <ul class="option-box" id="timezone_sel_option"></ul>
+        </dd>
+    </dl>
+</form>

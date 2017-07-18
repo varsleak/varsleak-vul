@@ -1,0 +1,21 @@
+{
+	"appsign":"safety_wireless",
+	"appname":"防蹭网",
+	"version":"1.0.13",
+	"dep_version":"1.3.0",
+	"description":"防蹭网：<p>开启防蹭网功能后，用户可以自定义一个类似QQ密码找回功能的密码保护问题和对应的答案，把防蹭网保护级别提升到更高等级。这样即使无线wifi密码被破解了也是不能上网的，还必须填入预设的答案才能上网。而这个答案是无法通过软件来破解的。为了您的网络安全，请妥善保管密码保护问题和答案！</p><p>特别说明：可以设置黑白名单，手动对指定的设备强制阻断或免认证。</p>",
+	"bin_start":"./igd_safety_wireless_app",
+	"author":"netcore",
+	"URL":"www.netcoretec.com",
+	"maintainer":"netcore",
+	"email":"",
+	"app_type":"local",
+	"icon":"./safety_wireless.gif",
+	"rom_use":80,
+	"ram_use":1040,
+	"start_reboot":"yes",
+	"uninstall_reboot":"no",
+	"disable_reboot":"no",
+	"uninstall":"yes",
+	"disable":"yes"
+}

@@ -1,0 +1,108 @@
+body {
+	background: rgb(51, 51, 51); color: rgb(55, 53, 54); font-size: 12px;
+    font-family: "\5FAE\8F6F\96C5\9ED1", Tahoma, Verdana, Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+form {
+	margin: 0px; padding: 0px;
+}
+.wrap {
+	background: rgb(255, 255, 255);text-align: left;margin-top:30px;margin-left: auto; margin-right: auto;border: 1px solid rgb(23, 122, 224); width: 700px;
+}
+dd {
+	margin: 0px; padding: 0px 14px 14px;
+}
+p {
+	margin: 0px; padding: 0px; line-height: 25px;
+}
+/* my self*/
+
+form {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+input {
+    border: 1px solid #E5E5E5;
+    border-radius: 5px;
+    height: 35px;
+    line-height: 35px;
+    padding: 0 5px;
+    font-size: 14px;
+    background-color: #fff;
+    vertical-align: middle;
+}
+input.noborder {
+    border: none;
+}
+button {
+    border-radius: 5px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 30px;
+    font-size: 14px;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    border: 0px solid #1C7EC2;
+    background: #1C7EC2;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1C7EC2', endColorstr='#2588CF');
+    background: linear-gradient(top, #1C7EC2, #2588CF);
+    background: -moz-linear-gradient(top, #1C7EC2, #2588CF);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#1C7EC2), to(#2588CF));
+}
+
+.formstyle {
+    margin: 0 0 20px 0;
+}
+.formstyle dt {
+    background: rgb(23, 122, 224); margin: 0px; padding: 30px 10px; text-align: center; color: rgb(207, 227, 248); font-size: 16px; font-weight: bold;
+}
+.formstyle dd {
+    margin: 0 0 10px;
+    line-height: 35px;
+    *zoom:1;
+}
+.formstyle dd:after {
+    content: ".";
+    display: block;
+    clear: both;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 0;
+    line-height: 0;
+    overflow:hidden;
+}
+.formstyle dd label {
+    float: left;
+    width: 200px;
+    text-align: right;
+    padding-right: 30px;
+    margin-bottom: 3px;
+    color: #666666;
+}
+.formstyle dd label span {
+    display: block;
+    margin-top: -15px;
+}
+.formstyle dd label.inline {
+    display: inline;
+    float: none;
+    width: auto;
+    text-align: left;
+    padding: 0;
+    margin: 0 10px 0 0;
+    color: #666666;
+}
+.formstyle dd span {
+    color: #aaaaaa;
+    padding-left: 10px;
+    white-space: nowrap;
+    word-break: keep-all;
+    vertical-align: top;
+}
+.formstyle_btn {
+    padding: 5px 0 0 280px;
+}

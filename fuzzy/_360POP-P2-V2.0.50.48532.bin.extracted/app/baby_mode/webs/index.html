@@ -1,0 +1,63 @@
+<!doctype html>
+<!--[if lt IE 7 ]><html class="ie6" lang="zh-cn"><![endif]-->
+<!--[if IE 7 ]><html class="ie7" lang="zh-cn"><![endif]-->
+<!--[if IE 8 ]><html class="ie8" lang="zh-cn"><![endif]-->
+<!--[if IE 9 ]><html class="ie9" lang="zh-cn"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html class="w3c"><!--<![endif]-->
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="author" content="wbo" />
+    <!-- 以下两行必须载入 -->
+    <link rel="stylesheet" type="text/css" href="/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/css/default.css" />
+    <link rel="stylesheet" type="text/css" href="/app_common/style.css" />
+    <script type="text/javascript" src="/javascript/module.js"></script>
+    <script type="text/javascript" src="/app_common/init.js"></script>
+    <script type="text/javascript" src="/app_common/app_ctrl/js/language_CN_app.js"></script>
+    <link rel="stylesheet" href="./css/baby_mode.css" type="text/css"/>
+</head>
+<body>
+    <div class="baby-mode-list">
+	</div>
+
+    <div class="waiting-list-title"></div>
+    <div class="baby-mode-waiting-list">
+    </div>
+
+    <div class="setting-panel boy">
+		<div class="info">
+			<span id="infoTip"></span>
+			<div class="">
+				<input checked type="radio" id="boy" name="sex" value="1"/><label for="boy" id="boyTxt"></label>
+				<input type="radio" id="girl" name="sex" value="0"/><label for="girl" id="girlTxt"></label>
+			</div>
+		</div>
+		<div class="ctrl">
+            <!-- todo -->
+			<span class="title" style="clear: both;float: none;" id="limitTimeTip"></span>
+            <div class="timeSec" style="margin: 0;">
+                <label id="timeGroup"></label>
+                <div style="margin:0;" class="timeSlot"></div>
+            </div>
+            <div class="timeSec" style="margin-top: 15px;">
+                <label id="weekRepeat"></label>
+                <div style="margin:0;" class="weekSlot"></div>
+            </div>
+			<div style="clear:both;margin:0;" id="set_opt_section">
+                <input type="hidden" class="submit-mac" value=""/>
+                <input type="hidden" class="submit-action"  value="add"/>
+                <input type="hidden" class="submit-idx"  value=""/>
+                <input type="hidden" class="children-idx"  value=""/>
+				<span class="submit-btn"></span><span class="cancel-btn"></span>
+			</div>
+		</div>
+	</div>
+
+    <script type="text/javascript" src="/javascript/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/javascript/jq.plugin.js"></script>
+    <script type="text/javascript" src="/javascript/err.js"></script>
+    <script type="text/javascript" src="/app_common/app_ctrl/js/app_lib.js"></script>
+    <script type="text/javascript" src="js/baby_mode.js?version=1000"></script>
+</body>
+</html>

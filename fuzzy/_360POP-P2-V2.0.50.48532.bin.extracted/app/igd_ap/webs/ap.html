@@ -1,0 +1,99 @@
+<div class="form-area app-box" style="position:relative;">
+    <div class="box-bd">
+        <form name="ap_frm" id="ap_frm" method="post" action="" onsubmit="wire_bas_ap_set();return false;">
+            <div class="item">
+                <label class="form-label isneed"></label>
+				<div class="radio_form" id="ap" onclick="radio_toggle(this,'ap_enable_set');"></div>
+                <input type="hidden" id="ap_hidden" name="enable" value=""/>
+            </div>
+            <div id="ap_set_tab" class="off">
+                <div class="item">
+                    <label class="form-label isneed"></label>
+					<input type="text"  id="ap_ssid" maxlength="32" class="input-text" name="ssid" autocomplete="off" style="width:165px;"/>
+                </div>
+                <div class="item">
+                	<label class="form-label isneed"></label>
+                    <select id="wls_mode_sel" name="auth_mode" onchange="wireless_safe_mode_change(this.value);" style="width:182px;">
+                    	<!--<option id="webLimitPass" value="1"></option>-->
+                        <option id="pwdLimitPass" value="0"></option>
+                        <option id="noLimitPass" value="2"></option>
+                        <option id="touchLinkPass" value="3"></option>
+                    </select>
+                </div>
+                <div id="re_pos_layer">
+                    <div class="item" id="set_psd">
+                        <label class="form-label isneed"></label>
+                        <input type="text" maxlength="64" class="input-text " value="" id="ap_wpa_key" name="wpa_key"  autocomplete="off" data-aes="true" style="width:165px;" />
+                    </div>
+                    <div class="item">
+                        <label class="form-label isneed"></label>
+                        <a href="javascript:void(0);" class="custom" onclick="advance_toggle();"></a>
+                    </div>
+                    <div id="advance_layer" class="off">
+                        <div class="item">
+                            <label class="form-label isneed"></label>
+                            <input type="checkbox" onclick="ap_broadcast_change();" id="ck_broadcast_ssid" />
+                            <label for="ck_broadcast_ssid" id="lbl_ssid_broadcast"></label>
+                            <input type="hidden" id="broadcast_ssid_hidden" name="broadcast_ssid" />
+                        </div>
+                        <div class="item">
+                            <label class="form-label isneed"></label>
+                            <div class="radio_form" id="waln_partition" onclick="radio_toggle(this);"></div>
+                            <input type="hidden" id="waln_partition_hidden" name="host_isolation" value=""/>
+                        </div>
+                        <div class="item">
+                            <label class="form-label isneed"></label>
+                            <input type="checkbox" id="ap_auto_close" onclick="set_ap_auto_close(this);" />
+                            <label for="ap_auto_close" id="ap_auto_set"></label>
+                            <input type="hidden" id="ap_auto_close_hidden" name="auto_close_enable" />
+                        </div>
+                        <!--访客网络限速开关-->
+                        <div class="item">
+                            <label class="form-label isneed"></label>
+                            <div class="radio_form" onclick="radio_toggle(this,'speed_limit_set');" id="speed_limit"></div>
+                            <input type="hidden" id="speed_limit_hidden" name="limit_enable" value=""/>
+                        </div>
+                        <div class="off" id="speed_limit_tab">
+                            <div class="item">
+                                <label class="form-label isneed"></label>
+                                <input type="text" id="upside" autocomplete="off" name="limit_up_speed" class="input-text " maxlength="5" style="width:115px;" />
+                                <label class="inline mr5" for="upside">KB/s</label>
+                            </div>
+                            <div class="item">
+                                <label class="form-label isneed"></label>
+                                <input type="text" id="downside" autocomplete="off" name="limit_down_speed" class="input-text " maxlength="5" style="width:115px;" />
+                                <label class="inline mr5" for="downside">KB/s</label>
+                            </div>
+                            <div class="item">
+                                <label class="form-label isneed"></label>
+                                <input type="text" id="access_number" autocomplete="off" name="limit_hosts_num" class="input-text " maxlength="2" style="width:55px;" />
+                                <span id="limit_hosts_tip" class="mr5"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item opt">
+                <button type="submit" id="save_btn"></button>
+                <input type="hidden" name="action" value="set"/>
+            </div>
+        </form>
+    </div>
+    <div id="upload_file_layer" class="off">
+        <form id="upload_img_form" method="post" class="form-area" target="iframe_hidden" action="./put_file.cgi" enctype="multipart/form-data">
+            <div class="item" style="position:relative;*width:886px;">
+                 <label class="form-label"></label>
+                <a style="text-decoration:none; overflow:hidden;" class="white_btn" href="javascript:void(0);">
+                    <span id="span_view"></span>
+                    <input type="file" size="3" class="filePrew" id="put_file" name="put_file">
+                </a>
+                <a class="view" href="javascript:void(0)" onclick="view();"></a>
+            </div>
+            <div id="file_name_layer" class="item off" style="position:relative;*width:886px;">
+            	<label class="form-label"></label>
+                <div id="file_name"></div>
+            </div>
+        </form>
+	</div>
+</div>
+<iframe name="iframe_hidden" id="iframe_hidden" height="0" width="0" frameborder="0"></iframe>

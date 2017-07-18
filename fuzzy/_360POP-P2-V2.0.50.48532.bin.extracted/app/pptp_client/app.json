@@ -1,0 +1,21 @@
+{
+	"appsign":"pptp_client",
+	"appname":"PPTP客户端",
+	"version":"1.0.7",
+	"dep_version":"1.4.0",
+	"description":"PPTP：<p>VPN (虚拟专网)是把两个私有网络通过外网建立一个加密的连接。保证两端通信不会被窃听和篡改。</p><p>PPTP方式的VPN需要一个服务器端和若干客户端。</p><p>服务器端：</p><p>PPTP服务器用于接收客户端拨入并建立VPN虚拟链路，实现在虚拟链路上的网络通讯。</p><p>PPTP服务端地址：注意这里是填任意未使用的私有IP，而非公网IP。</p><p>用户的网络地址：填入VPN客户端内网网段地址，用于实现客户端和服务端内网之间互相通讯。</p><p>客户端：</p><p>服务器地址：注意这里是填写服务器端的公网IP，而非私有IP地址。</p><p>数据加密：是否启用128-bit数据加密，需和PPTP服务端保持一致。</p><p>模式选择：如果VPN服务器做代理上网，选择ISP模式。如果需要实现两端互访，选择企业模式。</p><p>服务器网络地址：填入VPN服务器端内网网段地址，用于实现客户端和服务端内网之间相互通讯。</p>",
+	"bin_start":"./igd_pptpc_app",
+	"author":"netcore",
+	"URL":"www.netcoretec.com",
+	"maintainer":"netcore",
+	"email":"-",
+	"app_type":"local",
+	"icon":"./pptp_client.png",
+	"rom_use":194,
+	"ram_use":1920,
+	"start_reboot":"yes",
+	"uninstall_reboot":"no",
+	"disable_reboot":"yes",
+	"uninstall":"yes",
+	"disable":"yes"
+}

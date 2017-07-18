@@ -1,0 +1,163 @@
+<div id="dmz_div">
+    <div id="dmz_info_list_div" class="app-box">
+        <div class="box-hd">
+            <h3 class="box-title"></h3>
+        </div>
+        <div class="box-bd">
+            <table class="datatable">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="wan1_dmz_tr" class="off">
+                        <td>1</td>
+                        <td>WAN1</td>
+                        <td id="wan1_dmz_ip"></td>
+                        <td id="wan1_dmz_status"></td>
+                        <td>
+                            <img src="./images/edit.gif" onClick="html_load_dmz(1);" class="setupBtn" title=""/>
+                        </td>
+                    </tr>
+                    <tr id="wan2_dmz_tr" class="off">
+                        <td>2</td>
+                        <td>WAN2</td>
+                        <td id="wan2_dmz_ip"></td>
+                        <td id="wan2_dmz_status"></td>
+                        <td>
+                            <img src="./images/edit.gif" onClick="html_load_dmz(2);" class="setupBtn" title=""/>
+                        </td>
+                    </tr>
+                    <tr id="wan3_dmz_tr" class="off">
+                        <td>3</td>
+                        <td>WAN3</td>
+                        <td id="wan3_dmz_ip"></td>
+                        <td id="wan3_dmz_status"></td>
+                        <td>
+                            <img src="./images/edit.gif" onClick="html_load_dmz(3);" class="setupBtn" title=""/>
+                        </td>
+                    </tr>
+                    <tr id="wan4_dmz_tr" class="off">
+                        <td>4</td>
+                        <td>WAN4</td>
+                        <td id="wan4_dmz_ip"></td>
+                        <td id="wan4_dmz_status"></td>
+                        <td>
+                            <img src="./images/edit.gif" onClick="html_load_dmz(4);" class="setupBtn" title=""/>
+                        </td>
+                    </tr>
+                    <tr id="wan5_dmz_tr" class="off">
+                        <td>5</td>
+                        <td>WAN5</td>
+                        <td id="wan5_dmz_ip"></td>
+                        <td id="wan5_dmz_status"></td>
+                        <td>
+                            <img src="./images/edit.gif" onClick="html_load_dmz(5);" class="setupBtn" title=""/>
+                        </td>
+                    </tr>
+                    <tr id="wan6_dmz_tr" class="off">
+                        <td>6</td>
+                        <td>WAN6</td>
+                        <td id="wan6_dmz_ip"></td>
+                        <td id="wan6_dmz_status"></td>
+                        <td>
+                            <img src="./images/edit.gif" onClick="html_load_dmz(6);" class="setupBtn" title=""/>
+                        </td>
+                    </tr>
+                    <tr id="wan7_dmz_tr" class="off">
+                        <td>7</td>
+                        <td>WAN7</td>
+                        <td id="wan7_dmz_ip"></td>
+                        <td id="wan7_dmz_status"></td>
+                        <td>
+                            <img src="./images/edit.gif" onClick="html_load_dmz(7);" class="setupBtn" title=""/>
+                        </td>
+                    </tr>
+                    <tr id="wan8_dmz_tr" class="off">
+                        <td>8</td>
+                        <td>WAN8</td>
+                        <td id="wan8_dmz_ip"></td>
+                        <td id="wan8_dmz_status"></td>
+                        <td>
+                            <img src="./images/edit.gif" onClick="html_load_dmz(8);" class="setupBtn" title=""/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div id="dmz_detail_info_div" class="app-box">
+        <div class="box-hd">
+            <h3 class="box-title">
+
+            </h3>
+        </div>
+        <div class="box-bd">
+            <form  name="dmz_form" method="post" class="form-area" action="" onsubmit="virtual_dmz_add();return false;">
+                <div class="item">
+                    <input type="hidden" id="uiname" value="WAN1" name="uiname">
+                    <label class="form-label isneed"></label>
+					<div class="radio_form" id="dmz_status" onclick="radio_toggle(this,'dmz_change');"></div>
+                    <input type="hidden" name="dmz_status" id="dmz_status_hidden"/>
+                </div>
+                <div class="item">
+                    <label class="form-label" id="dmz_ip_address_tip"></label>
+                    <input name="host_ip" id="dmz_ip_address" type="text" class="input-text" autocomplete="off" maxlength="15" />
+                </div>
+                <div class="item opt">
+                    <button type="submit" id="ok_btn" class="saveBtn"></button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" id="dmz_return"  onClick="return_dmz_set();"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="DMZ_param_set" class="off">
+        <div class="app-box">
+            <div class="box-hd">
+                <h3 class="box-title"></h3>
+            </div>
+            <div class="box-bd">
+                <div class="item">
+                    <label for="dmz_lan_ip" class="form-label"></label>
+                    <input name="ip" id="dmz_lan_ip" type="text" size="25" maxlength="15" value="" autocomplete="off"/>
+                </div>
+                <div class="item">
+                    <label for="dmz_wan_ip" class="form-label"></label>
+                    <input name="ip" id="dmz_wan_ip" type="text" size="25" maxlength="15" value="" autocomplete="off"/>
+                </div>
+                <div class="item">
+                    <label for="dmz_wan_mask" class="form-label"></label>
+                    <input name="ip" id="dmz_wan_mask" type="text" size="25" maxlength="15" value="" autocomplete="off"/>
+                </div>
+                <div class="item">
+
+                    <label for="wan_port" class="form-label"></label>
+                    <select id="wan_port">
+                        <option>WAN1</option>
+                        <option>WAN2</option>
+                        <option>WAN3</option>
+                        <option>WAN4</option>
+                    </select>
+                </div>
+                <div class="item opt">
+                    <button type="button" onClick="" class="saveBtn"></button>
+                </div>
+            </div>
+        </div>
+        <div class="app-box">
+            <div class="box-hd">
+                <h3 class="box-title"></h3>
+            </div>
+            <div class="box-bd">
+
+                <table id="dmz_list" class="data-table"></table>
+            </div>
+        </div>
+    </div>
+</div>

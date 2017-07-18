@@ -1,0 +1,22 @@
+{
+	"appsign":"radio_power",
+	"appname":"radio_power",
+	"version":"0.0.1",
+	"dep_version":"0.0.1",
+	"description":"",
+	"bin_start":"./radio_power_app",
+	"author":"360",
+	"URL":"www.360.cn",
+	"maintainer":"360",
+	"email":"",
+	"app_type":"local",
+	"icon":"./radio_power.png",
+	"rom_use":1000,
+	"ram_use":1000,
+	"start_reboot":"yes",
+	"uninstall_reboot":"no",
+	"disable_reboot":"yes",
+	"uninstall":"yes",
+	"disable":"yes",
+	"feature":"multi_period"
+}

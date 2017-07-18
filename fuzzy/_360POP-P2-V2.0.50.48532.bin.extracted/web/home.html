@@ -1,0 +1,55 @@
+<!doctype html>
+<!--[if lt IE 7 ]><html class="ie6" lang="zh-cn"><![endif]-->
+<!--[if IE 7 ]><html class="ie7" lang="zh-cn"><![endif]-->
+<!--[if IE 8 ]><html class="ie8" lang="zh-cn"><![endif]-->
+<!--[if IE 9 ]><html class="ie9" lang="zh-cn"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html class="w3c"><!--<![endif]-->
+<head>
+	<meta charset="UTF-8" />
+	<title>360安全路由</title>
+	<link type="text/css" href="css/reset.css" rel="stylesheet"/>
+	<link type="text/css" href="css/nav.css" rel="stylesheet"/>
+	<style>
+		.container{
+			position: relative;
+			overflow: hidden;
+			width: 100%;
+		}
+		.container iframe{
+			margin-top: -42px;
+			width: 100%;
+			height: 2000px;
+			overflow: hidden;
+		}
+	</style>
+</head>
+<body>
+	<div class="topbar">
+		<div class="container">
+			<div class="logo">
+				<img src="images/nav-logo.png" alt="360安全路由" />
+			</div>
+			<ul class="nav">
+				<li><a href="http://luyouw.360.cn/" class="" id="btn" target="#view" data-src="http://luyouw.360.cn/">去官网</a></li>
+				<li><a href="">关注官方论坛</a></li>
+				<li><a href="http://weibo.com/luyou360" target="_blank">关注官方微博</a></li>
+				<li><a href="javascript:void(0);" onclick="loginOut();">退出管理</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="container">
+		<iframe src="new_index.htm" frameborder="0" id="view"></iframe>
+	</div>
+	<script>
+		var link = document.getElementById('btn');
+		var ifr = document.getElementById('view');
+		var toggle;
+		link.onclick = function (e) {
+			toggle = ifr.src;
+			ifr.src = link.getAttribute('data-src');
+			this.setAttribute('data-src', toggle);
+			return false;
+		}
+	</script>
+</body>
+</html>

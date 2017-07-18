@@ -1,0 +1,106 @@
+body{
+	font-size: 12px;
+	background: #f5f6f8  center 420px no-repeat;
+}
+#login_pwd { -webkit-box-shadow: 0 0 0px 1000px white inset; }
+.login-area{
+	width: 960px;
+	margin: 0 auto;
+	padding-top: 155px;
+	position:relative;
+}
+.login-area .slogan{
+	margin: 0 auto 60px;
+    font-size: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #f44748;
+}
+.login-area .login{
+	position: relative;
+	width: 376px;
+	margin: 0 auto 15px;
+}
+.login-area .input-area,
+.login-area .btn-area{
+	height: 36px;
+    margin-bottom: 30px;
+}
+.login-area .input-label{
+	float: left;
+	width: 60px;
+	line-height: 36px;
+}
+.login-area .input-area .input-txt{
+	width: 238px;
+	height: 16px;
+	padding: 10px;
+	font-size: 16px;
+	border: 1px solid #fcb145;
+}
+.login-area .button-area .btn_login{
+	width: 260px;
+	height: 40px;
+	font-size: 18px;
+	line-height: 40px;
+	margin-left: 60px;
+    background: url("/images/login-btn-bg.png") no-repeat left top transparent;
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/login-btn-bg.png',sizingMethod='scale');
+    background-size: 100% 100%;
+    color: #ffffff;
+}
+.login-area .security-status{
+	position: absolute;
+	top: 40px;
+	left: 59px;
+	width: 261px;
+}
+.ie6 .login-area .input-area .input-label{
+	margin-right: -3px;
+}
+.login-area .pwd_status{
+	margin: 0;
+	width: auto;
+	float: none;
+}
+.login-area .pwd_status span{
+	border-color: #f5f6f8;
+}
+#tip{
+	padding-top: 50px;
+}
+#tip_center{
+	text-align: center;
+}
+.pass-info{
+    color: #808080;
+    margin: 0 auto;
+    text-align: center;
+    padding-left: 0.5em;
+}
+a{
+    color: #428bef;
+    text-decoration: none;
+    outline: none;
+    text-decoration: underline;
+}
+a:link{
+    color: #428bef;
+}
+a:visited{
+    color: #428bef;
+}
+a:hover{
+    color: #81d82c;
+    text-decoration: underline;
+}
+/********** new year  ********/
+body.newYear{background-color:#fdf2d9;}
+.topbar.newYear{background: url("./../images/newYear-header.png") no-repeat top left;background-size: 100% 100%;height: 62px;}
+.newYear .topbar .nav a{color: #ffffff;border-color: #ffffff;}
+.newYear .topbar .nav li{border-color: #ffffff;}
+.happy-new-year-l,.happy-new-year-r{position: absolute;top: 0px;}
+.happy-new-year-l{left: -465px;}
+.happy-new-year-r{right: -510px;}
+.happy-new-year-area{position: fixed;z-index: 0;width: 100%;left: 0;top: 0;}
+.happy-new-year-area .blankNewYearArea{width: 1004px;height: 350px;margin: 0 auto;position: relative;}

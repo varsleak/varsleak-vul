@@ -1,0 +1,93 @@
+<!doctype html>
+<!--[if lt IE 7 ]><html class="ie6" lang="zh-cn"><![endif]-->
+<!--[if IE 7 ]><html class="ie7" lang="zh-cn"><![endif]-->
+<!--[if IE 8 ]><html class="ie8" lang="zh-cn"><![endif]-->
+<!--[if IE 9 ]><html class="ie9" lang="zh-cn"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html class="w3c"><!--<![endif]-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="format-detection" content="telephone=no"/>
+    <title></title>
+    <meta name="author" content="wbo" />
+    <!-- 以下两行必须载入 -->
+    <link rel="stylesheet" type="text/css" href="/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/css/default.css" />
+    <link rel="stylesheet" type="text/css" href="/app_common/style.css" />
+    <script type="text/javascript" src="/javascript/module.js"></script>
+    <script type="text/javascript" src="/app_common/init.js"></script>
+    <script type="text/javascript" src="/javascript/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/javascript/jq.plugin.js"></script>
+    <script type="text/javascript" src="/javascript/err.js"></script>
+    <script type="text/javascript" src="/app_common/app_ctrl/js/language_CN_app.js"></script>
+    <script type="text/javascript" src="/app_common/app_ctrl/js/app_lib.js"></script>
+
+    <link rel="stylesheet" href="css/qh360.css" type="text/css"/>
+    <script type="text/javascript" src="js/qh360.js"></script>
+</head>
+<body>
+        <div class="tab_area">
+            <h3 class="last selected">网址安全检测</h3>
+        </div>
+        <div class="tab_cont qh_360_set_layer">
+            <p></p>
+            <div class="wrap">
+                <div class="qh_360_txt_layer breakword"></div>
+                <div class="qh_360_btn_layer">
+                    <input type="hidden" value="1" id="qh_url_hidden"/>
+                    <!--<button type="submit" id="qh_360_url_btn" onclick="qh_url_enable();" >关闭</button>-->
+                </div>
+            </div>
+        </div>
+        <div class="tab_area">
+            <h3 id="web_count_title" class="last selected">网址安全统计</h3>
+        </div>
+        <div class="tab_cont">
+            <div id="web_count_list">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">类型</th>
+                            <th colspan="2" class="borderleft">数目</th>
+                        </tr>
+                        <tr>
+                            <th class="borderleft">今日</th>
+                            <th>总计</th>
+                        </tr>
+                    </thead>
+                    <tbody id="web_count">
+                        <tr>
+                            <td>正常网址</td>
+                            <td>0条</td>
+                            <td>0条</td>
+                        </tr>
+                        <tr  class="evenrow">
+                            <td>阻断挂马网址</td>
+                            <td>0条</td>
+                            <td>0条</td>
+                        </tr>
+                        <tr>
+                            <td>阻断篡改首页等网址</td>
+                            <td>0条</td>
+                            <td>0条</td>
+                        </tr>
+                        <tr  class="evenrow">
+                            <td>阻断钓鱼、欺诈网址</td>
+                            <td>0条</td>
+                            <td>0条</td>
+                        </tr>
+                        <tr>
+                            <td>阻断恶意软件下载网址</td>
+                            <td>0条</td>
+                            <td>0条</td>
+                        </tr>
+                        <tr class="evenrow">
+                            <td>阻断木马、下载者网址</td>
+                            <td>0条</td>
+                            <td>0条</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</body>
+</html>

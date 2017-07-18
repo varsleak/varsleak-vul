@@ -1,0 +1,55 @@
+<!doctype html>
+<!--[if lt IE 7 ]><html class="ie6" lang="zh-cn"><![endif]-->
+<!--[if IE 7 ]><html class="ie7" lang="zh-cn"><![endif]-->
+<!--[if IE 8 ]><html class="ie8" lang="zh-cn"><![endif]-->
+<!--[if IE 9 ]><html class="ie9" lang="zh-cn"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html class="w3c"><!--<![endif]-->
+<head>
+	<title>pptp client</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="format-detection" content="telephone=no"/>
+	<link rel="stylesheet" type="text/css" href="/css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="/css/default.css" />
+	<link rel="stylesheet" type="text/css" href="/app_common/style.css" />
+    <link rel="stylesheet" type="text/css" href="./css/hosts.css" />
+    <script type="text/javascript" src="/javascript/module.js"></script>
+	<script type="text/javascript" src="/app_common/init.js"></script>
+	<script type="text/javascript" src="/javascript/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/javascript/jq.plugin.js"></script>
+     <script type="text/javascript" src="/javascript/jquery.caret.js"></script>
+    <script type="text/javascript" src="/app_common/app_ctrl/js/language_CN_app.js"></script>
+	<script type="text/javascript" src="/app_common/app_ctrl/js/app_lib.js"></script>
+	<script type="text/javascript" src="/javascript/err.js"></script>
+	<script type="text/javascript" src="./js/hosts.js"></script>
+</head>
+<body>
+	<div class="app-box">
+		<div class="box-bd">
+         <form id="host_set_frm" class="form-area" name="host_set_frm" method="post">
+            <div id="host_layer">
+            	<div id="host_tip"></div>
+                <div id="host_check" style="text-align:right;">
+                	<input type="checkbox" id="ck_host" />
+                    <label for="ck_host" id="lbl_ck_host"></label>
+                </div>
+            	<div id="host_title">
+                	<span class="host_ip"></span>
+                    <span class="host_url"></span>
+                </div>
+            	<div id="host_content">					
+            		<textarea wrap="off" readonly="readonly" class="lineshow" id="host_lineshow">
+            		</textarea><textarea id="host" wrap="off"></textarea>
+            		<div id="error_tip"></div>
+                    <div id="error_msg"></div>
+                    <br style="height:0; margin:0; padding:0; clear:both;"/>
+            	</div>
+            	<div class="item opt">
+                	<button type="button" class="btn" id="clear_btn"></button>
+            		<button type="submit" class="btn" id="save_btn"></button>
+            	</div>
+             </div>
+          </form>
+		</div>
+	</div>
+</body>
+</html>

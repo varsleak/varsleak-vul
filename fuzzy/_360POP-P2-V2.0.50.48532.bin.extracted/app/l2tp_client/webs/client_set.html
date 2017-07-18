@@ -1,0 +1,87 @@
+<div class="app-box">
+    <div class="box-bd">
+        <form id="client_set_frm" class="form-area" name="client_set_frm" method="post" onsubmit="client_set_save();return false;">
+            <div class="item">
+                <label class="form-label isneed"></label>
+                <select name="enable" id="client_enable">
+                    <option selected value="1" class="status"></option>
+					<option value="0" class="status"></option>
+                </select>
+            </div>
+            <div class="item">
+                <label class="form-label isneed"></label>
+                <input type="text" id="server" name="server" class="input-text" maxlength="63" autocomplete="off"/>
+                <span class="serverIPTip"></span>
+            </div>
+            <div class="item">
+                <label class="form-label isneed"></label>
+                <input type="text" id="user" name="user" class="input-text" maxlength="32" autocomplete="off"/>
+            </div>
+            <div class="item">
+                <label class="form-label isneed"></label>
+                <input type="text" id="pass" name="pass" class="input-text" maxlength="32"  data-aes="true" autocomplete="off"  />
+            </div>
+
+            <!-- start 功能隐藏 2014-10-07 -->
+            <div class="item off">
+                <label class="form-label"></label>
+                <input id="input_nat" type="checkbox" checked onclick="set_enable_net();" />
+                <label for="input_nat" class="inline isOnNat"></label>
+                <input name="enable_nat" id="enable_nat" value="1" type="hidden" />
+            </div>
+            <div class="item off">
+                <label class="form-label"></label>
+                <input id="radio_isp_mode" type="radio" onclick="l2tp_client_mode_set(this.value);" checked value="isp" name="mode">
+                <label for="radio_isp_mode" class="inline" id="ISPMode"></label>
+                <input id="radio_enterprise_mode" type="radio" onclick="l2tp_client_mode_set(this.value);"   value="com" name="mode">
+                <label for="radio_enterprise_mode" class="inline" id="companyMode"></label>
+            </div>
+            <div class="tip off">
+                <div>
+                    <label class="inline" id="ISPModeInfo"></label>
+                </div>
+                <div>
+                    <label class="inline" id="companyModeInfo"></label>
+                </div>
+            </div>
+            <div class="item com off">
+                <label class="form-label isneed"></label>
+                <input type="text" id="servernet" maxlength="31" name="servernet" class="input-text" autocomplete="off" />
+            </div>
+            <div class="item com off">
+                <label class="form-label isneed"></label>
+                <input type="text" id="servermask" maxlength="31" name="servermask" class="input-text" autocomplete="off" />
+            </div>
+            <!-- end 功能隐藏 2014-10-07 -->
+
+
+            <div id="wan_uiname" class="off">
+                <label for="uiname" id="interface"></label>
+                <select id="uiname" name="uiname"></select>
+            </div>
+            <div class="item opt">
+                <input type="hidden" name="deal" id="deal" value="add" />
+                <input type="hidden" name="is_ipaddr" id="is_ipaddr" value="" />
+                <input type="hidden" name="id" id="id" value="" />
+                <button type="submit" class="btn" id="save_btn"></button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button  id="cancel_btn" class="off btn" onclick="client_cancel_mod();return false;"></button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="app-box" id="l2tp-list">
+    <div class="box-hd">
+        <h3 class="box-title"></h3>
+		<div id="vpn_layer">
+			<input type="checkbox" id="vpn" onclick="set_vpn();" />
+			<label id="lbl_vpn" for="vpn"></label>
+		</div>
+    </div>
+    <div class="box-bd">
+        <table  class="data-table" id="l2tp_client_tab" ></table>
+        <div class="opt">
+            <button class="btn" onclick="client_clean();return false;" id="delAllBtn"></button>
+        </div>
+    </div>
+</div>

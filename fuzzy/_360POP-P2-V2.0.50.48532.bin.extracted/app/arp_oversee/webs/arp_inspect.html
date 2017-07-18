@@ -1,0 +1,49 @@
+<div id="tip"></div>
+<div id="warning_count" class="grey-text">
+    <p class="warning_count_txt"></p>
+</div>
+<div class="app-box">
+    <div class="box-hd">
+        <h3 class="box-title"></h3>
+    </div>
+    <div class="box-bd">
+        <form id="filter_arp_defense" class="form-area" name="filter_arp_defense_frm " method="post" onsubmit="filter_arp_defense_save();return false;">
+            <div class="item">
+                <label class="form-label" ></label>
+                <input id="arp_rate_check" type="checkbox" class="input-chx" onclick="arp_rate_status();">
+                <span class="arp_rate_warning" style="color:red"></span>
+            </div>
+            <div id="arp_rate_dd" class="item">
+                <label  class="form-label isneed"></label>
+                <input id="arp_rate" type="text" maxlength="5" class="input-text input-small">
+                <span class="arp_rate_dw"></span>
+                <span style="color:red">(1 - 10)</span>
+            </div>
+            <div class="item">
+                <label  class="form-label"></label>
+                <input id="arp_prevent_check" type="checkbox" class="input-chx"></div>
+            <div class="item opt">
+                <button type="submit" class="saveBtn"></button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="app-box">
+    <div class="box-hd">
+        <h3 class="box-title"></h3>
+    </div>
+    <div class="box-bd">
+        <div>
+            <select id="arp_choose" style="margin-bottom:10px;" onchange="choose_arp_inspect(this.value)">
+                <option selected="" value="ALL" class="selectOption"></option>
+                <option value="LAN" class="selectOption"></option>
+                <option value="WAN" class="selectOption"></option>
+            </select>
+        </div>
+        <table class="data-table" id="arp_inspect_tab"></table>
+        <div class="opt">
+            <button onclick="filter_arp_bind_all();return false;" class="bindALL"></button>
+            <button onclick="filter_arp_clean();return false;" class="yellow cleanAll"></button>
+        </div>
+    </div>
+</div>

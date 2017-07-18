@@ -1,0 +1,5 @@
+NEW_FEATURE:= 5GWiFi  fault_detect ucallcgi local_storage app_store super_app
+ANDROID_AV:=1.8.18
+ANDROID_FU:=0
+IOS_AV:=2.4.9
+IOS_FU:=0

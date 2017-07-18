@@ -1,0 +1,118 @@
+<!doctype html>
+<!--[if lt IE 7 ]><html class="ie6" lang="zh-cn"><![endif]-->
+<!--[if IE 7 ]><html class="ie7" lang="zh-cn"><![endif]-->
+<!--[if IE 8 ]><html class="ie8" lang="zh-cn"><![endif]-->
+<!--[if IE 9 ]><html class="ie9" lang="zh-cn"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html class="w3c"><!--<![endif]-->
+<head>
+	<title>pptp client</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="format-detection" content="telephone=no"/>
+	<link rel="stylesheet" type="text/css" href="/css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="/css/default.css" />
+	<link rel="stylesheet" type="text/css" href="/app_common/style.css" />
+	<link rel="stylesheet" type="text/css" href="./css/igd_sw.css" />
+    <script type="text/javascript" src="/javascript/module.js"></script>
+	<script type="text/javascript" src="/app_common/init.js"></script>
+	<script type="text/javascript" src="/javascript/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/javascript/jq.plugin.js"></script>
+    <script type="text/javascript" src="/app_common/app_ctrl/js/language_CN_app.js"></script>
+	<script type="text/javascript" src="/app_common/app_ctrl/js/app_lib.js"></script>
+	<script type="text/javascript" src="/javascript/err.js"></script>
+	<script type="text/javascript" src="./js/igd_sw.js"></script>
+</head>
+<body>
+<div class="frame_tab_layer app-box">
+	<div id="guide_img">
+		<div id="link_down_icon" class="off"></div>
+	</div>
+	<div id="set" class="section">
+		<p id="start_tip" class="tip"></p>
+		<p id="link_down_tip" class="tip off"></p>
+		<div class="btn_layer">
+			<button id="start_btn" class="bigger_btn" type="submit"></button>
+		</div>
+	</div>
+	<div id="wait" class="section off">
+		<p class="tip detecting_tip"></p>
+		<div id="coutdown_icon">
+			<span id="coutdown_time"></span>
+		</div>
+		<div id="wait_msg"></div>
+	</div>
+	<div id="setup" class="section off">
+		<p class="tip detecting_tip"></p>
+		<div id="setup_msg"></div>
+		<div id="type"></div>
+	</div>
+	<div id="linkdown" class="section off">
+		<p id="link_down_tip_retry" class="tip"></p>
+		<div class="btn_layer">
+			<button class="retry_btn bigger_btn" type="submit"></button>
+		</div>
+	</div>
+	<div id="correct" class="section off">
+		<p class="tip end_tip"></p>
+		<div id="correct_icon">
+			<img src="../../../images/init/mobile/suc.png" width="70"/>
+		</div>
+		<div id="correct_msg"></div>
+		<div id="correct_tip"></div>
+	</div>
+	<div id="error" class="section off">
+		<p class="tip end_tip"></p>
+		<div id="error_icon">
+			<img src="../../../images/init/mobile/error.png" width="70"/>
+		</div>
+		<div id="error_msg"></div>
+		<div id="error_pppoe"></div>
+		<p id="error_tip"></p>
+		<div id="sp_layer" class="off">
+			<table id="sp_data" class="data-table">
+					<tbody>
+						<tr>
+							<td>中国联通</td>
+							<td>10010</td>
+							<td>长城宽带</td>
+							<td>96090090</td>
+						</tr>
+						<tr class="evenrow">
+							<td>网通宽带</td>
+							<td>10010</td>
+							<td class="adjust">宽&nbsp;&nbsp;带&nbsp;&nbsp;通</td>
+							<td>010-84603993</td>
+						</tr>
+						<tr>
+							<td>中国电信</td>
+							<td>10000</td>
+							<td>艾谱宽带</td>
+							<td>952155</td>
+						</tr>
+						<tr class="evenrow">
+							<td>中国移动</td>
+							<td>10086</td>
+							<td>方正宽带</td>
+							<td>010-82529990</td>
+						</tr>
+						<tr>
+							<td>歌华宽带</td>
+							<td>96196</td>
+							<td>蓝波宽带</td>
+							<td>010-65885227</td>
+						</tr>
+						<tr class="evenrow">
+							<td>铁通宽带</td>
+							<td>10050</td>
+							<td>中电飞华</td>
+							<td>010-51961096</td>
+						</tr>
+					</tbody>
+			</table>
+		</div>
+		<div class="btn_layer">
+			<button class="retry_btn bigger_btn" type="submit"></button>
+		</div>
+	</div>
+</div>
+</body>
+</html>

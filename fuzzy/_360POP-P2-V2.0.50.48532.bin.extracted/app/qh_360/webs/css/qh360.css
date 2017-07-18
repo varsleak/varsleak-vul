@@ -1,0 +1,32 @@
+.data-table{
+    border: 1px solid #d8d8d8;
+}
+.data-table th {
+    border: 1px solid #d8d8d8;
+}
+.tab_cont {
+    padding: 0 30px 20px;
+}
+.qh_360_set_layer p {
+    font-size: 22px;
+    line-height: 1;
+    margin: 0 0 25px;
+	text-align:center;
+}
+.qh_360_set_layer p.seton {
+    color: #37c828;
+}
+.qh_360_set_layer p.seton span {
+    color: #b4b7be;
+}
+.qh_360_set_layer div.wrap {
+    overflow: hidden;
+}
+.qh_360_txt_layer {
+    color: #999;
+    font-size: 12px;
+    line-height: 1.5;
+}
+.qh_360_btn_layer {
+    float: right;
+}

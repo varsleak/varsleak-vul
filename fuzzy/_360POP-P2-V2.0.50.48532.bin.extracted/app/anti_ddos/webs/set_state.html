@@ -1,0 +1,49 @@
+﻿<div id="tip"></div>
+<div id="warning_count" class="grey-text">
+    <p class="warning_count_txt"></p>
+</div>
+<div class="app-box">
+    <div class="box-bd">
+        <form id="set_state" class="form-area" name="set_state" >
+                <div class="item">
+                    <label class="form-label"></label>
+                    <span id="attack_hard_radio"></span>
+					<!--<div class="radio_form" id="attack_hard_radio"></div>-->
+                    <input id="attack_hard_radio_hidden" type="hidden" value="" name="attack_hard" />
+                </div>
+                <div class="item">
+                    <label class="form-label"></label>
+					<!--<div class="radio_form" id="attack_driver_radio"></div>-->
+                    <span id="attack_driver_radio"></span>
+                    <input id="attack_driver_radio_hidden" type="hidden" value="" name="attack_driver" />
+                </div>
+                <div class="item">
+                    <label class="form-label"></label>
+					<!--<div class="radio_form" id="attack_system_radio"></div>-->
+                    <span id="attack_system_radio"></span>
+                    <input id="attack_system_radio_hidden" type="hidden" value="" name="attack_system" />
+                </div>
+                <div class="item">
+                    <label class="form-label"></label>
+					<!--<div class="radio_form" id="attack_application_radio"></div>-->
+                    <span id="attack_application_radio"></span>
+                    <input id="attack_application_radio_hidden" type="hidden" value="" name="attack_application" />
+                </div>
+                <div class="item off">
+                    <label class="form-label"></label>
+                    <span id="lan2lan_status"></span>
+                    <!--<div class="radio_form" id="lan2lan_status_radio"></div>-->
+                    <input id="lan2lan_status_val" name="lan2lan_status" type="hidden" value="">
+                </div>
+                <div class="item">
+                    <label class="form-label"></label>
+                    <span id="wanping_status_radio"></span>
+					<!--<div class="radio_form" id="wanping_status_radio"></div>-->
+                    <input id="wanping_status_radio_hidden" type="hidden" value="" name="wanping_status" />
+                </div>
+                <div class="item opt">
+                    <button type="button" class="nomalSetBtn" onclick="save_set_info(2)"></button><button type="button" class="openAllBtn" onclick="save_set_info(1)"></button><button type="button" class="shutAllBtn" onclick="save_set_info(0)"></button>
+                </div>
+        </form>
+    </div>
+</div>

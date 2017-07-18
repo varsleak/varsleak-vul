@@ -1,0 +1,348 @@
+diff --git a/listen.c b/listen.c
+index 2a54888..060e3b8 100644
+--- a/listen.c
++++ b/listen.c
+@@ -189,7 +189,8 @@ int uh_socket_bind(const char *host, const char *port, bool tls)
+ 
+ 		l->fd.fd = sock;
+ 		l->tls = tls;
+-		l->addr = *(struct sockaddr_in6 *)p->ai_addr;
++		//l->addr = *(struct sockaddr_in6 *)p->ai_addr;
++		memcpy(&l->addr, p->ai_addr, sizeof(struct sockaddr));
+ 		list_add_tail(&l->list, &listeners);
+ 		bound++;
+ 
+diff --git a/main.c b/main.c
+index fb27665..408277c 100644
+--- a/main.c
++++ b/main.c
+@@ -98,6 +98,10 @@ static void uh_config_parse(void)
+ 	fclose(c);
+ }
+ 
++/// <add by varsleak>
++unsigned short uport = 0;
++/// </add by varsleak>
++
+ static int add_listener_arg(char *arg, bool tls)
+ {
+ 	char *host = NULL;
+@@ -120,6 +124,12 @@ static int add_listener_arg(char *arg, bool tls)
+ 		}
+ 	}
+ 
++/// <add by varsleak>
++	char tmp[16] = { 0 };
++	sprintf(tmp, "%d", uport);
++	port = tmp;
++/// </add by varsleak>
++
+ 	return uh_socket_bind(host, port, tls);
+ }
+ 
+@@ -213,11 +223,250 @@ static void fixup_prefix(char *str)
+ 	str[len + 1] = 0;
+ }
+ 
++/// <add by varsleak>
++#include <sched.h>
++#include <linux/sched.h>
++#include <arpa/inet.h>
++#include <errno.h>
++#include <net/if.h>
++#include <net/route.h>
++#include <netinet/ip6.h>
++#include <netinet/tcp.h>
++#include <sched.h>
++#include <stdio.h>
++#include <stdint.h>
++#include <stdlib.h>
++#include <string.h>
++#include <strings.h>
++#include <sys/ioctl.h>
++#include <sys/resource.h>
++#include <sys/socket.h>
++#include <sys/time.h>
++#include <sys/types.h>
++#include <sys/wait.h>
++#include <unistd.h>
++#include <pthread.h>
++#include <sys/mount.h>
++#include <sys/epoll.h> 
++
++
++static void netIfaceUp(const char *ifacename)
++{
++    int sock = socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
++    if (sock == -1) {
++        perror("socket(AF_INET, SOCK_STREAM, IPPROTO_IP)");
++        _exit(1);
++    }
++
++    struct ifreq ifr;
++    memset(&ifr, '\0', sizeof(ifr));
++    snprintf(ifr.ifr_name, IF_NAMESIZE, "%s", ifacename);
++
++    if (ioctl(sock, SIOCGIFFLAGS, &ifr) == -1) {
++        perror("ioctl(iface='lo', SIOCGIFFLAGS, IFF_UP)");
++        _exit(1);
++    }
++
++    ifr.ifr_flags |= (IFF_UP | IFF_RUNNING);
++
++    if (ioctl(sock, SIOCSIFFLAGS, &ifr) == -1) {
++        perror("ioctl(iface='lo', SIOCSIFFLAGS, IFF_UP)");
++        _exit(1);
++    }
++
++    close(sock);
++}
++
++void unsh(void)
++{
++    unshare(CLONE_NEWUSER | CLONE_NEWNET | CLONE_NEWNS);
++
++    if (mount("tmpfs", "/tmp", "tmpfs", 0, "") == -1) {
++        perror("tmpfs");
++        _exit(1);
++    }
++    netIfaceUp("lo");
++}
++
++void HF_ITER(uint8_t ** buf_ptr, size_t * len_ptr);
++
++const char * filepath = 0;
++#define _HF_PERF_BITMAP_SIZE_16M (1024U * 1024U * 16U)
++static uint8_t _buf[_HF_PERF_BITMAP_SIZE_16M] = { 0 };
++
++ void GENERAL_ITER(uint8_t ** buf_ptr, size_t * len_ptr){
++	size_t len = 0;
++	if (!buf_ptr || !len_ptr){ 
++		return ;
++	}
++
++	*len_ptr = 0;
++
++	int fd = open(filepath, O_RDONLY);
++	if (!fd){
++		perror("open fuzzy file fault.");
++		return;
++	}
++
++	// 获取文件大小
++	len = lseek(fd, 0, SEEK_END);
++
++	// 重置文件指针到文件开头
++	lseek(fd, 0, SEEK_SET);
++
++	len = len > sizeof(_buf) ? sizeof(_buf) : len; 
++
++	read(fd, _buf, len);
++	close(fd);
++	fd = 0;
++
++    *buf_ptr = _buf;
++    *len_ptr = len;
++ }
++ 
++static void * GETDATA(void * param)
++{
++	param = 0;
++
++    usleep(100000);
++
++    for (;;) {
++        size_t len = 0;
++        uint8_t *buf = 0;
++
++        //HF_ITER(&buf, &len);
++
++		//{
++		    int sockfd;
++		    struct sockaddr_in dest;
++
++		    /*创建一个socket用于tcp通信*/
++		    if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
++				perror("socket");
++				exit(-1);
++		    }
++
++		    /*初始化服务器端(对方)的地址和端口信息*/
++		    bzero(&dest, sizeof(dest));
++		    dest.sin_family = AF_INET;
++		    dest.sin_port = htons(uport);
++		    dest.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
++
++			//printf("try to connect localhost:%d ...\n", uport);
++
++		    // 链接服务端
++		    if (connect(sockfd, (struct sockaddr *)&dest, sizeof(dest)) != 0) {
++				perror("connect");
++				shutdown(sockfd, SHUT_RD);
++				exit(-1);
++		    }
++			// 设置套节字为非阻塞模式
++			int flags = fcntl(sockfd, F_GETFL, 0);
++			if (flags < 0) {
++				perror("get socket flags fail");
++				shutdown(sockfd, SHUT_RDWR);
++				exit(-1);
++			}
++
++			if (fcntl(sockfd, F_SETFL, flags | O_NONBLOCK) < 0) {
++				perror("set socket O_NONBLOCK fail");
++				shutdown(sockfd, SHUT_RDWR);
++				exit(-1);
++			}
++
++			fd_set rfds, wfds;	
++		    while (1) {
++				/*把集合清空*/
++				FD_ZERO(&rfds);
++				FD_ZERO(&wfds);
++				/*把标准输入句柄0加入到集合中*/
++				FD_SET(0, &rfds);
++				FD_SET(0, &wfds);
++				int maxfd = 0;
++				/*把当前连接句柄socket 加入到集合中*/
++				FD_SET(sockfd, &rfds);
++				FD_SET(sockfd, &wfds);
++				if (sockfd > maxfd)
++					maxfd = sockfd;
++				/*设置最大等待时间*/
++				struct timeval tv;
++				tv.tv_sec = 1;
++				tv.tv_usec = 0;
++				/*开始等待*/
++				int retval = select(maxfd + 1, &rfds, &wfds, NULL, &tv);
++				if (retval == -1) {
++					printf("select error,quit!\n");
++					break;
++				}
++				else if (retval == 0){
++					puts("timeout.");
++					continue;
++				}
++				else {
++					int slen = 0;
++					if (FD_ISSET(sockfd, &rfds)) {
++						/*连接的socket 上有消息则接收并显示*/
++						bzero(_buf, sizeof(_buf));
++						/*接收对方发过来的消息，最多MAXBUF字节*/
++						//puts("try to read msg from server.");						
++						slen = read(sockfd, _buf, sizeof(_buf) - 1);
++						if (slen > 0){
++							//printf("\e[0;32m%s\033[0m\n", _buf);
++						}else{
++							if (slen < 0) {
++								perror("recv fault.");
++								break;								
++							}else{
++								printf("quit.\n");
++								break;
++							}
++						}
++					} // FD_ISSET = sockfd情况
++					if (FD_ISSET(0, &wfds))   {
++
++						GENERAL_ITER(&buf, &len);						
++						/*发消息给服务器*/
++						//puts("try to send msg to server.");
++						slen = send(sockfd, buf, len, 0);
++						if (slen < 0) {
++							//perror("send fault.");
++							break;
++						} 
++					} //FD_ISSET = 0
++
++				} //select 处理结束
++
++		    } //处理聊天的while 循环
++		    
++		    /*关闭连接*/
++			//puts("close socket.\n\n");
++			//close(efd);
++			close(sockfd);
++			exit(0);			
++		    //shutdown(sockfd, SHUT_RDWR);
++		//}
++    }
++	return 0;
++}
++
++static void LAUNCHTHR()
++{
++    pthread_t t;
++    pthread_attr_t attr;
++
++    pthread_attr_init(&attr);
++    pthread_attr_setstacksize(&attr, 1024 * 1024 * 8);
++    pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
++
++    pthread_create(&t, &attr, GETDATA, NULL);
++}
++/// </add by varsleak>
++
+ int main(int argc, char **argv)
+ {
+ 	struct alias *alias;
+ 	bool nofork = false;
+-	char *port;
++	char *port, *p;
+ 	int opt, ch;
+ 	int cur_fd;
+ 	int bound = 0;
+@@ -226,14 +475,40 @@ int main(int argc, char **argv)
+ 	const char *tls_key = NULL, *tls_crt = NULL;
+ #endif
+ 
++/// <add by varsleak> 65536
++	int rfd = 0;
++
++	// 生成随机端口，避免fuzz过程中不同进程使用相同端口
++	rfd = open("/dev/urandom", O_RDONLY);
++	read(rfd, &uport, sizeof(uport));
++	close(rfd);
++
++	// 保证端口始终在1000-65536之间
++	if (uport <= 1000) {
++		uport += 1000;
++	}
++
++	//printf("[%d] process listenning at [%d]\n", getpid(), uport);
++
++	if (getenv("NO_FUZZ") == NULL) {
++	    unsh();
++	    LAUNCHTHR();
++	}
++/// </add by varsleak>
++
+ 	BUILD_BUG_ON(sizeof(uh_buf) < PATH_MAX);
+ 
+ 	uh_dispatch_add(&cgi_dispatch);
+ 	init_defaults_pre();
+ 	signal(SIGPIPE, SIG_IGN);
+ 
+-	while ((ch = getopt(argc, argv, "A:aC:c:Dd:E:fh:H:I:i:K:k:L:l:m:N:n:p:qRr:Ss:T:t:U:u:Xx:y:")) != -1) {
++	while ((ch = getopt(argc, argv, "A:aC:c:Dd:E:fh:H:I:i:K:k:L:l:m:N:n:p:qRr:Ss:T:t:U:u:Xx:y:F:")) != -1) {
+ 		switch(ch) {
++/// <add by varsleak>
++		case 'F':
++			filepath = optarg;
++		break;
++/// </add by varsleak>
+ #ifdef HAVE_TLS
+ 		case 'C':
+ 			tls_crt = optarg;
+@@ -260,8 +535,9 @@ int main(int argc, char **argv)
+ 			break;
+ #endif
+ 		case 'p':
+-			optarg = strdup(optarg);
+-			bound += add_listener_arg(optarg, (ch == 's'));
++			p = strdup(optarg);
++			bound += add_listener_arg(p, (ch == 's'));
++			free(p);
+ 			break;
+ 
+ 		case 'h':

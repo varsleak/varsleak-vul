@@ -1,0 +1,30 @@
+<form id="lan_setup_frm" class="app-form appContent_sectionModel" action="javascript:void(0);">
+	<dl>
+		<dd>
+			<label class="form-label" id="lbl_lan_ip_address" ></label>
+			<input type="text" class="input-biger"  maxlength="15" size="27" name="lan_ip" id="lan_ip_address" autocomplete="off" />
+			<input type="hidden" id="old_lan_ip" />
+		</dd>
+		<dd>
+			<label class="form-label" id="lbl_lan_sub_mask" ></label>
+			<input type="text" class="input-biger"  maxlength="15" size="27" name="lan_mask" id="lan_sub_mask" autocomplete="off" />
+			<input type="hidden" id="old_lan_mask" />
+		</dd>
+		<dd>
+			<label class="form-label" id="lbl_dhcp_status" ></label>
+			<span class="switch-txt"></span>
+			<input id="dhcp_enable" type="checkbox" class="switch radio_form" />
+			<label for="dhcp_enable" id="dhcp_enable_switch"></label>
+			<input type="hidden" id="dhcp_enable_hidden" name="dhcp_enable"/>
+		</dd>
+		<dd>
+			<label class="form-label" id="lbl_dhcp_pool_start" ></label>
+			<input type="text" class="input-biger" maxlength="15" size="27" id="dhcp_pool_start" name="dhcp_start" autocomplete="off" />
+		</dd>
+		<dd>
+			<label class="form-label" id="lbl_dhcp_pool_end" ></label>
+			<input type="text" class="input-biger" maxlength="15" size="27" id="dhcp_pool_end"  name="dhcp_end" autocomplete="off" />
+            <input type="hidden" id="dns_proxy_hidden" name="is_router_as_dns"/>
+        </dd>
+	</dl>
+</form>

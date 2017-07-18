@@ -1,0 +1,172 @@
+<form class="app-form appContent_sectionModel" name="wan_pppoe_form" id="wan_pppoe_form">
+    <dl>
+        <dd>
+            <label class="form-label" id="lbl_wan_setup_user0"></label>
+            <input type="text" name="user" id="wan_setup_user0" class="txt6" maxlength="127" autocomplete="off"/>
+        </dd>
+        <dd>
+            <label class="form-label" id="lbl_wan_setup_pass0"></label>
+            <input type="password" id="wan_setup_pass0" name="pass" class="txt6" maxlength="127" autocomplete="off"
+                   data-aes="true">
+        </dd>
+        <dd>
+            <label class="form-label" id="lbl_wan_setup_mac0"></label>
+            <input name="mac" id="wan_setup_mac0" type="text"  maxlength="17" class="txt6" autocomplete="off"/>
+        </dd>
+        <dd style="display: none">
+            <label class="form-label" id="lbl_wan_setup_up_bandwidth0" for="wan_setup_up_bandwidth0"></label>
+            <span class="word_sep" id="span_up_bandwidth0"></span>
+            <input id="wan_setup_up_bandwidth0" name="up_bandwidth" type="text" size="4" maxlength="4" class="txt"/>
+            <span class="word_sep">Mbit/s</span>
+            <span class="word_sep" id="span_down_bandwidth0"></span>
+            <input id="wan_setup_down_bandwidth0" name="down_bandwidth" type="text" size="4" maxlength="4" class="txt"/>
+            <span class="word_sep">Mbit/s</span>
+            ///////////////////
+            <label class="form-label" id="lbl_isp_type" for="isp_radio1"></label>
+            <input type="radio" class="input-radio" name="isp_radio" value="CHINATELECOM" checked="checked"
+                   onClick="set_isp_value(this.value,0)" id="isp_radio1"/>
+            <label id="lbl_isp_radio1" for="isp_radio1"></label>
+            &nbsp;&nbsp;
+            <input type="radio" class="input-radio" name="isp_radio" value="CNCGROUP"
+                   onClick="set_isp_value(this.value,0)"
+                   id="isp_radio2"/>
+            <label id="lbl_isp_radio2" for="isp_radio2"></label>
+            &nbsp;&nbsp;
+            <input type="radio" class="input-radio" name="isp_radio" value="AUTO" onClick="set_isp_value(this.value,0)"
+                   id="isp_radio3"/>
+            <label id="lbl_isp_radio3" for="isp_radio3"></label>
+            <input type="hidden" name="isp" id="isp0" value="CHINATELECOM"/>
+            ///////////////////
+            <label class="form-label" id="lbl_detect" for="detec_on"></label>
+            <input type="radio" class="input-radio" name="line_detect" id="detec_on" value="1"
+                   onClick="set_detect_value(this.value);">
+            <label id="lbl_detect_on" for="detec_on"></label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio" class="input-radio" name="line_detect" id="detec_off" value="0" checked="checked"
+                   onClick="set_detect_value(this.value);">
+            <label id="lbl_detect_off" for="detec_off"></label>
+            <input type="hidden" name="line_detect" id="line_detect" value="0">
+            /////////////////
+            <label class="form-label" id="lbl_cut_time" for="fmac_time0"></label>
+            <input type="radio" class="input-radio" name="time" value="0" onClick="cut_timer_change(this.value)"
+                   checked="checked" id="fmac_time0">
+            <label id="lbl_fmac_time0" for="fmac_time0"></label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio" class="input-radio" name="time" value="1" onClick="cut_timer_change(this.value)"
+                   id="fmac_time1">
+            <label id="lbl_fmac_time1" for="fmac_time1"></label>
+            <input type="hidden" name="timer_enable" id="cut_time_hidden" value="0">
+            /////////////////
+            <span class="item_text" id="span_week"></span>
+		    <span class="item_content fix_check">
+			<input type="checkbox" class="input-chx" name="monday" value="1" id="wan_day0">
+			<label id="lbl_wan_day0" for="wan_day0"></label>
+			<input type="checkbox" class="input-chx" name="tuesday" value="2" id="wan_day1">
+			<label id="lbl_wan_day1" for="wan_day1"></label>
+			<input type="checkbox" class="input-chx" name="wednesday" value="3" id="wan_day2">
+			<label id="lbl_wan_day2" for="wan_day2"></label>
+			<input type="checkbox" class="input-chx" name="thursday" value="4" id="wan_day3">
+			<label id="lbl_wan_day3" for="wan_day3"></label>
+			<input type="checkbox" class="input-chx" name="friday" value="5" id="wan_day4">
+			<label id="lbl_wan_day4" for="wan_day4"></label>
+			<input type="checkbox" class="input-chx" name="saturday" value="6" id="wan_day5">
+			<label id="lbl_wan_day5" for="wan_day5"></label>
+			<input type="checkbox" class="input-chx" name="sunday" value="7" id="wan_day6">
+			<label id="lbl_wan_day6" for="wan_day6"></label>
+			<input type="hidden" name="timer_day" id="wan_day" value=""></span>
+            ///////////////////
+            <label class="form-label" id="span_time_set" for="wan_start_hour"></label>
+            <input type="text" maxlength="2" size="5" name="start_hour" id="wan_start_hour" class="txt"
+                   autocomplete="off"/>
+		    <span class="word_sep">
+			<label id="lbl_wan_start_hour" for="wan_start_hour"></label>
+		    </span>
+            <input type="text" maxlength="2" size="5" name="start_minute" id="wan_start_min" class="txt"
+                   autocomplete="off"/>
+		    <span class="word_sep">
+			<label id="lbl_wan_start_min" for="wan_start_min"></label>
+		    </span>
+            <span class="word_sep">---</span>
+            <input type="text" maxlength="2" size="5" name="end_hour" id="wan_end_hour" class="txt" autocomplete="off"/>
+		    <span class="word_sep">
+			<label id="lbl_wan_end_hour" for="wan_end_hour"></label>
+		    </span>
+            <input type="text" maxlength="2" size="5" name="end_minute" id="wan_end_min" class="txt"
+                   autocomplete="off"/>
+		    <span class="word_sep">
+			<label id="lbl_wan_end_min" for="wan_end_min"></label>
+		    </span>
+            //////////////////////
+            <input type="radio" class="input-radio" name="pppoe_conf_radio" value="AUTO" checked="checked"
+                   onClick="set_pppoe_connect_mode(0,value);" id="pppoe_conf_radio1">
+            <label for="pppoe_conf_radio1">自动连接互联网 (默认状态)</label>
+            <br/>
+            <input name="pppoe_conf_radio" type="radio" class="input-radio" value="IDLE"
+                   onClick="set_pppoe_connect_mode(0,value);" id="pppoe_conf_radio2">
+            <label for="pppoe_conf_radio2">空闲或超时后自动断开,在</label>
+            <input id="wan_setup_out_time0" name="out_time" type="text" size="4" maxlength="4" value="15"
+                   class="txt"
+                   disabled="true"/>
+            <input type="hidden" class="default_restore" id="wan_setup_out_time0_dr" name="out_time_dr" value="15"/>
+            <label for="pppoe_conf_radio2">(1-30)分钟后, 如果没有发现访问请求，就自动断开!</label>
+
+            <br/>
+            <input type="radio" class="input-radio" name="pppoe_conf_radio" value="MANU"
+                   onClick="set_pppoe_connect_mode(0,value);" id="pppoe_conf_radio3">
+            <label for="pppoe_conf_radio3">手动连接</label>
+            <input type="hidden" name="pppoe_conf" id="pppoe_conf0" value="AUTO"/>
+        </dd>
+        <dt class="expert">
+        <p><span class="title"  id="expertBtnTxt"></span><img src="./images/expertArrow.png"></p></dt>
+        <fieldset class="wan_pppoe_form_expert section_hide wan-set-fieldset">
+            <dd>
+                <label class="form-label">MTU</label>
+                <input name="mtu" class="txt4" type="text" id="wan_setup_mtu0" value="1480" maxlength="4" autocomplete="off"
+                       placeholder=""/>
+            </dd>
+            <dd>
+                <label class="form-label" id="lbl_wan_setup_dns01"></label>
+                <input type="text" class="txt4" id="wan_setup_dns01" name="dns1" maxlength="15" autocomplete="off"
+                       placeholder=""/>
+            </dd>
+            <dd>
+                <label class="form-label" id="lbl_wan_setup_dns02"></label>
+                <input type="text" class="txt4" id="wan_setup_dns02" name="dns2" maxlength="15" autocomplete="off"
+                       placeholder=""/>
+            </dd>
+            <dd>
+                <label class="form-label" id="lbl_work_mode_nat"></label>
+                <span class="switch-txt"></span>
+                <input id="work_mode_radio" type="checkbox" class="switch radio_form"/>
+                <label for="work_mode_radio" id="work_mode_switch"></label>
+                <input type="hidden" id="work_mode_radio_hidden" name="work_mode" value="NAT"/>
+            </dd>
+            <dd>
+                <label class="form-label" id="lbl_wan1_select"></label>
+                <a class="selectArrow" href="javascript:void(0);">
+                    <span id="wan1_select_txt" class="select-txt"></span>
+                    <input id="wan1_select" name="wan1_select" type="hidden"/>
+                    <img src="./images/selectArrow.png"/>
+                </a>
+                <ul class="option-box" id="wan1_select_option"></ul>
+            </dd>
+            <dd>
+                <label class="form-label" id="lbl_server_name"></label>
+                <input type="text" id="server_name0" name="server_name" class="txt4" maxlength="31" autocomplete="off"
+                       placeholder=""/>
+            </dd>
+            <dd>
+                <label class="form-label" id="lbl_ac_name"></label>
+                <input type="text" id="ac_name0" name="ac_name" class="txt3" maxlength="31" autocomplete="off"
+                       placeholder=""/>
+            </dd>
+        </fieldset>
+    </dl>
+</form>
+<form id="wan_common_form">
+    <input type="hidden" id="common_clone_mac" name="clone_mac"/>
+    <input type="hidden" id="common_default_mac" name="default_mac"/>
+    <input type="hidden" id="common_uiname" name="uiname"/>
+    <input type="hidden" id="common_connect_type" name="connect_type"/>
+</form>
+<script type="text/javascript" src="../javascript/network_setup.js"></script>

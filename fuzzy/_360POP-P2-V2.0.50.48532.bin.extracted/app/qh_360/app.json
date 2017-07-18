@@ -1,0 +1,21 @@
+{
+	"appsign":"qh_360",
+	"appname":"360安全卫士",
+	"version":"1.0.3",
+	"dep_version":"1.4.0",
+	"description":"360安全：<p>磊科联合360安全卫士推出第二代安全路由器，时刻保卫你的网络安全!</p><p>安装上该APP以后，路由器能自动发现并有效拦截含有木马或病毒的网页，为你的安全上网和网上交易保驾护航！</p>",
+	"bin_start":"./qh_360",
+	"author":"360",
+	"URL":"www.360.cn",
+	"maintainer":"360",
+	"email":"-",
+	"app_type":"local",
+	"icon":"./qh_360.png",
+	"rom_use":77,
+	"ram_use":2048,
+	"start_reboot":"no",
+	"uninstall_reboot":"no",
+	"disable_reboot":"no",
+	"uninstall":"yes",
+	"disable":"yes"
+}

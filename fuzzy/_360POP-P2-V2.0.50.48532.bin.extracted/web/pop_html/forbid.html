@@ -1,0 +1,126 @@
+<!doctype html>
+<!--[if lt IE 7 ]>
+<html class="ie6" lang="zh-cn"><![endif]-->
+<!--[if IE 7 ]>
+<html class="ie7" lang="zh-cn"><![endif]-->
+<!--[if IE 8 ]>
+<html class="ie8" lang="zh-cn"><![endif]-->
+<!--[if IE 9 ]>
+<html class="ie9" lang="zh-cn"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="w3c"><!--<![endif]-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="0">
+    <title>360安全路由</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=0, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+    <link type="text/css" href="../css/nav.css" rel="stylesheet"/>
+    <link type="text/css" href="../css/default.css" rel="stylesheet"/>
+    <link type="text/css" href="../css/login.css" rel="stylesheet"/>
+    <script type="text/javascript" src="../javascript/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="../javascript/err.js"></script>
+    <script type="text/javascript" src="../javascript/cookie.js"></script>
+</head>
+<body>
+<div class="topbar">
+    <div class="container">
+        <div class="logo">
+            <img src="../images/nav-logo.png" alt="360安全路由" />
+        </div>
+        <ul class="nav">
+            <li><a href="http://luyouw.360.cn/" target="_blank" >去官网</a></li>
+            <li><a href="http://bbs.360.cn/forum-7007-1.html" target="_blank">论坛</a></li>
+            <li class="last"><a href="http://weibo.com/luyou360" target="_blank">微博</a></li>
+        </ul>
+    </div>
+</div>
+<div id="login_area" class="login-area" style="text-align: center">
+    <div class="slogan">
+        欢迎使用360安全路由
+    </div>
+    <div style="text-align: center">
+        <strong style="color: #ff0000;font-size: 16px" id="failure_tip">您输入密码已错误30次，请您稍后再试！</strong>
+    </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function () {
+    init_time();
+});
+function getQueryString() {
+    var url = location.search; //获取url中"?"符后的字串
+    var theRequest = new Object();
+    if (url.indexOf("?") != -1) {
+        var str = url.substr(1);
+        strs = str.split("&");
+        for(var i = 0; i < strs.length; i ++) {
+            theRequest[strs[i].split("=")[0]]=decodeURIComponent(strs[i].split("=")[1]);
+        }
+    }
+    return theRequest;
+}
+var setIntervalId;
+function init_time() {
+    var left_time = 10*60;
+    var queryObject=getQueryString();
+    var timeGet = queryObject["left_time"];
+    var overTimeNameGet=queryObject["time"];
+    var overTimeName = $.cookie("overTimeName");
+    var time=timeGet;
+    if(overTimeNameGet&&overTimeName==overTimeNameGet){
+        time=$.cookie(overTimeName);
+    }else if(overTimeName){
+        $.cookie( "overTimeName" ,overTimeNameGet,{ path: '/', expires: 1 });
+        $.cookie( overTimeName ,null,{ path: '/', expires: 1 });
+    }else{
+        $.cookie( "overTimeName" ,overTimeNameGet,{ path: '/', expires: 1 });
+    }
+    if (time)
+        left_time = time;
+    if (left_time != 0) {
+        if (setIntervalId)
+            clearInterval(setIntervalId);
+        setIntervalId = setInterval(function () {
+            judge_how_time(left_time);
+            left_time--;
+        }, 1000);
+    }
+}
+
+function changeTip(data) {
+    var timeTip = parseInt(data);
+    var sec = timeTip % 60;
+    var min = Math.floor(timeTip / 60);
+    if (parseInt(sec) == 0) {
+        var result = min + "分钟";
+    } else {
+        if (min == 0)
+            var result = sec + "秒";
+        else
+            var result = min + "分" + sec + "秒";
+    }
+    return result;
+}
+
+function judge_how_time(resultTime) {
+    if (resultTime > 0) {
+        var overTimeName = $.cookie("overTimeName");
+        if(overTimeName)
+        {
+            $.cookie(overTimeName ,resultTime,{ path: '/', expires: 1 });
+        }
+        var s_time = changeTip(resultTime);
+        $('#failure_tip').html("您输入密码错误已达到30次，请您" + s_time + "后再试......");
+    }
+    else {
+        $('#failure_tip').html("正在刷新......");
+        window.location.href = "../login.htm";
+    }
+}
+
+</script>
+</body>
+</html>

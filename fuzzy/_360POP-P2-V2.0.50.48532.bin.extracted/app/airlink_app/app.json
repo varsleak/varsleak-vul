@@ -1,0 +1,22 @@
+{
+	"appsign":"airlink_app",
+	"appname":"智能家居",
+	"version":"0.0.1",
+	"dep_version":"0.0.1",
+	"description":"",
+	"bin_start":"./airlink_app",
+	"author":"360",
+	"URL":"www.360.cn",
+	"maintainer":"360",
+	"email":"",
+	"app_type":"local",
+	"icon":"./airlink_app.gif",
+	"rom_use":1000,
+	"ram_use":1000,
+	"start_reboot":"yes",
+	"uninstall_reboot":"no",
+	"disable_reboot":"yes",
+	"uninstall":"yes",
+	"disable":"yes",
+	"feature":"beacon|three_scene|tea_key"
+}

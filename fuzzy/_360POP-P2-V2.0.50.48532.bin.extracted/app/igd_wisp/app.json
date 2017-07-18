@@ -1,0 +1,21 @@
+{
+	"appsign":"igd_wisp",
+	"appname":"wisp",
+	"version":"1.0.4",
+	"dep_version":"1.3.0",
+	"description":"通过无线AP接入到外网，相当于WAN口，在此基础上提供网络的接入和DHCP",
+	"bin_start":"./igd_wisp_app",
+	"author":"netcore",
+	"URL":"www.netcoretec.com",
+	"maintainer":"netcore",
+	"email":"",
+	"app_type":"local",
+	"icon":"./wisp.png",
+	"rom_use":30,
+	"ram_use":690,
+	"start_reboot":"no",
+	"uninstall_reboot":"no",
+	"disable_reboot":"no",
+	"uninstall":"yes",
+	"disable":"yes"
+}

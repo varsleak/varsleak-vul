@@ -1,0 +1,135 @@
+﻿.no-new-disk .sub-title,.disk .sub-title{margin-top:60px;padding:0;text-align: center;font-size:14px;color: #7F7F7F;}
+#no_disk_tip { color:#000; }
+.no-new-disk .no-disk{margin-top: 40px;}
+.no-new-disk .no-disk .sub-title{margin-top: 0;}
+.no-new-disk .title,.disk .title{margin:0;padding:0;text-align: center;font-size: 28px;color: #428BEF;}
+.no-new-disk .no-disk-img{width: 284px;height: 172px;margin: 60px auto;background: url("../images/no_disk.png") no-repeat top center;}
+.no-new-disk .new-disk-img{width: 346px;height: 155px;margin: 60px auto 80px;background: url("../images/new_disk.png") no-repeat top center;}
+.no-new-disk .new-disk,.disk .new-disk{margin-top: 50px;}
+.no-new-disk .new-disk .sub-title,.disk .new-disk .sub-title{color: #428bef;font-size: 18px;}
+.no-new-disk .new-disk .title,.disk .new-disk .title{font-size: 30px;}
+.disk .panel .panel-head{height: 60px;line-height:60px;position: relative;background-color: #f8f8f8;}
+.disk .panel .panel-title{ text-indent:40px; font-size: 16px;color: #000; border-bottom:1px solid #f2f2f2;cursor: pointer}
+.disk .panel .icon{display: block;width:20px;height: 12px;position: absolute;right: 35px;top:24px;cursor: pointer;}
+.disk .panel .icon-down{background: url("../images/arrow-down-store.png") no-repeat;}
+.disk .panel .icon-up{background: url("../images/arrow-up-store.png") no-repeat;}
+.disk .panel .panel-item{position: relative;overflow: hidden;background-color: #fff;}
+.disk .panel .panel-item p{float: left;width: 130px;}
+.disk .panel .panel-item .panel-sub-title{font-size: 14px;color: #242424;margin-left: 40px;}
+.disk .panel .panel-item .num-item{margin-left: 130px;}
+.disk .panel .panel-item .memory-item{margin-left: 110px;width: 250px}
+.disk .panel .panel-item .btn-wrap-head{margin-left: 40px;}
+.disk .panel .panel-item .num{color: #000;font-weight: bold;}
+.disk .panel .panel-btn{color: #6ba8fc;background-color: #fff;border: 1px solid #6ba8fc;border-radius: 2px;padding:2px 5px;text-decoration: none;}
+
+.disk .panel .panel-body .partition-wrap{width:800px;margin-left: auto;margin-right: auto;}
+.disk .panel .panel-body .partition-wrap .btn-wap-body{text-align: center;}
+.disk .panel .panel-body .partition .part{padding: 35px 0;}
+.disk .panel .panel-body .partition .part .item{height: 30px;line-height: 30px;position: relative; font-size:14px; }
+.disk .panel .panel-body .partition .part .item .tit{color: #242424; padding:0 5px; }
+.disk .panel .panel-body .partition .part .item .position{position: absolute;top:0;}
+.disk .panel .panel-body .partition .part .item .pos-1{left: 50px;}
+.disk .panel .panel-body .partition .part .item .pos-2{left: 172px;}
+.disk .panel .panel-body .partition .part .item .pos-3{left: 254px;}
+.disk .panel .panel-body .partition .part .item .pos-4{left: 320px;}
+.disk .panel .panel-body .partition .part .item .pos-top{top:4px}
+.disk .panel .panel-body .partition .part .item .red{color: #ff484a;}
+.disk .panel .panel-body .partition .part .item .disk_label{ outline:0;border:0;width: 190px;height: 22px;line-height: 22px;}
+.disk .panel .panel-body .partition .part .item .focusin{border: 1px solid #d8d8d8}
+.disk .panel .panel-body .partition .part .item .bar-wrap{display: block;width: 207px;height: 16px;}
+.disk .panel .panel-body .partition .part .item .bar-wrap .bar{width: 207px;height:16px;}
+.disk .panel .panel-body .partition .part .item .bar-wrap .bar-bg{background: url("../images/bar-bg.png") no-repeat; margin-top:6px;}
+.disk .panel .panel-body .partition .part .item .bar-wrap .bar-progress{background: url("../images/bar-progress.png") no-repeat; position: absolute; top:6px;}
+.disk .panel .panel-body .partition .part .item .bar-wrap .memory-num{ position: absolute;top: 0;width:100%;height: 28px;line-height: 28px;text-align: center;color: #7f7f7f; font-size:12px; }
+.disk .panel .line-h{border-top: 1px solid #EDECEA;}
+.disk .new-disk{margin-bottom: 140px;}
+.disk-wrap .disk-tip { border-top: 1px solid #EDECEA; padding:20px 0 2px;}
+.disk-wrap .btn-wrap{padding: 0 0 30px;text-align: center;margin-top: 1px}
+
+#store_type_layer div{width: 50%}
+.store-app{
+    overflow: hidden;
+    border-bottom: 1px solid #e4e7eb;
+    margin-top: 35px;
+}
+.store-app .app-logo{
+    width: 75px;
+    height: 75px;
+    float: left;
+    margin: 0 20px auto 60px;
+}
+.store-app .logo-default{
+    background: url("../images/icon_default.png") no-repeat center;
+}
+.store-app  .logo-samba{
+    background: url("/app/samba/samba.png") no-repeat center;
+}
+.store-app  .logo-dlna{
+    background: url("/app/dlna/dlna.png") no-repeat center;
+}
+.store-app  .logo-disk-sleep{
+    background: url("/images/disk_sleep.png") no-repeat center;
+}
+.store-app .app-box{
+    float: left;
+}
+.store-app .box-title{
+    text-align: left;
+    font-size: 16px;
+    color: #333;
+}
+.store-app .app-tips{
+    font-size: 12px;
+    color: #999;
+    margin-top: 12px;
+}
+.store-app p{
+    width: 717px;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+.store-app .warning{
+    color: #ff0000;
+}
+.store-app .app-disabled{
+    font-size: 14px;
+}
+.store-app .item{
+    margin: 40px 0 60px;
+}
+.store-app .form-label{
+    width: 16%;
+    text-align: left;
+    font-size: 14px;
+    color: #333;
+}
+.store-app .opt{
+    padding: 30px 0 40px 0;
+    text-align: left;
+    margin: 0;
+}
+.store-app .btn.disabled,
+.store-app .btn.disabled:hover{
+    background: #898e97 none repeat scroll 0 0
+}
+
+.store-manage .dot_waiting{
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-left: 1px;
+    background: url("../images/loading-dot.gif") no-repeat center;
+}
+.store-manage .box-hd{line-height: 22px;border-bottom: none;margin-bottom: 12px;height: auto}
+.store-manage .tab_area{margin-bottom: 0}
+.store-manage #app_page{padding-top: 0;padding-bottom: 60px}
+.store-manage .app-box { width:80%; }
+#disk_sleep { padding:0 34px; }
+#disk_sleep_frm .item { margin:10px 0; }
+#disk_sleep_tips { margin-top:-2px; }
+#disk_sleep_tips p { padding:3px 0; }
+#disk_sleep_frm .sleep{ color:#fb7c16; }
+#disk_sleep_frm .run{ color:#4bbb15; }
+.format_tip { line-height:21px; height:21px; color:#ff0000; background:url(/images/error.gif) no-repeat 20% 0%; margin-top:20px; font-size:12px; text-indent:27px; }
+.support_tip { color:#999; margin-top:-8px; }
+.disk_icon { position:absolute; left:53px; top:8px;}

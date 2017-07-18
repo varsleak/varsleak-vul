@@ -1,0 +1,44 @@
+﻿<div class="fix_ie_shadow rally_fix_ie_shadow"></div>
+<div class="form-border-shadow">
+    <div id="restore_default_div" class="app-box">
+        <form id="restore_default_form" class="form-area" action="javascript:void(0);">
+            <!--<div class="opt">
+                <img src="./images/rebase.png">
+            </div>-->
+            <div class="rally_center_tip center_tip">
+                <span id="div_manual_update_tip"></span>
+            </div>
+			<div class="item">
+            	<label id="lbl_param_save" class="form-label"></label>
+				<div class="radio_form radio_on" id="param_save" onclick="radio_toggle(this,'param_save_change');"></div>
+            	<input type="hidden" id="param_save_hidden" value="1" />
+        	</div>
+            <div class="item">
+                <label id="network_param_lbl" class="form-label"></label>
+                <input type="checkbox" id="network_param" checked="checked" class="param" onclick="param_choose();" />
+                <label id="network_param_tip"  for="network_param"></label>
+            </div>
+            <div class="item">
+                <label id="host_name_lbl" class="form-label"></label>
+                <input type="checkbox" id="host_name_param" checked="checked" class="param" onclick="param_choose()" />
+                <label id="host_name_tip"  for="host_name_param"></label>
+            </div>
+            <div class="item">
+                <label id="plugin_info_lbl" class="form-label"></label>
+                <input type="checkbox" id="plugin_param" checked="checked" class="param" onclick="param_choose()" />
+                <label id="plugin_info_tip"  for="plugin_param"></label>
+            </div>
+            <div class="opt">
+                <input type="submit" onClick="RstoreDefault();" class="btn submit_btn btn_default"/>
+            </div>
+        </form>
+    </div>
+    <div id="reset_div" class="section_hide">
+        <center>
+            <div class="reset_tip">
+                <span id="span_reset_tip"></span>
+                <span id="time"></span>
+            </div>
+        </center>
+    </div>
+</div>

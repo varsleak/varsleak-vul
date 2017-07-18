@@ -1,0 +1,125 @@
+<div class="swiper-wrapper safeDefendSwiperWrapper">
+    <section class="swiper-slide app-form safeDefend-host">
+        <dl>
+            <dt id="netStatusTip"></dt>
+            <dd>
+                <div>
+                    <label class="safeDefend-title"></label>
+                    <span class="switch-txt"></span>
+                    <input id="net_enable" type="checkbox"  class="switch radio_form" />
+                    <label for="net_enable"></label>
+                    <input type="hidden" id="net_enable_hidden" name="enable"/>
+                </div>
+                <article>
+                    <ul>
+                        <li><span class="net-safe-tip"></span><span>保护中</span></li>
+                        <li><span class="net-safe-tip"></span><span>保护中</span></li>
+                        <li><span class="net-safe-tip"></span><span>保护中</span></li>
+                        <li><span class="net-safe-tip"></span><span>保护中</span></li>
+                        <li><span class="net-safe-tip"></span><span>保护中</span></li>
+                    </ul>
+                </article>
+                <aside class="s-d-search-info" data-source-html-name="safe-defend-net"></aside>
+            </dd>
+            <dd>
+                <div>
+                    <label class="safeDefend-title"></label>
+                    <span class="switch-txt"></span>
+                    <input id="dns_enable" type="checkbox"   class="switch radio_form" />
+                    <label for="dns_enable"></label>
+                    <input type="hidden" id="dns_enable_hidden" name="switch"/>
+                </div>
+                <article>
+                    <ul>
+                        <li><span class="internet-safe-tip"></span><span>保护中</span></li>
+                        <li><span class="internet-safe-tip"></span><span>保护中</span></li>
+                        <li><span class="internet-safe-tip"></span><span>保护中</span></li>
+                    </ul>
+                </article>
+                <aside class="s-d-search-info"  data-source-html-name="safe-defend-internet"></aside>
+            </dd>
+            <dd>
+                <div>
+                    <label class="safeDefend-title"></label>
+                    <span class="switch-txt"></span>
+                    <input id="arp_enable" type="checkbox"   class="switch radio_form" />
+                    <label for="arp_enable" ></label>
+                    <input type="hidden" id="arp_enable_hidden" name="arp_enable"/>
+                    <input type="hidden" id="safe_arp_mode" name="arp_mode" />
+                    <input type="hidden" id="safe_arp_rate" name="arp_rate" />
+                </div>
+                <article>
+                    <ul>
+                        <li><span class="home-safe-tip"></span><span>保护中</span></li>
+                        <li><span class="home-safe-tip"></span><span>保护中</span></li>
+                    </ul>
+                </article>
+                <aside class="s-d-search-info"  data-source-html-name="safe-defend-home"></aside>
+            </dd>
+            <dd id="sec-psw-info" data-source-html-name="safe-defend-password" class="select_dd">
+                <label class="safeDefend-title"></label>
+                <span></span>
+            </dd>
+        </dl>
+    </section>
+    <section class="swiper-slide app-form safe-defend-net">
+        <dl>
+            <dt id="safe-defend-net-title"></dt>
+            <dd><label class="safe-defend-net-info"></label><span class="normal"></span></dd>
+            <dd><label class="safe-defend-net-info"></label><span class="trojan"></span></dd>
+            <dd><label class="safe-defend-net-info"></label><span class="chang_set"></span></dd>
+            <dd><label class="safe-defend-net-info"></label><span class="trick"></span></dd>
+            <dd><label class="safe-defend-net-info"></label><span class="malvare"></span></dd>
+            <dd><label class="safe-defend-net-info"></label><span class="trojan_down"></span></dd>
+        </dl>
+        <p id="safe-defend-net-shut-tip"></p>
+    </section>
+    <section class="swiper-slide app-form safe-defend-internet">
+        <p id="safe-defend-internet-title"></p>
+        <p id="safe-defend-password-tip"></p>
+        <p id="safe-defend-internet-shut-tip"></p>
+    </section>
+    <section class="swiper-slide app-form safe-defend-home">
+        <form id="filter_arp_bind"  name="filter_arp_bind_frm" method="post">
+            <dl>
+                <dt><span class="s-d-home-sub-title"></span><button id="s-d-arp-add"></button></dt>
+                <dd>
+                    <label class="arp-defend-label"></label>
+                    <input id="filter_arp_ip" type="text" maxlength="15" name="ip" class="txt4" />
+                </dd>
+                <dd>
+                    <label  class="arp-defend-label"></label>
+                    <input id="filter_arp_mac" type="text" maxlength="17" name="mac" class="txt5" />
+                </dd>
+                <dd>
+                    <label class="arp-defend-label"></label>
+                    <input id="filter_arp_name" type="text" name="host_name" class="txt3" maxlength="32" />
+                </dd>
+                <dd>
+                    <label class="arp-defend-label"></label>
+                    <a class="selectArrow" href="javascript:void(0);">
+                        <span class="select-txt"></span>
+                        <input id="bind_iface" name="dev" type="hidden" />
+                        <img  src="./images/selectArrow.png" />
+                    </a>
+                    <ul class="option-box" id="safeDefendHome_interface_option"></ul>
+                    <input id="filter_arp_deal" type="hidden" value="add" name="deal">
+                    <input id="filter_arp_old_ip" type="hidden" value="0" name="old_ip">
+                    <input id="filter_arp_old_dev" type="hidden" value="LAN" name="old_dev">
+                </dd>
+                <dt class="s-d-home-sub-title"></dt>
+            </dl>
+        </form>
+        <dl id="s-d-arp-list"></dl>
+    </section>
+    <section class="swiper-slide app-form safe-defend-password">
+        <dl>
+            <dd class="select_dd" data-edit-psw-html-name="wifi_set"><label id="s-d-wifi-strength"></label><span></span><span class="s-d-psw-edit"></span></dd>
+            <dd class="select_dd" data-edit-psw-html-name="password"><label id="s-d-psw-strength"></label><span></span><span class="s-d-psw-edit"></span></dd>
+        </dl>
+    </section>
+    <section class="swiper-slide safe-defend-password-edit subContainer-sub" id="safe-defend-password-edit">
+
+    </section>
+</div>
+

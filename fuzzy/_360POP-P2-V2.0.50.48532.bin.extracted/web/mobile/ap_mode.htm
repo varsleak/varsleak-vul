@@ -1,0 +1,91 @@
+<div class="swiper-wrapper apModeSwiperWrapper">
+    <section class="swiper-slide ap-nav app-form">
+        <dl>
+            <dd id="app-set-txt" class="select_dd" data-html-name="ap-set"></dd>
+            <dd id="app-list-txt" class="select_dd" data-html-name="ap-list"></dd>
+        </dl>
+    </section>
+    <section class="swiper-slide ap-set app-form">
+        <form name="ap_frm" id="ap_frm" method="post" action="" class="section_hide">
+            <dl>
+                <dd>
+                    <label class="form-label" id="lbl_ap_enable" ></label>
+                    <span class="switch-txt"></span>
+                    <input id="ap" type="checkbox"   class="switch radio_form" />
+                    <label for="ap" id="wireless_enable_switch"></label>
+                    <input type="hidden" id="ap_hidden" name="enable"/>
+                </dd>
+                <dd>
+                    <label class="form-label" id="lbl_ap_ssid"></label>
+                    <input type="text"  id="ap_ssid" maxlength="32"  name="ssid" class="txt7" autocomplete="off" />
+                </dd>
+                <dd>
+                    <label class="form-label" id="lbl_ssid_broadcast"></label>
+                    <input type="hidden" id="broadcast_ssid_hidden" name="broadcast_ssid"/>
+                    <input id="broadcast_ssid" type="checkbox"   class="radio radio_form" />
+                    <label for="broadcast_ssid" id="broadcast_ssid_radio"></label>
+                </dd>
+                <dd>
+                    <label class="form-label" id="lbl_host_isolation" ></label>
+                    <span class="switch-txt"></span>
+                    <input id="host_isolation" type="checkbox"   class="switch radio_form" />
+                    <label for="host_isolation" id="host_isolation_switch"></label>
+                    <input type="hidden" id="host_isolation_hidden" name="host_isolation"/>
+                </dd>
+                <dd>
+                    <label class="form-label" id="lbl_ap_ap_mode_sel" ></label>
+                    <a class="selectArrow" href="javascript:void(0);">
+                        <span id="ap_ap_mode_sel_txt" class="select-txt"></span>
+                        <input id="ap_ap_mode_sel"  name="auth_mode" type="hidden" />
+                        <img src="./images/selectArrow.png" />
+                    </a>
+                    <ul class="option-box ap_wap_option"></ul>
+                </dd>
+                <dd id="set_psd">
+                    <label class="form-label"></label>
+                    <input type="text" maxlength="64" class="txt5 " placeholder="" value="" id="ap_wpa_key" name="wpa_key"  autocomplete="off" data-aes="true" />
+                    <input type="hidden" name="action" value="set"/>
+                </dd>
+                <dd class="item section_hide">
+                    <label class="form-label"></label>
+                    <span class="switch-txt"></span>
+                    <input id="ap_auto_close" type="checkbox"   class="switch radio_form" />
+                    <label for="ap_auto_close" id="ap_auto_set"></label>
+                    <input type="hidden" id="ap_auto_close_hidden" name="auto_close_enable"/>
+                </dd>
+                <dd class="speed_limit section_hide">
+                    <label class="form-label"></label>
+                    <span class="switch-txt"></span>
+                    <input id="speed_limit" type="checkbox"   class="switch radio_form" />
+                    <label for="speed_limit"></label>
+                    <input type="hidden" id="speed_limit_hidden" name="limit_enable" value=""/>
+                </dd>
+                <dd class="speed_limit section_hide">
+                    <label class="form-label"></label>
+                    <input type="text" id="upside" class="unit-input" autocomplete="off" name="limit_up_speed" maxlength="5" />
+                    <span class="input-unit">Mbit/s</span>
+                </dd>
+                <dd class="speed_limit section_hide">
+                    <label class="form-label"></label>
+                    <input type="text" id="downside" class="unit-input" autocomplete="off" name="limit_down_speed" maxlength="5" />
+                    <span class="input-unit">Mbit/s</span>
+                </dd>
+                <dd class="speed_limit section_hide">
+                    <label class="form-label"></label>
+                    <input type="text" id="access_number" autocomplete="off" name="limit_hosts_num" maxlength="2" />
+                    <span id="limit_hosts_tip" class="mr5"></span>
+                </dd>
+            </dl>
+        </form>
+    </section>
+    <section class="swiper-slide ap-list app-form">
+        <dl id="ap-list"></dl>
+        <dl id="ap-list-info" class="section_hide">
+            <dd><label class="ap-list-info-label"></label><span class="mac"></span></dd>
+            <dd><label class="ap-list-info-label"></label><span class="mode"></span></dd>
+            <dd><label class="ap-list-info-label"></label><span class="tx_rate"></span></dd>
+            <dd><label class="ap-list-info-label"></label><span class="rx_rate"></span></dd>
+            <dd><label class="ap-list-info-label"></label><span class="elapsed"></span></dd>
+        </dl>
+    </section>
+</div>

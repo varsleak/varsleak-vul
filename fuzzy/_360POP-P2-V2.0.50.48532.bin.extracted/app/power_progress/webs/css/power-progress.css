@@ -1,0 +1,146 @@
+.opt-mode{
+    display: none;
+    position: relative;
+    width: 630px;
+    height: 200px;
+    padding: 30px 0 0;
+    margin: 75px auto 0;
+}
+.scrollbar_add{
+    position: relative;
+    width: 300px;
+    height: 26px;
+    background: url(../images/power_add.png) no-repeat;
+    top:-56px;
+}
+.scrollbar_plus{
+    position: relative;
+    width: 630px;
+    height: 26px;
+    background: url(../images/power_plus.png) no-repeat;
+    margin-bottom: 30px;
+}
+.scrollbar .power{
+    position: absolute;
+    top: 20px;
+    left: 34px;
+    width: 0;
+    height: 7px;
+    line-height: 0;
+    font-size: 0;
+    background: url(../images/power-status.png) no-repeat;
+}
+.scrollbar .power-low{
+    width: 0;
+}
+.scrollbar .power-middle{
+    width: 222px;
+}
+.scrollbar .power-high{
+    width: 473px;
+}
+.sign{
+    position: absolute;
+    top: 5px;
+    left: 6px;
+    width: 12px;
+    height: 24px;
+    background: url(../images/sign.png) no-repeat;
+}
+.sign-low{
+    left: 6px;
+}
+.sign-middle{
+    left: 50%;
+    margin-left: -6px;
+}
+.sign-high{
+    left: auto;
+    right: 6px;
+}
+.scrollbar a{
+    position: absolute;
+    top: 9px;
+    width: 29px;
+    height: 29px;
+    background: url(../images/power_on.png) no-repeat;
+}
+.scrollbar a i{
+    position: absolute;
+    top: 7px;
+    left: 8px;
+    width: 13px;
+    height: 13px;
+}
+.sign-area{
+    width: 630px;
+    position: relative;
+    height: 38px;
+    font-size: 14px;
+    background: #FFFDF6;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    text-align: center;
+}
+.sign-area i{
+    display: block;width: 170px;border-top: 1px solid #9e9a95;position: absolute;top:18px;left: 90px;
+}
+.sign-area .second_i{
+    left: 365px;
+}
+.sign-area a{
+    position: absolute;
+    width: 75px;
+	height: 38px;
+	display: block;
+    background: none;
+    line-height: 38px;color: #4c4c4a;font-size:15px;
+}
+.sign-area .selected{
+    background: #ff6600;
+    border-radius: 3px;
+    color: #fff;
+}
+.sign-area .text-low{
+    left: 2px;
+}
+.sign-area .text-middle{
+    left: 277px;
+}
+.sign-area .text-high{
+    right: 2px;
+}
+.wifi-status span {
+    display: none;
+    padding-left: 10px;
+}
+.opt-mode .wifi-status{
+    margin: 20px 0 30px;text-align: center;font-size: 14px;
+}
+.opt-mode div.high .high {
+    color: #2b3238 ;
+    display: inline-block;
+}
+.opt-mode div.middle .middle {
+    color: #2b3238 ;
+    display: inline-block;
+}
+.opt-mode div.low .low {
+    color: #2b3238 ;
+    display: inline-block;
+}
+a:hover{
+    text-decoration: none;cursor: pointer;
+}
+#power_progress_frm .form-label {
+    width: 34%;
+}
+.item *{vertical-align: middle;}
+.data-table td a.edit, .data-table td a.del, .data-table td a.status {
+    color: #438BF1;
+    background: transparent;
+    border: none;
+    padding: 6px;
+}
+.app-box{padding: 0 34px;}

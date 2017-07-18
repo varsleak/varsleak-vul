@@ -1,0 +1,49 @@
+﻿<div id="warning_count" class="grey-text">
+    <p class="warningCountTxt"></p>
+</div>
+<div class="app-box">
+    <div class="box-bd">
+        <form id="second_protect_set_frm" class="form-area" method="post" onsubmit="qh_pwd_enable();return false;">
+            <div class="item">
+                <label class="form-label"></label>
+				<div class="radio_form" id="safety_wireless_status" onclick="radio_toggle(this,'set_question_type');"></div>
+                <input id="safety_wireless_status_hidden" type="hidden" value="1" name="enable" />
+            </div>
+            <div class="item">
+                <label class="form-label"></label>
+                <select name="id" id="ques_id"></select>
+            </div>
+            <div id="idf_question" class="off">
+                <div class="item">
+                    <label class="form-label isneed"></label>
+                    <input type="text" class="input-text"  name="question3" id="question3"  maxlength="32" autocomplete="off" />
+                </div>
+            </div>
+            <div class="item">
+                <label class="form-label isneed"></label>
+                <input id="wirel_answer" maxlength="32" type="text" class="input-text" data-aes="true" name="answer" autocomplete="off" />
+            </div>
+            <div class="item">
+                <label class="form-label"></label> <em onclick="show_senior_set();" class="btn-text"></em>
+            </div>
+            <div class="senior_set off">
+                <div class="item">
+                    <label class="form-label"></label>
+                    <input type="checkbox" class="input-chx" id="enable_router" onchange="set_enable_deny_router();"  />
+                    <input type="hidden" name="enable_deny_router"  id="enable_deny_router_val" />
+                    <label for="enable_router" class="allowOpenBtn"></label>
+                </div>
+                <div class="item">
+                    <label class="form-label"></label>
+                    <input type="checkbox" class="input-chx" id="enable_computer" onchange="set_enable_deny_computer();" />
+                    <input type="hidden" name="enable_deny_computer"  id="enable_deny_computer_val" />
+                    <label for="enable_computer" class="allowOpenBtn"></label>
+                </div>
+            </div>
+            <div class="item opt">
+                <input  type="hidden" value="1" name="action">
+                <button id="qh_360_wireless_btn2"  type="submit" class="btn"></button>
+            </div>
+        </form>
+    </div>
+</div>

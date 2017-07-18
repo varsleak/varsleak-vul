@@ -1,0 +1,251 @@
+﻿<!doctype html>
+<!--[if lt IE 7 ]><html class="ie6" lang="zh-cn"><![endif]-->
+<!--[if IE 7 ]><html class="ie7" lang="zh-cn"><![endif]-->
+<!--[if IE 8 ]><html class="ie8" lang="zh-cn"><![endif]-->
+<!--[if IE 9 ]><html class="ie9" lang="zh-cn"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html class="w3c"><!--<![endif]-->
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <link rel="stylesheet" type="text/css" href="/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/css/default.css" />
+    <link rel="stylesheet" type="text/css" href="/app_common/style.css"/>
+    <script type="text/javascript" src="/javascript/module.js"></script>
+    <script type="text/javascript" src="/app_common/init.js"></script>
+    <script type="text/javascript" src="/app_common/app_ctrl/js/language_CN_app.js"></script>
+	<script type="text/javascript" src="/javascript/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/javascript/jq.plugin.js"></script>
+	<script type="text/javascript" src="/app_common/app_ctrl/js/app_lib.js"></script>
+    <style type="text/css">
+        .tableTextCenter{text-align: center;vertical-align: middle}
+        .tableBorder  th td{border-right: 1px solid #000000}
+		#tableObj tbody tr th{text-align: right}
+        .hide{display: none}
+        .show{display: block}
+        .inputButColor{background-color:#3093DA;color: #ffffff }
+        .set_btn{background-color: #ffffff;height: 20px;width: 18px;border: none;vertical-align: middle;}
+		#host_list th:hover{
+            cursor: pointer;
+            background-color:#ffe081;color: #000;
+        }
+        #host_list_ip th:hover{
+            cursor: pointer;
+            background-color:#ffe081;color: #000;
+        }
+		td a{
+            cursor: pointer;
+        }
+        /* 分页 */
+        .table_footer_style{
+            border-top: 1px solid #e8e8e8;
+            text-align: left;
+        }
+        .table_footer_style .btn,
+        #host_con_info .btn{
+            width: 36px;
+            height: 21px;
+            line-height: 21px;
+            margin-bottom: -3px;
+        }
+        .table_footer_style .btn{
+            margin-right: 12px;
+        }
+        #host_con_info .btn{
+            margin: 0 1px;
+        }
+        .table_footer_style a{
+            padding: 3px 8px;
+            border: 1px solid #d8d8d8;
+            color: #2b3238;
+        }
+        .table_footer_style a:hover{
+            color: #428bef;
+        }
+        #host_list_setSize,
+        #host_list_ip_setSize{
+            width: 55px;
+            padding: 0px;
+            height: 22px;
+        }
+        #host_list_page_select,
+        #host_list_ip_page_select{
+            width: 60px;
+            padding: 0px;
+            height: 22px;
+        }
+        .app-box{
+            padding: 0 34px;
+        }
+        .app-box .center{
+            padding: 40px 0 30px;
+        }
+        .app-box .input_text{
+            width: 65px;
+            height: 14px;
+            padding: 2px 6px;
+            line-height: 14px;
+            border: 1px solid #d8d8d8;
+        }
+        .data-table{
+            font-size: 12px;
+        }
+        #host_list_dl .box-hd{
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+		#host_monitor_layer.form-area .form-label  { width:50%;}
+    </style>
+</head>
+<body>
+    <input type="hidden" name="uiname" value="WAN1" />
+    <!-- 实时监控 -->
+    <div class="app-box">
+        <div class="box-hd">
+            <h3 class="box-title"></h3>
+        </div>
+        <div id="host_monitor_layer" class="box-bd form-area">
+            <div class="item">
+                <label class="form-label"></label>
+                <span id="host_sum">0</span>
+
+            </div>
+            <div class="item" >
+                <label class="form-label"></label>
+                <span id="con_sum">0</span>
+            </div>
+            <div class="item">
+                <label class="form-label"></label>
+                <span id="wan_up_down_speed">0/0</span>
+            </div>
+            <div class="item">
+                <label class="form-label"></label>
+                <span id="up_down_byte">0/0</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 查看内网设备连接信息 -->
+    <div class="app-box" id="host_list_dl">
+        <div class="box-hd">
+            <h3 class="box-title" id="search"></h3>
+        </div>
+        <div class="box-bd">
+            <table id="host_list" class="data-table">
+                <thead id="host_list_head">
+                    <tr>
+                        <th onClick="host_info_sort('host_name');return false;"></th>
+                        <th onClick="host_info_sort('ip');return false;"></th>
+                        <th onClick="host_info_sort('conn_count');return false;"></th>
+                        <th onClick="host_info_sort('up_speed_qos');return false;"></th>
+                        <th onClick="host_info_sort('down_speed_qos');return false;"></th>
+                        <th onClick="host_info_sort('up_byte');return false;"></th>
+                        <th onClick="host_info_sort('down_byte');return false;"></th>
+                       <th onClick="host_info_sort('up_time');return false;"></th>
+                    </tr>
+                </thead>
+                <tbody id="host_con_info">
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td valign="middle" colspan="8" class="table_footer_style">
+                            <label  style="float:left;" class="maxNumShow"></label>
+                            <div style="float:left;padding:1px 5px;*padding:9px 5px 0px 5px;"><select id="host_list_setSize"  onchange="setMaxSize()">
+                                <option selected value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                            </select></div>
+                            <div  style="float:left;">
+                            <a class="skipFirstPage" onClick="skipFirstPage()"></a>
+                            <a class="skipFrontPage" onClick="skipFrontPage()"></a>
+                            <a class="skipNextPage" onClick="skipNextPage()"></a>
+                            <a class="skipLastPage" onClick="skipLastPage()"></a>
+                            <span id="selectContent" class="off" style="vertical-align: middle">
+                            </span>
+                            <label class="inline" id="host_list_currentData"></label>
+                            <label class="off" id="host_list_remainData"></label>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <div class="app-box off" id="host_list_ip_dl">
+        <div class="box-hd">
+            <h3 class="box-title"></h3>
+        </div>
+        <div class="box-bd">
+            <table class="data-table">
+                <caption style="text-align: left;border-bottom: 1px dotted;_border-bottom:none;margin-bottom: 1em;line-height: 2em" id="host_list_caption" >当前主机信息</caption>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="host_list_ip_title_info"></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="app-box off" id="host_list_ip_info_dl">
+        <div class="box-bd">
+            <table id="host_list_ip" class="data-table">
+                <caption style="text-align: left;border-bottom: 1px dotted;margin-bottom: 1em;_border-bottom:none;line-height: 2em" class="currentHostLineInfo"></caption>
+                <thead>
+                    <tr>
+                        <th onClick="host_conn_sort('proto');return false;"></th>
+                        <th onClick="host_conn_sort('des_ip');return false;"></th>
+                        <th onClick="host_conn_sort('src_port');return false;"></th>
+                        <th onClick="host_conn_sort('dest_port');return false;"></th>
+                        <th onClick="host_conn_sort('up_bytes');return false;"></th>
+                        <th onClick="host_conn_sort('down_bytes');return false;"></th>
+                        <th onClick="host_conn_sort('up_speed');return false;"></th>
+                        <th onClick="host_conn_sort('down_speed');return false;"></th>
+                        <th onClick="host_conn_sort('out_interface');return false;"></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="host_list_ip_info"></tbody>
+                <tfoot>
+                    <tr>
+                        <td valign="middle" colspan="12" class="table_footer_style">
+                                <label class="inline" class="maxNumShow"></label>
+                                <select id="host_list_ip_setSize"  onchange="setMaxSize()">
+                                    <option selected="" value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                </select>
+                                <input type="hidden" value="10" id="host_list_ip_setSize_text"  />
+                                <a class="skipFirstPage"  onclick="skipFirstPage()"></a>
+                                <a class="skipFrontPage"  onclick="skipFrontPage()"></a>
+                                <a class="skipNextPage"  onclick="skipNextPage()"></a>
+                                <a class="skipLastPage"  onclick="skipLastPage()"></a>
+                                <span id="host_list_ip_selectContent" style="vertical-align: middle"></span>
+                                <label class="inline"  id="host_list_ip_currentData"></label>
+                                <label class="off"  id="host_list_ip_remainData" ></label>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <div class="center">
+                <button class="off" onClick="host_ip_info_clean();return false" id="del"></button>
+                <button style="display: none;margin-left: 1em" id="refresh" onClick="lan_net_view_refresh();return false"></button>
+                <button onClick="lan_net_view_stop_refresh();return false" id="stop_refresh" style="display: inline;margin-left: 1em"> </button>
+                <button onClick="retrun_host_info();return false" style="display: none;margin-left: 1em" id="return_but"></button>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript" src="js/access-control.js"></script>
+<script type="text/javascript" src="js/host_moniter_sort.js"></script>
+</body>
+</html>

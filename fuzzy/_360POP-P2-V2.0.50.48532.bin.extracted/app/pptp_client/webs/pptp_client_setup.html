@@ -1,0 +1,87 @@
+<div class="app-box">
+	<div class="box-bd">
+		<form id="pptp_server_setup_frm" class="form-area" name="pptp_client_setup_frm" method="post" action="" onsubmit="pptp_client_setup_submit();return false;">
+			<div class="item">
+				<label class="form-label isneed" ></label>
+				<select id="pptp_client_enable_sel" name="enable">
+					<option value="1" id="openPptpClient"></option>
+					<option value="0" id="shutPptpClient"></option>
+				</select>
+			</div>
+			<div class="item">
+				<label class="form-label isneed" ></label>
+				<input class="input-text" type="text" id="pptp_client_server_addr" name="server" size="17" maxlength="63" autocomplete="off" />
+				<span id="serverAddrTip"></span>
+			</div>
+			<div class="item">
+				<label  class="form-label isneed"></label>
+				<input class="input-text" type="text" maxlength="5" size="5" value="1723" id="pptp_client_server_port" name="port"></div>
+			<div class="item">
+				<label  class="form-label isneed"></label>
+				<input class="input-text" id="pptp_client_user" name="user" size="17" maxlength="32" type="text" autocomplete="off"/>
+			</div>
+			<div class="item">
+				<label  class="form-label isneed"></label>
+				<input class="input-text" id="pptp_client_pass" name="pass" size="17" maxlength="32" type="text" data-aes="true" autocomplete="off"/>
+			</div>
+			<div class="item off">
+				<label for="mppe_128" class="form-label isneed"></label>
+				<input id="mppe_128" type="checkbox" checked="checked" onclick="set_mppe_128();"/>
+				<label for="mppe_128" class="inline" id="setMppeTip"></label>
+				<input type="hidden" id="mppe_128_hidden" name="encrypt" value="1"/>
+			</div>
+			<!-- start 功能隐藏 2014-10-07 -->
+			<div class="item off">
+				<label for="nat" class="form-label isneed"></label>
+				<input id="nat" type="checkbox" checked="checked" onclick="set_nat();"/>
+				<label for="nat" class="inline" id="openNAT"></label>
+				<input type="hidden" id="nat_hidden" name="enable_nat" value="1" />
+			</div>
+			<div class="item off">
+				<label for="radio_enterprise_mode" class="form-label isneed"></label>
+				<input type="radio" onclick="pptp_client_mode_sel(this.value)" value="isp" id="radio_isp_mode" name="pptp_mode">
+				<label for="radio_isp_mode" class="inline" id="ISPMode"></label>
+				<input type="radio" onclick="pptp_client_mode_sel(this.value)"  value="com" id="radio_enterprise_mode" name="pptp_mode">
+				<label for="radio_enterprise_mode" class="inline" id="companyMode"></label>
+				<input type="hidden" value="isp" id="pptp_client_mode_hidden" name="mode"></div>
+			<div id="interface_layer" class="off">
+				<label for="pptp_client_interface" class="form-label isneed"></label>
+				<select id="pptp_client_interface" name="uiname"></select>
+			</div>
+			<div id="enterprise_mode_layer" class="off">
+				<div class="item">
+					<label for="pptp_client_servernet" class="form-label isneed"></label>
+					<input class="input-text" id="pptp_client_servernet" name="servernet" size="17" maxlength="15" type="text" autocomplete="off"/>
+				</div>
+				<div class="item">
+					<label for="pptp_client_servermask" class="form-label isneed"></label>
+					<input class="input-text" id="pptp_client_servermask" name="servermask" size="17" maxlength="15" type="text" autocomplete="off"/>
+				</div>
+			</div>
+			<!-- end 功能隐藏 2014-10-07 -->
+			<div class="opt">
+				<input class="input-text" type="hidden" id="is_ipaddr" name="is_ipaddr" value="0">
+				<input class="input-text" type="hidden" id="old_id" name="id" />
+				<input class="input-text" type="hidden" id="deal" name="deal" value="add" />
+				<button id="save" type="submit"></button>
+				&nbsp;&nbsp;
+				<button type="button" id="cancel" onclick="load_app_page('pptp_client_setup','init_pptp_client_setup');" style="display:none;"></button>
+			</div>
+		</form>
+	</div>
+</div>
+<div class="app-box" id="pptp-list">
+	<div class="box-hd">
+		<h3 class="box-title"></h3>
+		<div id="vpn_layer">
+			<input type="checkbox" id="vpn" onclick="set_vpn();" />
+			<label id="lbl_vpn" for="vpn"></label>
+		</div>
+	</div>
+	<div class="box-bd">
+		<table class="data-table" id="pptp_client_setup_list"></table>
+		<div class="opt">
+			<button id="delAll" type="button" onclick="pptp_client_clean_all();"></button>
+		</div>
+	</div>
+</div>

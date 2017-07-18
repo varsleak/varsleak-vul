@@ -1,0 +1,40 @@
+﻿textarea {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    resize: none;
+	outline: none;
+	-moz-border-radius:0;
+	-webkit-border-radius:0;
+	border-radius:0;
+	height:300px;
+	font-family:'\5FAE\8F6F\96C5\9ED1';white-space:pre;
+	font-size:14px;
+	line-height:20px;
+}
+
+textarea.lineshow {
+    background: #fff;
+    color: #999;
+    cursor: default;
+	overflow:hidden;
+    text-align: right;
+	width:9%;
+	border-right:none;
+	float:left;
+}
+
+#words { font-size:12px; text-align:right; }
+#words span { color:#FF3D3E; }
+#host { width:90%; color:#666; float:left; }
+#host_layer { width:640px; margin:0 auto;}
+#host_title { width:99.5%; height:38px; background:#ddd; color:#333; }
+#host_title span { display:inline-block; height:100%; line-height:38px;}
+.host_ip{ width:40%;  text-indent:73px;}
+.host_url{ width:40%; text-indent:19px;}
+#host_tip { text-align:center; padding:35px 0 28px; color:#666;}
+#host_example  { color:#000; }
+#host_content { width:100%; margin:0 auto; position:relative;}
+#error_tip { position:absolute; top:0px; left:60px; background-color: rgba(254, 175, 176, 0.32); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#51FEAFB0', 
+endColorstr = '#51FEAFB0' );  border: 1px solid rgba(255, 61, 62, 0.25); width:89.7%; height:20px; display:none;}
+#error_msg { color:#FF3D3E; position:absolute; left:650px; font-size:12px; width:145px; display:block;} 
+#ck_host,#lbl_ck_host { vertical-align:middle;}

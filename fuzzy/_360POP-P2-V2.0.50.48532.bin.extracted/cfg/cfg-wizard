@@ -1,0 +1,4 @@
+POPFLAG=off
+WANMODE=dynamic
+PPPUSER=""
+PPPPWD=""

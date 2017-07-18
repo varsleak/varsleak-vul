@@ -1,0 +1,83 @@
+﻿<form id="wireless_advance_frm" class="app-form appContent_sectionModel" action="javascript:void(0);">
+	<dl>
+		<dt id="wireless_advance_tip" class="mr0"></dt>
+		<dd>
+			<label class="form-label" id="lbl_radio_criterion"></label>
+			<a class="selectArrow" href="javascript:void(0);">
+                <span id="wireless_base_band_sel_txt" class="select-txt"></span>
+                <input id="wireless_base_band_sel" name="radio_criterion" type="hidden" />
+                <img  src="./images/selectArrow.png" />
+            </a>
+            <ul class="option-box" id="wireless_base_band_option"></ul>
+		</dd>
+		<dd>
+			<label class="form-label" id="lbl_wireless_fragment" ></label>
+			<input type="text" id="wireless_fragment" name="fragThreshold" maxlength="4" min="256" max="2346" />
+		</dd>
+		<dd>
+			<label class="form-label" id="lbl_wireless_RTSThreshold" ></label>
+			<input type="text" id="wireless_RTSThreshold" name="rtsThreshold" maxlength="4" min="256" max="2347" />
+		</dd>
+		<dd>
+			<label class="form-label" id="lbl_wireless_preamble"></label>
+			<a class="selectArrow" href="javascript:void(0);">
+                <span id="wireless_preamble_sel_txt" class="select-txt"></span>
+                <input id="wireless_preamble_sel" name="preamble" type="hidden" />
+                <img  src="./images/selectArrow.png" />
+            </a>
+            <ul class="option-box" id="wireless_preamble_option"></ul>
+		</dd>
+		<dd style="display:none;">
+			<label class="form-label" id="lbl_wireless_protection"></label>
+			<span class="switch-txt"></span>
+			<input id="wireless_protection" type="checkbox" class="switch radio_form" />
+			<label for="wireless_protection" id="wireless_protection_switch"></label>
+			<input type="hidden" id="wireless_protection_hidden" name="protection"/>
+		</dd>
+		
+		<dd>
+			<label class="form-label" id="lbl_wireless_ampdu"></label>
+			<span class="switch-txt"></span>
+			<input id="wireless_ampdu" type="checkbox" class="switch radio_form" />
+			<label for="wireless_ampdu" id="wireless_ampdu_switch"></label>
+			<input type="hidden" id="wireless_ampdu_hidden" name="ampdu"/>
+		</dd>
+		<dd style="display:none;">
+			<label class="form-label" id="lbl_wireless_tx_2_path"></label>
+			<span class="switch-txt"></span>
+			<input id="wireless_tx_2_path" type="checkbox" class="switch radio_form" />
+			<label for="wireless_tx_2_path" id="wireless_tx_2_path_switch"></label>
+			<input type="hidden" id="wireless_tx_2_path_hidden" name="tx_2_path"/>
+			<input type="hidden" name="action" value="1" />
+		</dd>
+        <dd>
+			<label class="form-label" id="lbl_enable_upnp"></label>
+			<span class="switch-txt"></span>
+			<input id="enable_upnp" type="checkbox" class="switch radio_form" />
+			<label for="enable_upnp" id="enable_upnp_switch"></label>
+			<input type="hidden" id="enable_upnp_hidden" />
+			<input type="hidden" value="10" id="time_upnp" />
+		</dd>
+        <dd>
+			<label class="form-label" id="lbl_p_plus"></label>
+			<span class="switch-txt"></span>
+			<input id="p_plus" type="checkbox" class="switch radio_form" />
+			<label for="p_plus" id="p_plus_switch"></label>
+			<input type="hidden" id="p_plus_hidden" />
+		</dd>
+        <dd>
+			<label class="form-label" id="lbl_safe_request"></label>
+			<span class="switch-txt"></span>
+			<input id="boa_deny_switch" type="checkbox" class="switch radio_form" />
+			<label for="boa_deny_switch"></label>
+            <input type="hidden"  id="boa_deny_switch_hidden" name="enable"/>
+            <input type="hidden" id="deny_switch_old" value="0">
+		</dd>
+        <dd id="deny_ip_layer">
+            <label id="lbl_deny_ip"></label>
+            <input type="text" class="txt9" id="deny_ip" name="ip" maxlength="15" />
+            <input type="hidden" id="deny_ip_old" />
+            <input type="hidden" id="user_ip" />
+        </dd>
+	</dl>
+</form>

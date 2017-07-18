@@ -1,0 +1,54 @@
+<section id="touch_link_guide" style="display:none;">
+	<h1 id="guide_tip"></h1>
+	<p id="guide_replenish"></p>
+	<div id="guide_layer">
+		<img src="/mobile/images/guide.png" />
+	</div>
+	<div class="center_tip" style="margin-top: 20px;">
+		<input type="button" class="btn blue_btn" id="start_touch_link_btn" />
+	</div>
+</section>
+<div class="swiper-wrapper touch-link-swiper-wrapper" style="display:none;">
+	<section id="touch_link_nav" class="app-form swiper-slide">
+		<dl>
+			<dt id="touch_link_tip" class="mr0"></dt>
+			<dd data-html-name="touch_link_set" class="select_dd" id="touch_link_set_txt"></dd>
+			<dd data-html-name="touch_link_list" class="select_dd" id="touch_link_list_txt"></dd>
+		</dl>
+	</section>
+	<section id="touch_link_set" class="swiper-slide">
+		<form id="touch_link_frm" class="app-form" action="javascript:void(0);">
+			<dl>
+				<dd>
+					<label class="form-label" id="lbl_touch_link_switch"></label>
+					<span class="switch-txt"></span>
+					<input id="touch_link_switch" type="checkbox" class="switch radio_form" />
+					<label for="touch_link_switch" id="touch_link_switch_switch"></label>
+					<input type="hidden" id="touch_link_switch_hidden" name="switch"/>
+				</dd>
+				<dt id="link_wrapper" class="noMarginTop bgno"><span id="link"></span><span id="link_name"></span></dt>
+				<dt class="noMarginTop"></dt>
+				<dd id="push_mode_layer">
+					<label class="form-label" id="lbl_touch_link_def"></label>
+					<a class="selectArrow" href="javascript:void(0);">
+						<span id="touch_link_def_option_txt" class="select-txt"></span>
+						<input id="touch_link_def_option_sel" name="def" type="hidden" />
+						<img  src="./images/selectArrow.png" />
+					</a>
+					<ul class="option-box" id="touch_link_def_option"></ul>
+				</dd>
+				<dt id="push_mode_text" class="noMarginTop bgno"></dt>
+			</dl>
+		</form>
+		<div id="table_layer">
+			<form class="app-form" action="javascript:void(0);">
+				<dl id="auth_layer">
+				</dl>
+			</form>
+		</div>
+	</section>
+	<section id="touch_link_list" class="app-form swiper-slide">
+		<dl id="touch_link_status_list"></dl>
+		<dl id="touch_link_status_list_detail"></dl>
+	</section>
+</div>

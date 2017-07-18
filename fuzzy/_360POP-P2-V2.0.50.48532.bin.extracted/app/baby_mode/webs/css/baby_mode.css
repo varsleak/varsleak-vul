@@ -1,0 +1,290 @@
+body{
+	padding: 20px 30px;
+}
+
+.baby-mode-list{
+	overflow: hidden;
+	width: 100%;
+}
+.baby-mode-list .device-item{
+	float: left;
+	width: 430px;
+    height: 290px;
+	margin: 10px 7px;
+	position: relative;
+	border: 1px #ddd solid;
+	border-radius: 3px;
+}
+
+.baby-mode-list .device-item .close{
+	position: absolute;
+	color: #fff;
+	right: 0;
+	top: 0;
+	font-size: 12px;
+	padding: 10px;
+	cursor: pointer;
+}
+.baby-mode-list .device-item .device-name{
+	height: 65px;
+	line-height: 65px;
+	padding-left: 71px;
+	color: #fff;
+}
+.baby-mode-list .device-item.boy{
+	border: 1px solid #428bef;
+}
+.baby-mode-list .device-item.girl{
+	border: 1px solid #ff8180;
+}
+.baby-mode-list .device-item.girl span.settting-btn{
+	border: 1px solid #ff8180;
+	color: #ff8180;
+}
+.baby-mode-list .device-item.boy .device-name{
+	background: url("../images/boy_icon.png") 8px 8px no-repeat #428bef;
+}
+.baby-mode-list .device-item.girl .device-name{
+	background: url("../images/girl_icon.png") 8px 8px no-repeat #ff8180;
+}
+.baby-mode-list .device-item .device-detail{
+	height: 25px;
+	padding-top: 5px;
+	line-height: 25px;
+}
+.baby-mode-list .device-item .info{
+	font-size: 12px;
+}
+/*.weekend{*/
+    /*color:#ff6600 ;*/
+/*}*/
+._children_list_odd{
+    background-color: #f3f4f6;
+}
+.baby-mode-list .device-item .info li{
+	padding: 6px 10px;line-height: normal;overflow: hidden;
+}
+.baby-mode-list .device-item .info li.timer_slot_off .time_line,.baby-mode-list .device-item .info li.timer_slot_off .time_week{
+	color: #CCCCCC;
+}
+.baby-mode-list .device-item .info li .time_line{
+	font-size: 16px;color: #333333;
+}
+.baby-mode-list .device-item .info li .time_week{
+    font-size: 14px;color: #999999;
+}
+.baby-mode-list .device-item .info li p{
+	margin: 0;float: left;padding:0;
+}
+.baby-mode-list .device-item .info .edit,.baby-mode-list .device-item .info .del,.baby-mode-list .device-item .info .status{
+	float: right;display: block;padding-left: 10px;  line-height: 40px;font-size: 14px;color:#428bef;text-decoration: none;
+}
+.baby-mode-list .device-item .settting-btn{
+	background: #fff;border: 1px solid #428bef;color: #428bef;position: absolute;cursor: pointer;left: 145px;bottom: 10px;width: 138px;height: 34px;line-height: 34px;text-align: center;border-radius: 3px;
+}
+.baby-mode-list .device-item .settting-btn.noTimeSlot{
+    bottom: 95px;
+}
+
+.adding-mode .add-more,
+.baby-mode-waiting-list,
+.waiting-list-title,
+.setting-panel,
+.setting-mode .baby-mode-list{
+	display: none;
+}
+.adding-mode .baby-mode-waiting-list,
+.adding-mode .waiting-list-title,
+.setting-mode .setting-panel{
+	display: block;
+}
+
+/*待加入列表*/
+.waiting-list-title{
+	height: 30px;
+	line-height: 30px;
+	padding: 10px;
+	text-align: center;
+	font-size: 16px;
+	border: 1px solid #e8e8e8;
+	border-width: 1px 0;
+	margin-top: 30px;
+}
+.baby-mode-waiting-list{
+	/*overflow: hidden;*/
+}
+.baby-mode-waiting-list .device-item {
+	border-bottom: 1px solid #e8e8e8;
+	position: relative;
+}
+.baby-mode-waiting-list .device-item .edit-name{
+	width: 86px;
+	height: 14px;
+	padding: 2px 6px;
+	border: 1px solid #d8d8d8;
+}
+.baby-mode-waiting-list .device-item .device-info{
+	overflow: hidden;
+	padding: 10px 0 10px 0;
+}
+.baby-mode-waiting-list .device-item .device-name-section {
+	float: left;
+	width: 200px;
+	margin-left: 45px;
+}
+.baby-mode-waiting-list .device-item p{
+    margin:0 auto;
+}
+.baby-mode-waiting-list .no-device-list .device-info{
+    text-align: center;line-height: 42px;
+}
+.baby-mode-waiting-list .mobile .device-info{
+    background:url(/images/mobile.png) 0 50% no-repeat;
+}
+.baby-mode-waiting-list .pc .device-info{
+    background:url(/images/pc.png) 0 50% no-repeat;
+}
+.baby-mode-waiting-list .camera .device-info{
+    background:url(/images/camera_small.png) 0 50% no-repeat;
+}
+.baby-mode-waiting-list .router .device-info{
+    background:url(/images/router.png) 0 50% no-repeat;
+}
+.baby-mode-waiting-list .pad .device-info{
+    background:url(/images/pad.png) 0 50% no-repeat;
+}
+.baby-mode-waiting-list .repeater .device-info{
+    background:url(/images/repeater.png) 0 50% no-repeat;
+}
+.baby-mode-waiting-list .none .device-info {
+    background:url(/images/none.png) 0 50% no-repeat;
+}
+.baby-mode-waiting-list .device-item .device-name-section .device-name {
+    min-width: 100px;
+    display: inline-block;
+    margin-top: 10px;
+}
+.baby-mode-waiting-list .device-item .gray {
+	color: #999;
+}
+.baby-mode-waiting-list .device-item .device-ip-section {
+	float: left;
+	width: 185px;
+}
+.baby-mode-waiting-list .device-item .device-ctrl-section {
+	position: absolute;
+	top: 20px;
+	right: 6px;
+}
+.baby-mode-waiting-list .device-item .device-ctrl-section .set-button{
+	padding: 0px 10px;
+	height: 22px;
+	line-height: 14px;
+	width: 110px;
+}
+.baby-mode-waiting-list .device-item .limit-speed-button {
+	margin-right: 3px;
+	background-position: 48px 7px;
+	background-repeat: no-repeat;
+}
+.baby-mode-waiting-list .device-item .speed-ctrl-section {
+	position: absolute;
+	top: 18px;
+	right: 6px;
+}
+
+.baby-mode-waiting-list .device-item .edit-name {
+	display: none;
+}
+
+.baby-mode-waiting-list .device-item.edit-name-mode .edit-name {
+	display: inline-block;
+}
+
+
+/* 时间设置模板  */
+.setting-panel{
+	border: 1px solid #428bef;
+	border-radius: 3px;
+}
+.setting-panel .info{
+	height: 80px;
+	color: #fff;
+	padding-left: 70px;
+	background: url("../images/boy_icon.png") 10px 50% no-repeat #428bef;
+}
+.setting-panel  .device-name-title{
+    font-size: 14px;
+    margin-left: 10px;
+}
+.setting-panel.girl{
+	border: 1px solid #ff8180;
+}
+.setting-panel.girl .info{
+	background: url("../images/girl_icon.png") 10px 50% no-repeat #ff8180;
+}
+.setting-panel .info span{
+	float: left;
+	width: 100%;
+	margin-top: 15px;
+	font-size: 18px;
+}
+.setting-panel .ctrl{
+	padding: 0 40px 40px 70px;
+}
+.setting-panel .ctrl .title{
+	float: left;
+	width: 100%;
+	height: 60px;
+	line-height: 60px;
+}
+.setting-panel .ctrl input{
+	width: 35px;
+	height: 20px;
+	padding: 10px;
+	border: 1px solid #d8d8d8;
+	border-radius: 0;
+	line-height: 20px;/* todo */
+	font-size: 14px;
+	margin: 0 5px 0 10px;
+	float:left;
+}
+.setting-panel .ctrl div{
+	text-align: right;
+	margin-top: 30px;
+}
+.setting-panel .ctrl div span{
+	text-align: center;
+	color: #fff;
+	padding: 10px 40px;
+	margin: 0 20px;
+	cursor: pointer;
+	border-radius: 3px;
+}
+.setting-panel .ctrl div.weekSlot span{
+    color: #999999;padding: 0;margin: 0 0 0 15px;
+}
+.setting-panel .ctrl div.weekSlot span.active{
+	border:1px solid #428bef;
+    color:#428bef;
+}
+.setting-panel .ctrl div.weekSlot span.noMargin{
+    margin: 0;
+}
+.setting-panel .ctrl .submit-btn{
+	background: #428bef;
+}
+.setting-panel.girl .ctrl .submit-btn{
+	background: #ff8180;
+}
+.setting-panel .ctrl .cancel-btn{
+	background: #ddd;
+	color: #666;
+}
+/* */
+.timeSec{
+    overflow: hidden;clear: both;float: none;
+}
+.timeSec label{
+    width:75px;text-align: left;height: 42px;line-height: 42px;float: left;
+}

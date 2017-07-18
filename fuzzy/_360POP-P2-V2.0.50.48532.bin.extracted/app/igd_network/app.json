@@ -1,0 +1,21 @@
+{
+	"appsign":"igd_network",
+	"appname":"»¥Á¬»¥Í¨",
+	"version":"0.0.1",
+	"dep_version":"0.0.1",
+	"description":"",
+	"bin_start":"./igd_network_app",
+	"author":"360",
+	"URL":"www.360.cn",
+	"maintainer":"360",
+	"email":"",
+	"app_type":"local",
+	"icon":"./igd_network.gif",
+	"rom_use":1000,
+	"ram_use":1000,
+	"start_reboot":"yes",
+	"uninstall_reboot":"no",
+	"disable_reboot":"yes",
+	"uninstall":"yes",
+	"disable":"yes"
+}

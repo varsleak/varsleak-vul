@@ -1,0 +1,72 @@
+<div class="swiper-wrapper portMapSwiperWrapper">
+    <section class="swiper-slide app-form portHost">
+        <dl>
+            <dd class="select_dd" id="portMapSer-title" data-source-html-name="portMap-set"></dd>
+            <dd class="select_dd" id="portMapSerList-title" data-source-html-name="portMap-list"></dd>
+            <dd class="select_dd" id="portMapDMZ-title" data-source-html-name="dmz-set"></dd>
+        </dl>
+    </section>
+    <section class="swiper-slide app-form portMap-set">
+        <form name="virtual_service_frm" id="virtual_service_frm"  method="post" action="">
+            <!--onsubmit="virtual_service_submit();return false;"-->
+            <dl>
+                <dd>
+                    <label  class="portM-set-label"></label>
+                    <input name="name" id="virtual_name"  type="text" class="txt7" maxlength="32" autocomplete="off" />
+                </dd>
+                <dd>
+                    <label  class="portM-set-label"></label>
+                    <input name="in_ip" id="virtual_in_ip"  type="text" class="txt8" maxlength="15" autocomplete="off" />
+                </dd>
+                <dd>
+                    <label class="portM-set-label"></label>
+                    <a class="selectArrow" href="javascript:void(0);">
+                        <span class="select-txt"></span>
+                        <input id="proto" name="protocol" type="hidden" />
+                        <img  src="./images/selectArrow.png" />
+                    </a>
+                    <ul class="option-box" id="proto_option"></ul>
+                </dd>
+                <dd class="portmap-port-set">
+                    <label class="portM-set-label"></label>
+                    <input class="input-text portmap-port-set-b" id="dest_port_b" type="text" size="5" maxlength="5" name="out_end_port" />
+                    <span>-</span>
+                    <input class="input-text portmap-port-set-a" id="dest_port_a" type="text" size="5" maxlength="5" name="out_start_port" />
+                </dd>
+                <dd class="portmap-port-set">
+                    <label class="portM-set-label"></label>
+                    <input class="input-text portmap-port-set-b" id="src_port_b" type="text" size="5" maxlength="5" name="in_end_port" />
+                    <span>-</span>
+                    <input class="input-text portmap-port-set-a" id="src_port_a" type="text" size="5" maxlength="5" name="in_start_port"/>
+                    <input type="hidden" name="mode" value="0" id="action"/>
+                    <input type="hidden" id="uiname-port-set" name="uiname" value="ALL"  />
+                </dd>
+                <dd id="modify_hidevalue_box" class="section_hide"></dd>
+            </dl>
+        </form>
+    </section>
+    <section class="swiper-slide app-form portMap-list">
+        <dl id="portMap-list-tab"></dl>
+    </section>
+    <section class="swiper-slide app-form dmz-set">
+        <form  name="dmz_form" method="post"  action="">
+            <!--onsubmit="virtual_dmz_add();return false;"-->
+            <dl>
+                <dt id="dmz-set-tip"></dt>
+                <dd>
+                    <input type="hidden" id="uiname" value="WAN1" name="uiname">
+                    <label class="dmz-set-label"></label>
+                    <span class="switch-txt"></span>
+                    <input id="dmz_status" type="checkbox"   class="switch radio_form" />
+                    <label for="dmz_status"></label>
+                    <input type="hidden" id="dmz_status_hidden" name="dmz_status"/>
+                </dd>
+                <dd>
+                    <label class="dmz-set-label" id="dmz_ip_address_tip"></label>
+                    <input name="host_ip" id="dmz_ip_address" type="text" class="txt7" autocomplete="off" maxlength="15" />
+                </dd>
+            </dl>
+        </form>
+    </section>
+</div>
+

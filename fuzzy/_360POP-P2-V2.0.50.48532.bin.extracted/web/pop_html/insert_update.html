@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache">   
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title></title>
+<style type="text/css">
+body{ margin:0; padding:0; font-family:"微软雅黑";}
+#container{ width:415px; height:275px;}
+.title{ position:relative;}
+h1{ font-size:16px; color:#fff; margin:0; padding:24px 0 14px 0; text-align:center;}
+.btn_later{ text-align:center; padding-top:10px;}
+#log { color:#fff; font-size:14px; height:105px; padding:0 17px;}
+#log ul { margin:0; padding:0;}
+#log ul li { margin:0; padding:0; line-height:1.5; margin:0 15px 0 17px;}
+#progress_bar { color:#fff; font-size:12px; padding-top:24px;}
+#tip { text-align:center; padding-bottom:10px;}
+button { color: #b7ceee; background: #428bef; cursor: pointer; border: none; outline: none; height: 27px; width: 80px; line-height: 27px;}
+#pro_bar_outer { height: 8px; overflow: hidden; width:90%; margin:0 auto; border:1px solid #fff; -moz-border-radius:8px; -webkit-border-radius:8px; -o-border-radius:8px; border-radius:8px;}
+#pro_bar { -moz-border-radius:8px; -webkit-border-radius:8px; -o-border-radius:8px; border-radius:8px; background: #fff; height: 8px; width: 0%;}
+#version { font-size:14px;}
+#countdown_tip { font-size: 16px; padding: 98px 0 25px; color:#fff; text-align: center; }
+#update_time { font-size: 36px; color:#fff; text-align: center;}
+.close { color: #b0b0b0; font-size: 26px; height: 26px; line-height: 26px; padding: 0; position: absolute;right: 0; text-align: center;text-decoration: none;  top: 0; width: 30px; z-index: 6001;}
+</style>
+<script type="text/javascript" src="./javascript/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="./javascript/cookie.js"></script>
+<script type="text/javascript" src="./javascript/jquery-plugin.js"></script>
+<script type="text/javascript" src="/javascript/new_lib.js"></script>
+<script type="text/javascript" src="/javascript/module.js"></script>
+<script type="text/javascript" src="/javascript/aes.js"></script>
+<script type="text/javascript" src="./javascript/b64.js"></script>
+<script type="text/javascript" src="/javascript/language_CN.js"></script>
+</head>
+
+<body>
+<div id="container">
+	<div id="update_layer">
+		<div class="title">
+			<h1>正在下载固件</h1>
+			<a class="close" href="javascript:void(0);">×</a>
+		</div>
+		<div id="log">
+			<div id="version"></div>
+			<div id="change_log">
+			</div>
+		</div>
+		<div id="progress_bar">
+			<div id="tip">升级软件需要花费几分钟的时间，请不要关闭电源或按重置按钮!</div>
+			<div id="pro_bar_outer">
+				<div id="pro_bar"></div>
+			</div>
+		</div>
+		<div class="btn_later">
+			<button id="retry_btn" style="display:none;">重试</button>
+			<!--<button id="download_btn" style="display:none;">下载</button>-->
+		</div>
+	</div>
+	<div id="countdown_layer" style="display:none;">
+		<div id="countdown_tip">路由器正在重启，请勿断电</div>
+		<div id="update_time"></div>
+	</div>
+</div>
+<script type="text/javascript">
+var bin_file_download = {
+	file_download_timer:null,
+	second:null,
+	download_time_out_time:0,
+	init:function(){
+		var _this = this;
+		_this.start_check();
+		_this.get_log();
+		_this.check_loop();
+		//_this.bind_retry_event();
+		//_this.bind_download_event();
+		_this.bind_skip_event();
+		_this.second = igd.global_param.update_time;
+		$("#update_time").html(_this.second);
+		
+	},
+	get_log:function(){
+		var _this = this;
+		$.post('/router/version_check.cgi',{op:"dump"},function(data){
+			data = eval("("+ data +")");
+			document.getElementById("version").innerHTML = data.new_version;
+			var statement = utf8to16(base64decode(data.statement));
+			if(statement != ""){
+				var log_cnt = statement.split("\r\n");
+				var $ul = $("<ul/>");
+				for(var i in log_cnt){
+					var $li = $("<li/>");
+					$li.html(log_cnt[i]);
+					$ul.append($li);
+				}
+				$("#change_log").append($ul);
+				_this.init_bar();
+			}
+			else{
+				var obj = $("#change_log");
+				obj.html("暂无日志！");
+				obj.css("text-align","center");
+				obj.css("padding-top","14px");
+			}
+		});
+	},
+	show_count_down_page:function(){
+		$("#update_layer").hide();
+		$("#countdown_layer").show();
+		this.countdown();
+	},
+	countdown:function(){
+		var time = this.second;
+		var countdown_timer;
+		if(countdown_timer)
+			window.clearInterval(countdown_timer);
+		countdown_timer = setInterval(function(){
+			var o_div = $("#update_time");
+			o_div.html(time);
+			time--;
+			if(time == 0){
+				o_div.remove();
+			}
+		},1000);
+	},
+	start_check:function(){
+		var _this = this;
+		$.post("/router/version_check.cgi",{op:"update"});
+	},
+	check_loop:function(){
+		var _this = this;
+		if(this.file_download_timer)
+			window.clearInterval(this.file_download_timer);
+		this.file_download_timer = window.setInterval(function(){
+			_this.check();
+		},1000);
+	},
+	/*bind_retry_event:function(){
+		var _this = this;
+		$("#retry_btn").unbind("click").bind("click",function(){
+			_this.retry();
+			$(this).hide();
+			$("#download_btn").show();
+			
+		});
+	},*/
+	/*bind_download_event:function(){
+		var _this = this;
+		$("#download_btn").unbind("click").bind("click",function(){
+			_this.download();
+			$(this).hide();
+			//$("#retry_btn").show();
+		});
+	},*/
+	/*retry:function(){//取消下载
+		$.post("/router/version_check.cgi",{op:"abort"});
+	},
+	download:function(){//下载
+		$.post("/router/version_check.cgi",{op:"update"});
+	},*/
+	bind_skip_event:function(){
+		$(".close").unbind("click").bind("click",function(){
+			$.post("/router/version_check.cgi",{op:"skip"});
+		});
+	},
+	init_bar:function(){
+		var scroll_elem = $("#log");
+		var o_height = scroll_elem.height() + "px";
+		scroll_elem.slimScroll({
+			width: 'auto', //可滚动区域宽度
+			height: o_height, //可滚动区域高度
+			size: '8px', //组件宽度
+			color:'#c7c7c7',
+			opacity: .8, //滚动条透明度
+			alwaysVisible: true ,//是否 始终显示组件
+			disableFadeOut: false, //是否 鼠标经过可滚动区域时显示组件，离开时隐藏组件
+			railVisible: true, //是否 显示轨道
+			railColor: '#6a6a6a', //轨道颜色
+			railOpacity: 1, //轨道透明度
+			borderRadius: '7px' //滚动条圆角
+		});
+	},
+	check:function(){
+		var _this = this;
+		$.post('/router/version_check.cgi',{op:"dump"},function(data){
+			var data = dataDeal(data);
+			//如果无升级版本。todo
+			var step  = data.step;
+			
+			//step = parseInt(Math.random()*(6-0)+0);
+			
+			var s = parseInt(data.status);
+			
+			//$("#tip").html(igd.update_info[s].info);
+			if(step == "0"){
+				$("#tip").html("下载错误，请手动重试……");
+				$("#retry_btn").show().unbind("click").bind("click",function(){
+					$.post('/router/version_check.cgi',{op:"check"},function(data){});
+				});
+			}
+			else if(step == "2"){
+				$("#tip").html("下载错误，请手动重试……");
+				$("#retry_btn").show().unbind("click").bind("click",function(){
+					$.post('/router/version_check.cgi',{op:"update"},function(data){});
+				});
+			}
+			else if(step == "3"){
+				$("#tip").html("下载过程需要花费几分钟的时间，请不要关闭电源或者按重置按钮！");
+				$("#retry_btn").hide();
+				var cur_size = parseInt(data.cur_size,10);
+				var total_size = parseInt(data.total_size,10);
+				if(total_size == 0){//0%
+					$("#pro_percent").html("0%");
+					$("#pro_bar").css("width","0%");
+				}
+				else{
+					var percent = ((cur_size/total_size) * 100).toFixed(2);
+					$("#pro_percent").html(percent + "%");
+					$("#pro_bar").css("width",percent + "%");
+				}
+			}
+			else if(step == "4"){
+				$("#tip").html("正在校验升级文件，请稍候……");
+			}
+			else if(step == "5"){
+				$("#tip").html("开始升级路由器，请稍候……");
+			}
+			else if(step == "6"){
+				_this.show_count_down_page();
+				window.clearInterval(_this.file_download_timer);
+			}
+		});
+	}
+};
+$(document).ready(function(){
+	bin_file_download.init();
+});
+</script>
+</body>
+</html>

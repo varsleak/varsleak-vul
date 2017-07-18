@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html class="newYear">
+<head lang="en">
+	<meta charset="UTF-8">
+	<title>360安全路由</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+	<style>
+		html, body, div, p, h1, h2, h3, button { margin: 0; padding: 0;}
+		html, body { width: 100%; background: #fffdf6; color: #999; font: 14px/1.5em 'Microsoft Yahei','SimHei','SimSun'}
+		h1, h2, h3 { color: #474747;}
+		h1 { font: 32px 'Mircrosoft YaHei', 'SimHei';}
+		h2 { font-size: 16px;}
+
+		i { display: inline-block; width: 70px; height: 70px; margin: 75px 0 30px; background-position: 0 -37px;}
+		i.e { background-position: 0 -107px;}
+
+		button { width: 320px; height: 44px; border: 0; color: #fff; font: bolder 16px/44px 'SimSun';outline: none; cursor: pointer;
+            background: url("/images/quickenSteupBtn.jpg") no-repeat left top transparent;
+            filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/quickenSteupBtn.png',sizingMethod='scale');
+            background-size: 100% 100%;
+            -moz-background-size:100% 100%;
+            -webkit-background-size:100% 100%;
+            -o-background-size:100% 100%;
+        }
+		button.e { background: #ff5252;}
+
+		.button-group { font-size: 0; margin: 15px 0;}
+		.button-group button { position: relative; width: 107px; height: 48px; line-height: 48px; font-size: 12px; font-weight: normal; color: #999; border: 1px solid #e6e6e6; background: #FBFBFB; margin-right:-1px;}
+		.button-group button:not(:first-child):not(:last-child) { margin: 0 -1px; border-radius: 0;}
+		.button-group button:first-child { border-top-right-radius: 0; border-bottom-right-radius: 0;}
+		.button-group button:last-child { border-top-left-radius: 0; border-bottom-left-radius: 0;}
+		.button-group button.current { background: #f44748; border-color: #f44748; color: #ffdada; font-weight: bold; z-index: 2;}
+		.button-group button.current:before { position: absolute; content: ''; width: 0; height: 0; border: 5px solid transparent; border-top-color: #f44748; left: 47px; bottom: -10px;}
+
+
+		/*.form input { height: 16px; width: 278px; margin: 10px 0; border: 1px solid #e6e6e6; padding: 11px 20px; color: #444; font-weight: bold; font-size: 16px; outline: none; border-radius: 5px;}*/
+		.page .input {
+		  width: 220px;
+		  height:16px;
+		  margin:10px 0;
+		  padding:11px 20px;
+		  border: 1px solid #fcb145;
+		  border-radius: 5px;
+		  line-height: 14px;
+		  font-size: 14px;
+		}
+		.form input:focus { border-color: #fcb145;}
+		.form p.error input { border-color: red;}
+		.form p.error .error-tip { display: inline;}
+		.error-tip { display: none; position: absolute; margin-left: 8px; line-height: 48px; color: red;}
+		.placeholder { padding: 10px 20px; left:300px; top:10px; font-size: 14px; line-height: 1.5em; color: #999; position: absolute;}
+
+		span.g { font-size: 16px; color: #5a9ce6}
+
+		p.link { width: 310px; margin: auto; line-height: 38px; overflow: hidden;}
+		p.link a { color: #5a9ce6; font-size: 12px;}
+
+		.b { background-image: url(/images/init/guide.png);}
+		.l { float: left;}
+		.r { float: right;}
+
+		.page { display: none; position: absolute; left: 50%; top: 50%; width: 800px; height: 300px; margin: -210px 0 0 -400px; text-align: center;}
+
+		.page-welcome button { margin-top: 50px;}
+		.page-welcome h1 { width: 395px; height: 37px; margin: 100px auto 10px auto;}
+
+		.page-set-network { position: static; width: 100%; height: 100%; margin: 0;}
+		.page-set-network .content { position: absolute; left: 50%; top: 40%; width: 800px; height: 300px; margin: -210px 0 0 -400px;}
+		.page-set-network .form { display: none;}
+		.page-set-network .info { line-height: 38px;}
+		.page-set-network .form-dhcp { line-height: 25px; font-weight: bold;}
+		.page-set-network button { margin-top: 15px;}
+		.page-set-network .password-tip { position: absolute; bottom: 0; left: 0; width: 100%; height: 87px; background: #f7f7f7; border-top: 1px solid #e1e1e1;}
+		.page-set-network .password-tip .wrapper { width: 470px; padding-left: 65px; margin: 11px auto 0 auto; font: 12px/18px 'SimSun'; background-position: -401px -52px; background-repeat: no-repeat; text-align: left;}
+		.page-set-network .password-tip .title { font-weight: bold; line-height: 26px;}
+
+		.page-set-network .content button {
+			margin-top: 40px;border-radius: 5px;
+		}
+		.page-test-network img, .page-get-method img { margin: 80px 0 35px;}
+
+		.page-cable-error h2,.page-network-error h2 { margin-bottom: 35px;}
+
+		.page-forget-password { position: static; width: 100%; height: 100%; background: #94959a; margin: 0;}
+		.page-forget-password .dialog { position: absolute; width: 920px; height: 500px; left: 50%; top: 50%; margin: -250px 0 0 -460px; background: #fff; box-shadow: 0 0 10px 5px rgba(0,0,0,.15);}
+		.page-forget-password .header { padding: 32px 0; background: #f8f8f8; border-bottom: 1px solid #e5e5e5; }
+		.page-forget-password .next { position: absolute; width: 15px; height: 15px; top: 19px; right: 17px;  background-position: -401px -37px;}
+		.page-forget-password .content { overflow: hidden;}
+		.page-forget-password .content .c { width: 455px; padding-top: 62px;}
+		.page-forget-password .content .sp { display: block; width: 1px; height: 380px; background: #e5e5e5; background-image: linear-gradient(#fff 0, #e5e5e5 30%, #e5e5e5 60%, #fff 100%);}
+		.page-forget-password .img { width: 331px; height: 149px; margin: 40px auto 0 auto; background-position: -70px -37px;}
+		.page-forget-password .tel { width: 331px; overflow: hidden; margin: 40px auto 0 auto;}
+		.page-forget-password .tel div { width: 160px; text-align: left; color: #666; line-height: 1.8em;}
+
+		.page-connected i { margin-bottom: 20px;}
+		.page-connected button { margin-top: 20px;}
+
+		.page-set-wifi {top: 40%;}
+		.page-set-wifi h1 { margin: 70px 0 25px;}
+		.page-set-wifi .tip { line-height: 14px; color: #000;padding: 0 0 24px 0;}
+        .page-set-wifi .tip-pass {
+            display: none;
+            color: #000;
+            border: 2px solid #428bef;
+            width: 308px;
+            margin: 0 auto;
+            margin: 0px auto 26px auto;
+            padding: 5px 5px;
+            border-style: dotted;
+            border-radius: 8px;
+        }
+		.page-set-wifi .strength { display: none; position: absolute; margin-left: 8px; line-height: 62px; font-size: 16px;}
+		.page-set-wifi .strength span { display: none; margin: 0 14px;}
+		.page-set-wifi .strength-strong .strong { display: inline; color: #63c462;}
+		.page-set-wifi .strength-normal .normal { display: inline; color: #fd8a24;}
+		.page-set-wifi .strength-weak .weak { display: inline; color: #f7383c;}
+		.page-set-wifi .strength em { display: inline-block; width: 18px; height: 10px; margin-right: 2px; background: #ebebeb;}
+		.page-set-wifi .strength-strong .l1, .page-set-wifi .strength-strong .l2, .page-set-wifi .strength-strong .l3 { background: #63c462;}
+		.page-set-wifi .strength-normal .l1, .page-set-wifi .strength-normal .l2 { background: #fd8a24;}
+		.page-set-wifi .strength-weak .l1 { background: #f7383c;}
+
+        .page-set-wifi input.input-admin-password {  display: none;  }
+        .page-set-wifi span.span-same-password,.page-set-wifi input.checkbox-same-password{  font-size: 16px;  vertical-align: middle;display: inline;  }
+		.page-set-wifi .left-same-pass-word-box{width: 320px;margin: auto;text-align: left;padding-bottom: 14px;}
+        .page-set-wifi input.checkbox-same-password{/*width: 20px;*/border:0;padding: 0px;}
+
+		.page-reboot img { margin: 80px 0 20px;}
+		.page-reboot .count-down-wrapper { margin-top: 35px; font-weight: bold;}
+
+		.page-end h2 { margin: -10px 0 15px;}
+		
+		
+		.page .label-wrapper {
+		  position: relative;
+		}
+		
+		.page .label-wrapper label {
+		  position: absolute;
+		  left: 240px;
+		  top: 11px;
+		  *top:12px;
+		  color: #444;
+		  width: 60px;
+		  line-height: 38px;
+		  height: 38px;
+		  text-align: left;
+		  background:#fff;
+		  padding-left:15px;
+		}
+		
+		.page .label-wrapper .input {
+		  padding-left: 80px;
+		}
+		.page-end .title {
+			bottom: 20px;
+			font-size: 18px;
+		}
+		.page-end .sub-title {
+			font-size: 14px;
+			opacity: .5;
+		}
+		.page-end .wifi-name-2-4,.page-end .wifi-name-5{
+			font-size: 24px;
+			color: #13d283;
+			line-height:1.5em;
+		}
+		#wifi_pwd_tip{
+			color: #5a9ce6;
+			padding-bottom:5px;
+		}
+		#wifi_focus,#admin_focus{
+			color:#ff0000;
+		}
+		#lock_div { position:fixed; background: #000; width: 100%; top: 0; left: 0; z-index: 4000;  display: none;}
+		#dialog { border: 1px solid #f1f1f1; background: #fbfaf8; border-radius: 2px; -moz-border-radius: 2px; -webkit-border-radius: 2px; box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5); -moz-box-shadow: 0 0px 4px rgba(0, 0, 0, 0.5); position: absolute; z-index: 4001; display: none; width: 400px; color: #2b3238;}
+		#dialog_head { line-height: 1.5; font-weight: bold; background: url("../images/pop-tit.png") repeat-x; padding: 10px 0 10px 27px;}
+		#dialog_wrap { zoom: 1; overflow: hidden; margin: 10px 0;}
+		#dialog_msg { width: 100%; text-align: center; padding:10px 0; overflow: hidden; line-height:2.2em;}
+		#dialog_btn_layer_wrap { zoom: 1; overflow: hidden;}
+		#dialog_btn_layer { padding: 15px 0 30px; text-align: center;}
+		.dialog_focus { position: absolute; left: -1000px; top: 0px;}
+		.btn { height: 34px; width: 115px; border-radius: 2px; -webkit-border-radius: 2px;  -moz-border-radius: 2px; line-height: 34px; color: #fff; background: #428bef;  cursor: pointer; border: none; outline: none;vertical-align:middle; }
+		input.gray { color: #585858; background-color: #e7eaf1;}
+		#agreement { padding-top:18px; text-align:center; }
+		#agree,#lbl_agree { vertical-align:middle; }
+		#rule { text-decoration:none; color:#5a9ce6; }
+		
+		
+        html.newYear{position: absolute;width: 100%;min-width: 1004px;min-height: 100%;background: url("/images/newYear-footer.png") no-repeat left bottom #fdf2d9;}
+        body.newYear{width: 100%;margin-bottom: 87px;}
+        .happy-new-year-l,.happy-new-year-r{position: absolute;top: -63px;}
+        .happy-new-year-l{left: -457px;}
+        .happy-new-year-r{right: -457px;}
+        .happy-new-year-area{position: fixed;z-index: 0;width: 100%;}
+        .happy-new-year-area .blankNewYearArea{height: 350px;margin: 0 auto;position: relative; width:1004px;}
+
+	</style>
+<!--[if lte IE 7]>
+<style type="text/css">
+	.button-group button{filter:chroma(color=#000000);}
+    input[type="submit"],button{filter:chroma(color=#000000);border:none;}
+</style>
+<![endif]-->
+</head>
+<body class="newYear">
+    <div class="happy-new-year-area">
+        <div class="blankNewYearArea">
+            <div class="happy-new-year-l"><img src="/images/happy-new-year-l.png" /></div>
+            <div class="happy-new-year-r"><img src="/images/happy-new-year-r.png" /></div>
+        </div>
+    </div>
+	<!-- 欢迎页 -->
+	<div class="page page-welcome">
+		<h1 class="b"></h1>
+		<p id="steps_txt"></p>
+        <form>
+        	<input type="text" value="" style="position:absolute; left:-9999px; top:-9999px;" />
+			<button type="submit" id="start_btn" class="next"></button>
+       </form>
+	   <div id="agreement">
+			<input type="checkbox" id="agree" checked="checked" /><label id="lbl_agree" for="agree">加入<a target="_blank" href="./privacy.html" id="rule">《用户体验改进计划》</a></label>
+		</div>
+	</div>
+
+	<!-- 获取连接方式 -->
+	<div class="page page-get-method">
+		<p><img src="/images/init/loading.gif"></p>
+		<h2 id="wan_detecting"></h2>
+		<p>
+			<span id="detect_need"></span>
+			<span class="count-down"></span>
+			<span id="wait_time1"></span>
+		</p>
+	</div>
+
+	<!-- 设置网络连接 -->
+	<div class="page page-set-network">
+		<div class="content">
+			<h1 id="start_title"></h1>
+			<p class="info"></p>
+			<!-- 这块交互比较复杂，手机pc好像也不同，交互由前端来实现，从接口获取数据把 -->
+			<form>
+				<div class="button-group">
+					<button id="btn_pppoe" type="button" data-type="pppoe" data-info=""></button>
+					<button id="btn_dhcp" type="button" data-type="dhcp" data-info=""></button>
+					<button id="btn_static" type="button" data-type="ip" data-info=""></button>
+				</div>
+				<div class="form form-pppoe">
+					<p class="label-wrapper">
+						<input class="input input-pppoe-username" id="input-pppoe-username" name="pppoe-username" placeholder="" autocomplete="off" maxlength="127"/>
+						<label id="lbl_pppoe" for="input-pppoe-username"></label>
+						<span class="error-tip error-tip-pppoe-username"></span>
+					</p>
+					<p class="label-wrapper">
+						<input class="input input-pppoe-password" id="input-pppoe-password" name="pppoe-password" placeholder="" autocomplete="off" maxlength="127"/>
+						<label id="lbl_pppoe_pwd" for="input-pppoe-password"></label>
+						<span class="error-tip error-tip-pppoe-password"></span>
+					</p>
+				</div>
+				<div class="form form-ip">
+					<p class="label-wrapper">
+						<input class="input input-ip-ip" id="input-ip-ip"  name="ip-ip" placeholder="" autocomplete="off" maxlength="15" />
+						<label id="lbl_ip" for="input-ip-ip"></label>
+						<span class="error-tip error-tip-ip-ip"></span>
+					</p>
+					<p class="label-wrapper">
+						<input class="input input-ip-mask" id="input-ip-mask" name="ip-mask" placeholder="" autocomplete="off" maxlength="15" />
+						<label id="lbl_mask" for="input-ip-mask"></label>
+						<span class="error-tip error-tip-ip-mask"></span>
+					</p>
+					<p class="label-wrapper">
+						<input class="input input-ip-gateway" id="input-ip-gateway" name="ip-gateway" placeholder="" autocomplete="off" maxlength="15" />
+						<label id="lbl_gateway" for="input-ip-gateway"></label>
+						<span class="error-tip error-tip-ip-gateway"></span>
+					</p>
+					<p class="label-wrapper">
+						<input class="input input-ip-dns1" id="input-ip-dns1" name="ip-dns1" placeholder="" autocomplete="off" maxlength="15" />
+						<label id="lbl_dns1" for="input-ip-dns1"></label>
+						<span class="error-tip error-tip-ip-dns1"></span>
+					</p>
+					<p class="label-wrapper">
+						<input class="input input-ip-dns2" id="input-ip-dns2" name="ip-dns2" placeholder="" autocomplete="off"  maxlength="15" />
+						<label id="lbl_dns2" for="input-ip-dns2"></label>
+						<span class="error-tip error-tip-ip-dns2"></span>
+					</p>
+				</div>
+				<div id="wan_tips" class="form form-dhcp">
+                   
+				</div>
+				<p class="link">
+					<a href="#" id="a_skip" class="l skip"></a>
+					<a href="#" id="a_pwd" class="r forget-password"></a>
+				</p>
+				<button id="btn_start_net" type="submit"></button>
+			</form>
+		</div>
+		<div class="password-tip">
+			<div class="wrapper">
+				<p id="router_assitant" class="title"></p>
+				<p id="router_assitant_tip"></p>
+			</div>
+		</div>
+	</div>
+
+	<!-- 检测网络 -->
+	<div class="page page-test-network">
+		<p><img src="/images/init/loading.gif"></p>
+		<h2 id="detect_link"></h2>
+		<p>
+			<span id="detect_last"></span>
+			<span class="count-down"></span>
+			<span id="wait_time2"></span>
+		</p>
+	</div>
+
+	<!-- 密码错误 -->
+	<div class="page page-cable-error">
+		<p><i class="b e"></i></p>
+		<h2 id="net_err_title"></h2>
+		<button id="btn_link_ok" class="next e"></button>
+		<p class="link"><a class="l skip" id="a_jump" href="#"></a></p>
+	</div>
+
+	<!-- 其他错误 -->
+	<div class="page page-network-error">
+		<p><i class="b e"></i></p>
+		<h2 id="linkout_title" class="error-message"></h2>
+		<button id="btn_return" class="next e"></button>
+		<p class="link"><a class="r skip" href="#" id="a_jumpto_wifi"></a></p>
+	</div>
+
+	<!-- 忘记密码提示 -->
+	<div class="page page-forget-password">
+		<div class="dialog">
+			<div class="header">
+				<h2 id="forget_title"></h2>
+				<p id="get_user_pass"></p>
+				<a href="#" class="b next"></a>
+			</div>
+			<div class="content">
+				<div class="l c">
+					<h3 id="method1"></h3>
+					<p id="method1_txt"></p>
+					<p class="img b"></p>
+				</div>
+				<em class="l sp"></em>
+				<div class="r c">
+					<h3 id="method2"></h3>
+					<p id="method2_txt"></p>
+					<div id="telnum" class="tel">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 网络检测成功 -->
+	<div class="page page-connected">
+		<p><i class="b"></i></p>
+		<h2 id="linkok_title"></h2>
+		<p id="countiue_set_wifi"></p>
+		<button class="next c">
+			<span id="btn_set_wifi"></span>(<span class="count-down"></span>)
+		</button>
+	</div>
+
+	<!-- 设置WIFI -->
+	<div class="page page-set-wifi">
+		<h1 id="wifi_title"></h1>
+        <div id="wifi_pwd_tip"></div>
+		<form>
+			<div class="form">
+				<p class="label-wrapper">
+					<input class="input input-wifi-ssid" id="input-wifi-ssid" name="wifi-ssid" maxlength="29" placeholder="" autocomplete="off"/>
+					<label id="lbl_wifi" for="input-wifi-ssid"></label>
+					<span class="error-tip error-tip-wifi-ssid"></span>
+				</p>
+				<p class="label-wrapper">
+					<input class="input input-wifi-password" name="wifi-password" device_type="pc" placeholder="" maxlength="64" autocomplete="off" />
+					<label id="lbl_wifi_pwd"></label>
+					<span class="error-tip error-tip-wifi-password"></span><span class="strength"><span id="strength_title"></span><span id="strength_high" class="strong"></span><span id="strength_medium" class="normal"></span><span id="strength_low" class="weak"></span><em class="l1"></em><em class="l2"></em><em class="l3"></em></span>
+				</p>
+				<p class="label-wrapper" style="display: none">
+					<input class="input input-admin-password" name="admin-password" device_type="pc" placeholder="" maxlength="64" autocomplete="off" />
+					<label id="lbl_admin"></label>
+					<span class="error-tip error-tip-admin-password"></span><span class="strength"><span id="strength_title2"></span><span id="strength_high2" class="strong"></span><span id="strength_medium2" class="normal"></span><span id="strength_low2" class="weak"></span><em class="l1"></em><em class="l2"></em><em class="l3"></em></span>
+				</p>
+				<p>
+				<div class="left-same-pass-word-box"><input class="checkbox checkbox-same-password" type="checkbox" checked="checked" autocomplete="off" name="same-password"><span class="span-same-password" id="same_password"></span></div></p>
+			</div>
+			<p class="tip"><strong id="wifi_focus"></strong><span id="word1"></span><strong id="admin_focus"></strong><span id="word2"></span></p>
+            <p class="tip-pass" id="pass_tips"></p>
+			<button id="btn_next" type="submit"></button>
+		</form>
+	</div>
+
+	<!-- 设置成功，重启 -->
+	<div class="page page-reboot">
+		<div class="wrapper">
+			<p><img src="/images/init/loading.gif"></p>
+			<h2 id="wifi_fin_title"></h2>
+			<p id="wifi_restart"></p>
+			<p class="count-down-wrapper">
+				<span class="count-down g">10</span>
+				<span id="seconds"></span>
+			</p>
+		</div>
+	</div>
+
+	<!-- 结束页 -->
+	<div class="page page-end">
+		<p><i class="b"></i></p>
+		<h2 id="fin_title" class="title"></h2>
+		<h2 id="relink" class="sub-title"></h2>
+		<p><span class="ssid g wifi-name-2-4"></span></p>
+        <p><span class="ssid g wifi-name-5"></span></p>
+	</div>
+	<input type="hidden" id="page_type" value="pc" />
+	<div id="lock_div"></div>
+	<div id="dialog">
+		<form id="dialog_frm" action="javascript:void(0);">
+			<div id="dialog_head"></div>
+			<div id="dialog_wrap">
+				<div id="dialog_msg"></div>
+				<input type="text" class="dialog_focus"/>
+			</div>
+			<div id="dialog_btn_layer_wrap" class="form-area">
+				<div id="dialog_btn_layer" class="item opt">
+					<input type="submit" id="dialog_confirm_btn" class="btn submit_btn btn_confirm"/>
+				</div>
+			</div>
+		</form>
+	</div>
+<script type="text/javascript" src="/javascript/jquery-1.7.2.min.js"></script>
+<script>
+	(function() {
+		var type;
+		var $page = $('.page-set-network'), $form;
+
+		var setNetWorkMethod = window.setNetWorkMethod = function(_type) {
+			type = _type;
+			var tab = $page.find('.button-group button[data-type=' + type + ']');
+			tab.addClass('current').siblings().removeClass('current');
+			$page.find('.info').html(tab.attr('data-info'));
+			$form = $page.find('.form').hide().filter('.form-' + type).show();
+			if (type == 'pppoe') {
+				$page.find('.forget-password,.password-tip').show();
+			} else {
+				$page.find('.forget-password,.password-tip').hide();
+			}
+		};
+
+		$page.find('.button-group').on('click', 'button', function() {
+			setNetWorkMethod($(this).attr('data-type'));
+		}).find('button:first').click();
+
+		$('.input-wifi-password').focus(function() {
+			var $this = $(this);
+			var type = "pc";
+			srouter.init.wifi.showPassStrange($this,type);
+			if($(".input-wifi-ssid").siblings().eq(1).html() == L.exceed_max){
+				$(".input-wifi-ssid").siblings().eq(1).html("");
+				$(".input-wifi-ssid").parents("p").removeClass("error");
+			}
+		}).blur(function() {
+			$strength = $(this).siblings('.strength').hide();
+		});
+		$('.input-admin-password').focus(function() {
+			var $this = $(this);
+			var type = "pc"
+			srouter.init.wifi.showPassStrange($this,type);
+		}).blur(function() {
+			$strength = $(this).siblings('.strength').hide();
+		});
+		window.setWifiPasswordStrength = function(level,strength) {
+			strength.siblings('.strength')
+				.attr('class', 'strength')
+				.addClass('strength-' + level);
+		};
+
+		/**
+		 * 这里提供一个接口
+		 */
+		window.getNetworkSetting = function() {
+			var data = {};
+			$form.find('input').each(function() {
+				data[this.name] = this.value;
+			});
+			return {
+				method: type,
+				data: data
+			}
+		};
+
+		window.showError = function(field, err_msg) {
+			$('.error-tip').html("").parent().removeClass("error");
+			$('.error-tip-' + field)
+				.html(err_msg)
+				.parent().addClass('error')
+				.find('input').one('focus', function() {
+					$(this).parent().removeClass('error');
+				});
+		};
+
+		window.isJumpMagView = function() {
+			return true;
+		};
+
+	})();
+
+	var PlaceHolder ={
+		init : function(){
+			if('placeholder' in document.createElement('input')){ //如果浏览器原生支持placeholder
+				return ;
+			}
+			$('input[placeholder]').each(function(i, el) {
+				var $el = $(el);
+				var hint = $el.attr('placeholder');
+				var $hint = $('<span />').addClass('placeholder').html(hint).insertAfter(el);
+				$hint.click(function(){
+					$el.focus();
+				});
+				$el.blur(function() {
+					if ($el.val().length == 0) {
+						$hint.css('display', 'inline');
+					}
+				}).focus(function() {
+					$hint.hide();
+				});
+			});
+		}
+	};
+
+	PlaceHolder.init();
+
+</script>
+<script type="text/javascript" src="/javascript/jq.plugin.js"></script>
+<script type="text/javascript" src="/javascript/aes.js"></script>
+<script type="text/javascript" src="/javascript/b64.js"></script>
+<script type="text/javascript" src="/javascript/module.js"></script>
+<script type="text/javascript" src="/javascript/language_CN.js"></script>
+<script type="text/javascript" src="/javascript/new_lib.js"></script>
+<script type="text/javascript" src="/javascript/init.js"></script>
+</body>
+</html>
+

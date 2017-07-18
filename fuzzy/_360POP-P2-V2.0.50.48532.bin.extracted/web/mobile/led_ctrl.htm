@@ -1,0 +1,33 @@
+<form action="" method="post" class="app-form appContent_sectionModel" id="led_ctrl" name="led_ctrl_frm">
+    <dl>
+        <dt id="ledCtrlTip"></dt>
+        <dd>
+            <label class="form-label" id="ledCtrlCloseTip"></label>
+            <span class="switch-txt"></span>
+            <input id="light_enable" type="checkbox"   class="switch radio_form" />
+            <label for="light_enable"></label>
+            <input type="hidden" name="enable" id="light_enable_hidden" />
+        </dd>
+        <dd class="item_time_group">
+            <label class="time_group_txt" id="ledCtrlShutTime"></label>
+            <a href="javascript:void(0);" class="hour_min">
+                <input class="start hour" type="text" readonly="true" size="5" value="00" placeholder="--" id="start_hour" name="start_hour" maxlength="2" />
+                <span  class="time-label lbl_baby_hour"></span>
+                <input class="start min"  type="text" readonly="true" size="5" maxlength="2" value="00" placeholder="--" id="start_min" name="start_minute" />
+                <span  class="time-label lbl_baby_minute"></span>
+            </a>
+        </dd>
+        <dd class="item_time_group">
+            <label class="time_group_txt" id="ledCtrlOpenTime"></label>
+            <a href="javascript:void(0);" class="hour_min">
+                <input class="end hour"  type="text" readonly="true" size="5" maxlength="2" value="00" placeholder="--" id="end_hour" name="end_hour" />
+                <span class="time-label lbl_baby_hour"></span>
+                <input  class="end min"  type="text" readonly="true" size="5" maxlength="2" value="00" placeholder="--" id="end_min" name="end_minute" />
+                <span class="time-label lbl_baby_minute"></span>
+            </a>
+            <input type="hidden" name="timer_day" id="timer_day_hidden" value="7 1 2 3 4 5 6" />
+            <input type="hidden" name="timer_enable" id="timer_enable_hidden" />
+        </dd>
+
+    </dl>
+</form>

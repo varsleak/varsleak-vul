@@ -1,0 +1,75 @@
+<div class="swiper-wrapper wirelessSwiperWrapper">
+    <section class="swiper-slide app-form wirelessSet-menu section_hide">
+        <dl>
+            <dd class="select_dd" id="portMapSer-title" data-source-html-name="2_4">
+                <label>2.4G WiFi</label>
+                <span class="status_txt ddComment" id="wireless_status_type_2_4"></span>
+            </dd>
+            <dd class="select_dd" id="portMapSerList-title" data-source-html-name="5">
+                <label>5G WiFi</label>
+                <span class="status_txt ddComment" id="wireless_status_type_5"></span>
+            </dd>
+        </dl>
+    </section>
+    <section class="swiper-slide app-form wirelessSet section_hide">
+        <form class="app-form" id="wireless_base_frm">
+            <dl>
+                <dd >
+                    <label class="form-label" id="lbl_wireless_status" ></label>
+                    <span class="switch-txt"></span>
+                    <input id="wireless_enable" type="checkbox"   class="switch radio_form" />
+                    <label for="wireless_enable" id="wireless_enable_switch"></label>
+                    <input type="hidden" id="wireless_enable_hidden" name="wire_enable"/>
+                </dd>
+                <dd>
+                    <label class="form-label" id="lbl_ssid" ></label>
+                    <input type="text" class="txt7" id="wire_ssid" name="AP_SSID" maxlength="32" data-verification="string" />
+                </dd>
+                <dd id="wifiSetPSW">
+                    <label class="form-label" id="lbl_wireless_key_val" ></label>
+                    <input type="text" class="txt5" maxlength="64" id="wireless_key_val" name="wpa_key" data-verification="password eq8_32" />
+                </dd>
+                <dd>
+                    <label class="form-label" id="lbl_wlb_channel_width" ></label>
+                    <a class="selectArrow" href="javascript:void(0);">
+                        <span class="select-txt"></span>
+                        <input id="wlb_channel_width_sel" name="channel_width" type="hidden" />
+                        <img  src="./images/selectArrow.png" />
+                    </a>
+                    <ul class="option-box" id="channel_width_option"></ul>
+                </dd>
+                <dd>
+                    <label class="form-label" id="lbl_wireless_base_channel_sel" ></label>
+                    <a class="selectArrow" href="javascript:void(0);">
+                        <span class="select-txt"></span>
+                        <input id="wireless_base_channel_sel" name="channel_num" type="hidden" />
+                        <img  src="./images/selectArrow.png" />
+                    </a>
+                    <ul class="option-box" id="channel_num_option"></ul>
+                </dd>
+                <dd>
+                    <label class="form-label" id="lbl_wls_ap_mode_sel" ></label>
+                    <a class="selectArrow" href="javascript:void(0);">
+                        <span class="select-txt"></span>
+                        <input id="wls_ap_mode_sel" type="hidden" name="ap_mode" />
+                        <img src="./images/selectArrow.png" />
+                    </a>
+                    <ul class="option-box wifi_wap_option"></ul>
+                </dd>
+                <dd>
+                    <label id="lbl_ssid_broadcast"></label>
+                    <input type="hidden" id="wire_ssid_broadcast_hidden" name="ssid_broadcast"/>
+                    <input id="wire_ssid_broadcast" type="checkbox"   class="radio radio_form" />
+                    <label for="wire_ssid_broadcast" id="ssid_broadcast_radio"></label>
+                </dd>
+                <dd id="same_section" class="section_hide">
+                    <label class="form-label" id="wireless_same"></label>
+                    <span class="switch-txt"></span>
+                    <input id="same_enable" type="checkbox"   class="switch radio_form" />
+                    <label for="same_enable"></label>
+                    <input type="hidden" id="same_enable_hidden" name="wire_enable"/>
+                </dd>
+            </dl>
+        </form>
+    </section>
+</div>

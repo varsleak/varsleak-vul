@@ -1,0 +1,11 @@
+/*锁全屏*/
+.select_iframe{position:absolute;z-index:2000;border:0px;top:0;left:0;filter:alpha(opacity=0);-moz-opacity:0;-khtml-opacity: 0;opacity:0;}
+/*锁部分屏*/
+/*.select_iframe{position:absolute;z-index:6000;border:0px;width:expression(this.nextSibling.offsetWidth); height:expression(this.nextSibling.offsetHeight);top:expression(this.nextSibling.offsetTop);left:expression(this.nextSibling.offsetLeft);filter:alpha(opacity=0);-moz-opacity:0;-khtml-opacity: 0;opacity:0;}*/
+#app_lock_div { position:absolute; background-color:#000;width:100%;top:0;left:0;filter:Alpha(opacity=15);-moz-opacity:0.15;-khtml-opacity:0.15;opacity:0.15;z-index:4000;display:none;}
+#app_message_layer{ border:1px solid #f1f1f1; background: #fbfaf8; border-radius: 5px; -moz-border-radius: 5px;-webkit-border-radius: 5px; box-shadow: 0px 0px 4px rgba(0,0,0,0.5); -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.5);-moz-box-shadow: 0 0px 4px rgba(0,0,0,0.5); padding:5px; position:absolute; z-index:4001; display:none; width:280px;}
+#app_msg_type{ width:50px; height:50px; margin:12px auto;}
+.wait{ background:url("../images/icon_set.gif") no-repeat -50px 0;}
+.success{ background:url("../images/icon_set.gif") no-repeat 0 0;}
+.error{ background:url("../images/icon_set.gif") no-repeat -100px 0;}
+.word{ text-align:center; font-size:14px; line-height:21px; color:#636363;}

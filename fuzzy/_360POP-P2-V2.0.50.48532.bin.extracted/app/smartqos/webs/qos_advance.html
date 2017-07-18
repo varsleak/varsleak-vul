@@ -1,0 +1,159 @@
+<div class="app-box">
+	<div class="box-bd">
+		<form name="qos_advance_form" class="form-area" id="qos_advance_form" method="post" action="" onsubmit="qos_advance_submit();return false;">
+			<div class="item">
+				<label class="form-label isneed"></label>
+				<div onclick="radio_toggle(this);" id="private_skip" class="radio_form"></div>
+				<input type="hidden" id="private_skip_hidden" name="private_skip"/>
+				<span id="private_skip_tip"></span>
+			</div>
+			<div class="item">
+				<label for="web_first" class="form-label isneed"></label>
+				<select id="web_first" name="web_first">
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				</select>
+			</div>
+			<div class="item">
+				<label for="movie_first" class="form-label isneed"></label>
+				<select id="movie_first" name="movie_first">
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				</select>
+			</div>
+			<div class="item">
+				<label for="udp_up_len" class="form-label isneed"></label>
+				<input id="udp_up_len" name="udp_up_len" type="text" class="input-text" size="3" maxlength="4" />
+				<span style="padding-left:5px;">KB/s</span>
+				<span id="udp_up_len_tip"></span>
+			</div>
+			<div class="item">
+				<label  class="form-label isneed"></label>
+				<label for="wan_setup_up_reserved1" class="inline mr_13"></label>
+				<input id="wan_setup_up_reserved1" name="up_reserved1" type="text" class="input-text txt_44" size="4" maxlength="4"/>
+				<span class="pl">%</span>
+				<label for="wan_setup_down_reserved1" class="inline m_rl"></label>
+				<input id="wan_setup_down_reserved1" name="down_reserved1" type="text" class="input-text txt_44" size="4" maxlength="4"/>
+				<span class="pl">%</span>
+			</div>
+			<div id="qos_set_tab_layer">
+				<ul>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+				<table id="qos_set_tab" class="data-table">
+					<thead>
+					<tr>
+						<th width="20%"></th>
+						<th width="40%"></th>
+						<th width="40%"></th>
+					</tr> 
+					</thead>
+					<tbody id="qos_set_paint_list_id">
+						<tr id="qosbitsshow_1">
+							<td>
+								<label for="class_text_feal1">1</label>
+							</td>
+							<td>
+								<input id="class_text_feal1" class="input-text text_tab" name="fact0" maxlength="3" type="text" onkeyup="qos_feal_left_math();" autocomplete="off" />
+							</td>
+							<td>
+								<input id="class_text_max1" class="input-text text_tab" name="max0" maxlength="3" type="text" onkeyup="qos_max_left_math(1);" autocomplete="off" />
+							</td>
+						</tr>
+						<tr id="qosbitsshow_2">
+							<td>
+								<label for="class_text_feal2">2</label>
+							</td>
+							<td>
+								<input id="class_text_feal2" class="input-text text_tab" name="fact1" maxlength="3" type="text" onkeyup="qos_feal_left_math();"autocomplete="off" />
+							</td>
+							<td>
+								<input id="class_text_max2" class="input-text text_tab" name="max1" maxlength="3" type="text" onkeyup="qos_max_left_math(2);" autocomplete="off" />
+							</td>
+						</tr>
+						<tr id="qosbitsshow_3">
+							<td>
+								<label for="class_text_feal3">3</label>
+							</td>
+							<td>
+								<input id="class_text_feal3" class="input-text text_tab" name="fact2" maxlength="3" type="text" onkeyup="qos_feal_left_math();" autocomplete="off" />
+							</td>
+							<td>
+								<input id="class_text_max3" class="input-text text_tab" name="max2" maxlength="3" type="text" onkeyup="qos_max_left_math(3);" autocomplete="off" />
+							</td>
+						</tr>
+						<tr id="qosbitsshow_4">
+							<td>
+								<label for="class_text_feal4">4</label>
+							</td>
+							<td>
+								<input id="class_text_feal4" class="input-text text_tab" name="fact3" maxlength="3" type="text" onkeyup="qos_feal_left_math();" autocomplete="off" />
+							</td>
+							<td>
+								<input id="class_text_max4" class="input-text text_tab" name="max3" maxlength="3" type="text" onkeyup="qos_max_left_math(4);" autocomplete="off" />
+							</td>
+						</tr>
+						<tr id="qosbitsshow_5">
+							<td>
+								<label for="class_text_feal5">5</label>
+							</td>
+							<td>
+								<input id="class_text_feal5" class="input-text text_tab" name="fact4" maxlength="3" type="text" onkeyup="qos_feal_left_math();" autocomplete="off" />
+							</td>
+							<td>
+								<input id="class_text_max5" class="input-text text_tab" name="max4" maxlength="3" type="text" onkeyup="qos_max_left_math(5);" autocomplete="off" />
+							</td>
+						</tr>
+						<tr id="qosbitsshow_6" class="bottom_border">
+							<td>
+								<label for="class_text_feal6">6</label>
+							</td>
+							<td>
+								<input id="class_text_feal6" class="input-text text_tab" name="fact5" maxlength="3" type="text" onkeyup="qos_feal_left_math()" autocomplete="off" />
+							</td>
+							<td>
+								<input id="class_text_max6" class="input-text text_tab" name="max5" maxlength="3" type="text" onkeyup="qos_max_left_math(6);" autocomplete="off" />
+							</td>
+						</tr>
+						<tr id="qosbitsshow_7">
+							<td>
+								<label for="class_text_feal7">7</label>
+							</td>
+							<td>
+								<input id="class_text_feal7" class="input-text text_tab" name="fact6"  maxlength="3" type="text" onkeyup="qos_feal_left_math();" autocomplete="off" />
+							</td>
+							<td>
+								<input id="class_text_max7" class="input-text text_tab" name="max6" maxlength="3" type="text" onkeyup="qos_max_left_math(7);" autocomplete="off" />
+							</td>
+						</tr>
+						<tr id="qosbitsshow_8">
+							<td>
+								<label for="class_text_feal8">8</label>
+							</td>
+							<td>
+								<input id="class_text_feal8" class="input-text text_tab" name="fact7"  maxlength="3" type="text" onkeyup="qos_feal_left_math();" autocomplete="off" />
+							</td>
+							<td>
+								<input id="class_text_max8" class="input-text text_tab" name="max7" maxlength="3" type="text" onkeyup="qos_max_left_math(8);" autocomplete="off" />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="item opt">
+				<input type="hidden" name="action" value="set"/>
+				<button type="submit" id="save_btn"></button>
+			</div>
+		</form>
+	</div>
+</div>
+<div id="qos_advance_list" class="app-box">	
+</div>

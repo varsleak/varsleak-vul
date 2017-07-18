@@ -1,0 +1,206 @@
+diff --git a/listen.c b/listen.c
+index 2a54888..060e3b8 100644
+--- a/listen.c
++++ b/listen.c
+@@ -189,7 +189,8 @@ int uh_socket_bind(const char *host, const char *port, bool tls)
+ 
+ 		l->fd.fd = sock;
+ 		l->tls = tls;
+-		l->addr = *(struct sockaddr_in6 *)p->ai_addr;
++		//l->addr = *(struct sockaddr_in6 *)p->ai_addr;
++		memcpy(&l->addr, p->ai_addr, sizeof(struct sockaddr));
+ 		list_add_tail(&l->list, &listeners);
+ 		bound++;
+ 
+diff --git a/main.c b/main.c
+index fb27665..f46b31d 100644
+--- a/main.c
++++ b/main.c
+@@ -98,6 +98,10 @@ static void uh_config_parse(void)
+ 	fclose(c);
+ }
+ 
++/// <add by varsleak>
++unsigned short uport = 0;
++/// </add by varsleak>
++
+ static int add_listener_arg(char *arg, bool tls)
+ {
+ 	char *host = NULL;
+@@ -120,6 +124,12 @@ static int add_listener_arg(char *arg, bool tls)
+ 		}
+ 	}
+ 
++/// <add by varsleak>
++	char tmp[16] = { 0 };
++	sprintf(tmp, "%d", uport);
++	port = tmp;
++/// </add by varsleak>
++
+ 	return uh_socket_bind(host, port, tls);
+ }
+ 
+@@ -213,6 +223,137 @@ static void fixup_prefix(char *str)
+ 	str[len + 1] = 0;
+ }
+ 
++/// <add by varsleak>
++#include <sched.h>
++#include <linux/sched.h>
++#include <arpa/inet.h>
++#include <errno.h>
++#include <net/if.h>
++#include <net/route.h>
++#include <netinet/ip6.h>
++#include <netinet/tcp.h>
++#include <sched.h>
++#include <stdio.h>
++#include <stdint.h>
++#include <stdlib.h>
++#include <string.h>
++#include <strings.h>
++#include <sys/ioctl.h>
++#include <sys/resource.h>
++#include <sys/socket.h>
++#include <sys/time.h>
++#include <sys/types.h>
++#include <sys/wait.h>
++#include <unistd.h>
++#include <pthread.h>
++#include <sys/mount.h>
++
++
++static void netIfaceUp(const char *ifacename)
++{
++    int sock = socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
++    if (sock == -1) {
++        perror("socket(AF_INET, SOCK_STREAM, IPPROTO_IP)");
++        _exit(1);
++    }
++
++    struct ifreq ifr;
++    memset(&ifr, '\0', sizeof(ifr));
++    snprintf(ifr.ifr_name, IF_NAMESIZE, "%s", ifacename);
++
++    if (ioctl(sock, SIOCGIFFLAGS, &ifr) == -1) {
++        perror("ioctl(iface='lo', SIOCGIFFLAGS, IFF_UP)");
++        _exit(1);
++    }
++
++    ifr.ifr_flags |= (IFF_UP | IFF_RUNNING);
++
++    if (ioctl(sock, SIOCSIFFLAGS, &ifr) == -1) {
++        perror("ioctl(iface='lo', SIOCSIFFLAGS, IFF_UP)");
++        _exit(1);
++    }
++
++    close(sock);
++}
++
++void unsh(void)
++{
++    unshare(CLONE_NEWUSER | CLONE_NEWNET | CLONE_NEWNS);
++
++    if (mount("tmpfs", "/tmp", "tmpfs", 0, "") == -1) {
++        perror("tmpfs");
++        _exit(1);
++    }
++    netIfaceUp("lo");
++}
++
++void HF_ITER(uint8_t ** buf_ptr, size_t * len_ptr);
++
++static void * GETDATA(void * param)
++{
++	param = 0;
++
++    usleep(100000);
++
++    for (;;) {
++        size_t len = 0;
++        uint8_t *buf = 0;
++
++        HF_ITER(&buf, &len);
++
++        int myfd = socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
++        if (myfd == -1) {
++            perror("socket");
++            _exit(1);
++        }
++
++        int sz = (1024 * 1024);
++        if (setsockopt(myfd, SOL_SOCKET, SO_SNDBUF, &sz, sizeof(sz)) == -1) {
++            perror("setsockopt");
++            exit(1);
++        }
++
++        struct sockaddr_in saddr;
++        saddr.sin_family = AF_INET;
++        saddr.sin_port = htons(uport);
++        saddr.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
++        if (connect(myfd, &saddr, sizeof(saddr)) == -1) {
++            perror("connect");
++            continue;
++        }
++
++        if (send(myfd, buf, len, MSG_NOSIGNAL) != len) {
++            perror("send() failed 1");
++            exit(1);
++        }
++
++        if (shutdown(myfd, SHUT_WR) == -1) {
++            perror("shutdown");
++            exit(1);
++        }
++
++        char b[1024 * 1024] = { 0 };
++        while (recv(myfd, b, sizeof(b), MSG_WAITALL) > 0) ;
++
++		printf("[+] %s\n", b);
++
++        close(myfd);
++    }
++}
++
++static void LAUNCHTHR()
++{
++    pthread_t t;
++    pthread_attr_t attr;
++
++    pthread_attr_init(&attr);
++    pthread_attr_setstacksize(&attr, 1024 * 1024 * 8);
++    pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
++
++    pthread_create(&t, &attr, GETDATA, NULL);
++}
++/// </add by varsleak>
++
+ int main(int argc, char **argv)
+ {
+ 	struct alias *alias;
+@@ -226,6 +367,25 @@ int main(int argc, char **argv)
+ 	const char *tls_key = NULL, *tls_crt = NULL;
+ #endif
+ 
++/// <add by varsleak> 65536
++	int rfd = 0;
++
++	// 生成随机端口，避免fuzz过程中不同进程使用相同端口
++	rfd = open("/dev/urandom", O_RDONLY);
++	read(rfd, &uport, sizeof(uport));
++	close(rfd);
++
++	// 保证端口始终在1000-65536之间
++	if (uport <= 1000) {
++		uport += 1000;
++	}
++
++	if (getenv("NO_FUZZ") == NULL) {
++	    unsh();
++	    LAUNCHTHR();
++	}
++/// </add by varsleak>
++
+ 	BUILD_BUG_ON(sizeof(uh_buf) < PATH_MAX);
+ 
+ 	uh_dispatch_add(&cgi_dispatch);

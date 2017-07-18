@@ -1,0 +1,182 @@
+<!doctype html>
+<!--[if lt IE 7 ]>
+<html class="ie6" lang="zh-cn"><![endif]-->
+<!--[if IE 7 ]>
+<html class="ie7" lang="zh-cn"><![endif]-->
+<!--[if IE 8 ]>
+<html class="ie8" lang="zh-cn"><![endif]-->
+<!--[if IE 9 ]>
+<html class="ie9" lang="zh-cn"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="w3c"><!--<![endif]-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="viewport" content="width=device-width,user-scalable=0,initial-scale=1,maximum-scale=1">
+    <meta name="MobileOptimized" content="320">
+    <meta name="HandheldFriendly" content="true">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no,email=no" name="format-detection">
+    <title>360安全路由</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link type="text/css" href="css/mobileinit.css" rel="stylesheet"/>
+    <link type="text/css" href="css/default.css" rel="stylesheet"/>
+    <link type="text/css" href="css/login_mobile.css" rel="stylesheet"/>
+    <script type="text/javascript" src="./javascript/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="./javascript/jq.plugin.js"></script>
+    <script type="text/javascript" src="./javascript/new_lib.js"></script>
+    <script type="text/javascript" src="./javascript/cookie.js"></script>
+    <script type="text/javascript" src="./javascript/module.js"></script>
+    <script type="text/javascript" src="./javascript/language_CN.js"></script>
+    <script type="text/javascript" src="./javascript/aes.js"></script>
+</head>
+<body>
+<div id="login_area" class="page login-area">
+    <div id="login" class="login">
+        <img src="./images/routerLogo.png" class="logo-router" />
+        <p class="slogan" id="slogan"></p>
+        <form id="login_frm" action="javascript:void(0)">
+            <div class="error-msg"></div>
+            <p class="input-area label-wrapper">
+                <input id="login_pwd" name="login_pwd" maxlength="64" onBlur="setInputCss();" onFocus="setInputCss();"  placeholder="请输入管理员密码" type="password" class="input" autocomplete="off" />
+            </p>
+            <input type="hidden" value="360LoginFlag" />
+            <div class="button-area">
+                <button type="submit" class="btn_login" onClick="loginIn();"></button>
+            </div>
+        </form>
+        <footer class="login-footer"><a target="_self" href="http://luyouw.360.cn/">去官网</a><span>|</span><a target="_self" class="appDownload">下载APP</a></footer>
+    </div>
+    <div id="login_router"></div>
+</div>
+<div id="lock_div"></div>
+<div id="message_layer">
+    <div id="msg_type" class="wait"></div>
+    <div id="msg" class="word"></div>
+</div>
+
+<script type="text/javascript">
+    var language_type = "CN";
+    var L = {},submitting = null;
+    var isFocusing = false;
+    $(document).ready(function () {
+		detect_browser();
+        current_html = "login";
+        $.ajaxSetup({
+            cache: false //关闭AJAX相应的缓存
+        });
+        $("body").mousedown(function () {
+            hide_msgbox();
+        });
+        language_type = igd.global_param.language_type;
+        L = language[language_type]["JS"];
+        document.title = language[language_type]["TITLE"];
+        init_language(current_html);
+        init_text_event();
+
+        if(/ipad/i.test(navigator.userAgent)){
+            $(":password,:text").focusin(function(){
+                $("body").height(function(n,c){isFocusing=true;return c+20});
+            }).focusout(function(){
+                isFocusing = false;
+                $("body").height("100%");
+            });
+        }
+
+//        兼容少部分 100 % height
+        (function(){
+            var _MIUI_compatible={};
+
+            _MIUI_compatible.default_h=document.documentElement.clientHeight;
+
+            _MIUI_compatible.default_w =document.documentElement.clientWidth;
+
+            _MIUI_compatible.initFlag = false;
+
+            var _MIUI_height_auto =  function(type){
+
+                !_MIUI_compatible.initFlag&&(_MIUI_compatible.initFlag=true,_MIUI_compatible.actValue=document.documentElement.clientWidth-_MIUI_compatible.default_h,_MIUI_compatible.default_w-=_MIUI_compatible.actValue);
+
+                var _height = (_MIUI_compatible.default_h+_MIUI_compatible.actValue == document.documentElement.clientWidth)? _MIUI_compatible.default_w:_MIUI_compatible.default_h;
+
+                !!type&&($("html,body").css("height",_height+"px"),$(".login-area").css("top",(_height>>1)+"px"));
+
+                return _height;
+            };
+
+            window._MIUI_height_compatiable=_MIUI_height_auto;
+        })();
+    });
+    window.onresize = function (){
+        var documentHeight = document.documentElement.clientHeight;
+        document.documentElement.clientHeight==0&&(documentHeight=_MIUI_height_compatiable(true));
+        if(!!submitting){
+            var _this = $("#message_layer");
+            var left = (parseInt(document.documentElement.scrollWidth) - _this.outerWidth()) / 2 + "px";
+            var top = document.documentElement.scrollTop + document.body.scrollTop + ( documentHeight- _this.outerHeight()) / 2 + "px";//fix chrome bug
+            _this.css("left", left);
+            _this.css("top", top);
+        }
+    };
+	
+	function detect_browser(){
+		var u = navigator.userAgent, app = navigator.appVersion;
+		if(u.indexOf('Android') > -1 || u.indexOf('Linux') > -1){//android终端或者uc浏览器
+			$(".appDownload").attr("href","http://down.360safe.com/wifinext/luyou.apk");
+		}
+		else if(!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)){ //ios终端
+			$(".appDownload").attr("href","https://itunes.apple.com/app/id928428882");
+		}
+		else{
+			$(".appDownload").attr("href","http://luyouw.360.cn/download_center.html");
+		}
+	}
+
+    function loginIn() {
+        if ($.cookie("Qihoo_360_login")) {
+            $.cookie('Qihoo_360_login', null, {
+                path: '/',
+                expires: 1
+            });
+        }
+        var obj = {};
+        obj.user = igd.global_param.default_user;
+        obj.pass = getAesString($("#login_pwd").val());
+		obj.from = 0;
+        if (check_input("login_frm")) {
+            $.post("/router/web_login.cgi", obj, function (data) {
+                try {
+                    data = eval("(" + data + ")");
+                    if (data["success"]=="1"&&data["token_id"]!="") {
+                        location.href = "./mobile/new_index_mobile.htm?token_id="+data["token_id"];
+                    }
+                    else {
+                        if (!isNaN(data.err_no) && (data.err_no == "48" || data.err_no == "49"|| data.err_no == "50"|| data.err_no == "51"|| data.err_no == "52")) {
+                            show_message("login_failure" + data.err_no);
+                        } else {
+                            show_message("login_failure");
+                        }
+                        submitting = true;
+                    }
+                }
+                catch (e) {
+                    show_message("login_failure");
+                    submitting = true;
+                }
+            });
+            submitting = false;
+        }
+    }
+
+    function setInputCss(){
+        var loginInput = $("#login_pwd");
+        var domContent = $(document);
+        var setTop=domContent.scrollTop();
+        domContent.scrollTop(setTop);
+    }
+</script>
+</body>
+</html>

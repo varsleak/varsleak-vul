@@ -1,0 +1,22 @@
+{
+	"appsign":"devices",
+	"appname":"devices",
+	"version":"0.0.1",
+	"dep_version":"0.0.1",
+	"description":"DEVICE TEST",
+	"bin_start":"./devices_app",
+	"author":"ZihaoWU",
+	"URL":"www.360.cn",
+	"maintainer":"360",
+	"email":"",
+	"app_type":"local",
+	"icon":"./devices.gif",
+	"rom_use":100,
+	"ram_use":100,
+	"start_reboot":"yes",
+	"uninstall_reboot":"no",
+	"disable_reboot":"yes",
+	"uninstall":"yes",
+	"disable":"yes",
+	"feature":"multi_period"
+}

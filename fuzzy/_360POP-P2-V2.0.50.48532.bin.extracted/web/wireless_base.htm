@@ -1,0 +1,117 @@
+﻿<div class="fix_ie_shadow"></div>
+<div class="form-border-shadow">
+	<div id="wireless_type_layer" class="tab_area section_hide">
+		<div data-type-index="0" id="div_wireless_2_4_title" class="tab-item on"></div>
+		<div data-type-index="1" id="div_wireless_5_title" class="tab-item"></div>
+	</div>
+	<div id="wireless_2_4_layer">
+		<div id="warning_count_center" class="grey-text section_hide">
+        	<p id="wireless_base_tip"></p>
+    	</div>
+		<form id="wireless_base_2_4_frm" class="form-area app-box" action="javascript:void(0);">
+			<div class="item">
+				<label class="form-label" id="lbl_2_4_wireless_status" ></label>
+				<div id="wireless_2_4_enable" class="radio_form"/><!--onclick="radio_toggle(this,'wireless_state_change');"-->
+				<input type="hidden" id="wireless_2_4_enable_hidden" name="wire_enable"/>
+			</div>
+			<div id="wireless_base_2_4_layer">
+				<div class="item">
+					<label class="form-label" id="lbl_2_4_ssid" ></label>
+					<input type="text" class="input-text" id="wire_2_4_ssid" name="AP_SSID" maxlength="32" size="35"/>
+				</div>
+				<div class="item" style="margin-top:-10px;">
+					<label class="form-label"></label>
+					<input type="checkbox" id="ck_2_4_ssid_broadcast" onclick="ssid_broadcast_change('2_4');"/>
+					<label id="lbl_2_4_ssid_broadcast" for="ck_2_4_ssid_broadcast"></label>
+					<input type="hidden" name="ssid_broadcast" id="wire_2_4_ssid_broadcast_hidden" />
+				</div>
+				
+				<div class="item">
+					<label class="form-label" id="lbl_wls_2_4_ap_mode_sel" ></label>
+					<select id="wls_2_4_ap_mode_sel" style="width:258px;" onchange="wireless_security_ap_change(this.value,'2_4')">
+					</select>
+				</div>
+				<div class="item section_hide" id="wireless_2_4_key_layer">
+					<label class="form-label" id="lbl_wireless_2_4_key_val" ></label>
+					<input type="text" class="input-text" maxlength="64" id="wireless_2_4_key_val" name="wpa_key" size="35"
+						   onblur="remove_ck_pwd(this.id);" onkeyup="ck_pwd(this.id,this.value);"
+						   onfocus="ck_pwd(this.id,this.value);"/>
+				</div>
+				<div class="item">
+					<label class="form-label" id="lbl_wlb_2_4_channel_width" ></label>
+					<select id="wlb_2_4_channel_width_sel" name="channel_width" style="width:258px;">
+					</select>
+				</div>
+				<div class="item" id="wire_2_4_channel_sel_layer">
+					<label class="form-label" id="lbl_wireless_base_2_4_channel_sel"></label>
+					<select id="wireless_base_2_4_channel_sel" name="channel_num" style="width:258px;"></select>
+				</div>
+				<div id="wire_2_4_channel_choose_layer" class="item">
+					<a href="javascript:void(0);" id="wire_2_4_channel_choose"></a>
+				</div>
+				<div class="item" id="same_layer">
+					<label class="form-label"></label>
+					<input type="checkbox" id="same" />
+					<label id="lbl_same" for="same"></label>
+				</div>
+			</div>
+			<div class="item opt">
+				<input type="hidden" id="wire_2_4_side_band_hidden" name="channel_band" value="1"/>
+				<input type="hidden" id="wire_2_4_mac_hidden" name="wire_mac"/>
+				<input type="submit" class="btn submit_btn btn_confirm" onClick="wireless_base_set('2_4')"/>
+			</div>
+			<div class="wifi_tip section_hide" id="wifi_2_4_tip"></div>
+		</form>
+	</div>
+	<div id="wireless_5_layer" class="section_hide">
+		<form id="wireless_base_5_frm" class="form-area app-box" action="javascript:void(0);">
+			<div class="item">
+				<label class="form-label" id="lbl_wireless_5_status"></label>
+				<div onclick="" id="wireless_5_enable" class="radio_form"/><!--radio_toggle(this,'wireless_state_change');-->
+				<input type="hidden" id="wireless_5_enable_hidden" name="wire_enable"/>
+			</div>
+			<div id="wireless_base_5_layer">
+				<div class="item">
+					<label class="form-label" id="lbl_5_ssid"></label>
+					<input type="text" class="input-text" id="wire_5_ssid" name="AP_SSID" maxlength="32" size="35"/>
+				</div>
+				<div class="item" style="margin-top:-10px;">
+					<label class="form-label"></label>
+					<input type="checkbox" id="ck_5_ssid_broadcast" onclick="ssid_broadcast_change('5');"/>
+					<label id="lbl_5_ssid_broadcast" for="ck_5_ssid_broadcast"></label>
+					<input type="hidden" name="ssid_broadcast" id="wire_5_ssid_broadcast_hidden" />
+				</div>
+				
+				<div class="item">
+					<label class="form-label" id="lbl_wls_5_ap_mode_sel" ></label>
+					<select id="wls_5_ap_mode_sel" style="width:258px;" onchange="wireless_security_ap_change(this.value,'5')">
+					</select>
+				</div>
+				<div class="item section_hide" id="wireless_5_key_layer">
+					<label class="form-label" id="lbl_wireless_5_key_val" ></label>
+					<input type="text" class="input-text" maxlength="64" id="wireless_5_key_val" name="wpa_key" size="35"
+						   onblur="remove_ck_pwd(this.id);" onkeyup="ck_pwd(this.id,this.value);"
+						   onfocus="ck_pwd(this.id,this.value);"/>
+				</div>
+				<div class="item">
+					<label class="form-label" id="lbl_wlb_5_channel_width" ></label>
+					<select id="wlb_5_channel_width_sel" name="channel_width" style="width:258px;" onchange="channel_sel_change(this.value)">
+					</select>
+				</div>
+				<div class="item" id="channel_sel_layer">
+					<label class="form-label" id="lbl_wireless_base_5_channel_sel"></label>
+					<select id="wireless_base_5_channel_sel" name="channel_num" style="width:258px;" onchange="channel_width_change(this.value);"></select>
+				</div>
+				<div id="wire_5_channel_choose_layer" class="item">
+					<a href="javascript:void(0);" id="wire_5_channel_choose"></a>
+				</div>
+			</div>
+			<div class="item opt">
+				<input type="hidden" id="wire_5_side_band_hidden" name="channel_band" value="1"/>
+				<input type="hidden" id="wire_5_mac_hidden" name="wire_mac"/>
+				<input type="submit" class="btn submit_btn btn_confirm" onClick="wireless_base_set('5')"/>
+			</div>
+			<div class="wifi_tip section_hide" id="wifi_5_tip"></div>
+		</form>
+	</div>
+</div>

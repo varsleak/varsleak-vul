@@ -1,0 +1,126 @@
+#!/bin/sh
+
+mount -t tmpfs -o size=24m tmpfs /var
+mount -t proc proc proc
+mount -t sysfs sysfs /sys
+mount -t devpts devpts /dev/pts
+
+cp -rd /dev /var/
+mount /var/dev /dev
+
+cp -rf /cfg /var/
+rm -f /var/cfg/VERSION
+mkdir /var/tmp
+mkdir /tmp/param
+mkdir /tmp/param/app_config
+mkdir /tmp/web/
+mkdir /var/parame
+mkdir /var/parame/brk
+mkdir /var/parame/parame
+mkdir /var/run
+mkdir /var/run/lock
+mkdir /var/dnrd
+mkdir /var/ppp
+mkdir /var/app
+cp -f /sh/ppp/* /var/ppp
+mkdir /var/udhcpc
+> /etc/resolv.conf
+
+echo 10240 >/proc/sys/vm/min_free_kbytes
+
+#no coredump for release version
+if [ "`grep -v DEBUG /etc/VERSION`" ]; then
+	ulimit -c 0
+else
+	echo "/tmp/core-%e" > /proc/sys/kernel/core_pattern
+	ulimit -c unlimited
+fi
+
+param_save load /var/parame/parame/param.tar.gzip
+if [ $? -ne 0 ]; then
+	echo "set unbind flag for thunder"
+	echo 1 > /tmp/param/unbind_thunder
+fi
+
+#add by zhouqingwei for boot update
+cfeupdate
+apps=`ls /app`
+for _app in $apps
+do
+	[ ! -d /app/app_config/$_app  ] && mkdir /app/app_config/$_app
+	[ ! -f /app/app_config/$_app/config ] && [ -f /app/$_app/config ] && cp /app/$_app/config /app/app_config/$_app/
+	[ -d /app/$_app -a ! -L /app/$_app ] && ln -s /app/$_app /var/app/$_app
+done
+
+#init vlan, added by caozhiwei 2015.06.08
+#port 0   ---> WAN eth2.1
+#port 1-4 ---> LAN eth2.5
+raswitch reg w 14 405555
+raswitch reg w 50 2001
+raswitch reg w 58 6005
+raswitch reg w 98 7f3f
+raswitch reg w e4 3f
+raswitch reg w 40 5001
+raswitch reg w 44 5005
+raswitch reg w 48 5005
+raswitch reg w 70 41
+raswitch reg w 74 7e
+#set fc of 0-4 port to be disabled
+raswitch reg w 11c 0
+raswitch reg w 120 0
+raswitch reg w 124 0
+#end vlan
+
+cp -f /etc/VERSION /var/tmp/version_1
+ifconfig eth2 up
+ifconfig eth2 mtu 1500
+
+vconfig add eth2 5
+vconfig add eth2 1
+
+ifconfig lo 127.0.0.1
+
+ifconfig pppoe up
+ifconfig vir1 up
+ifconfig eth2.5 up
+brctl addbr br0
+brctl addif br0 eth2.5
+brctl setfd br0 0
+brctl addvlan br0 eth2.5 0
+
+echo "add eth2.1 wan0-0 wan0-1 wan0-2 wan0-3" > /proc/PsExt/ctrl
+ifconfig wan0-0 up
+ifconfig wan0-1 up
+ifconfig wan0-2 up
+ifconfig wan0-3 up
+
+ifconfig br0 up
+brctl stp br0 off
+
+#bring up wifi interfaces
+ifconfig ra0 up
+ifconfig apcli0 up
+ifconfig ra0 down
+
+insmod /lib/modules/rlt_wifi.ko
+ifconfig rai0 up
+ifconfig apclii0 up
+ifconfig rai0 down
+
+mkdir -p /var/lib/scst/pr/
+insmod /lib/modules/tntfs.ko
+insmod /lib/modules/scst.ko
+insmod /lib/modules/scst_vdisk.ko
+insmod /lib/modules/scst_local.ko
+
+sh/init.sh
+
+/bin/long_loop 2 &
+/bin/netled &
+
+#no watchdog for debug version
+if [ "`grep -v DEBUG /etc/VERSION`" ]; then
+  watchdog -t 3 /dev/watchdog
+fi
+
+[ -f /lib/modules/mitm.ko ] && insmod /lib/modules/mitm.ko

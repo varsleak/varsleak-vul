@@ -1,0 +1,18 @@
+{
+	"app_name":"igd_sw",
+	"version":"0.0.1",
+	"dep_version":"0.0.1",
+	"icon_url":"./igd_sw.png",
+	"author":"360",
+	"bin_start":"./igd_sw",
+	"appname":"一键换机",
+	"rom_size":1000,
+	"ram_size":1000,
+	"status":"enable",
+	"uninstall":"no",
+	"disable":"yes",
+	"is_sign":2,
+	"start_reset":"yes",
+	"uninstall_reset":"no",
+	"disable_reset":"yes"
+}

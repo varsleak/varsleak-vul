@@ -1,0 +1,56 @@
+﻿<div class="app_container" style="position:relative; z-index:100;">
+    <div id="app_section">
+        <div id="detail_area">
+            <div id="app_list">
+                <div class='addon_container tab_container'></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="app_detail" class="section_hide">
+        <div id="app_intro">
+            <div id="app_img"></div>
+            <div id="app_intro_list">
+                <div class="app_info">
+                    <span class="app_name"></span>
+                    <span class="app_version"></span>
+                    <span class="app_author"></span>
+                    <span class="app_url"></span>
+                </div>
+                <div id="app_brief_area">
+                </div>
+                <div id="app_ctrl"></div>
+            </div>
+        </div>
+        <div id="app_set">
+            <div id="app_set_title">
+            </div>
+            <div id="app_detail_area"></div>
+        </div>
+    </div>
+</div>
+<div id="fix_app_ie_shadow" class="fix_ie_shadow"></div>
+
+<div class="pop_layer" id="add_app_layer">
+    <div class="pop_layer_header">
+        <h2 id="add_app_tip"></h2>
+        <a href="javascript:void(0);" class="modal_close" onclick="close_app_add();">×</a>
+    </div>
+    <div class="app-box">
+        <form id="add_app_form" method="post" target="iframe_hidden" action="/router/add_app.cgi"  enctype="multipart/form-data">
+            <div class="txt-fld">
+                <label id="lbl_app_content" for="app_content"></label>
+                <a href="javascript:void(0);" class="btn_addPic">
+                    <span id="span_view"></span>
+                    <input id="app_content" size="3" name="put_file" class="filePrew" type="file">
+                </a>
+                <div id="app_file_name" class="file_name_layer" title=""></div>
+                <input type="text" id="focus_help" class="focus_help">
+            </div>
+            <div class="btn-fld">
+                <input type="submit" onclick="add_app_submit();" class="btn submit_btn btn_confirm" value="确　定">
+            </div>
+        </form>
+    </div>
+</div>
+<iframe name="iframe_hidden" id="iframe_hidden" height="0" width="0" frameborder="0"></iframe>

@@ -1,0 +1,206 @@
+<!doctype html>
+<!--[if lt IE 7 ]>
+<html class="ie6" lang="zh-cn"><![endif]-->
+<!--[if IE 7 ]>
+<html class="ie7" lang="zh-cn"><![endif]-->
+<!--[if IE 8 ]>
+<html class="ie8" lang="zh-cn"><![endif]-->
+<!--[if IE 9 ]>
+<html class="ie9" lang="zh-cn"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="w3c"><!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="pragma" content="no-cache"/>
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<meta http-equiv="expires" content="0">
+<title>360安全路由</title>
+<meta name="viewport" content="width=device-width, user-scalable=0, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="/css/reset.css"/>
+<style type="text/css">
+body { min-width: 320px; font-family: "Hiragino Sans GB","Microsoft YaHei","微软雅黑",tahoma,arial,simsun,"黑体";}
+p{ font-size: 16px; color: #333333; line-height:1.7;}
+#wrapper { position:absolute; left:0; top:0; width:100%; height:100%;}
+.mid { /*display:flex; align-items:center;*//*水平居中*/ /*justify-content:center;*//*垂直居中*/ }
+.mid:after {
+	display:inline-block;
+	width:0;
+	height:100%;
+	vertical-align:middle;
+	content:"";
+}
+
+header { background-color: #326ac2; text-align: center; height:8.8%; color:#fff; width:100%; font-size:18px; }
+.content { color: #333; font-size: 16px; padding: 10% 5.8% 10.4%; text-align:center; }
+.mode { display:none;}
+.mode > div { text-align: center; margin:16.7% 0 21.2% 0;}
+.auto-img > img { width: 67.7%; max-width: 733px; max-height: 433px;}
+.admin-img > img { width: 53%; max-width: 510px; max-height: 433px;}
+footer { width: 100%; height:7.6%;}
+footer > .auth-status-sec { width: 74.2%; height:100%; max-width:270px; max-height:40px; margin: 0 auto; color: #fff; border-radius: 45px; background-color: #999; text-align:center;}
+footer > .auth-status-sec.auth_success { background-color: #326ac2;}
+iframe { display:none; }
+@media screen and (max-width: 345px) { /*当屏幕尺寸小于345时，应用下面的CSS样式*/
+  header { font-size:16px; }
+  p ,footer > .auth-status-sec { font-size: 14px;}
+}
+</style>
+
+</head>
+<body>
+<div id="wrapper">
+	<header class="mid">360安全路由温馨提示</header>
+	<section class="content">
+			<p>您已接入摩擦网络,距离上网只有一步之遥</p>
+		<div id="no-auth" class="mode">
+			<div class="auto-img"><img src="/images/touch_auth.png"></div>
+				<p>将您的手机靠近路由器10cm<br/>等待计时的灰色按钮变为蓝色即可正常上网</p>
+		</div>
+		<div id="admin-auth" class="mode">
+			<div class="admin-img"><img src="./images/touch_admin.png"></div>
+				<p>当前网络需要管理员认证<br/>请联系管理员放行</p>
+		</div>
+	</section>
+	<footer>
+		<div class="auth-status-sec mid"><span id="auth_status"></span></div>
+	</footer>
+</div>
+<script type="text/javascript" src="/javascript/b64.js"></script>
+<script type="text/javascript" src="/javascript/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+    !(function () {
+        var statusLoopId = null, mac, count = 0, auth_status = false,_url, time_left=18,type = null,in_white = false,timer = null;
+		var ios_delay = 5000;
+		var white_list = ["www.ibook.info","www.itools.info","www.thinkdifferent.us","www.airport.us","www.appleiphonecell.com","captive.apple.com"];
+        function init_status() {
+			type = detect_browser();
+            $.when(dectect_mode()).then(function(){
+				getCurMac();
+				detect_white();
+				get_device_status();
+			});
+			
+        }
+
+        function getCurMac() {
+            var postValue = window.location.search.substr(1).split("&");
+            for (var s = 0; s < postValue.length; s++) {
+                if (postValue[s].split("=")[0] == "pcmac") {
+                    mac = (postValue[s].split("=")[1]).toLowerCase().split(":").join("-");
+                }
+                if (postValue[s].substr(0, 3) == "url") {
+                    _url = utf8to16(base64decode(postValue[s].substr(4)));
+                }
+            }
+        }
+
+		function detect_browser(){
+			var type = "pc";
+			var u = navigator.userAgent, app = navigator.appVersion;
+			if(u.indexOf('Android') > -1 || u.indexOf('Linux') > -1){//android终端或者uc浏览器
+				type = "android";
+			}
+			
+			if(!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)){ //ios终端
+				type = "ios";
+			}
+			return type;
+		}
+	
+		function dectect_mode(){
+			var dfd = $.Deferred()
+			$.post("/app/touch_link/webs/ql_get_conf.cgi",{noneed:"noneed"}, function (res) {
+				res = eval("("+ res +")");
+				if(res["data"][0].def_link == "0"){//管理员模式
+					$("#admin-auth").show();
+					$("#auth_status").html("待认证");
+				}
+				else{
+					$("#no-auth").show();
+					$("#auth_status").html("请靠近路由");
+				}
+				dfd.resolve();
+			});
+			return dfd.promise();
+		}
+		
+		function detect_white(){
+			for(var i = 0; i < white_list.length; i++){
+				if(_url.indexOf(white_list[i]) != -1){
+					in_white = true;
+					break;
+				}
+			}
+		}
+		
+        function refresh_text() {
+            var calleeFn = arguments.callee;
+            $(".auth-status-sec").addClass("auth_success").find("#auth_status").html("认证中("+time_left+"s)");
+			time_left--;
+			if (time_left <= 0){
+				 clearTimeout(statusLoopId);
+				$(".auth-status-sec").addClass("auth_success").find("#auth_status").html("认证成功");
+				if(type == "ios"){
+					add_iframe();
+				}
+			}
+			else
+				setTimeout(calleeFn, 1000);
+		}
+		
+		function add_iframe(){
+			var ifr = $("<iframe/>");
+			ifr.attr("src",_url);
+			$("body").append(ifr);
+		}
+		
+        function get_device_status() {
+            if (auth_status) return;
+            count++;
+            var calleeFn = arguments.callee;
+            $.post("/app/touch_link/webs/ql_get_list.cgi", function (res) {
+                res = eval("("+ res +")");
+                if (res.err_no == "0" && res["data"].length != 0) {
+                    var list = res.data;
+                    var len = list.length;
+                    for (var i = 0; i < len; i++) {
+                        if (list[i].mode == 2 && list[i].mac.toLowerCase() === mac) {
+							if(type == "android"){
+								clearTimeout(statusLoopId);
+								$(".auth-status-sec").addClass("auth_success").find("#auth_status").html("认证成功");
+								if(timer)
+									clearTimeout(timer);
+								timer = setTimeout(function(){
+									window.location.href = _url;
+								},2000);
+								return;
+							}
+							else{
+								clearTimeout(statusLoopId);
+								auth_status = true;
+								time_left -= list[i].second;
+								if(in_white){
+									$(".auth-status-sec").addClass("auth_success").find("#auth_status").html("认证成功");
+									add_iframe();
+								}
+								else{
+									if(time_left < 3)
+										time_left = 3;
+									statusLoopId = setTimeout(function(){
+										refresh_text();
+									},1000);
+								}
+								return;
+							}
+                        }
+                    }
+                    statusLoopId = setTimeout(calleeFn, 2000);
+                }
+            });
+        }
+
+        init_status();
+    })();
+</script>
+</body>
+</html>

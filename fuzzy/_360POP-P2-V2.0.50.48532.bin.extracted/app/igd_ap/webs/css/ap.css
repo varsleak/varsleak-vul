@@ -1,0 +1,65 @@
+﻿#ap_frm .form-label,#upload_img_form .form-label{
+	width: 49%;
+}
+.datatable tr th,.datatable td{ text-align: center;}
+.datatable .paging{ text-align: left;}
+.formstyle dd label{
+	width: 260px;
+}
+
+/* */
+#ap-list .box-hd{
+	border-bottom: none;
+	margin-bottom: 0;
+}
+#wep_keyval1_info{
+	font-size: 12px;
+}
+.mr5 { margin-left:5px;}
+
+a.white_btn {
+    border: 1px solid #d8d8d8;
+    text-align: center;
+    background: #f3f4f6;
+    color: #3193d8;
+    cursor: pointer;
+    overflow: visible;
+    font-size: 14px;
+    padding: 11px 8px;
+    text-decoration: none;
+	position:absolute;
+	top:0;
+	left:455px;
+	line-height:1.5;
+	color:#2B3238;
+}
+a.white_btn span { display:block; }
+a.white_btn:hover { text-decoration:none;}
+#ap_set_tab { position:relative;}
+.filePrew {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 115px;
+    height: 40px;
+	font-size:250%;
+    opacity: 0; /* 实现的关键点 */
+    filter: alpha(opacity=0); /* 兼容IE */
+}
+.view { position:absolute; left:580px; top:8px;}
+#upload_file_layer { position:absolute; left:0; top:138px; width:100%;}
+
+#re_pos_layer { position:relative; }
+.opt { position:relative;}
+.box-bd { position:relative;}
+#ck_broadcast_ssid,#lbl_ssid_broadcast { vertical-align:middle;}
+#ap_wireless_list { width:100%; }
+#ap_wireless_list .th_0 { width:10%;}
+#ap_wireless_list .th_1 { width:25%;}
+#ap_wireless_list .th_2 { width:25%;}
+#ap_wireless_list .th_3 { width:5%;}
+#ap_wireless_list .th_4 { width:10%;}
+#ap_wireless_list .th_5 { width:10%;}
+#ap_wireless_list .th_6 { width:15%;}
+#ap_wireless_list span { border:1px solid #FFBB00; color:#FFBB00; padding:0 8px; margin-left:7px; font-size:12px;}

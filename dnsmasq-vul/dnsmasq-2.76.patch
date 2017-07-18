@@ -1,0 +1,582 @@
+diff --git a/./Makefile b/../../dnsmasq-2.76/Makefile
+index dd0513b..13860f5 100644
+--- a/./Makefile
++++ b/../../dnsmasq-2.76/Makefile
+@@ -24,11 +24,11 @@ MANDIR        = $(PREFIX)/share/man
+ LOCALEDIR     = $(PREFIX)/share/locale
+ BUILDDIR      = $(SRC)
+ DESTDIR       = 
+-CFLAGS        = -Wall -W -O2
+-LDFLAGS       = 
++CFLAGS        ?= -Wall -W -O2
++LDFLAGS       ?= 
+ COPTS         = 
+ RPM_OPT_FLAGS = 
+-LIBS          = 
++LIBS          ?= 
+ 
+ #################################################################
+ 
+diff --git a/./src/dhcp-common.c b/../../dnsmasq-2.76/src/dhcp-common.c
+index 08528e8..03f4ce5 100644
+--- a/./src/dhcp-common.c
++++ b/../../dnsmasq-2.76/src/dhcp-common.c
+@@ -18,6 +18,40 @@
+ 
+ #ifdef HAVE_DHCP
+ 
++#ifdef FUZZ
++static ssize_t my_recvmsg(int sockfd, struct msghdr *msg, int flags)
++{
++  ssize_t n;
++  ssize_t i;
++
++  if(daemon->dhcp_fuzz_file)
++  {
++    printf("Fuzzy!\n");
++    FILE *f = fopen(daemon->dhcp_fuzz_file, "rb");
++    if(!f)
++    {
++      printf("Couldn't open file: %s\n", daemon->dhcp_fuzz_file);
++      exit(1);
++    }
++
++    n = fread((char*)msg->msg_iov->iov_base, 1, msg->msg_iov->iov_len, f);
++    fclose(f);
++
++    memcpy(msg->msg_name, "\x0a\x00\x41\x41\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00", 28);
++    msg->msg_namelen    = 28;
++    memcpy(msg->msg_control, "\x24\x00\x00\x00\x00\x00\x00\x00\x29\x00\x00\x00\x32\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x01\x00\x00\x00\x00\x00\x00\x00", 40);
++    msg->msg_controllen = 40;
++    msg->msg_flags      = 0;
++  }
++  else
++  {
++    n = recvmsg(sockfd, msg, flags);
++  }
++
++  return n;
++}
++#endif
++
+ void dhcp_common_init(void)
+ {
+     /* These each hold a DHCP option max size 255
+@@ -43,7 +77,12 @@ ssize_t recv_dhcp_packet(int fd, struct msghdr *msg)
+   while (1)
+     {
+       msg->msg_flags = 0;
++
++#ifdef FUZZ
++      while ((sz = my_recvmsg(fd, msg, MSG_PEEK | MSG_TRUNC)) == -1 && errno == EINTR);
++#else
+       while ((sz = recvmsg(fd, msg, MSG_PEEK | MSG_TRUNC)) == -1 && errno == EINTR);
++#endif
+       
+       if (sz == -1)
+ 	return -1;
+@@ -65,7 +104,11 @@ ssize_t recv_dhcp_packet(int fd, struct msghdr *msg)
+ 	}
+     }
+   
++#ifdef FUZZ
++  while ((sz = my_recvmsg(fd, msg, 0)) == -1 && errno == EINTR);
++#else
+   while ((sz = recvmsg(fd, msg, 0)) == -1 && errno == EINTR);
++#endif
+   
+   return (msg->msg_flags & MSG_TRUNC) ? -1 : sz;
+ }
+diff --git a/./src/dhcp.c b/../../dnsmasq-2.76/src/dhcp.c
+index 10f1fb9..cc0e8d8 100644
+--- a/./src/dhcp.c
++++ b/../../dnsmasq-2.76/src/dhcp.c
+@@ -217,9 +217,18 @@ void dhcp_packet(time_t now, int pxe_fd)
+ 	  iface_index = *(p.i);
+ 	}
+ #endif
+-	
++
++#ifdef FUZZ
++  if (daemon->dhcp_fuzz_file)
++  {
++    iface_index = 0;
++    strcpy(ifr.ifr_name, "lo");
++  }
++  else
++#else
+   if (!indextoname(daemon->dhcpfd, iface_index, ifr.ifr_name))
+     return;
++#endif
+ 
+ #ifdef HAVE_LINUX_NETWORK
+   /* ARP fiddling uses original interface even if we pretend to use a different one. */
+diff --git a/./src/dns-protocol.h b/../../dnsmasq-2.76/src/dns-protocol.h
+index 75d8ffb..a7dc3c7 100644
+--- a/./src/dns-protocol.h
++++ b/../../dnsmasq-2.76/src/dns-protocol.h
+@@ -15,7 +15,13 @@
+ */
+ 
+ #define NAMESERVER_PORT 53
+-#define TFTP_PORT       69
++
++#ifdef FUZZ
++#	define TFTP_PORT       6969
++#else
++#	define TFTP_PORT       69
++#endif
++
+ #define MAX_PORT        65535u
+ 
+ #define IN6ADDRSZ       16
+diff --git a/./src/dnsmasq.c b/../../dnsmasq-2.76/src/dnsmasq.c
+index 045ec53..c4aec20 100644
+--- a/./src/dnsmasq.c
++++ b/../../dnsmasq-2.76/src/dnsmasq.c
+@@ -879,6 +879,88 @@ int main (int argc, char **argv)
+   /* Using inotify, have to select a resolv file at startup */
+   poll_resolv(1, 0, now);
+ #endif
++
++#ifdef FUZZ
++  if(daemon->client_fuzz_file)
++  {
++    printf("Reading a fake request packet from %s!\n", daemon->client_fuzz_file);
++    struct listener fake_listener;
++    memset(&fake_listener, 0, sizeof(struct listener));
++
++    fake_listener.fd = 0;
++    fake_listener.family = AF_INET;
++
++    receive_query(&fake_listener, now);
++
++    printf("Done parsing the requested packet!\n");
++    exit(0);
++  }
++
++  if(daemon->server_fuzz_file)
++  {
++    printf("Reading a fake response packet from %s!\n", daemon->server_fuzz_file);
++
++    reply_query(0, AF_INET, now);
++
++    printf("Done parsing the requested packet!\n");
++
++    exit(0);
++  }
++
++  if(daemon->tcp_client_fuzz_file)
++  {
++    union mysockaddr local_addr;
++    struct in_addr netmask;
++    netmask.s_addr = 0;
++
++    int f = open(daemon->tcp_client_fuzz_file, O_RDONLY);
++
++    if(!f || f == -1)
++    {
++      printf("Error opening file: %s\n", daemon->tcp_client_fuzz_file);
++      exit(1);
++    }
++
++    /* We need stdin to be closed, otherwise it'll be trying to read from it. */
++    close(0);
++
++    tcp_request(f, now, &local_addr, netmask, 0);
++
++    printf("Done with the TCP request!\n");
++
++    exit(0);
++  }
++
++  if(daemon->tftp_fuzz_file)
++  {
++    printf("Reading a fake TFTP packet from %s!\n", daemon->tftp_fuzz_file);
++    struct listener fake_listener;
++    memset(&fake_listener, 0, sizeof(struct listener));
++
++    fake_listener.fd = 0;
++    fake_listener.family = AF_INET;
++
++    tftp_request(&fake_listener, now);
++
++    printf("Done parsing the requested TFTP packet!\n");
++    exit(0);
++  }
++
++  if(daemon->dhcp_fuzz_file)
++  {
++    printf("Reading a fake DHCP packet from %s!\n", daemon->dhcp_fuzz_file);
++    struct listener fake_listener;
++    memset(&fake_listener, 0, sizeof(struct listener));
++
++    fake_listener.fd = 0;
++    fake_listener.family = AF_INET;
++
++    dhcp_packet(now, 0);
++
++    printf("Done parsing the requested DHCP packet!\n");
++    exit(0);
++  }
++#endif
+   
+   while (1)
+     {
+diff --git a/./src/dnsmasq.h b/../../dnsmasq-2.76/src/dnsmasq.h
+index 1896a64..f6729d0 100644
+--- a/./src/dnsmasq.h
++++ b/../../dnsmasq-2.76/src/dnsmasq.h
+@@ -1057,6 +1057,15 @@ extern struct daemon {
+   char *addrbuff;
+   char *addrbuff2; /* only allocated when OPT_EXTRALOG */
+ 
++#ifdef FUZZ
++  char *client_fuzz_file;
++  char *server_fuzz_file;
++  char *tcp_client_fuzz_file;
++  char *tcp_server_fuzz_file;
++  char *tftp_fuzz_file;
++  char *dhcp_fuzz_file;
++  char *dhcp6_fuzz_file;
++#endif
+ } *daemon;
+ 
+ /* cache.c */
+diff --git a/./src/forward.c b/../../dnsmasq-2.76/src/forward.c
+index 9b464d3..da10053 100644
+--- a/./src/forward.c
++++ b/../../dnsmasq-2.76/src/forward.c
+@@ -23,6 +23,72 @@ static struct frec *lookup_frec_by_sender(unsigned short id,
+ static unsigned short get_id(void);
+ static void free_frec(struct frec *f);
+ 
++#ifdef FUZZ
++ssize_t my_recvmsg(int sockfd, struct msghdr *msg, int flags)
++{
++  ssize_t n;
++  ssize_t i;
++  char a, b;
++
++  if(daemon->client_fuzz_file)
++  {
++    printf("Fuzzy!\n");
++    FILE *f = fopen(daemon->client_fuzz_file, "rb");
++    if(!f)
++    {
++      printf("Couldn't open file: %s\n", daemon->client_fuzz_file);
++      exit(1);
++    }
++
++    n = fread((char*)msg->msg_iov->iov_base, 1, msg->msg_iov->iov_len, f);
++    fclose(f);
++
++    /* Replace the transaction_id. */
++    ((char*)msg->msg_iov->iov_base)[0] = a;
++    ((char*)msg->msg_iov->iov_base)[1] = b;
++
++    memcpy(msg->msg_name, "\x0a\x00\x41\x41\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00", 28);
++    msg->msg_namelen    = 28;
++    memcpy(msg->msg_control, "\x24\x00\x00\x00\x00\x00\x00\x00\x29\x00\x00\x00\x32\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x01\x00\x00\x00\x00\x00\x00\x00", 40);
++    msg->msg_controllen = 40;
++    msg->msg_flags      = 0;
++  }
++  else
++  {
++    n = recvmsg(sockfd, msg, flags);
++  }
++
++  return n;
++}
++
++ssize_t my_recvfrom(int sockfd, void *buf, size_t len, int flags, struct sockaddr *src_addr, socklen_t *addrlen)
++{
++  ssize_t n;
++
++  if(daemon->server_fuzz_file)
++  {
++    printf("Fuzzy!\n");
++
++    FILE *f = fopen(daemon->server_fuzz_file, "rb");
++    if(!f)
++    {
++      printf("Couldn't open file: %s\n", daemon->server_fuzz_file);
++      exit(1);
++    }
++
++    n = fread((char*)buf, 1, len, f);
++    fclose(f);
++  }
++  else
++  {
++    n = recvfrom(sockfd, buf, len, flags, src_addr, addrlen);
++  }
++
++  return n;
++}
++
++#endif
++
+ /* Send a UDP packet with its source address set as "source" 
+    unless nowild is true, when we just send it with the kernel default */
+ int send_from(int fd, int nowild, char *packet, size_t len, 
+@@ -734,7 +800,11 @@ void reply_query(int fd, int family, time_t now)
+   union mysockaddr serveraddr;
+   struct frec *forward;
+   socklen_t addrlen = sizeof(serveraddr);
++#ifdef FUZZ
++  ssize_t n = my_recvfrom(fd, daemon->packet, daemon->packet_buff_sz, 0, &serveraddr.sa, &addrlen);
++#else
+   ssize_t n = recvfrom(fd, daemon->packet, daemon->packet_buff_sz, 0, &serveraddr.sa, &addrlen);
++#endif
+   size_t nn;
+   struct server *server;
+   void *hash;
+@@ -758,6 +828,10 @@ void reply_query(int fd, int family, time_t now)
+     return;
+   
+   /* spoof check: answer must come from known server, */
++#ifdef FUZZ
++  if(!daemon->server_fuzz_file)
++  {
++#endif
+   for (server = daemon->servers; server; server = server->next)
+     if (!(server->flags & (SERV_LITERAL_ADDRESS | SERV_NO_ADDR)) &&
+ 	sockaddr_isequal(&server->addr, &serveraddr))
+@@ -765,6 +839,10 @@ void reply_query(int fd, int family, time_t now)
+   
+   if (!server)
+     return;
++
++#ifdef FUZZ
++  }
++#endif
+   
+ #ifdef HAVE_DNSSEC
+   hash = hash_questions(header, n, daemon->namebuff);
+@@ -773,6 +851,17 @@ void reply_query(int fd, int family, time_t now)
+   crc = questions_crc(header, n, daemon->namebuff);
+ #endif
+   
++#ifdef FUZZ
++  if(daemon->server_fuzz_file)
++  {
++    struct frec *my_frec = (struct frec*)malloc(sizeof(struct frec));
++    my_frec->sentto = (struct server*)malloc(sizeof(struct server));
++
++    forward = my_frec;
++  }
++  else
++#endif
++
+   if (!(forward = lookup_frec(ntohs(header->id), hash)))
+     return;
+   
+@@ -1181,8 +1270,13 @@ void receive_query(struct listener *listen, time_t now)
+   msg.msg_iov = iov;
+   msg.msg_iovlen = 1;
+   
++#ifdef FUZZ
++  if ((n = my_recvmsg(listen->fd, &msg, 0)) == -1)
++    return;
++#else
+   if ((n = recvmsg(listen->fd, &msg, 0)) == -1)
+     return;
++#endif
+   
+   if (n < (int)sizeof(struct dns_header) || 
+       (msg.msg_flags & MSG_TRUNC) ||
+@@ -1243,8 +1337,12 @@ void receive_query(struct listener *listen, time_t now)
+ 	  return;
+ 	}
+     }
+-		
++
++#ifdef FUZZ
++  if (check_dst && daemon->client_fuzz_file == 0)
++#else	
+   if (check_dst)
++#endif
+     {
+       struct ifreq ifr;
+ 
+@@ -1622,6 +1720,9 @@ unsigned char *tcp_request(int confd, time_t now,
+   (void)mark;
+   (void)have_mark;
+ 
++#ifdef FUZZ
++  if (!daemon->tcp_client_fuzz_file)
++#endif
+   if (getpeername(confd, (struct sockaddr *)&peer_addr, &peer_len) == -1)
+     return packet;
+ 
+diff --git a/./src/option.c b/../../dnsmasq-2.76/src/option.c
+index d8c57d6..14f991b 100644
+--- a/./src/option.c
++++ b/../../dnsmasq-2.76/src/option.c
+@@ -159,6 +159,17 @@ struct myoption {
+ #define LOPT_SCRIPT_ARP    347
+ #define LOPT_DHCPTTL       348
+ #define LOPT_TFTP_MTU      349
++
++#ifdef FUZZ
++#	define LOPT_FUZZ_CLIENT   350
++#	define LOPT_FUZZ_SERVER   351
++#	define LOPT_RANDOM_PORT   352
++#	define LOPT_TCP_FUZZ_CLIENT 353
++#	define LOPT_TCP_FUZZ_SERVER 354
++#	define LOPT_TFTP_FUZZ     355
++#	define LOPT_DHCP_FUZZ     356
++#	define LOPT_DHCP6_FUZZ    357
++#endif
+  
+ #ifdef HAVE_GETOPT_LONG
+ static const struct option opts[] =  
+@@ -323,6 +334,18 @@ static const struct myoption opts[] =
+     { "dns-loop-detect", 0, 0, LOPT_LOOP_DETECT },
+     { "script-arp", 0, 0, LOPT_SCRIPT_ARP },
+     { "dhcp-ttl", 1, 0 , LOPT_DHCPTTL },
++
++#ifdef FUZZ
++    { "client-fuzz", 1, 0, LOPT_FUZZ_CLIENT },
++    { "server-fuzz", 1, 0, LOPT_FUZZ_SERVER },
++    { "randomize-port", 0, 0, LOPT_RANDOM_PORT },
++    { "tcp-client-fuzz", 1, 0, LOPT_TCP_FUZZ_CLIENT },
++    { "tcp-server-fuzz", 1, 0, LOPT_TCP_FUZZ_SERVER },
++    { "tftp-fuzz", 1, 0, LOPT_TFTP_FUZZ },
++    { "dhcp-fuzz", 1, 0, LOPT_DHCP_FUZZ },
++    { "dhcp6-fuzz", 1, 0, LOPT_DHCP6_FUZZ },
++#endif
++
+     { NULL, 0, 0, 0 }
+   };
+ 
+@@ -494,6 +517,16 @@ static struct {
+   { LOPT_LOOP_DETECT, OPT_LOOP_DETECT, NULL, gettext_noop("Detect and remove DNS forwarding loops."), NULL },
+   { LOPT_IGNORE_ADDR, ARG_DUP, "<ipaddr>", gettext_noop("Ignore DNS responses containing ipaddr."), NULL }, 
+   { LOPT_DHCPTTL, ARG_ONE, "<ttl>", gettext_noop("Set TTL in DNS responses with DHCP-derived addresses."), NULL }, 
++#ifdef FUZZ
++  { LOPT_FUZZ_CLIENT, ARG_DUP, "<filename>", gettext_noop("Read DNS requests from the given file instead of the network."), NULL },
++  { LOPT_FUZZ_SERVER, ARG_DUP, "<filename>", gettext_noop("Read DNS responses from the given file instead of the network."), NULL },
++  { LOPT_RANDOM_PORT, ARG_DUP, NULL, gettext_noop("Randomize the listen port (useful for fuzzing)"), NULL },
++  { LOPT_TCP_FUZZ_CLIENT, ARG_DUP, "<filename>", gettext_noop("Read TCP DNS requests from the given file instead of the network."), NULL },
++  { LOPT_TCP_FUZZ_SERVER, ARG_DUP, "<filename>", gettext_noop("Read TCP DNS responses from the given file instead of the network."), NULL },
++  { LOPT_TFTP_FUZZ, ARG_DUP, "<filename>", gettext_noop("Read and parses a TFTP packet from a file instead of the network."), NULL },
++  { LOPT_DHCP_FUZZ, ARG_DUP, "<filename>", gettext_noop("Read and parses a DHCP packet from a file instead of the network."), NULL },
++  { LOPT_DHCP6_FUZZ, ARG_DUP, "<filename>", gettext_noop("Read and parses a DHCPv6 packet from a file instead of the network."), NULL },
++#endif
+   { 0, 0, NULL, NULL, NULL }
+ }; 
+ 
+@@ -4046,6 +4079,44 @@ static int one_opt(int option, char *arg, char *errstr, char *gen_err, int comma
+       }
+ #endif
+ 		
++#ifdef FUZZ
++    case LOPT_FUZZ_CLIENT: /* --client-fuzz */
++      daemon->client_fuzz_file = optarg;
++      break;
++
++    case LOPT_FUZZ_SERVER: /* --server-fuzz */
++      daemon->server_fuzz_file = optarg;
++      break;
++
++    case LOPT_TCP_FUZZ_CLIENT:
++      daemon->tcp_client_fuzz_file = optarg;
++      break;
++
++    case LOPT_TCP_FUZZ_SERVER:
++      daemon->tcp_server_fuzz_file = optarg;
++      break;
++
++    case LOPT_TFTP_FUZZ:
++      daemon->tftp_fuzz_file = optarg;
++      break;
++
++    case LOPT_DHCP_FUZZ:
++      daemon->dhcp_fuzz_file = optarg;
++      break;
++
++    case LOPT_DHCP6_FUZZ:
++      daemon->dhcp6_fuzz_file = optarg;
++      break;
++
++    case LOPT_RANDOM_PORT: /* --randomize-port  */
++      do
++      {
++        daemon->port = rand16();
++      } while(daemon->port < 1024);
++      printf("dns port randomly set to %d\n", daemon->port);
++      break;
++#endif
++
+     default:
+       ret_err(_("unsupported option (check that dnsmasq was compiled with DHCP/TFTP/DNSSEC/DBus support)"));
+       
+diff --git a/./src/tftp.c b/../../dnsmasq-2.76/src/tftp.c
+index 5e4a32a..9d92b86 100644
+--- a/./src/tftp.c
++++ b/../../dnsmasq-2.76/src/tftp.c
+@@ -39,6 +39,40 @@ static void sanitise(char *buf);
+ #define ERR_FULL   3
+ #define ERR_ILL    4
+ 
++#ifdef FUZZ
++static ssize_t my_recvmsg(int sockfd, struct msghdr *msg, int flags)
++{
++  ssize_t n;
++  ssize_t i;
++
++  if(daemon->tftp_fuzz_file)
++  {
++    printf("Fuzzy!\n");
++    FILE *f = fopen(daemon->tftp_fuzz_file, "rb");
++    if(!f)
++    {
++      printf("Couldn't open file: %s\n", daemon->tftp_fuzz_file);
++      exit(1);
++    }
++
++    n = fread((char*)msg->msg_iov->iov_base, 1, msg->msg_iov->iov_len, f);
++    fclose(f);
++
++    memcpy(msg->msg_name, "\x0a\x00\x41\x41\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00", 28);
++    msg->msg_namelen    = 28;
++    memcpy(msg->msg_control, "\x24\x00\x00\x00\x00\x00\x00\x00\x29\x00\x00\x00\x32\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x01\x00\x00\x00\x00\x00\x00\x00", 40);
++    msg->msg_controllen = 40;
++    msg->msg_flags      = 0;
++  }
++  else
++  {
++    n = recvmsg(sockfd, msg, flags);
++  }
++
++  return n;
++}
++#endif
++
+ void tftp_request(struct listener *listen, time_t now)
+ {
+   ssize_t len;
+@@ -94,10 +128,21 @@ void tftp_request(struct listener *listen, time_t now)
+   /* we overwrote the buffer... */
+   daemon->srv_save = NULL;
+ 
++#ifdef FUZZ
++  if ((len = my_recvmsg(listen->tftpfd, &msg, 0)) < 2)
++#else
+   if ((len = recvmsg(listen->tftpfd, &msg, 0)) < 2)
++#endif
+     return;
+ 
+   /* Can always get recvd interface for IPv6 */
++#ifdef FUZZ
++  if(daemon->tftp_fuzz_file)
++  {
++    /* Do nothing. */
++  }
++  else
++#endif
+   if (!check_dest)
+     {
+       if (listen->iface)

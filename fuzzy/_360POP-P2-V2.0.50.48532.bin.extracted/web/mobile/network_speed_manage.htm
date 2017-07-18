@@ -1,0 +1,93 @@
+<div class="swiper-wrapper networkSpeedManageSwiperWrapper">
+    <section class="swiper-slide app-form network-speed-manage list">
+
+        <dl>
+            <dd class="device-title-info">
+                <script type="text/template" id="devices-title-info">
+                    <p><span class="device-count">{{devicesCount}}</span><span
+                            class="all-down-speed">{{allDownSpeed}}</span></p>
+                </script>
+            </dd>
+            <dt class="title"><label id="lbl_network_speed_manage_device"></label></dt>
+        </dl>
+
+        <dl class="devices-list">
+            <script type="text/template" id="network-speed-manage-device">
+                <dd class="device-item  {{os_type}}" data-mac="{{mac}}">
+                    <div class="device-info"><span class="device-name"
+                                                   title="{{full_name}}">{{name}}</span><br/><span
+                            class="on-line-time">{{onlineTime}}</span>
+                    </div>
+                    <span class="down-speed">{{down_speed}}</span></dd>
+            </script>
+            <script type="text/template" id="no-data">
+                <dl class="no_data section_hide" style="display: block;text-align: center;">{{no_data_title}}</dl>
+            </script>
+        </dl>
+        <dl>
+            <dt class="title"><label id="lbl_network_speed_manage_black"></label></dt>
+        </dl>
+        <dl class="black-list">
+
+            <script type="text/template" id="network-speed-manage-black">
+                <dd class="device-item" data-mac="{{mac}}">
+                    <div class="device-info"><span class="device-name"
+                                                   title="{{full_name}}">{{name}}</span><br><span
+                            class="on-line-time">{{blackTime}}</span></div>
+                </dd>
+            </script>
+        </dl>
+    </section>
+    <section class="swiper-slide app-form network-speed-manage control">
+        <form id="network-speed-manage-control">
+            <dl>
+                <dd>
+                    <label class="form-label" id="lbl_device_name" for="full_name"></label>
+                    <input name="full_name" id="full_name" maxlength="32" type="text" class="txt5" />
+                </dd>
+                <dd class="device">
+                    <label class="form-label" id="lbl_up_speed" ></label>
+                    <input name="up_speed" id="up_speed" type="text"  disabled="disabled" />
+                </dd>
+                <dd class="device">
+                    <label class="form-label" id="lbl_down_speed" ></label>
+                    <input name="down_speed" id="down_speed" type="text" disabled="disabled" />
+                </dd>
+                <dd class="device limit-num-box">
+                    <label class="form-label" id="lbl_limit_up_speed" ></label>
+                    <input name="limit_up_speed_show" id="limit_up_speed_show" type="text" class="limit_speed_show"  readonly="true"/>
+                    <input name="limit_up_speed" id="limit_up_speed" type="text" class="num-box off" maxlength="5"/>
+                    <span class="speed_limit_unit off">&nbsp&nbspKB/s</span>
+                    <button  type="button" class="btn_speed_limit"></button>
+                    <button  type="button" id="btn_limit0" class="btn_limit section_hide"></button>
+                    <button  type="button" id="btn_cancel_limit0" class="btn_cancel_limit section_hide"></button>
+                </dd>
+                <dd class="device limit-num-box">
+                    <label class="form-label" id="lbl_limit_down_speed" ></label>
+                    <input name="limit_down_speed_show" id="limit_down_speed_show" type="text" class="limit_speed_show" readonly="true"/>
+                    <input name="limit_down_speed" id="limit_down_speed" type="text" class="num-box off" maxlength="5"/>
+                    <span class="speed_limit_unit off">&nbsp&nbspKB/s</span>
+                    <button  type="button" class="btn_speed_limit"></button>
+                    <button  type="button" id="btn_limit1" class="btn_limit section_hide"></button>
+                    <button  type="button" id="btn_cancel_limit1" class="btn_cancel_limit section_hide"></button>
+                </dd>
+                <dd>
+                    <label class="form-label" id="lbl_is_black"></label>
+                    <span class="switch-txt"></span>
+                    <input id="is_black" type="checkbox" class="switch radio_form"/>
+                    <label for="is_black" id="is_black_switch"></label>
+                    <input type="hidden" id="is_black_hidden" name="is_black"/>
+                </dd>
+                <dd class="" id="device-ip-sec">
+                    <label class="form-label" id="lbl_ip" ></label>
+                    <a href="#" id="device-ip" class="enable_ip_txt" target="_blank"></a>
+                    <input name="ip" id="ip" type="text" readonly="true" class="disable_ip_txt" />
+                </dd>
+                <dd class="">
+                    <label class="form-label" id="lbl_mac" ></label>
+                    <input name="mac" id="mac" type="text" readonly="true"/>
+                </dd>
+            </dl>
+        </form>
+    </section>
+</div>

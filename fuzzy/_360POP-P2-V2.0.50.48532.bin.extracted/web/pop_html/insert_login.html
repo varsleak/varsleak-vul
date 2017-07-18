@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache">   
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title></title>
+<style type="text/css">
+body { margin:0; padding:0; font-family:"微软雅黑",Helvetica,Tahoma,Arial,SimSun,Heiti,"黑体",sans-serif;}
+form{ margin:0; padding:0;}
+#container { width:415px; height:285px;}
+.title { position:relative;}
+h1 { font-size:22px; color:#fff; margin:0; padding:50px 0 40px 0; text-align:center; word-spacing:2px;}
+.btn_layer { text-align:center;}
+button { color: #b7ceee; background: #428bef; cursor: pointer; border: none; outline: none;}
+#login_btn { width: 175px; height: 27px; line-height: 27px;}
+.item { position:relative; text-align:center; zoom:1;/* fix ie bug */}
+.txt { background:none; border:1px solid #FFF; padding:6px 4px; width:167px; color:#fff; text-align:center;}
+.lbl { color:#fff; position:absolute; left:168px; top:7px; font-size:11px; -webkit-transform:scale(0.91);}
+#err_tip{ font-size:12px; line-height:1.5; height:18px; text-align:center; color:#f00; margin:2px 0;}
+.close { color: #b0b0b0; font-size: 30px; height: 26px; line-height: 26px; padding: 0; position: absolute;right: 0; text-align: center;text-decoration: none;  top: 0; width: 26px; z-index: 6001;}
+</style>
+<script type="text/javascript" src="./javascript/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="./javascript/cookie.js"></script>
+<script type="text/javascript" src="./javascript/jquery-plugin.js"></script>
+<script type="text/javascript" src="./javascript/new_lib.js"></script>
+<script type="text/javascript" src="./javascript/module.js"></script>
+<script type="text/javascript" src="./javascript/aes.js"></script>
+</head>
+
+<body>
+<div id="container">
+	<div class="title">
+		<h1>欢迎使用360安全路由</h1>
+		<a class="close" href="javascript:void(0);">×</a>
+	</div>
+	<form id="login_frm" action="javascript:void(0)">
+		<div class="item">
+			<input type="password" id="pwd" class="txt" />
+			<label class="lbl" for="pwd">请输入管理密码</label>
+		</div>
+		<div class="item" id="err_tip"></div>
+		<div class="btn_layer">
+			<button id="login_btn">确定</button>
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+var insert_login_page = {
+	init:function(){
+		this.login_event();
+		this.pwd_ctr_event();
+		this.close_event();
+	},
+	login_event:function(){
+		var _this = this;
+		$("#login_btn").unbind("click").bind("click",function(){
+			_this.login();
+		});
+	},
+	close_event:function(){
+		$(".close").unbind("click").bind("click",function(){
+			$.post("/router/pop_update_window.cgi");
+		});
+	},
+	login:function(){
+		if ($.cookie("Qihoo_360_login")) {
+            $.cookie('Qihoo_360_login', null, {
+                path: '/',
+                expires: 1
+            });
+        }
+		var obj = {};
+		obj.user = igd.global_param.default_user;
+		obj.pass = getAesString($("#pwd").val());
+		if (check_input("login_frm")) {
+			$.post("/router/web_login.cgi", obj, function (data) {
+				try {
+					data = eval("(" + data + ")");
+					if (data["success"]=="1"&&data["token_id"]!="") {
+						location.href = "./insert_update.html?token_id=" + data["token_id"];
+					}
+					else {
+						if (!isNaN(data.err_no) && (data.err_no == "48" || data.err_no == "49"|| data.err_no == "50"|| data.err_no == "51"|| data.err_no == "52")) {
+							$("#err_tip").html("登录失败" + data.err_no);
+						} else {
+							$("#err_tip").html("登录失败");
+						}
+					}
+				}
+				catch (e) {
+					$("#err_tip").html("登录失败");
+				}
+			});
+		}
+	},
+	pwd_ctr_event:function(){
+		$("#pwd").unbind("focus").bind("focus",function(){
+			$("#err_tip").html("");
+			$(this).next("label").css("display","none");
+		});
+		$("#pwd").unbind("blur").bind("blur",function(){
+			var val = $(this).val();
+			if(val == "")
+				$(this).next("label").css("display","");
+			else
+				$(this).next("label").css("display","none");
+		});
+	}
+};
+
+$(document).ready(function(){
+	insert_login_page.init();
+});
+</script>
+</body>
+</html>

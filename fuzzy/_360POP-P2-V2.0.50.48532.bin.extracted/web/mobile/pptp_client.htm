@@ -1,0 +1,54 @@
+<div class="swiper-wrapper pptp-client-swiper-wrapper">
+	<section id="pptp_client_nav" class="swiper-slide app-form" style="width:25%;">
+		<dl>
+			<dd data-html-name="pptp_client_set" class="select_dd" id="pptp_client_set_txt"></dd>
+			<dd data-html-name="pptp_client_list" class="select_dd" id="pptp_client_list_txt"></dd>
+			<dd data-html-name="pptp_client_status" class="select_dd" id="pptp_client_status_txt"></dd>
+		</dl>
+	</section>
+	<section id="pptp_client_set" class="swiper-slide">
+		<form id="pptp_client_setup_frm" class="app-form">
+			<dl>
+				<dd>
+					<label class="form-label"></label>
+					<span class="switch-txt"></span>
+					<input id="pptp_client_enable" type="checkbox" class="switch radio_form" />
+					<label for="pptp_client_enable" id="pptp_client_enable_switch"></label>
+					<input type="hidden" id="pptp_client_enable_hidden" name="enable"/>
+				</dd>
+				<dd>
+					<label class="form-label"></label>
+					<input type="text" autocomplete="off" class="txt6" id="pptp_client_server_addr" maxlength="63"  name="server" />
+				</dd>
+				<dd>
+					<label class="form-label"></label>
+					<input type="text" autocomplete="off" maxlength="4" id="pptp_client_server_port" name="port"  value="1723" />
+				</dd>
+				<dd>
+					<label class="form-label"></label>
+					<input type="text" autocomplete="off" class="txt4" id="pptp_client_user" maxlength="32" name="user"  />
+				</dd>
+				<dd>
+					<label class="form-label"></label>
+					<input type="text" autocomplete="off" data-aes="true" class="txt3" id="pptp_client_pass" maxlength="32" name="pass" />
+					<input type="hidden" id="mppe_128_hidden" name="encrypt" value="1" />
+					<input type="hidden" id="pptp_client_interface" name="uiname" value="WAN1" />
+					<input type="hidden" id="pptp_client_mode_hidden" name="mode" value="isp" />
+					<input type="hidden" name="is_ipaddr" id="is_ipaddr" value="0" />
+					<input type="hidden" name="deal" id="deal" value="add" />
+					<input type="hidden" name="id" id="old_id" />
+					<input type="hidden" value="1" name="enable_nat" id="nat_hidden" />
+					<input type="hidden" name="servermask" id="pptp_client_servermask" value="" />
+					<input type="hidden" name="servernet" id="pptp_client_servernet" value="" />
+				</dd>
+			</dl>
+		</form>
+	</section>
+	<section id="pptp_client_list" class="swiper-slide app-form">
+		<dl id="setup_list"></dl>
+	</section>
+	<section id="pptp_client_status" class="swiper-slide app-form">
+		<dl id="status_list" class="section_hide"></dl>
+		<dl id="status_list_detail" class="section_hide"></dl>
+	</section>
+</div>

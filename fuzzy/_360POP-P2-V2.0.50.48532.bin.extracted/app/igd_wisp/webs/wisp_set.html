@@ -1,0 +1,89 @@
+﻿<style>
+    .btn{
+        line-height: 30px\9;
+    }
+</style>
+<div class="app-box">
+    <div class="box-hd">
+        <h3 class="box-title"></h3>
+    </div>
+    <div class="box-bd">
+        <form name="wisp_frm" id='wisp' class="form-area" method="post" action="">
+            <div id="wisp_wrap">
+                <div class="item">
+                    <label class="form-label isneed"></label>
+                    <div class="radio_form" id="wisp_status" onclick="radio_toggle(this,'wisp_enable_set');"></div>
+                    <input type="hidden" id="wisp_status_hidden" name="enable" value=""/>
+                </div>
+                <div class="item">
+                    <label class="form-label isneed" id="lbl_switch_wisp"></label>
+                    <div class="radio_form radio_on" id="wisp_switch" style="width: 50px"></div>
+                    <input type="hidden" id="wisp_switch_hidden" name="auto" value="1">
+                </div>
+                <div class="item">
+                    <label class="form-label" id="lbl_ssid_str"></label>
+                    <span id="ssid_str"></span>
+                </div>
+                <div class="item">
+                    <label class="form-label" id="lbl_link_status"></label>
+                    <span id="status_tips"></span>
+                </div>
+                <div class="item">
+                    <label class="form-label" id="lbl_link_time"></label>
+                    <span id="link_time"></span>
+                </div>
+                <div class="opt">
+                    <input type="button" class="btn btn_confirm" onclick="wisp_submit(1)" value="">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="app-box" style="position:relative;">
+    <button id="hide_list" class="btn btn_hide_list margin-h section_hide" onclick="close_ap_list();"></button>
+    <button id="apSearch" class="btn btn_search_ap" onclick="get_ap_data()"></button>
+    <div class="box-hd">
+        <h3 class="box-title" id="ssid_nearby"></h3>
+    </div>
+    <div id="ap_list_tab" class="box-bd section_hide">
+        <table class="data-table" id="apList"></table>
+    </div>
+</div>
+
+<!--弹框内容-->
+<script type="text/template" id="pop_layer">
+    <div class="pop_layer_header">
+        <h2 id="wisp_pop_tip">{{wisp_pop_tip}}</h2>
+        <a href="javascript:void(0);" class="modal_close">×</a>
+    </div>
+    <div class="app-box">
+        <form name="wisp_frm" id="wisp_frm" class="form-area" method="post" action="javascript:void(0);">
+            <div class="item" id="ssid_layer">
+                <label class="form-label isneed" id="lbl_ssid">{{lbl_ssid}}</label>
+                <input type="password" style="display:none" />
+                <input name="ssid" maxlength="32" class="input-text margin-r" id="ssid_flag" type="text" autocomplete="off" />
+                <input type="hidden" id="ssid_b64"/>
+            </div>
+            <div class="item off" id="bssid_layer">
+                <label class="form-label isneed" id="lbl_bssid"></label>
+                <input type="password" class="sr-only" />
+                <input type="text" class="input-text" readonly="readonly" name="bssid" id="bssid_flag" style="width:160px;" />
+            </div>
+            <div class="item">
+                <label class="form-label" id="lbl_pwd">{{lbl_pwd}}</label>
+				<input type="password" class="sr-only" />
+                <input name="key" maxlength="64" class="input-text" id="psd" type="password" autocomplete="off" data-aes="true" autofocus="autofocus"/>
+            </div>
+            <div class="opt">
+                <input type="submit" id="wisp_con_btn" class="btn submit_btn btn_connect margin-h" value="{{wisp_con_btn}}"/>
+                <input type="submit" id="wisp_del_btn" class="btn submit_btn btn_delete margin-h" value="{{wisp_del_btn}}"/>
+                <input type="submit" id="wisp_mod_btn" class="btn submit_btn btn_modify margin-h" value="{{wisp_mod_btn}}"/>
+                <input type="hidden" name="action" value="set" />
+                <input type="hidden" name="auth" id="auth_flag" />
+                <input type="hidden" name="channel" id="channel_flag" />
+                <input type="hidden" name="bandwidth" id="bandwidth_flag" />
+                <input type="hidden" name="encrypt" id="encrypt_flag" />
+            </div>
+        </form>
+    </div>
+</script>

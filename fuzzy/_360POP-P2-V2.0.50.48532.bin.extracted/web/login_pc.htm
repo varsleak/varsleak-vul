@@ -1,0 +1,142 @@
+<!doctype html>
+<!--[if lt IE 7 ]>
+<html class="ie6" lang="zh-cn"><![endif]-->
+<!--[if IE 7 ]>
+<html class="ie7" lang="zh-cn"><![endif]-->
+<!--[if IE 8 ]>
+<html class="ie8" lang="zh-cn"><![endif]-->
+<!--[if IE 9 ]>
+<html class="ie9" lang="zh-cn"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="w3c newYear"><!--<![endif]-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>360安全路由</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link type="text/css" href="css/reset.css" rel="stylesheet"/>
+    <link type="text/css" href="css/nav.css" rel="stylesheet"/>
+    <link type="text/css" href="css/default.css" rel="stylesheet"/>
+    <link type="text/css" href="css/login.css" rel="stylesheet"/>
+    <script type="text/javascript" src="./javascript/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="./javascript/jq.plugin.js"></script>
+    <script type="text/javascript" src="./javascript/new_lib.js"></script>
+    <script type="text/javascript" src="./javascript/cookie.js"></script>
+    <script type="text/javascript" src="./javascript/module.js"></script>
+    <script type="text/javascript" src="./javascript/language_CN.js"></script>
+    <script type="text/javascript" src="./javascript/aes.js"></script>
+</head>
+
+<body class="newYear">
+
+<div class="happy-new-year-area">
+    <div class="blankNewYearArea">
+        <div class="happy-new-year-l"><img src="./images/happy-new-year-l.png" /></div>
+        <div class="happy-new-year-r"><img src="./images/happy-new-year-r.png" /></div>
+    </div>
+</div>
+<div class="topbar newYear">
+    <div class="container">
+        <div class="logo">
+            <img id="logo_img" src="images/nav-logo.png" alt=""/>
+        </div>
+        <ul class="nav">
+            <li><a id="official_website" href="http://luyouw.360.cn/" target="_blank"></a></li>
+            <li><a id="bbs" href="http://bbs.360.cn/forum-7007-1.html" target="_blank"></a></li>
+            <li class="last"><a id="micro_blog" href="http://weibo.com/luyou360" target="_blank"></a></li>
+        </ul>
+    </div>
+</div>
+<div id="login_area" class="login-area">
+    <div class="slogan" id="slogan"></div>
+    <div id="login" class="login">
+        <form id="login_frm" action="javascript:void(0)">
+            <div class="input-area clearfix">
+                <label id="lbl_login_pwd" for="login_pwd" class="input-label"></label>
+				<input type="text" value="360安全路由" class="sr-only" />
+                <input id="login_pwd" name="login_pwd" maxlength="64" type="password" class="input-txt" />
+                <input type="text" value="360LoginFlag" style="display:none;">
+            </div>
+            <!--<div id="pwd_check" class="security-status"></div>-->
+            <div class="button-area">
+                <button type="submit" class="btn_login" onClick="loginIn();"></button>
+            </div>
+        </form>
+    </div>
+    <div id="login_info" class="pass-info"></div>
+    <div id="login_router"></div>
+</div>
+<div id="lock_div"></div>
+<div id="message_layer">
+    <div id="msg_type" class="wait"></div>
+    <div id="msg" class="word"></div>
+</div>
+<script type="text/javascript">
+    var language_type = "CN";
+    var L = {};
+    $(document).ready(function () {
+        current_html = "login";
+        $.ajaxSetup({
+            cache: false //关闭AJAX相应的缓存
+        });
+        $("body").mousedown(function () {
+            hide_msgbox();
+        });
+        language_type = igd.global_param.language_type;
+        L = language[language_type]["JS"];
+        document.title = language[language_type]["TITLE"];
+        wan_status_detect_loop();
+		init_language(current_html);
+        init_text_event();
+        $("#login_pwd").focus();
+    });
+
+    function loginIn() {
+        if ($.cookie("Qihoo_360_login")) {
+            $.cookie('Qihoo_360_login', null, {
+                path: '/',
+                expires: 1
+            });
+        }
+        var obj = {};
+        obj.user = igd.global_param.default_user;
+        obj.pass = getAesString($("#login_pwd").val());
+        obj.from = 1;//PC
+        if (check_input("login_frm")) {
+            $.post("/router/web_login.cgi", obj, function (data) {
+                try {
+                    data = eval("(" + data + ")");
+                    if (data["success"]=="1"&&data["token_id"]!="") {
+                       location.href = "./new_index.htm?token_id="+data["token_id"];
+                    }
+                    else {
+                        if (!isNaN(data.err_no) && (data.err_no == "48" || data.err_no == "49"|| data.err_no == "50"|| data.err_no == "51"|| data.err_no == "52")) {
+                            show_message("login_failure" + data.err_no);
+                        } else {
+                            show_message("login_failure");
+                        }
+                    }
+                }
+                catch (e) {
+                    show_message("login_failure");
+                }
+            });
+        }
+    }
+	
+	var status_detect_timer;
+	function wan_status_detect_loop(){
+		$.post("/router/interface_status_show.cgi", {noneed: "noneed"});
+		if(status_detect_timer)
+			window.setInterval(status_detect_timer);
+		status_detect_timer = window.setInterval(function(){
+			//console.log("do not release link");
+			$.post("/router/interface_status_show.cgi", {noneed: "noneed"});
+		},30*1000);
+	}
+	
+</script>
+</body>
+</html>

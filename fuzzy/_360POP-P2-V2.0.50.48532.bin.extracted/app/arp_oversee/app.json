@@ -1,0 +1,21 @@
+{
+	"appsign":"arp_oversee",
+	"appname":"防ARP攻击",
+	"version":"1.0.12",
+	"dep_version":"1.3.0",
+	"description":"ARP防欺骗、IP/MAC绑定",
+	"bin_start":"./arp_oversee",
+	"author":"netcore",
+	"URL":"www.netcoretec.com",
+	"maintainer":"netcore",
+	"email":"",
+	"app_type":"local",
+	"icon":"./arp_oversee.png",
+	"rom_use":40,
+	"ram_use":960,
+	"start_reboot":"no",
+	"uninstall_reboot":"no",
+	"disable_reboot":"no",
+	"uninstall":"yes",
+	"disable":"yes"
+}

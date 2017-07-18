@@ -1,0 +1,79 @@
+﻿<div class="fix_ie_shadow"></div>
+<div class="form-border-shadow">
+    <div id="warning_count_center" class="grey-text">
+        <p id="wireless_advance_tip"></p>
+    </div>
+    <div id="wireless_advance_layer" class="app-box">
+        <form id="wireless_advance_frm" class="form-area" action="javascript:void(0);">
+            <div class="item">
+                <label class="form-label" id="lbl_radio_criterion" for=""></label>
+				<select id="wireless_base_band_sel" name="radio_criterion" style="width:148px;">
+                 </select>
+            </div>
+          <div class="item">
+                <label class="form-label" id="lbl_wireless_fragment" for=""></label>
+				<input type="text" maxlength="4" size="10" id="wireless_fragment" name="fragThreshold" class="input-text input-small" style="width:130px;" />
+				<span class="word_sep">(256-2346)</span>
+			</div>
+            <div class="item">
+                <label class="form-label" id="lbl_wireless_RTSThreshold" for=""></label>
+				<input type="text" maxlength="4" id="wireless_RTSThreshold" size="10" name="rtsThreshold" class="input-text input-small" style="width:130px;" />
+				<span class="word_sep">(256-2347)</span>
+            </div>
+			<div class="item">
+                <label class="form-label" id="lbl_wireless_preamble" for=""></label>
+				<select id="wireless_preamble_sel" name="preamble" style="width:148px;">
+                </select>
+            </div>
+			<div class="item section_hide">
+                <label class="form-label" id="lbl_wireless_protection" for=""></label>
+				<div class="radio_form radio_on" id="wireless_protection" onclick="radio_toggle(this);"></div>
+				<input type="hidden" name="protection" id="wireless_protection_hidden" />
+            </div>
+			<div class="item">
+                <label class="form-label" id="lbl_wireless_ampdu" for=""></label>
+				<div class="radio_form radio_on" id="wireless_ampdu" onclick="radio_toggle(this);"></div>
+				<input type="hidden" name="ampdu" id="wireless_ampdu_hidden" />
+            </div>
+			<div class="item section_hide">
+                <label class="form-label" id="lbl_wireless_tx_2_path" for=""></label>
+				<div class="radio_form radio_on" id="wireless_tx_2_path" onclick="radio_toggle(this);"></div>
+				<input type="hidden" name="tx_2_path" id="wireless_tx_2_path_hidden" />
+            </div>
+            <div class="item">
+                <label class="form-label" id="lbl_enable_upnp" for=""></label>
+                <div class="radio_form radio_on" id="enable_upnp" onclick="radio_toggle(this);"></div>
+                <input type="hidden" id="enable_upnp_hidden" value="0"/>
+                <input type="hidden" id="time_upnp" value="10"/>
+                <input type="hidden" id="count"/>
+            </div>
+            <div class="item">
+                <label class="form-label" id="lbl_p_plus" for=""></label>
+                <div class="radio_form radio_on" id="p_plus" onclick="radio_toggle(this);"></div>
+                <input type="hidden" id="p_plus_hidden" value="0"/>
+            </div>
+			<div class="item">
+                <label class="form-label" id="lbl_boa_deny_switch" for=""></label>
+				<div class="radio_form radio_on" id="boa_deny_switch" onclick="radio_toggle(this,'deny_switch_set');"></div>
+				<input type="hidden" name="enable" id="boa_deny_switch_hidden" />
+				<input type="hidden" id="deny_switch_old" />
+            </div>
+			<div class="item section_hide" id="deny_ip_layer">
+				<label class="form-label" id="lbl_deny_ip" for=""></label>
+				<input type="text" style="width:130px;" class="input-text input-small" name="ip" id="deny_ip" maxlength="15" autocomplete="off" />
+				<span id="ip_not_same_segment_tip"></span>
+				<input type="hidden" id="deny_ip_old" />
+				<input type="hidden" id="user_ip" />
+			</div>
+            <div class="item">
+                <label class="form-label" id="lbl_plugins_enable" ></label>
+                <div class="radio_form radio_off" id="plugins_enable" onclick="set_plugins_dialog(this);"></div>
+                <input type="hidden" id="plugins_enable_hidden" value="0"  />
+            </div>
+            <div class="item opt">
+				<input type="hidden" name="action" value="1" />
+                <input type="submit" class="btn submit_btn btn_confirm" onclick="developer_set()"/>
+            </div>
+        </form>
+    </div>
+</div>

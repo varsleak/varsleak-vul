@@ -1,0 +1,59 @@
+<div class="app-box">
+	<div class="box-bd">
+		<form name="qos_priority_form" id='qos_priority_form' class="form-area" method="post" action="" onsubmit="qos_priority_add();return false;">
+			<div class="item">
+				<label for="enable_id" class="isneed form-label"></label>
+				<select  name="enable" id="enable_id" class="select_line">
+					<option value="true" id="enableTrue"></option>
+					<option value="false" id="enableFalse"></option>
+				</select>
+			</div>
+			<div class="item">
+				<label for="name_id" class="isneed form-label"></label>
+				<input type="text" name="name" maxlength="31"  class="input-text"  id="name_id" autocomplete="off"/>
+			</div>
+			<div class="item">
+				<label for="prio" class="isneed form-label"></label>
+				<input type="text" name="prio" maxlength="4" class="input-text txt_54"  id="prio"  size="5" autocomplete="off"/>
+				<span class="tip"></span>
+			</div>
+			<div class="item">
+				<label for="class_id" class="isneed form-label"></label>
+				<select name="class" id="class_id" class="select_line">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+				</select>
+				<span class="tip"></span>
+			</div>
+			<div id="lan_ip_layer_wrap"></div>    <!--内网主机容器-->
+			<div id="wan_ip_layer_wrap"></div>    <!--目的主机容器-->
+			<div id="proto_port_wrap"></div>      <!--协议及端口容器-->
+			<div id="time_segment_layer"></div>   <!--时间容器-->
+			<div class="item opt">
+				<input type="hidden" name="deal" value="add" id="action_hidden"/>
+				<input type="hidden" name="old_id" id="old_id"/>
+				<button type="submit"  name="submitbutton" id="save_button"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button type="button" id="cancel" onClick="cancel_update()" class="off"></button>
+			</div>
+		</form>
+	</div>
+</div>
+<div id="smart-qos-list" class="app-box">
+	<div class="box-hd">
+		<h3 class="box-title"></h3>
+	</div>
+	<div class="box-bd">
+		<table class="data-table" id="qos_priority_list">
+		</table>
+		<div class="opt">
+			<button  name="clean" id="delAll" onclick="qos_policy_clean();"></button>
+		</div>
+	</div>
+</div>
+

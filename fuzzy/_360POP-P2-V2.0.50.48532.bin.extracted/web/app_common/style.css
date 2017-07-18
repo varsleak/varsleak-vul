@@ -1,0 +1,263 @@
+@charset "utf-8";
+html {
+	overflow: hidden;
+}
+body {
+	font-size: 14px;
+	color: #2b3238;
+	overflow: hidden;
+}
+p {
+	margin: 1.12em 0;
+}
+
+textarea {
+	border: 1px solid #E5E5E5;
+	border-radius: 5px;
+	background-color: #fff;
+}
+.btn_dis{
+	height: 34px;
+	padding: 0 20px;
+	border-radius: 4px; 
+	-webkit-border-radius: 4px; 
+	-moz-border-radius: 4px; 
+	line-height: 34px;
+	color:#585858;
+	background:#e7eaf1;
+	cursor: pointer;
+	border: none;
+}
+button.btdark {
+}
+button.btdark:hover {
+}
+/* 提示信息 */
+.showinfo {
+	border: 1px solid #FFD700;
+	background-color: #FFFFE1;
+	padding: 5px;
+}
+/* 文字换行 */
+.breakword {
+	word-wrap: break-word;
+	overflow: hidden;
+}
+/* 文字截断 */
+.ellipsis {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+/* 清除浮动 */
+.autoclear {
+	*zoom:1;
+}
+.autoclear:after {
+	content: ".";
+	display: block;
+	clear: both;
+	height: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 0;
+	line-height: 0;
+	overflow:hidden;
+}
+/* 必填项 */
+.isneed {
+	/*background: url("isneed.gif") right no-repeat;*/
+}
+/* 通用表单样式 */
+.formstyle {
+	/*margin: 0 0 20px;*/
+	margin:0;
+}
+.formstyle dt {
+	font-size: 14px;
+	color: #3093DA;
+	font-weight:bold;
+    width: 96%;
+    margin: 0 0 10px 1%;
+	padding:8px 0 12px 0;
+    text-align: center;
+	background: url(../images/line.png) no-repeat bottom;
+}
+.formstyle dt a {
+	font-size: 21px;
+	color: #666;
+	margin-right: 10px;
+}
+.formstyle dt a:hover {
+	text-decoration: none;
+}
+.formstyle dt a.cur {
+	color: #3093DA;
+	border-bottom: 1px solid #3093DA;
+}
+.formstyle dd {
+	margin: 0 0 10px;
+	line-height: 35px;
+	*zoom:1;
+}
+.formstyle dd:after {
+	content: ".";
+	display: block;
+	clear: both;
+	height: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 0;
+	line-height: 0;
+	overflow:hidden;
+}
+.formstyle dd label {
+	float: left;
+	width: 170px;
+	text-align: right;
+	padding-right: 30px;
+	margin-bottom: 3px;
+	color: #666666;
+}
+.formstyle dd label span {
+	display: block;
+	margin-top: -15px;
+}
+.formstyle dd label.inline {
+	display: inline;
+	float: none;
+	width: auto;
+	text-align: left;
+	padding: 0;
+	margin: 0 10px 0 0;
+	color: #666666;
+}
+.formstyle dd span {
+	color: #aaaaaa;
+	padding-left: 10px;
+	white-space: nowrap;
+	word-break: keep-all;
+	vertical-align: top;
+}
+.formstyle dd.formstyle_btn {
+	text-align: center;
+	margin:0 0 20px 0;
+}
+/* 通用表格显示 */
+.datatable {
+	width: 100%;
+	border-style: none;
+	background-color: #fff;
+	margin-bottom: 20px;
+	text-align: left;
+	border-collapse: collapse;
+}
+.datatable th, .datatable td {
+	padding: 5px;
+}
+.datatable thead th {
+	background-color: #eee;
+	margin: 0;
+	text-align: left;
+	border-top: 1px solid #cfcfcf;
+	border-bottom: 1px solid #cfcfcf;
+}
+.datatable thead td {
+	background-color: #ddd;
+	font-weight: bold;
+	border-top: 1px solid #cfcfcf;
+	border-bottom: 1px solid #cfcfcf;
+}
+.datatable thead td span {
+	font-size: 12px;
+	font-weight: 400;
+	color: #888;
+}
+.datatable tbody th {
+	width: 20%;
+	background-color: #f7f7f7;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+}
+.datatable tbody div {
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+	font-weight: 400;
+	color: #888;
+}
+.datatable tbody td {
+	background-color: #fff;
+	border-bottom: 1px solid #ddd;
+	white-space:normal; 
+	word-break:break-all;
+	word-wrap:break-word;
+	border-collapse:collapse;
+}
+.datatable tbody tr.evenrow td {
+	background-color: #f4f4f4;
+}
+.datatable tfoot td {
+	background-color: #fafafa;
+	text-align: right;
+	border-bottom: 1px solid #cfcfcf;
+}
+/* 通用分页样式 */
+.showpage {
+	text-align: right;
+	margin: 12px;
+}
+.showpage a, .showpage span {
+	margin: 0px;
+	padding: 1px 5px;
+	border: 1px solid #9D9DD3;
+}
+.showpage a:hover {
+	color: #000;
+	border: 1px solid #004EA2;
+	text-decoration: none;
+}
+.showpage .pageinfo {
+	background-color: #156C03;
+	border: 1px solid #156C03;
+	color: #fff;
+}
+.showpage .nextprev {
+}
+.showpage .nolink {
+	color: #ccc;
+	border: 1px solid #ddd;
+	cursor: default;
+}
+.showpage .curpage {
+	background-color: #004EA2;
+	color: #fff;
+	border: 1px solid #004EA2;
+	cursor: default;
+}
+.showpage .gotopage {
+	padding: 1px;
+}
+.showpage .gotopage input {
+	border: 0;
+	height: 13px;
+}
+
+/* 表单调整 */
+#warning_count p{text-align: center}
+
+/* timeSlot  by lwj */
+.no-border{border: none;}
+.form-area .item.timeSlotSec,.form-area .item.weekSlotSec{height: 42px;line-height: 42px;}
+.item.timeSlotSec .form-label,.item.weekSlotSec .form-label{height: 42px;line-height: 42px;}
+.timeSlot,.weekSlot {overflow: hidden;line-height: normal;float: left;}
+.timeSlot input {width: 35px;height: 20px;padding: 10px; border-radius: 0; line-height: 20px;font-size: 14px;margin: 0 5px 0 10px;float: left;text-align: center;}
+.timeSlot input.start.hour{margin-left: 0;}
+.timeSlot b{float: left;font-weight: 400; margin-top: 14px;vertical-align: middle;}
+/* weekSlot  by lwj */
+.weekSlot{padding-top: 4px;}
+.weekSlot .noMargin{margin: 0;}
+.weekSlot span:hover{cursor: pointer;}
+.weekSlot span{display: block;float: left;margin-left: 15px;width: 32px;height: 32px;text-align: center;line-height: 32px;border: 1px solid #999999;border-radius: 5px;color: #999999}
+.weekSlot span.active{border: 1px solid #fcb145;color:#fcb145;}

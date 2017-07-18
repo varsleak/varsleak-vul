@@ -1,0 +1,33 @@
+#qos_set_form .form-label{
+	width: 43.5%;
+}
+#qos_advance_form .form-label{
+	width:31%;
+}
+#qos_priority_form .form-label{
+	width:38%;
+}
+#qos_priority_list .th_0{ width:20%;}
+#qos_priority_list .th_1{ width:25%;}
+#qos_priority_list .th_2{ width:25%;}
+#qos_priority_list .th_3{ width:30%;}
+#user_group_cnt { margin-left:40%;}
+#user_group_layer{ margin-bottom:10px}
+#qos_set_tab{ table-layout:fixed;}
+.form-area .text_tab{ padding:4px; width:220px;}
+#qos_set_tab_layer{ border-top:1px solid #E4E8EB; padding-top:36px; margin-top:36px;}
+#qos_set_tab_layer ul { padding-bottom:33px;}
+#qos_set_tab_layer ul li { font-size:12px; padding:3px 0 3px 35px; color:#7F7F7F;}
+#private_skip_tip{ font-size:12px; padding-left:10px;}
+#udp_up_len_tip{ font-size:12px;}
+#udp_up_len{ width:30px;}
+.form-area .txt_104{ width:104px;}
+.form-area .txt_44{ width:44px;}
+.form-area .txt_54{ width:54px;}
+#smart-qos-list .box-hd { border-bottom: 0 none; margin-bottom: 0;}
+#qos_advance_list .box-hd { border-bottom: 0 none; margin-bottom: 0;}
+.mr_20 { margin-right:20px;}
+.pl { padding-left:7px;}
+.mr_13 { margin-right:13px;}
+.m_rl{ margin: 0 13px 0 35px;}
+.tip { font-size:12px; padding-left:10px;}

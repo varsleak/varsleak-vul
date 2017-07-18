@@ -1,0 +1,606 @@
+<!doctype html>
+<!--[if lt IE 7 ]>
+<html class="ie6" lang="zh-cn"><![endif]-->
+<!--[if IE 7 ]>
+<html class="ie7" lang="zh-cn"><![endif]-->
+<!--[if IE 8 ]>
+<html class="ie8" lang="zh-cn"><![endif]-->
+<!--[if IE 9 ]>
+<html class="ie9" lang="zh-cn"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html class="w3c"><!--<![endif]-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="0">
+    <title></title>
+    <meta name="viewport" content="width=device-width, user-scalable=0, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/default.css"/>
+    <style type="text/css">
+		.btn,button {
+			background: #428bef;
+			filter:none;
+			
+		}
+        body {
+            background: #333;
+            overflow-x: hidden
+        }
+
+        img {
+            border: 0;
+            vertical-align: middle;
+        }
+
+        label {
+            font-size: 12px;
+            color: #373536;
+			vertical-align:middle;
+        }
+
+		input {
+			vertical-align:middle;
+		}
+		
+		#rem_answerTxt { margin-left:3px;}
+        select, .txt {
+            padding: 2px 0;
+            width: 170px;
+        }
+
+        .red {
+            color: #BD0000;
+        }
+
+        .f12 {
+            font-size: 12px;
+        }
+
+        .f14 {
+            font-size: 14px;
+        }
+
+        .notice {
+            padding: 20px 40px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .form-area .form-label {
+            width: 40%;
+        }
+
+        .wrap .opt {
+            text-align: center;
+        }
+
+        .wrap {
+            position: relative;
+            width: 700px;
+            height: 370px;
+            background: #FFFFFF;
+            margin: 30px auto;
+            border-radius: 3px;
+            -moz-box-shadow: 3px 3px 20px #333;
+            box-shadow: 3px 3px 20px #333;
+            border: 1px #177AE0 solid;
+        }
+
+        .m-wrap {
+            width: 100%;
+            background-color: #fff;
+        }
+
+        .m-notice {
+            padding: 10px;
+        }
+
+        .m-wrap .form-area .form-label {
+            width: 35%;
+            padding: 0;
+            margin: 0;
+        }
+
+        .m-wrap .form-area .input-text {
+            width: 150px;
+        }
+
+        .m-wrap .opt {
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .pc .form-error {
+            visibility: hidden;
+            color: #f00;
+        }
+
+        .mobile .form-error {
+            height: 30px;
+            text-align: center;
+            color: #f00;
+            visibility: hidden;
+        }
+
+        .title {
+            background: #428bef;
+            line-height: 60px;
+            height: 60px;
+            text-align: center;
+			color:#fff;
+			font-weight:bold;
+			text-shadow:0 1px 0 rgba(0,0,0,0.3);
+        }
+
+		.title_web{
+			font-size:18px;
+		}
+        #authing {
+            display: none;
+            position: absolute;
+            left: 25%;
+            top: 125px;
+            width: 50%;
+            height: 120px;
+            text-align: center;
+            line-height: 120px;
+            color: #fff;
+            background: #333 url(../images/jd.gif) center 30px no-repeat;
+        }
+
+        #yes_failure {
+            text-align: center;
+        }
+         #no_failure .form-area .input-text {
+            width: 200px;
+            height: 16px;
+            padding: 8px;
+            border: 1px solid #d8d8d8;
+            border-radius: 0;
+            line-height: 14px;
+            font-size: 14px;
+        }
+		#no_failure .form-area #question_sel.input-text{ border:none;}
+		.m-wrap .form-area #question_sel.input-text{ border:none;}
+    </style>
+    <script type="text/javascript" src="/javascript/module.js"></script>
+    <script type="text/javascript" src="/app_common/init.js"></script>
+    <script type="text/javascript" src="/javascript/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/javascript/new_lib.js"></script>
+	<script type="text/javascript" src="/javascript/aes.js"></script>
+    <script type="text/javascript" src="/javascript/err.js"></script>
+    <script type="text/javascript" src="/javascript/b64.js"></script>
+    <script type="text/javascript" src="/javascript/cookie.js"></script>
+    <script type="text/javascript" src="/javascript/language_CN.js"></script>
+    <script type="text/javascript" src="/app_common/app_ctrl/js/language_CN_app.js"></script>
+	<script type="text/javascript" src="/app_common/app_ctrl/js/app_lib.js"></script>
+</head>
+<body>
+<!--<iframe src="./demo.html"></iframe>-->
+<script type="text/template" id="pc-web">
+    <div class="wrap">
+        <div class="title title_web"></div>
+        <div class="notice">
+            <p class="noticeFirst"></p>
+
+            <p class="noticeSec"></p>
+        </div>
+        <form action="javascript:void(0);">
+            <div class="pc" id="no_failure">
+                <div class="form-area">
+                    <div class="item">
+                        <label for="question_sel" class="form-label"></label>
+                        <input type="text" id="question_sel" readonly="readonly" class="input-text">
+                    </div>
+                    <div class="item">
+                        <label for="wirel_answer" class="form-label"></label>
+                        <input type="text" maxlength="32" id="wirel_answer" onFocus="clean_tips();"
+                               class="input-text" autocomplete="off">
+                        <span style="color: red; font-size: 12px; display: none;" class="off" id="tipmessage"></span>
+                        <input type="hidden" id="wirel_answer_id">
+                        <span class="form-error"></span>
+                    </div>
+                    <div id="authing"></div>
+                    <div class="item">
+                        <label  class="form-label"></label>
+                        <input type="checkbox" id="rem_answer" checked="checked"><label for="rem_answer" id="rem_answerTxt"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="c" id="yes_failure" style="display: none;">
+                <strong style="color: #ff0000;font-size: 12px;" id="failure_tip"></strong>
+            </div>
+            <div id="submitBut" class="opt">
+				<input id="confirm_btn" type="submit" class="btn" value=""/>
+            </div>
+        </form>
+    </div>
+</script>
+<script type="text/template" id="m-web">
+    <style>
+        html, body {
+            height: 100%;
+        }
+		body {
+			background:#fff;
+		}
+    </style>
+    <div class="m-wrap mobile">
+        <div class="title"></div>
+        <div class="m-notice">
+
+            <p class="noticeFirst"></p>
+
+            <p class="noticeSec"></p>
+        </div>
+        <div class="form-error"></div>
+        <form action="javascript:void(0);">
+            <div class="m-content form-area" id="no_failure">
+                <div class="item">
+                    <label for="question_sel" class="form-label"></label>
+                    <input type="text" id="question_sel" readonly="readonly" class="input-text">
+                </div>
+                <div class="item">
+                    <label for="wirel_answer" class="form-label"></label>
+                    <input type="text" maxlength="32" id="wirel_answer" onfocus="clean_tips();" class="input-text"  autocomplete="off"/>
+                    <input type="hidden" id="wirel_answer_id">
+                </div>
+                <div>
+                    <span style="color: red;font-size: 12px;margin-left: 80px" class="off" id="tipmessage"></span>
+                </div>
+                <div class="item">
+                    <label  class="form-label"></label>
+                    <input type="checkbox" id="rem_answer" checked="checked"><label for="rem_answer" id="rem_answerTxt"></label>
+                </div>
+            </div>
+            <div class="m-content" id="yes_failure" style="display: none">
+                <strong style="color: #ff0000;" id="failure_tip"></strong>
+            </div>
+            <div id="submitBut" class="opt">
+				<input id="confirm_btn" type="submit" class="btn" value=""/>
+            </div>
+        </form>
+    </div>
+    <div id="authing" style="background:#000 url(../images/jd.gif) no-repeat center center;"></div>
+</script>
+<script type="text/javascript">
+var COUNTDOWN = 600,appHtml = appL.safety_wireless.js,pwd = "",pwd_string = "";
+var path = "/app/safety_wireless/webs/";
+$(document).ready(function () {
+	$("body").mousedown(function (event) {
+        hide_msgbox();
+    });
+	$("#confirm_btn").unbind("click").bind("click",function(){
+		confirm_click();
+	});
+    getPostValue();
+	get_question();
+	add_event();
+    var c_pwd = $.cookie("c_pwd");
+    if (c_pwd){
+		var key = $.cookie("key");
+		pwd = getDAesString(c_pwd,key);
+		init_pwd();
+	}
+
+    init_time();
+});
+
+function init_time() {
+	//获取cgi中time的值，查看是否用户关闭过页?
+	$.post(path + "auth_info_failure.cgi",{mac:macStr},function(data){
+		data = eval("("+ data +")");
+		var b_time = data.time;
+		var left_time = 0;
+		var c_time = $.cookie("time");
+		var time = 0;
+		if(c_time){
+			if(b_time < c_time)
+				time = b_time;
+			else
+				time = c_time;
+		}
+		else{
+			time = b_time;
+		}
+		left_time = time;
+		if (left_time != 0) {
+			failure();
+			if (setIntervalId)
+				clearInterval(setIntervalId);
+			setIntervalId = setInterval(function () {
+				judge_how_time(left_time);
+				left_time--;
+			}, 1000);
+		}
+	});
+}
+
+
+var macStr, setIntervalId, auth_timer, urlStr;
+
+
+function failure() {
+    $("#confirm_btn").attr("class", "btn");
+    $("#confirm_btn").attr("disabled", true);
+    $('#no_failure').hide();
+    $('#yes_failure').show();
+    $('#submitBut').hide();
+    $('#tipmessage').hide();
+}
+
+function changeTip(data) {
+    var timeTip = parseInt(data);
+    var sec = timeTip % 60;
+    var min = Math.floor(timeTip / 60);
+    if (parseInt(sec) == 0) {
+        var result = min + appCommonJS.timeFull.min;
+    } else {
+        if(min == 0)
+            var result=sec+appCommonJS.time.sec;
+        else
+            var result=min+appCommonJS.time.min+sec+appCommonJS.time.sec;
+    }
+    return result;
+}
+
+function get_question() {
+    $.post(path + 'auth_info_check_get.cgi', 'noneed=noneed', init_question);
+}
+
+function init_question(data) {
+	var data = eval("("+ data +")");
+    $("#question_sel").val(data.question);
+}
+
+function getPostValue(){
+	var obj = {};
+	var keywords = ["pcip","pcmac","url"];
+	var param = decodeURI(window.location.toString()).split("?");
+	var val = param[1];
+	if(param.length > 2){//访问的网址中的参数中自带问号
+		for(var i = 2; i < param.length; i++){
+			val += "?" + param[i];
+		}
+	}
+	
+	var postValue = val.split("&");
+    for (var s = 0; s < postValue.length; s++) {
+        if (postValue[s].split("=")[0] == keywords[0]) {
+            obj.ip = postValue[s].substring(keywords[0].length+1,postValue[s].length);
+        }
+        if (postValue[s].split("=")[0] == keywords[1]) {
+			obj.mac = postValue[s].substring(keywords[1].length+1,postValue[s].length);
+			macStr = obj.mac;
+        }
+        if (postValue[s].split("=")[0] == keywords[2]) {
+			urlStr = utf8to16(base64decode(postValue[s].substring(keywords[2].length+1,postValue[s].length)));
+        }
+    }
+	return obj;
+}
+
+function confirm_click() {
+	var answer = "",pwd_val = $('#wirel_answer').val(),elem = $('#wirel_answer');
+	hide_msgbox();
+	if(elem.is(":focus")){
+		var ret = get_msgbox("wirel_answer","string");
+		if(!ret)
+			return;
+		else
+			elem.blur();
+	}
+	if (pwd_val != "" && pwd_val == pwd_string) {//说明用户根本没点密码字段
+		answer = pwd;
+	}
+	else{
+    	answer = $('#wirel_answer').val();
+		var ret = get_msgbox("wirel_answer","string");
+		if(!ret)
+			return;
+	}
+    if (answer == '') {
+        $('.form-error').css('visibility', 'visible');
+        return false;
+    }
+    $('#tipmessage').hide();
+    var obj = new Object;
+	var lengthKeyObj0 = {
+        "rand_key": "",
+        "key_index": ""
+    };
+		$.post("/router/get_rand_key.cgi",{"noneed": "noneed"},function(data){
+			data = dataDeal(data);
+			if (data.rand_key) {
+				lengthKeyObj0["rand_key"] = data.rand_key.substring(32, 64);
+				lengthKeyObj0["key_index"] = data.rand_key.substring(0, 32);
+			} else {
+				return;
+			}
+			obj.answer = encodeURIComponent(getAesString(answer,lengthKeyObj0));
+			var ret = getPostValue();
+			obj.ip = ret.ip;
+			obj.mac = ret.mac;
+			auth_ing();
+			auth_timer = setTimeout(function () {
+				auth_fin();
+				clearTimeout(auth_timer);
+			}, 3000);
+		
+			var authResult = appHtml.auth;
+		
+			$.post(path + 'auth_info_check.cgi', obj, function (data) {
+				data = eval("(" + data + ")");
+				if (data == "SUCCESS") {
+					if ($("#rem_answer").attr("checked")) {
+						$.cookie("c_pwd", obj.answer, {
+							path: '/',
+							expires: 1
+						});
+						 $.cookie("key", lengthKeyObj0.rand_key, {
+							path: '/',
+							expires: 1
+						});
+						
+					} else {
+						$.cookie('c_pwd', null, {
+							path: '/',
+							expires: 1
+						});
+						$.cookie("key", null, {
+							path: '/',
+							expires: 1
+						});
+					}
+					window.setTimeout(function(){
+						alert(authResult[0]);jump_url( urlStr );
+					}, 3000);
+				} else {
+					window.setTimeout(function(){
+						$("#wirel_answer").val("").focus();
+						$("#authing").hide();alert(authResult[1]);
+						$.post( path +"auth_info_failure.cgi",{"mac":macStr},showMessage);
+					}, 3000);
+				}
+			});
+		});
+}
+
+function showMessage(res) {
+	var data = eval("("+ res +")");
+    var errorStr = appHtml.authError;
+    if (parseInt(data["can"]) < 0 || parseInt(data["can"]) > 4) {
+        return;
+    }
+    if (parseInt(data["can"]) == 0) {
+        failure();
+        if(setIntervalId)
+            clearInterval(setIntervalId);
+        var resultTime = COUNTDOWN;
+        setIntervalId = setInterval(function(){
+            judge_how_time(resultTime);
+            resultTime--;
+        },1000);
+    }
+    $('#tipmessage').show().html(errorStr[1] + data.can + errorStr[2]);
+}
+
+function judge_how_time(resultTime){
+    var hasCount = appHtml.hasAuthCount;
+    if(resultTime>0){
+        $.cookie( "time" ,resultTime,{ path: '/', expires: 1 });
+        var s_time=changeTip(resultTime);
+        $('#failure_tip').html(hasCount[0]+s_time+hasCount[1]);
+    }
+    else{
+        $.cookie('time',null,{ path: '/', expires: 1 });
+        $('#failure_tip').html(appHtml.refreshing);
+		$("#confirm_btn").attr("disabled", false);
+        window.location.reload();
+    }
+}
+
+function auth_ing() {
+    var authDom = $("#authing");
+    $("#confirm_btn").attr("class", "btn").prop("disabled",true);
+    authDom.show();
+    if (browser.versions.mobile || browser.versions.symbian) {
+        authDom.css({
+            "left":0,"top":0,"width": "100%","height":$(document).height() + "px","lineHeight":$(document).height() + 60 + "px","opacity":"0.8"
+        });
+    }
+}
+
+
+function auth_ing() {
+    $("#confirm_btn").attr("class", "btn");
+    $("#confirm_btn").attr("disabled", true);
+    $("#authing").show();
+    if (browser.versions.mobile || browser.versions.symbian) {
+        $("#authing").css("left", "0");
+        $("#authing").css("top", "0");
+        $("#authing").css("width", "100%");
+        $("#authing").css("height", $(document).height() + "px");
+        $("#authing").css("lineHeight", $(document).height() + 60 + "px");
+        $("#authing").css("opacity", "0.8");
+    }
+}
+
+function auth_fin() {
+    $("#confirm_btn").attr("class", "btn");
+    $("#confirm_btn").attr("disabled", false);
+    $("#authing").hide();
+}
+
+function jump_url(url) {
+    window.location.href = url;
+}
+
+function clean_tips() {
+    $('.form-error').css('visibility', 'hidden');
+    $('#tipmessage').hide();
+}
+
+
+function init_pwd(){
+	var  mask = '\u25CF';
+	for(var i = 0; i < pwd.length; i++){
+		pwd_string += mask;
+	}
+	$("#wirel_answer").val(pwd_string);
+	
+}
+
+function add_event(){
+	var elem = $("#wirel_answer");
+	elem.off("blur").on("blur", function () {
+		if(elem.val() == ""){
+			elem.val(pwd);
+		}
+	});
+	elem.off("focus").on("focus", function () {
+		if(elem.val() != ""){
+			elem.val("");
+		}
+	});
+}
+
+//判断访问终端
+var browser = {
+    versions: function () {
+        var u = navigator.userAgent,
+                app = navigator.appVersion;
+        return {
+            trident: u.indexOf('Trident') > -1, //IE内核
+            presto: u.indexOf('Presto') > -1, //opera内核
+            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内?
+            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终?
+            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览?
+            iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览?
+            iPad: u.indexOf('iPad') > -1, //是否iPad
+            webApp: u.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
+            symbian: u.indexOf('Symbian') > -1, //symbian
+            mac: u.indexOf('Mac OS X') > -1, //Mac OS X
+            linux: u.indexOf('Linux') > -1, //Linux
+            ie6: u.indexOf('MSIE 6.0') > -1 //ie6
+        };
+    }(),
+    language: (navigator.browserLanguage || navigator.language).toLowerCase()
+};
+
+if (browser.versions.mobile || browser.versions.symbian) {
+    document.write(document.getElementById('m-web').innerHTML);
+    init_app_language(appL.safety_wireless.safety_redirection);
+    //get_question();
+} else {
+    document.write(document.getElementById('pc-web').innerHTML);
+    init_app_language(appL.safety_wireless.safety_redirection);
+    //get_question();
+}
+</script>
+</body>
+</html>

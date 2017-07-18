@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>360安全路由</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+	<meta name="viewport" content="width=device-width,user-scalable=0,initial-scale=1,maximum-scale=1">
+	<link rel="stylesheet" href="/css/mobileinit.css"></head>
+<body>
+<!-- 预加载图片 -->
+<div style="position: absolute;clip:rect(1px,1px,1px,1px);">
+    <img  style="height: 1px;width: 1px" src="../images/init/mobile/suc.png?v=700"/>
+</div>
+	<div id="doc">
+		<!-- 欢迎页 -->
+		<div class="page page-welcome">
+			<div class="inner">
+
+				<div class="slogan">
+					<h2 id="thanks" class="sub-title"></h2>
+					<h1 id="router" class="title"></h1>
+					<h3 id="steps" class="tip"></h3>
+					<!--<a class="install-app" href="http://down.360safe.com/wifinext/luyou.apk">安装路由器卫士，两步上网</a>-->
+					<!--tmp start-->
+					<a id="start_install" href="javascript:;" class="install-app next" style="text-decoration:none;"></a>
+					<div id="agreement">
+						<input type="checkbox" id="agree" checked="checked" /><label id="lbl_agree" for="agree">加入<a target="_blank" href="./privacy.html" id="rule">《用户体验改进计划》</a></label>
+					</div>
+					<!--tmp end-->
+					<!--<p><a href="javascript:;" class="link next">以普通方式连接路由器</a></p>-->
+				</div>
+			</div>
+		</div>
+
+		<!-- 获取连接方式 -->
+		<div class="page page-panel page-get-method">
+			<div class="inner">
+				<div class="panel panel-auto-check">
+					<div class="icon loading"></div>
+					<h1 class="title" id="wan_detecting"></h1>
+					<h2 class="sub-title">
+						<span id="detect_need"></span>
+						<span class="count-down">15</span>
+						<span id="wait_time1"></span>					</h2>
+				</div>
+			</div>
+		</div>
+
+		<!-- 设置网络连接 -->
+		<div class="page page-set-network ">
+			<div class="inner">
+				<h1 id="start_title" class="title"></h1>
+				<!-- 静态ip的表单太高了，先隐藏这段 -->
+				<!-- <h2 class="sub-title">设置完宽带账号后，您的手机、电脑就可以上网了</h2> -->
+				<div class="error-msg"></div>
+				<div class="button-group clearfix">
+					<button type="button" id="btn_pppoe" data-type="pppoe" data-info=""></button>
+					<button type="button" id="btn_dhcp" data-type="dhcp" data-info=""></button>
+					<button type="button" id="btn_static" data-type="ip" data-info=""></button>
+				</div>
+				<div class="form form-pppoe show">
+					<form action="">
+						<p class="label-wrapper">
+							<input class="input input-pppoe-username" id="input-pppoe-username" name="pppoe-username" autocomplete="off" maxlength="127" />
+							<label id="lbl_pppoe" for="input-pppoe-username"></label>
+						</p>
+						<p class="label-wrapper">
+							<input class="input input-pppoe-password" id="input-pppoe-password" name="pppoe-password" autocomplete="off" maxlength="127" />
+							<label id="lbl_pppoe_pwd" for="input-pppoe-password"></label>
+						</p>
+						<p class="clearfix">
+							<a href="###" id="a_skip1" class="skip skip-to-wifi"></a>
+							<a href="###" id="a_pwd" class="skip-to-forget forget-password"></a>						</p>
+						<p class="opt">
+							<button class="next" id="btn_start_net"></button>
+						</p>
+					</form>
+				</div>
+				<div class="form form-dhcp">
+					<form action="">
+						<p id="wan_tips" class="desc"></p>
+						<p class="skip clearfix">
+							<a href="###" id="a_skip2" class="skip-to-wifi"></a>						</p>
+						<p class="opt">
+							<button id="btn_start_net2" class="next"></button>
+						</p>
+					</form>
+				</div>
+				<div class="form form-ip">
+					<form action="">
+						<p class="label-wrapper">
+							<input class="input input-ip-ip" name="ip-ip" id="input-ip-ip" autocomplete="off" />
+							<label id="lbl_ip" for="input-ip-ip"></label>
+						</p>
+						<p class="label-wrapper">
+							<input class="input input-ip-mask" name="ip-mask" id="input-ip-mask" autocomplete="off" />
+							<label id="lbl_mask" for="input-ip-mask"></label>
+						</p>
+						<p class="label-wrapper">
+							<input class="input input-ip-gateway" name="ip-gateway" id="input-ip-gateway" autocomplete="off" />
+							<label id="lbl_gateway" for="input-ip-gateway"></label>
+						</p>
+						<p class="label-wrapper">
+							<input class="input " name="ip-dns1" id="input-ip-dns1" autocomplete="off" />
+							<label id="lbl_dns1" for="input-ip-dns1"></label>
+						</p>
+						<p class="label-wrapper">
+							<input class="input input-ip-dns2" name="ip-dns2" id="input-ip-dns2" autocomplete="off" />
+							<label id="lbl_dns2" for="input-ip-dns2"></label>
+						</p>
+						<p class="skip clearfix">
+							<a href="###" id="a_skip3" class="skip-to-wifi"></a>						</p>
+						<p class="opt">
+							<button id="btn_start_net3" class="next"></button>
+						</p>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- 检测网络 -->
+		<div class="page page-panel page-test-network">
+			<div class="inner">
+				<div class="panel panel-test-network">
+					<div class="icon loading"></div>
+					<h1 id="detect_link" class="title"></h1>
+					<h2 class="sub-title">
+						<span id="detect_need"></span>
+						<span class="count-down">15</span>
+						<span id="wait_time2"></span>					</h2>
+				</div>
+			</div>
+		</div>
+
+		<!-- 密码错误 -->
+		<div class="page page-panel page-cable-error">
+			<div class="inner">
+				<div class="panel panel-pppoe-error">
+					<div class="icon error"></div>
+					<h1 class="title" id="net_err_title"></h1>
+					<p class="opt">
+						<button id="btn_link_ok" class="next red"></button>
+						<span class="link">
+							<a href="#" id="a_skip" class="l skip"></a>						</span>					</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- 其他错误 -->
+		<div class="page page-panel page-network-error">
+			<div class="inner">
+				<div class="panel panel-wan-error">
+					<div class="icon error"></div>
+					<h1 class="title" id="linkout_title"></h1>
+					<p class="opt">
+						<button id="btn_return" class="next red"></button>
+					</p>
+				</div>
+			</div>
+		</div>
+		
+
+		<!-- 忘记密码提示 -->
+		<div class="page page-panel page-forget-password">
+			<div class="inner">
+				<div class="panel panel-forget-password">
+					<header class="header">
+						<h1 id="forget_title" class="title"></h1>
+						<h2 id="get_user_pass" class="sub-title"></h2>
+					</header>
+					<div>
+						<h3 id="method1"></h3>
+						<div class="cont">
+							<img src="/images/init/mobile/adsl.png" alt="" />						</div>
+						<h3 id="method2"></h3>
+						<div class="cont">
+							<table id="telnum" class="phone-table">
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td class="adjust"></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div class="opt">
+						<button id="btn_close" class="next"></button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 网络检测成功 -->
+		<div class="page page-panel page-connected">
+			<div class="inner">
+				<div class="panel panel-connected">
+					<div class="icon success"></div>
+					<h1 class="title" id="linkok_title"></h1>
+					<h2 class="sub-title" id="continue_wifi"></h2>
+					<p class="opt">
+						<button class="next green">
+							<span id="btn_set_wifi"></span> (
+							<span class="count-down">5</span>
+							)						</button>
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- 设置WIFI -->
+		<div class="page page-set-wifi">
+			<div class="inner">
+				<h1 id="wifi_title" class="title"></h1>
+				<div class="error-msg"></div>
+				<div class="form">
+					<form action="">
+						<p class="label-wrapper">
+							<input class="input input-wifi-ssid" name="wifi-ssid" id="input-wifi-ssid" maxlength="29" placeholder="" autocomplete="off" />
+							<label id="lbl_wifi" for="input-wifi-ssid"></label>
+						</p>
+						<p class="label-wrapper">
+							<input class="input input-wifi-password" name="wifi-password" maxlength="64" device_type="mobile" id="input-wifi-password" placeholder="" autocomplete="off" />
+							<label id="lbl_wifi_pwd" for="input-wifi-password"></label>
+						</p>
+						<p class="label-wrapper" style="display:none;">
+							<input class="input input-admin-password" name="admin-password" maxlength="64" device_type="mobile"  id="input-admin-password" placeholder="" autocomplete="off" />
+							<label id="lbl_admin" for="input-admin-password" ></label>
+						</p>
+						<p class="strength-box"><span class="strength"><span id="strength_title"></span><span id="strength_high" class="strong"></span><span id="strength_medium" class="normal"></span><span id="strength_low" class="weak"></span><em class="l1"></em><em class="l2"></em><em class="l3"></em></span></p>
+						<p style="text-align: left;">
+							<input class="checkbox checkbox-same-password" autocomplete="off" type="checkbox" checked="" name="same-password"> <span class="span-same-password" id="same_password"></span>						</p>
+<!--						<p class="tip">
+							<strong style="color: #ff0000;">WiFi密码</strong>与路由器<strong style="color: #ff0000;">管理密码</strong>相同，无需记忆多个密码
+						</p>-->
+						<p class="opt">
+							<button id="btn_next" class="next"></button>
+						</p>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- 设置成功，重启 -->
+		<div class="page page-panel page-reboot">
+			<div class="inner">
+				<div class="panel panel-reboot">
+					<div class="icon loading"></div>
+					<h1 class="title" id="wifi_fin"></h1>
+					<h2 class="sub-title" id="wifi_restart"></h2>
+					<p class="count-down-wrapper">
+						<span class="count-down">10</span>
+						<span id="seconds"></span>					</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- 结束页 -->
+		<div class="page page-end">
+			<div class="inner">
+				<div class="part-top">
+					<div class="icon success"></div>
+					<h1 class="title" id="wifi_fin_title"></h1>
+					<h2 class="sub-title" id="mobile_link"></h2>
+				</div>
+				<div class="wifi-name-2-4"></div>
+                <div class="wifi-name-5"></div>
+			</div>
+		</div>
+        <!-- app结束页 -->
+        <div class="page page-app-end">
+            <div class="inner">
+                <div class="part-top">
+                    <h1 id="fin_title" class="title"></h1>
+                    <div class="icon app-success"></div>
+                    <h2 id="relink" class="sub-title"></h2>
+                    <div class="wifi-name-2-4"></div>
+                	<div class="wifi-name-5"></div>
+                </div>
+            </div>
+        </div>
+	</div>
+	<input type="hidden" id="page_type" value="mobile" />
+	<div id="lock_div"></div>
+	<div id="dialog">
+		<form id="dialog_frm" action="javascript:void(0);">
+			<div id="dialog_head"></div>
+			<div id="dialog_wrap">
+				<div id="dialog_msg"></div>
+				<input type="text" class="dialog_focus"/>
+			</div>
+			<div id="dialog_btn_layer_wrap" class="form-area">
+				<div id="dialog_btn_layer" class="item opt">
+					<input type="submit" id="dialog_confirm_btn" class="btn submit_btn btn_confirm"/>
+				</div>
+			</div>
+		</form>
+	</div>
+	<script type="text/javascript" src="../javascript/jquery-1.7.2.min.js"></script>
+	<script>
+		(function() {
+			var type;
+			var $page = $('.page-set-network'), $form;
+
+			/**
+			 * 这里提供一个接口
+			 */
+
+			/* 参数为：name 和 错误信息 */
+			window.showError = function(field, err_msg) {
+				$('.error-msg').html(err_msg).css('visibility', 'visible');
+				$('.input-' + field).addClass('err-line');
+				setTimeout(function () {
+					$('.error-msg').html(err_msg).css('visibility', 'hidden');
+					$('.input-' + field).removeClass('err-line')
+				}, 2000)
+			}
+
+			var setNetWorkMethod = window.setNetWorkMethod = function(_type) {
+				type = _type;
+				var tab = $page.find('.button-group button[data-type=' + type + ']');
+				tab.addClass('current').siblings().removeClass('current');
+				$page.find('.info').html(tab.attr('data-info'));
+				$form = $page.find('.form').hide().filter('.form-' + type).show();
+				if (type == 'pppoe') {
+					$page.find('.forget-password').show();
+				} else {
+					$page.find('.forget-password').hide();
+				}
+			}
+			$page.find('.button-group').on('click', 'button', function() {
+				setNetWorkMethod($(this).attr('data-type'));
+			}).find('button:first').click();
+
+			$('.input-wifi-password').focus(function() {
+				srouter.init.wifi.showPassStrange($(this));
+                var  me=$(this);
+                setTimeout(function(){
+                    $(document).scrollTop(me.offset().top-10);
+                },500);
+			});
+            $('.input-wifi-password').blur(function() {
+				var $strength = $('.strength-box .strength').hide();
+			});
+			$('.input-admin-password').focus(function() {
+				srouter.init.wifi.showPassStrange($(this));
+				var  me=$(this);
+				setTimeout(function(){
+					$(document).scrollTop(me.offset().top-10);
+				},500);
+			});
+			$('.input-admin-password').blur(function() {
+				$strength = $('.strength-box .strength').hide();
+			});
+            $page.find('[name=pppoe-username],[name=pppoe-password],[name=ip-ip],[name=ip-mask],' +
+                    '[name=ip-gateway],[name=ip-dns1],[name=ip-dns1]').focus(function() {
+                var  me=$(this);
+                setTimeout(function(){
+                    $(document).scrollTop(me.offset().top-10);
+                },350);
+            });
+			window.setWifiPasswordStrength = function(level) {
+				$('.strength-box .strength')
+					.attr('class', 'strength')
+					.addClass('strength-' + level);
+			};
+
+			
+			window.getNetworkSetting = function() {
+				var data = {};
+				$form.find('input').each(function() {
+					data[this.name] = this.value;
+				});
+				return {
+					method: type,
+					data: data
+				}
+			}
+
+			window.isJumpMagView = function() {
+				return false;
+			};
+
+			setNetWorkMethod('pppoe');
+		})();
+	</script>
+	<script type="text/javascript" src="/javascript/jq.plugin.js"></script>
+	<script type="text/javascript" src="/javascript/aes.js"></script>
+    <script type="text/javascript" src="/javascript/b64.js"></script>
+	<script type="text/javascript" src="/javascript/module.js"></script>
+	<script type="text/javascript" src="/javascript/language_CN.js"></script>
+	<script type="text/javascript" src="/javascript/new_lib.js"></script>
+    <script type="text/javascript" src="/javascript/init.js"></script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<form id="wan_static_form" class="form-area" name="wan_static_form" action="javascript:void(0);">
+    <div class="item">
+
+        <label class="form-label" id="lbl_wan_setup_ip2" for=""></label>
+
+        <input name="ip" id="wan_setup_ip2" type="text" class="input-text input-big" maxlength="15" autocomplete="off"/></div>
+    <div class="item">
+
+        <label class="form-label" id="lbl_wan_setup_mask2" for=""></label>
+
+        <input name="mask" id="wan_setup_mask2" type="text" class="input-text input-big" maxlength="15" autocomplete="off"/></div>
+    <div class="item">
+
+        <label class="form-label" id="lbl_wan_setup_gw2" for=""></label>
+
+        <input name="gw" id="wan_setup_gw2" type="text" class="input-text input-big" maxlength="15" autocomplete="off"/></div>
+    <div class="item">
+
+        <label class="form-label" id="lbl_wan_setup_mac2" for=""></label>
+
+        <input name="mac" id="wan_setup_mac2" type="text" class="input-text input-big" maxlength="17"/>
+        <input type="button" class="btn gray margin-h btn_clone_mac" onClick="set_mac_clone(2)"/>
+        <input type="button" class="btn gray btn_recover_mac" onClick="resume_mac(2)"></div>
+    <div class="item">
+
+        <label class="form-label" id="lbl_wan_setup_dns21" for=""></label>
+
+        <input name="dns1" id="wan_setup_dns21" type="text" class="input-text input-big" maxlength="15" autocomplete="off"/></div>
+    <div class="item">
+
+        <label class="form-label" id="lbl_wan_setup_dns22" for=""></label>
+
+        <input name="dns2" id="wan_setup_dns22" type="text" class="input-text input-big" maxlength="15" autocomplete="off"/>
+        <span id="span_dns22_choose" class="word_sep"></span>
+
+    </div>
+    <div class="item section_hide">
+
+        <label class="form-label" id="lbl_wan_setup_up_bandwidth2" for="wan_setup_up_bandwidth2"></label>
+
+        <span id="span_up_bandwidth2" class="word_sep"></span>
+        <input id="wan_setup_up_bandwidth2" name="up_bandwidth" type="text" size="4" maxlength="4" class="txt" autocomplete="off" />
+        <span class="word_sep">Mbit/s</span>
+        <span id="span_down_bandwidth2" class="word_sep"></span>
+        <input id="wan_setup_down_bandwidth2" name="down_bandwidth" type="text" size="4" maxlength="4" class="txt"/>
+        <span class="word_sep">Mbit/s</span>
+
+    </div>
+    <div class="item section_hide">
+
+        <label class="form-label" id="lbl_isp_type" for="isp_radio1"></label>
+
+        <input type="radio" class="input-radio" name="isp_radio" value="CHINATELECOM" checked="checked"
+               onClick="set_isp_value(this.value,2)" id="isp_radio1"/>
+        <label id="lbl_isp_radio1" for="isp_radio1"></label>
+        &nbsp;&nbsp;
+        <input type="radio" class="input-radio" name="isp_radio" value="CNCGROUP" onClick="set_isp_value(this.value,2)"
+               id="isp_radio2"/>
+        <label id="lbl_isp_radio2" for="isp_radio2"></label>
+        &nbsp;&nbsp;
+        <input type="radio" class="input-radio" name="isp_radio" value="AUTO" onClick="set_isp_value(this.value,2)"
+               id="isp_radio3"/>
+        <label id="lbl_isp_radio3" for="isp_radio3"></label>
+        <input type="hidden" name="isp" id="isp2" value="CHINATELECOM"/>
+    </div>
+    <div class="item section_hide">
+
+        <label class="form-label" id="lbl_detect" for="detec_on"></label>
+
+        <input type="radio" class="input-radio" name="line_detect" id="detec_on" value="1"
+               onClick="set_detect_value(this.value);">
+        <label id="lbl_detect_on" for="detec_on"></label>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="radio" class="input-radio" name="line_detect" id="detec_off" value="0" checked="checked"
+               onClick="set_detect_value(this.value);">
+        <label id="lbl_detect_off" for="detec_off"></label>
+        <input type="hidden" name="line_detect" id="line_detect" value="0"></div>
+    <div class="item section_hide">
+
+        <label class="form-label" id="lbl_cut_time" for="fmac_time0"></label>
+
+        <input type="radio" class="input-radio" name="time" value="0" onClick="cut_timer_change(this.value)"
+               checked="checked" id="fmac_time0">
+        <label id="lbl_fmac_time0" for="fmac_time0"></label>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="radio" class="input-radio" name="time" value="1" onClick="cut_timer_change(this.value)"
+               id="fmac_time1">
+        <label id="lbl_fmac_time1" for="fmac_time1"></label>
+        <input type="hidden" name="timer_enable" id="cut_time_hidden" value="0"></div>
+    <div id="cut_time_set_body" class="item section_hide">
+        <span id="span_week" class="item_text"></span>
+		<span class="item_content fix_check">
+			<input type="checkbox" class="input-chx" name="monday" value="1" id="wan_day0">
+			<label id="lbl_wan_day0" for="wan_day0"></label>
+			<input type="checkbox" class="input-chx" name="tuesday" value="2" id="wan_day1">
+			<label id="lbl_wan_day1" for="wan_day1"></label>
+			<input type="checkbox" class="input-chx" name="wednesday" value="3" id="wan_day2">
+			<label id="lbl_wan_day2" for="wan_day2"></label>
+			<input type="checkbox" class="input-chx" name="thursday" value="4" id="wan_day3">
+			<label id="lbl_wan_day3" for="wan_day3"></label>
+			<input type="checkbox" class="input-chx" name="friday" value="5" id="wan_day4">
+			<label id="lbl_wan_day4" for="wan_day4"></label>
+			<input type="checkbox" class="input-chx" name="saturday" value="6" id="wan_day5">
+			<label id="lbl_wan_day5" for="wan_day5"></label>
+			<input type="checkbox" class="input-chx" name="sunday" value="7" id="wan_day6">
+			<label id="lbl_wan_day6" for="wan_day6"></label>
+			<input type="hidden" name="timer_day" id="wan_day" value=""></span>
+    </div>
+    <div class="item section_hide">
+
+        <label class="form-label" id="span_time_set" for="wan_start_hour"></label>
+
+        <input type="text" maxlength="2" size="5" name="start_hour" id="wan_start_hour" class="txt" autocomplete="off"/>
+		<span class="word_sep">
+			<label id="lbl_wan_start_hour" for="wan_start_hour"></label>
+		</span>
+        <input type="text" maxlength="2" size="5" name="start_minute" id="wan_start_min" class="txt" autocomplete="off"/>
+		<span class="word_sep">
+			<label id="lbl_wan_start_min" for="wan_start_min"></label>
+		</span>
+        <span class="word_sep">---</span>
+        <input type="text" maxlength="2" size="5" name="end_hour" id="wan_end_hour" class="txt" autocomplete="off"/>
+		<span class="word_sep">
+			<label id="lbl_wan_end_hour" for="wan_end_hour"></label>
+		</span>
+        <input type="text" maxlength="2" size="5" name="end_minute" id="wan_end_min" class="txt" autocomplete="off"/>
+		<span class="word_sep">
+			<label id="lbl_wan_end_min" for="wan_end_min"></label>
+		</span>
+    </div>
+    <div class="item">
+        <label class="form-label"></label>
+        <a id="wan_advance_link" class="default_link" href="javascript:void(0);" onclick="wan_advance_toggle(2);"></a>
+    </div>
+    <div id="advance_body" class="section_hide">
+		<div class="item">
+
+			<label class="form-label" for="">MTU</label>
+
+			<input name="mtu" id="wan_setup_mtu2" type="text" class="input-text input-small" value="1500" maxlength="4"/>
+			<span class="word_sep">(576-1500)</span>
+
+		</div>
+        <div class="item">
+            <label class="form-label" id="lbl_work_mode" for=""></label>
+            <input type="radio" class="input-radio" name="work_mode_radio" value="NAT"
+                   onClick="set_work_mode_value(2,this.value)" checked="checked" id="work_mode_radio1"/>
+            <label id="lbl_work_mode_radio1" for="work_mode_radio1"></label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio" class="input-radio" name="work_mode_radio" value="ROUTE"
+                   onClick="set_work_mode_value(2,this.value)" id="work_mode_radio2"/>
+            <label id="lbl_work_mode_radio2" for="work_mode_radio2"></label>
+            <input type="hidden" name="work_mode" id="work_mode2" value="NAT"/>
+       </div>
+		<div class="item">
+			<label class="form-label" id="lbl_wan1_select" for=""></label>
+			<select id="wan1_select" style="width:168px;"></select>
+		</div>
+    </div>
+    <div class="item opt">
+        <input type="submit" class="btn submit_btn btn_confirm" onClick="submit_wan_config(2);"/>
+    </div>
+</form>

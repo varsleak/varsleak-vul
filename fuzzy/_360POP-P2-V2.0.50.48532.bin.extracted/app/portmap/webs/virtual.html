@@ -1,0 +1,42 @@
+    <div id="virtual_div">
+        <div class="frame_tab_laye app-box">
+            <div class="box-bd">
+                
+                <form name="virtual_service_frm" id="virtual_service_frm" class="form-area" method="post" action="" onsubmit="virtual_service_submit();return false;">
+                    <div class="item">
+                        <label  class="form-label"></label>
+                        <input name="name" id="virtual_name"  type="text" class="input-text" maxlength="32" autocomplete="off" />
+                    </div>
+                    <div class="item">
+                        <label  class="form-label"></label>
+                        <input name="in_ip" id="virtual_in_ip"  type="text" class="input-text" maxlength="15" autocomplete="off" />
+                    </div>
+                    <div id="proto_port_wrap"></div>
+                    <div class="formstyle item off">
+                            <label  class="form-label"></label>
+                            <select id="uinames" name="uiname">
+                                <option value="ALL" selected="selected">ALL</option>
+                            </select>
+                    </div>
+                    <div class="item opt">
+                        <input type="hidden" name="mode" value="0" id="action"/>
+                        <button type="submit" id="save"></button>
+                        <button type="button" id="cancel" style="display:none;" onclick="load_app_page('virtual','init_virtual')"></button>
+                        <div id="modify_hidevalue_box"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="frame_list_layer app-box" id="virtual-list">
+            <div class="box-hd">
+                <h3 class="box-title"></h3>
+            </div>
+            <div class="box-bd">
+                    <table class="data-table" id="virtual_service_list">
+                    </table>
+                    <div class="opt">
+                            <button type="button" onclick="virtual_clean_all()" id="delAllBtn" ></button>
+                    </div>
+            </div>
+        </div>
+    </div>

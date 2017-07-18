@@ -1,0 +1,32 @@
+<div id="manual_update_div" class="appContent_sectionModel">
+	<form id="update_form" method="post" target="iframe_hidden" action="/router/put_file.cgi"
+		  enctype="multipart/form-data">
+		<div>
+			<center>
+				<div id="manual_update_tip_wrapper">
+					<span id="div_manual_update_tip"></span>
+				</div>
+				<div id="cur_version_wrapper">
+					<label id="span_cur_ver"></label>
+					<span id="current_version"></span>
+				</div>
+				<div id="file_wrapper">
+					<a href="javascript:void(0);" class="file_btn">
+						<span id="span_view"></span>
+						<input type="file" name="put_file" id="put_file" class="filePrew" size="3"/>
+					</a>
+				</div>
+			</center>
+			<div id="update_file_name" class="item file_name_layer"></div>
+		</div>
+	</form>
+</div>
+<div class="appContent_sectionModel section_hide" id="reset_div">
+	<div class='loader-ring'>
+		<div class='loader-ring-light'></div>
+		<div class='loader-ring-track'></div>
+		<div class="loader-text" id="time"></div>
+	</div>
+	<div id="span_reset_tip" class="center_tip"></div>
+</div>
+<iframe name="iframe_hidden" id="iframe_hidden" height="0" width="0" frameborder="0"></iframe>

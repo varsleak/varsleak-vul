@@ -1,0 +1,28 @@
+    <div id="touch_link_switch_div">
+        <div class="frame_tab_laye app-box">
+			<form name="touch_switch_frm" id="touch_switch_frm" class="form-area" method="post" action="" onsubmit="touch_switch_submit();return false;">
+				<div class="item" style="height:73px;">
+					<label id="switch_ctr_lbl" class="from-label"></label>
+					<div class="radio_form" id="switch_ctr" onclick="touch_switch_submit();"></div>
+					<div class="status" id="switch_status"></div>
+					<div class="clear"></div>
+					<div id="link_wrapper"><span id="link"></span><span id="link_name"></span></div>
+				</div>
+				<div class="item off" id="push_mode_layer" style="height:auto;">
+					<label class="form-label"></label>
+					<div class="fl">
+						<p id="push_mode_text"></p>
+						<p><a href="javascript:void(0);" id="push_mode_link" onclick="push_mode_submit(this)"></a></p>
+					</div>
+					<br style="margin:0; padding:0; clear:both;" />
+				</div>
+				<div id="wifi_tip" class="off">
+				
+				</div>
+				<div class="item off" id="table_layer">
+					<div id="hopeGetCard"></div>
+					<table id="auth_list_tab" class="data-table"></table>
+				</div>	
+			</form>
+        </div>
+    </div>

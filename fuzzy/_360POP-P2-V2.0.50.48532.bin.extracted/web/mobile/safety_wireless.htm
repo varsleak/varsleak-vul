@@ -1,0 +1,85 @@
+<div class="swiper-wrapper safetyWirelessSwiperWrapper">
+    <section class="swiper-slide app-form safetyWirelessHost">
+        <dl>
+            <dd class="select_dd safetyWirelessTitle" data-html-name="safetyWirelessSet"></dd>
+            <dd class="select_dd safetyWirelessTitle" data-html-name="safetyWirelessWhite"></dd>
+            <dd class="select_dd safetyWirelessTitle" data-html-name="safetyWirelessBlack"></dd>
+        </dl>
+    </section>
+    <section class="swiper-slide app-form safetyWirelessSet">
+        <form id="second_protect_set_frm" method="post">
+            <dl>
+                <dd>
+                    <label class="form-label"></label>
+                    <span class="switch-txt"></span>
+                    <input id="safety_wireless_status" type="checkbox"   class="switch radio_form" />
+                    <label for="safety_wireless_status"></label>
+                    <input id="safety_wireless_status_hidden" type="hidden" value="" name="enable" />
+                </dd>
+                <dd>
+                    <label class="form-label" ></label>
+                    <a class="selectArrow" href="javascript:void(0);">
+                        <span id="ques_id_sel_txt" class="select-txt"></span>
+                        <input name="id" id="ques_id" type="hidden" />
+                        <img  src="./images/selectArrow.png" />
+                    </a>
+                    <ul class="option-box" id="ques_id_option"></ul>
+                </dd>
+                <dd class="off" id="idf_question">
+                	<label class="form-label isneed"></label>
+                    <input type="text" class="input-text"  name="question3" id="question3"  maxlength="32"  />
+                </dd>
+                <dd>
+                    <label class="form-label isneed"></label>
+                    <input id="wirel_answer" maxlength="32" type="text" data-aes="true" name="answer" autocomplete="off" />
+                </dd>
+                <dt class="expert" id="safetyWirelessSeniorSet">
+                    <a href="javascript:void(0);" id="safeWirelessSeniorBtn"></a><img  src="./images/expertArrow.png" />
+                </dt>
+                <dt class="seniorSetTip senior_set"></dt>
+                <dd class="senior_set">
+                    <label class="form-label"></label>
+                    <span class="switch-txt"></span>
+                    <input id="enable_router" type="checkbox"   class="switch radio_form" />
+                    <label for="enable_router"></label>
+                    <input type="hidden" name="enable_deny_router"  id="enable_router_hidden" />
+                </dd>
+                <dd class="senior_set">
+                    <label class="form-label"></label>
+                    <span class="switch-txt"></span>
+                    <input id="enable_computer" type="checkbox"   class="switch radio_form" />
+                    <label for="enable_computer"></label>
+                    <input type="hidden" name="enable_deny_computer"  id="enable_computer_hidden" />
+                    <input  type="hidden" value="1" name="action">
+                </dd>
+            </dl>
+        </form>
+    </section>
+    <section class="swiper-slide app-form safetyWirelessWhite">
+        <dl id="safetyWhiteCon">
+            <dd>
+                <label class="form-label"></label>
+                <input type="hidden" id="authAllStatus_hidden" name="authAllStatus"/>
+                <input id="authAllStatus" type="checkbox"   class="radio radio_form" />
+                <label for="authAllStatus" id="authAllStatus_radio"></label>
+            </dd>
+        </dl>
+        <dl id="safetyWirelessWhiteList"></dl>
+        <script type="text/template" id="safetyWirelessWhiteTemplate">
+            <dd>
+                <p><label>{{host_name}}</label><span>{{mac}}</span><a href="javascript:void(0);" class="pswAuth">{{type}}</a></p>
+                <p><a href="javascript:void(0);" class="addToBlack">{{addToBlack}}</a><a href="javascript:void(0);" class="BlackListAuth {{authBtnClass}}">{{authCon}}</a></p>
+            </dd>
+        </script>
+    </section>
+    <section class="swiper-slide app-form safetyWirelessBlack">
+        <dl id="safetyWirelessBlackList"></dl>
+        <div id="safetyBlackDel"><img src="images/delBtn.png"/><span id="safetyBlackDelTxt"></span></div>
+        <script type="text/template" id="safetyWirelessBlackTemplate">
+            <dd>
+                <p><label>MAC:</label><span>{{mac}}</span></p>
+                <p><a href="javascript:void(0);" class="addToWhite">{{addToWhite}}</a><a href="javascript:void(0);" class="delBlackList"></a></p>
+            </dd>
+        </script>
+    </section>
+</div>

@@ -1,0 +1,312 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache"/>
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<meta http-equiv="expires" content="0">
+<title></title>
+<link href="../../../../css/mobileinit.css" rel="stylesheet" type="text/css"  media="all" />
+<style type="text/css">
+#container { width:100%; min-width:320px; height:100%; margin:0 auto; }
+#topbar { width:100%;}
+/*url("../images/bg.gif") no-repeat 50% 70%*/ /*background-size:50%;*/
+#header_wrap { width:90%; max-width:1004px; margin:0 auto; border-bottom:1px solid #1b519b;}
+#header { text-align:center; padding:15px 0; border-bottom:1px solid #3479d6;}
+#header img { max-width:50%; max-height:25px; }
+#cnt { text-align:center; padding:22px 0;}
+.off { display:none;}
+#cnt img { max-width:50%; max-height:150px; }
+#article { padding-top:50px;}
+#article p { font-size:20px; color:#2e6bbe; text-align:center;}
+.btn, button { -moz-border-radius:65px; -webkit-boder-radius:65px; border-radius:65px; height:43px; line-height:43px; width:70%; font-size:16px; max-width:300px; height:45px; background:#3379d9; color:#fff; border:none; outline:none;}
+form div { text-align:center; color:#333; font-size:14px; margin:25px 0;}
+form label { padding-right:8px;}
+input.txt { border:1px solid #e6e6e6; height:33px; line-height:33px; width:204px; padding-left:5px;}
+#tipmessage { color:red; font-size:12px; text-align:center; padding:0; height:20px; line-height:20px; width:90%; margin:0 auto;} 
+#lock_div { position: absolute; background: #000; width: 100%; top: 0; left: 0; z-index: 4000; display: none;}
+#message_layer { border: 1px solid #f1f1f1; background: #fff; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5); -moz-box-shadow: 0 0px 4px rgba(0, 0, 0, 0.5); padding: 5px; position: absolute; z-index: 4001; display: none; width: 280px;}
+#msg_type { width: 50px; height: 50px; margin: 12px auto;}
+#msg { text-align:center; }
+#failure_tip { font-size:14px; color:#FF3D3E; text-align:center; padding-top:20px;}
+.wait { background-attachment: scroll; background-clip: border-box; background-color: rgba(0, 0, 0, 0); background-image: url("/images/loading.gif"); background-origin: padding-box; background-position: center bottom; background-repeat: no-repeat; background-size: 50px auto, 50px auto;}
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<script type="text/javascript" src="/javascript/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/javascript/module.js"></script>
+<script type="text/javascript" src="/javascript/new_lib.js"></script>
+<script type="text/javascript" src="/javascript/cookie.js"></script>
+<script type="text/javascript" src="/javascript/aes.js"></script>
+<script type="text/javascript" src="/javascript/err.js"></script>
+<script type="text/javascript" src="/app_common/app_ctrl/js/language_CN_app.js"></script>
+<script type="text/javascript" src="/app_common/app_ctrl/js/app_lib.js"></script>
+<scropt>
+</head>
+<body>
+	<div id="container">
+    	<div id="topbar">
+        	<div id="header_wrap" class="off">
+                <div id="header">
+                    <img src="../images/logo.png" />
+                </div>
+            </div>
+            <div id="cnt" class="off">
+                <img src="../images/bg.gif">
+            </div>
+        </div>
+        <div id="article" class="off">
+        	<p></p>
+            <div id="portal_layer">
+                <form id="portal_form" action="javascript:void(0);">
+                    <div>
+                        <label id="lbl_pass"></label>
+                        <input type="text" id="answer" class="txt" maxlength="30" style="width:210px;" />
+                        <div id="tipmessage"></div><!--密码错误提示-->
+                    </div>
+                    <div>
+                        <input type="submit" value="" class="btn" />
+                     </div>
+                </form>
+            </div>
+            <div id="failure_tip"></div><!--次数提示-->
+        </div>
+    </div>
+    <div id="lock_div"></div>
+    <div id="message_layer">
+    	<div id="msg_type" class="wait"></div>
+    	<div id="msg" class="word"></div>
+	</div>
+</body>
+<script type="text/javascript">
+var appHtml = appL.igd_ap.js;
+var message_panel =message_panel|| new Object();
+message_panel = {
+	wait:{
+		type:"wait",
+		auto_fade:false,
+		message:appCommonJS.controlMessage.s_wait
+	},
+	error:{
+		type:"error",
+		auto_fade:true,
+		message:appCommonJS.controlMessage.c_fail
+	},
+	success:{
+		type:"success",
+		auto_fade:true,
+		message:appCommonJS.controlMessage.s_suc
+	}
+};
+var portal = {
+	path:"/app/igd_ap/webs/",
+	COUNTDOWN:300,
+	setIntervalId:null,
+	auth_timer:null,
+	timer:null,
+	param:{},
+	bind_event:function(){
+		var _this = this;
+		$(".btn").unbind("click").bind("click",function(){
+			_this.auth();
+		});
+		$("#answer").unbind("focus").bind("focus",function(){
+			 $('#tipmessage').css({visibility:"hidden"});
+		});
+	},
+	getPostValue:function(){
+		var _this = this;
+		var temp = decodeURI(location.toString());
+		var temp_str = temp.split("|");
+		var postValue = window.location.search.substr(1).split("&");
+		for (var s = 0; s < postValue.length; s++) {
+			if (postValue[s].split("=")[0] == "pcip") {
+				_this.param.ip = postValue[s].split("=")[1];
+			}
+			if (postValue[s].split("=")[0] == "pcmac") {
+				_this.param.mac = postValue[s].split("=")[1];
+			}
+			if (postValue[s].substr(0, 3) == "url") {
+				_this.param.url = postValue[s].substr(4);
+			}
+		}
+	},
+	initTime:function(){
+		var _this = this;
+		$.post(_this.path + "auth_info_failure_get.cgi",{mac:_this.param.mac},function(data){
+			data = dataDeal(data);
+			var b_time = data.time;
+			
+			if(b_time == 0 && parseInt(data.can) == 0){//异常错误
+				window.location.href = _this.param.url;
+			}
+			
+			var left_time = 0;
+			var c_time = $.cookie("time");
+			var time = 0;
+			if(c_time){
+				if(b_time < c_time)
+					time = b_time;
+				else
+					time = c_time;
+			}
+			else{
+				time = b_time;
+			}
+			left_time = time;
+			if (left_time != 0) {
+				_this.failure();
+				if (_this.setIntervalId)
+					clearInterval(_this.setIntervalId);
+				_this.setIntervalId = setInterval(function () {
+					_this.judge_how_time(left_time);
+					left_time--;
+				}, 1000);
+			}
+		});
+	},
+	
+	judge_how_time:function(resultTime){
+		var _this = this;
+		var hasCount = appHtml.hasAuthCount;
+		if(resultTime>0){
+			$.cookie( "time" ,resultTime,{ path: '/', expires: 1 });
+			var s_time = _this.changeTip(resultTime);
+			$('#failure_tip').html(hasCount[0]+s_time+hasCount[1]);
+		}
+		else{
+			$.cookie('time',null,{ path: '/', expires: 1 });
+			$('#failure_tip').html(appHtml.refreshing);
+			window.location.reload();
+		}
+	},
+	
+	changeTip:function(data) {
+		var timeTip = parseInt(data);
+		var sec = timeTip % 60;
+		var min = Math.floor(timeTip / 60);
+		if (parseInt(sec) == 0) {
+			var result = min + appCommonJS.timeFull.min;
+		} else {
+			if(min == 0)
+				var result=sec+appCommonJS.time.sec;
+			else
+				var result=min+appCommonJS.time.min+sec+appCommonJS.time.sec;
+		}
+		return result;
+	},
+	
+	getWifi:function(){
+		var _this = this;
+		$.post(_this.path + "guest_ap_ssid_get.cgi",{},function(data){
+			var data = dataDeal(data);
+			$("#article p").html(appHtml.welcome + cutString(data.ssid,30));
+		});
+	},
+	getImg:function(){
+		var _this = this;
+		$.post(_this.path + "custom_file_path_get.cgi",{noneed:"noneed"},function(data){
+			$("#article").removeClass("off");
+			var data = dataDeal(data);
+			var path = data.file_path;
+			if(path != ""){
+				var d = new Date();
+				var path_arr = path.split("/");
+				var path_name_arr = path_arr[path_arr.length-1].split(".");
+				var ex = path_name_arr[path_name_arr.length-1];
+				//$("#cnt img").attr("src","./"+ path);
+				//$("#cnt").removeClass("off");
+				var height = 130 + 55 + 44 + 2;//logo + padding + 2 border
+				$("#cnt,#header_wrap").remove();
+				$("#topbar").css({
+					"height":height + "px",
+					"background":"url(\"./image."+ ex +"?t="+ d.getTime() +"\") no-repeat center center"
+				});
+			}
+			else {
+				$("#cnt,#header_wrap").removeClass("off");
+				$("#topbar").css("background","#2e6bbe");
+			}
+		});
+	},
+	showMessage:function(data) {
+		var data = dataDeal(data);
+		var _this = this;
+		var errorStr = appHtml.authError;
+		if (parseInt(data.can) < 0 || parseInt(data.can) > 4) {
+			show_message("error",errorStr[0]);
+			return;
+		}
+		if (parseInt(data.can) == 0) {
+			_this.failure();
+			if(_this.setIntervalId)
+				clearInterval(_this.setIntervalId);
+			var resultTime = _this.COUNTDOWN;
+			_this.setIntervalId = setInterval(function(){
+				_this.judge_how_time(resultTime);
+				resultTime--;
+			},1000);
+		}
+		$('#tipmessage').css({visibility:"visible"}).html(errorStr[1] + data.can + errorStr[2]);
+	},
+	auth:function() {
+		var _this = this;
+		var authResult = appHtml.auth;
+		var answer = $('#answer').val();
+		if (answer == '') {
+			show_message("error",appHtml.answerNotNull);
+			return false;
+		}
+		$('#tipmessage').css({visibility:"hidden"});
+		var obj = {};
+		var lengthKeyObj0 = get_rand_key(0);
+		obj.answer = encodeURIComponent(getAesString(answer,lengthKeyObj0));
+		obj.ip = _this.param.ip;
+		show_message("wait",authResult[2]);
+		if(_this.auth_timer)
+			clearTimeout(_this.auth_timer);
+		_this.auth_timer = setTimeout(function () {
+			hide_pop_layer("message_layer");
+		}, 3000);
+	
+		$.post(_this.path + 'auth_info_check.cgi', obj, function (data) {
+			data = dataDeal(data);
+			if (data == "SUCCESS") {
+				window.setTimeout(function(){
+					show_message("success",authResult[0]);
+					window.location.href = _this.param.url;
+				},3000);
+			} 
+			else{
+				window.setTimeout(function(){
+					show_message("error",authResult[1]);
+					$.post(_this.path + 'auth_info_failure_get.cgi','mac='+ _this.param.mac,function(data){
+						_this.showMessage(data);
+					});
+				},3000);
+			}
+		});
+	},
+	failure:function(){
+		$('#tipmessage').css({visibility:"hidden"})
+		$('#portal_layer').hide();
+		hide_pop_layer("lock_div");
+	},
+	init:function(){
+		$("#lbl_pass").html(appHtml.lbl_pass);
+		$(".btn").val(appHtml.btn);
+		this.getWifi();
+		this.getImg();
+		var param = !!window.location.href.toString().split("noparam=")[1];
+		if(!param){
+			this.bind_event();
+			this.getPostValue();
+			this.initTime();
+		}
+	}
+};
+$(document).ready(function(){
+	portal.init();
+});
+</script>
+</html>
+

@@ -1,0 +1,34 @@
+.tab_cont {
+    padding: 0 30px 20px;
+	text-align:center;
+}
+.qh_360_set_layer{
+    zoom: 1;
+}
+.qh_360_set_layer p {
+    font-size: 22px;
+    line-height: 1;
+    margin: 0 0 25px;
+	text-align:center;
+}
+.qh_360_set_layer p.seton {
+    color: #37c828;
+}
+.qh_360_set_layer p.seton span {
+    color: #b4b7be;
+}
+.qh_360_set_layer div.wrap {
+    overflow: hidden;
+}
+.qh_360_txt_layer {
+    color: #999;
+    font-size: 12px;
+    line-height: 1.5;
+}
+.qh_360_btn_layer {
+    float: right;
+}
+#web_count_list .text{
+    color: #ffba00;
+    font-size: 22px;
+}

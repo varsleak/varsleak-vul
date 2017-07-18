@@ -1,0 +1,6 @@
+PPPTYPE=auto
+USER=""
+PWD=""
+DEMAND=
+OP=
+MTU=1492

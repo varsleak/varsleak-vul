@@ -1,0 +1,67 @@
+﻿<div class="fix_ie_shadow"></div>
+<div class="form-border-shadow">
+    <div id="warning_count_center" class="grey-text">
+        <p id="system_time_tip"></p>
+    </div>
+    <form id="system_time_frm" class="form-area app-box" action="javascript:void(0);">
+        <div class="item">
+            <label class="form-label" id="span_cur_time"></label>
+            <span id="current_time"></span>
+        </div>
+        <div class="item">
+
+            <label class="form-label" id="lbl_get_time" ></label>
+            <input type="radio" id="get_time_mode0" onClick="change_get_time_mode(this.value);" value="0"
+                   name="get_time_mode">
+            <label id="lbl_get_time_mode0" for="get_time_mode0"></label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio" id="get_time_mode1" onClick="change_get_time_mode(this.value);" value="1"
+                   name="get_time_mode">
+            <label id="lbl_get_time_mode1" for="get_time_mode1"></label>
+            <input type="hidden" name="work_mode" id="get_time_mode_hidden"/>
+        </div>
+        <div class="section_hide" id="manual_set_div">
+            <div class="item">
+                <label class="form-label" id="lbl_system_date" ></label>
+
+                <input type="text" size="5" maxlength="4" id="system_year" name="year" class="input-text input-small" autocomplete="off"/>
+				<span class="word_sep">
+					<label id="lbl_system_year" class="time-label" for="system_year"></label>
+				</span>
+                <input type="text" size="5" maxlength="2" id="system_month" name="month" class="input-text input-small" autocomplete="off" />
+				<span class="word_sep">
+					<label id="lbl_system_month" class="time-label" for="system_month"></label>
+				</span>
+                <input type="text" size="5" maxlength="2" id="system_day" name="day" class="input-text input-small" autocomplete="off"/>
+				<span class="word_sep">
+					<label id="lbl_system_day" class="time-label" for="system_day"></label>
+				</span>
+            </div>
+            <div class="item">
+
+                <label class="form-label" id="lbl_system_time" ></label>
+
+                <input type="text" size="5" maxlength="2" id="system_hour" name="hour" class="input-text input-small" autocomplete="off" />
+				<span class="word_sep">
+					<label id="lbl_system_hour" class="time-label" for="system_hour"></label>
+				</span>
+                <input type="text" size="5" maxlength="2" id="system_minute" name="minute" class="input-text input-small" autocomplete="off" />
+				<span class="word_sep">
+					<label id="lbl_system_minute" class="time-label" for="system_minute"></label>
+				</span>
+                <input type="text" size="5" maxlength="2" id="system_second" name="second" class="input-text input-small" autocomplete="off" />
+				<span class="word_sep">
+					<label id="lbl_system_second" class="time-label" for="system_second"></label>
+				</span>
+            </div>
+        </div>
+        <div class="item section_hide" id="ntp_div">
+
+            <label class="form-label" id="lbl_timezone" ></label>
+            <select id="timezone_sel" name="NTP"></select>
+        </div>
+        <div class="item opt">
+            <input type="submit" class="btn submit_btn btn_confirm" onClick="system_time_submit()"/>
+        </div>
+    </form>
+</div>

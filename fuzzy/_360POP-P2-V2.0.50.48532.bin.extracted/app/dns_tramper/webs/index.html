@@ -1,0 +1,51 @@
+<!doctype html>
+<!--[if lt IE 7 ]><html class="ie6" lang="zh-cn"><![endif]-->
+<!--[if IE 7 ]><html class="ie7" lang="zh-cn"><![endif]-->
+<!--[if IE 8 ]><html class="ie8" lang="zh-cn"><![endif]-->
+<!--[if IE 9 ]><html class="ie9" lang="zh-cn"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html class="w3c"><!--<![endif]-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="format-detection" content="telephone=no"/>
+    <title></title>
+    <meta name="author" content="wbo" />
+    <!-- 以下两行必须载入 -->
+    <link rel="stylesheet" type="text/css" href="/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/css/default.css" />
+    <link rel="stylesheet" type="text/css" href="/app_common/style.css" />
+    <link rel="stylesheet" href="css/dns_tramper.css" type="text/css"/>
+    <script type="text/javascript" src="/javascript/module.js"></script>
+    <script type="text/javascript" src="/javascript/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/javascript/jq.plugin.js"></script>
+    <script type="text/javascript" src="/app_common/init.js"></script>
+    <script type="text/javascript" src="/app_common/app_ctrl/js/language_CN_app.js"></script>
+    <script type="text/javascript" src="/javascript/err.js"></script>
+    <script type="text/javascript" src="/app_common/app_ctrl/js/app_lib.js"></script>
+
+    <script type="text/javascript" src="js/dns_tramper.js"></script>
+</head>
+<body>
+    <div class="tab_area">
+        <h3 class="last selected">上网劫持行为检测</h3>
+    </div>
+    <div class="tab_cont qh_360_set_layer">
+        <p></p>
+        <div class="wrap">
+            <div class="qh_360_txt_layer breakword"></div>
+            <div class="qh_360_btn_layer">
+            <input type="hidden" value="1" id="qh_url_hidden" />
+            <!--<button type="submit" id="qh_360_url_btn" onclick="qh_url_enable();" >关闭</button>-->
+            </div>
+        </div>
+    </div>
+    <div class="tab_area">
+        <h3 id="web_count_title" class="last selected">上网劫持安全统计</h3>
+    </div>
+    <div class="tab_cont" id="web_count_list">
+        <div class="text">
+            累计拦截上网劫持行为 <strong id="protect_no" style="color:#428bef" >0</strong>
+            次!
+        </div>
+    </div>
+</body>
+</html>

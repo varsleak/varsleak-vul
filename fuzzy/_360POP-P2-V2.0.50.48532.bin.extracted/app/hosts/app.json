@@ -1,0 +1,21 @@
+{
+	"appsign":"hosts",
+	"appname":"hosts!",
+	"version":"0.0.0",
+	"dep_version":"1.3.140101",
+	"description":"hosts program",
+	"bin_start":"./hosts_app",
+	"author":"qihoo",
+	"URL":"www.360.cn",
+	"maintainer":"qihoo",
+	"email":"",
+	"app_type":"local",
+	"icon":"./hosts.png",
+	"rom_use":1000,
+	"ram_use":1000,
+	"start_reboot":"yes",
+	"uninstall_reboot":"no",
+	"disable_reboot":"yes",
+	"uninstall":"yes",
+	"disable":"yes"
+}
