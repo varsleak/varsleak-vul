@@ -1,10 +1,10 @@
-##Reference
-[https://bugs.php.net/bug.php?id=74145](https://bugs.php.net/bug.php?id=74145)
+## Reference 
+[https://bugs.php.net/bug.php?id=74145](https://bugs.php.net/bug.php?id=74145) 
 
-##Usage
-path/to/php path/to/issus74145.php path/to/issus74145.xml
+## Usage 
+path/to/php path/to/issus74145.php path/to/issus74145.xml 
 
-##USE ZEND ALLOC:
+## USE ZEND ALLOC 
 ```
 ➜  php-src git:(d2eca4d) ✗ valgrind --leak-check=full sapi/cli/php ~/php720dev/bin/xmlfuzz.php ~/php720dev/bin/crash.xml
 ==22828== Memcheck, a memory error detector
@@ -66,7 +66,7 @@ path/to/php path/to/issus74145.php path/to/issus74145.xml
 [1]    22828 segmentation fault  valgrind --leak-check=full sapi/cli/php ~/php720dev/bin/xmlfuzz.php 
 ```
 
-##NO ZEND ALLOC:
+## NO ZEND ALLOC 
 ```
 ➜  php-src git:(d2eca4d) ✗ USE_ZEND_ALLOC=0 sapi/cli/php ~/php720dev/bin/crash.php 
 [1]    1382 segmentation fault  USE_ZEND_ALLOC=0 sapi/cli/php ~/php720dev/bin/crash.php

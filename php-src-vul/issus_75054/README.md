@@ -1,10 +1,10 @@
-## NOTICE
+## NOTICE 
 it was affect version: 7.0.22/7.1.5/7.1.6./7.1.8
 
-##Reference
+## Reference 
 [https://bugs.php.net/bug.php?id=75054](https://bugs.php.net/bug.php?id=75054)
 
-##gdb trace log
+## gdb trace log 
 ```
 ➜  cli git:(PHP-7.1.8) ✗ gdb PHP718orig
 GNU gdb (Ubuntu 7.11.1-0ubuntu1~16.5) 7.11.1
@@ -52,7 +52,7 @@ at /home/varsleak/github/fuzzy/php-src.orig/Zend/zend_alloc.c:2417
 #18 0x00000000009878c6 in main (argc=2, argv=0x114c830) at /home/varsleak/github/fuzzy/php-src.orig/sapi/cli/php_cli.c:1381
 ```
 
-##valgrind trace log
+## valgrind trace log 
 ```
 ==11340== Memcheck, a memory error detector
 ==11340== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
