@@ -6,5 +6,5 @@ Reference
 
 [php-7.1.5RC1 heap-use-after-free vulnerability](https://bugs.php.net/bug.php?id=74609)  
 
-php-7.1.5 memory leak
+[php-7.1.5 memory leak](https://github.com/varsleak/varsleak-vul/tree/master/php-src-vul/memory-leaks)
 

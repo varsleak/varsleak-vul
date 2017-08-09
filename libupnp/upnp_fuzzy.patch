@@ -1,0 +1,212 @@
+diff --git a/upnp/sample/common/tv_device.c b/upnp/sample/common/tv_device.c
+index 2abba54..f632a08 100644
+--- a/upnp/sample/common/tv_device.c
++++ b/upnp/sample/common/tv_device.c
+@@ -1298,6 +1298,9 @@ int TvDeviceCallbackEventHandler(Upnp_EventType EventType, const void *Event, vo
+ 	Cookie = Cookie;
+ }
+ 
++unsigned short gport;
++const char *gip_address;
++
+ int TvDeviceStart(char *ip_address, unsigned short port,
+ 		  const char *desc_doc_name, const char *web_dir_path,
+ 		  print_string pfun, int combo)
+@@ -1318,8 +1321,8 @@ int TvDeviceStart(char *ip_address, unsigned short port,
+ 
+ 		return ret;
+ 	}
+-	ip_address = UpnpGetServerIpAddress();
+-	port = UpnpGetServerPort();
++	gip_address = ip_address = UpnpGetServerIpAddress();
++	gport = port = UpnpGetServerPort();
+ 	SampleUtil_Print("UPnP Initialized\n"
+ 			 "\tipaddress = %s port = %u\n",
+ 			 ip_address ? ip_address : "{NULL}", port);
+@@ -1385,34 +1388,124 @@ int TvDeviceStop(void)
+ 	return UPNP_E_SUCCESS;
+ }
+ 
++#include <libhfuzz.h>
++#include<sys/types.h>
++#include<sys/stat.h>
++#include<fcntl.h>
++
+ void *TvDeviceCommandLoop(void *args)
+ {
+-	int stoploop = 0;
+-	char cmdline[100];
+-	char cmd[100];
+-
+-	while (!stoploop) {
+-		sprintf(cmdline, " ");
+-		sprintf(cmd, " ");
+-		SampleUtil_Print("\n>> ");
+-		/* Get a command line */
+-		char *s = fgets(cmdline, 100, stdin);
+-		if (!s)
+-			break;
+-		sscanf(cmdline, "%s", cmd);
+-		if (strcasecmp(cmd, "exit") == 0) {
+-			SampleUtil_Print("Shutting down...\n");
++	sleep(1);
++	int fd = open("/tmp/run_fuzzy.log", O_WRONLY|O_CREAT|O_APPEND);
++	if (fd < 0){
++		fprintf(stderr, "open [%m]\n");
++		exit(0);
++	}
++	FILE * fp = fdopen(fd, "a");
++	if (0 == fp){
++		fprintf(stderr, "fdopen [%m]\n");
++		exit(0);
++	}
++	for (;;) {
++		size_t len = 0;
++		const uint8_t *buf = "";
++
++		HF_ITER(&buf, &len);
++		//fprintf(fp, "buf:%.*s -- %d\n", len > 16 ? 16 : len, buf, len);	
++
++		int myfd = socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
++		if (myfd == -1) {
++			fprintf(fp, "socket [%m]\n");
+ 			TvDeviceStop();
+-			exit(0);
+-		} else {
+-			SampleUtil_Print("\n   Unknown command: %s\n\n", cmd);
+-			SampleUtil_Print("   Valid Commands:\n"
+-					 "     Exit\n\n");
++			exit(1);
++		}
++
++		int sz = (1024 * 1024);
++		if (setsockopt(myfd, SOL_SOCKET, SO_SNDBUF, &sz, sizeof(sz)) == -1) {
++			fprintf(fp, "setsockopt [%m]\n");
++			TvDeviceStop();
++			exit(1);
++		}
++
++		if (setsockopt(myfd, SOL_SOCKET, SO_REUSEADDR, &sz, sizeof(sz)) == -1) {
++			fprintf(fp, "setsockopt [%m]\n");
++			TvDeviceStop();
++			exit(1);
++		}
++
++		if (setsockopt(myfd, SOL_SOCKET, SO_REUSEPORT, &sz, sizeof(sz)) == -1) {
++			fprintf(fp, "setsockopt [%m]\n");
++			TvDeviceStop();
++			exit(1);
++		}
++
++		struct sockaddr_in saddr;
++		saddr.sin_family = AF_INET;
++		saddr.sin_port = htons(gport);
++		saddr.sin_addr.s_addr = inet_addr(gip_address);
++		if (connect(myfd, (struct sockaddr *)&saddr, sizeof(saddr)) == -1) {
++			fprintf(fp, "\n%d -- connect [%m]\n", getpid());
++			TvDeviceStop();
++			exit(1);
++		}
++		//fprintf(fp, "\n%d -- connect successful.\n", getpid());	
++
++		if (send(myfd, buf, len, MSG_NOSIGNAL) != len) {
++			fprintf(fp, "send [%m]\n");
++			TvDeviceStop();
++			exit(1);
++		}
++		//fprintf(fp, "\n%d -- send successful.\n", getpid());	
++
++		if (shutdown(myfd, SHUT_WR) == -1) {
++			fprintf(fp, "shutdown [%m]\n");
++			TvDeviceStop();
++			exit(1);
+ 		}
+-	}
+ 
+-	return NULL;
+-	args = args;
++		char b[1024 * 1024];
++		while (recv(myfd, b, sizeof(b), MSG_WAITALL) > 0) {
++			//fprintf(fp, "%s\n", b);
++		} ;
++
++		close(myfd);
++
++		fprintf(stderr, "%s\n", "done");	
++		//close(fd);
++		//fclose(fp);	
++		// 		TvDeviceStop();
++		// exit(0);
++  	}
++		TvDeviceStop();
++		exit(0);
++	// int stoploop = 0;
++	// char cmdline[100];
++	// char cmd[100];
++
++	// while (!stoploop) {
++	// 	sprintf(cmdline, " ");
++	// 	sprintf(cmd, " ");
++	// 	SampleUtil_Print("\n>> ");
++	// 	// Get a command line 
++	// 	char *s = fgets(cmdline, 100, stdin);
++	// 	if (!s)
++	// 		break;
++	// 	sscanf(cmdline, "%s", cmd);
++	// 	if (strcasecmp(cmd, "exit") == 0) {
++	// 		SampleUtil_Print("Shutting down...\n");
++	// 		TvDeviceStop();
++	// 		exit(0);
++	// 	} else {
++	// 		SampleUtil_Print("\n   Unknown command: %s\n\n", cmd);
++	// 		SampleUtil_Print("   Valid Commands:\n"
++	// 				 "     Exit\n\n");
++	// 	}
++	// }
++
++	// return NULL;
++	// args = args;
++	
++	return (void *)0;
+ }
+ 
+ int device_main(int argc, char *argv[])
+diff --git a/upnp/sample/linux/tv_device_main.c b/upnp/sample/linux/tv_device_main.c
+index 9d59d5e..f0872f4 100644
+--- a/upnp/sample/linux/tv_device_main.c
++++ b/upnp/sample/linux/tv_device_main.c
+@@ -35,6 +35,12 @@
+ #include <stdarg.h>
+ #include <stdio.h>
+ 
++#include <stdbool.h>
++#define _GNU_SOURCE
++#include <sched.h>
++
++
++
+ int main(int argc, char *argv[])
+ {
+ 	int rc;
+@@ -45,14 +51,19 @@ int main(int argc, char *argv[])
+ 	sigset_t sigs_to_catch;
+ #endif
+ 	int code;
+-
++	
+ 	rc = device_main(argc, argv);
+ 	if (rc != UPNP_E_SUCCESS) {
+ 		return rc;
+ 	}
+ 
++	pthread_attr_t attr;
++
++	pthread_attr_init(&attr);
++	pthread_attr_setstacksize(&attr, 1024 * 1024 * 4);
++
+ 	/* start a command loop thread */
+-	code = ithread_create(&cmdloop_thread, NULL, TvDeviceCommandLoop, NULL);
++	code = ithread_create(&cmdloop_thread, &attr, TvDeviceCommandLoop, NULL);
+ 	if (code !=  0) {
+ 		return UPNP_E_INTERNAL_ERROR;
+ 	}
