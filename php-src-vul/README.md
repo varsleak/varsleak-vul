@@ -8,3 +8,4 @@ Reference
 
 [php-7.1.5 memory leak](https://github.com/varsleak/varsleak-vul/tree/master/php-src-vul/memory-leaks)
 
+[php-7.1.5 DoS vulnerability](https://bugs.php.net/bug.php?id=75054)  

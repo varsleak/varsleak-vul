@@ -1,3 +1,6 @@
+## NOTICE
+it was affect version: 7.0.22/7.1.5/7.1.6./7.1.8
+
 ##gdb trace log
 ```
 ➜  cli git:(PHP-7.1.8) ✗ gdb PHP718orig
