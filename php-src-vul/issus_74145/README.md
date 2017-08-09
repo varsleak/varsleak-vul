@@ -1,3 +1,6 @@
+##Reference
+[https://bugs.php.net/bug.php?id=74145](https://bugs.php.net/bug.php?id=74145)
+
 ##Usage
 path/to/php path/to/issus74145.php path/to/issus74145.xml
 
